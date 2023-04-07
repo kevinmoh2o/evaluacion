@@ -1,45 +1,56 @@
 <template>
-    <!-- <Navbar></Navbar> -->
-    <div class="container">
+    <div class="pantalla">
+    <div class="cabecera">
+        <Navbar :estadoTitulo="true" :estadoFlecha="true"></Navbar>
+    </div>
+    <div class="cuerpo">
+        <div class="container">
         <div class="column-left">
             <div class="login">
-        <div class="formBx">
-            <h2>PLATAFORMA VIRTUAL</h2>
+                <div class="formBx">
+                    <h2>PLATAFORMA VIRTUAL</h2>
 
-            <div class="imgBox">
-                <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100" height="100">
+                    <div class="imgBox">
+                        <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100" height="100">
+                    </div>
+
+                    <div class="inputBx">
+                        <p>DNI</p>
+                        <input type="text" placeholder="DNI del usuario..." name="dni" class="form-control"
+                            maxlength="15" />
+                    </div>
+                    <div class="inputBx">
+                        <p>Contraseña</p>
+                        <input type="password" placeholder="Contraseña..." name="pasword" class="form-control"
+                            maxlength="15" />
+                    </div>
+                    <button class="btnLogin">Iniciar Sesión</button>
+                    <a href="#">Ha olvidado la contraseña</a>
+                    <a href="#">CREAR CUENTA</a>
+
+
+                </div>
             </div>
-
-            <div class="inputBx">
-                <p>DNI</p>
-                <input type="text" placeholder="DNI del usuario..." name="dni" class="form-control" />
-            </div>
-            <div class="inputBx">
-                <p>Contraseña</p>
-                <input type="password" placeholder="Contraseña..." name="pasword" class="form-control" />
-            </div>
-            <button class="btnLogin">Iniciar Sesión</button>
-            <a href="#">Ha olvidado la contraseña</a>
-            <a href="#">CREAR CUENTA</a>
-
-
         </div>
-    </div>
-        </div>
+
+
         <div class="column-right">
-            <!-- Contenido de la columna derecha -->
+
         </div>
     </div>
+    </div>
+    </div>
+    
 </template>
 
 <script>
-//import Navbar from '../components/Navbar.vue';
+import Navbar from '../components/Navbar.vue';
 export default {
     setup() {
-        
+
     },
-    components:{
-        
+    components: {
+        Navbar
     }
 }
 </script>
@@ -69,23 +80,52 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100%;
+    width: 100vw;
     background: #2fbf77;
 
 }
+
+.pantalla {
+  display: flex; /* activa el modo flexible en el contenedor */
+  flex-direction: column; /* establece la dirección de los elementos en vertical */
+  height: 100vh; /* establece la altura del contenedor al 100% de la pantalla */
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+}
+
+.cabecera {
+  height: 100px; /* establece la altura fija del primer div */
+  //background-color: red;
+}
+
+.cuerpo {
+  flex: 1; /* indica que el segundo div debe tomar todo el espacio disponible */
+  //background-color: blue;
+}
+
 .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px; /* Espacio entre columnas */
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    max-width: 1600px;
+    /* agregue un ancho máximo para evitar que la cuadrícula exceda el ancho de la ventana del navegador */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .column-left {
-  /* Estilos para la columna izquierda */
+    display: flex;
+    /* establacer display flex */
+    justify-content: center;
+    /* centrar horizontalmente */
+    align-items: center;
+    /* centrar verticalmente */
 }
 
 .column-right {
-  /* Estilos para la columna derecha */
+    //background-color: blue;
 }
 
 // Crear la clase base del botón
@@ -126,11 +166,11 @@ body {
 
 .login {
     height: 500px;
-    width: 400px;
+    width: 350px;
     border-radius: 15px;
     background: $color-azul-ligth;
     display: flex;
-    padding: 30px;
+    padding: 20px;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
@@ -166,7 +206,7 @@ body {
         .inputBx {
             padding: 5px;
             margin: 5px 0;
-            width: 100%;
+            width: 70%;
 
             p {
                 color: #fff
@@ -192,7 +232,7 @@ body {
             background: rgba(255, 255, 255, 0.0);
             ;
             color: $color-negro;
-            padding: 5px 45px;
+            padding: 5px 30px;
             border-radius: 5px;
             text-decoration: none;
             margin: 5px 0;

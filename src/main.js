@@ -6,4 +6,6 @@ import router from './router'
 
 import '@/styles/styles.scss'
 
-createApp(App).use(router).mount('#app')
+createApp(App)
+    .use(router)
+    .mount('#app');
