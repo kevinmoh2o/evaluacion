@@ -7,7 +7,7 @@
         </div>
 
         <a v-if="estadoTitulo" class="navbar-brand text-white">
-            DAYBOOK
+            {{ titulo }}
         </a>
 
         <div class="d-flex">
@@ -25,6 +25,7 @@ export default {
   props:{
     estadoTitulo:Boolean,
     estadoFlecha:Boolean,
+    titulo:String
 
   },
     setup() {

@@ -1,7 +1,7 @@
 <template>
     <div class="pantalla">
     <div class="cabecera">
-        <Navbar :estadoTitulo="true" :estadoFlecha="true"></Navbar>
+        <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo"></Navbar>
     </div>
     <div class="cuerpo">
         <div class="container">
@@ -26,7 +26,7 @@
                     </div>
                     <button class="btnLogin">Iniciar Sesión</button>
                     <a href="#">Ha olvidado la contraseña</a>
-                    <a href="#">CREAR CUENTA</a>
+                    <router-link to="/crear-cuenta">CREAR CUENTA</router-link>
 
 
                 </div>
@@ -47,7 +47,9 @@
 import Navbar from '../components/Navbar.vue';
 export default {
     setup() {
-
+        return {
+            titulo:'Login'
+        }
     },
     components: {
         Navbar
