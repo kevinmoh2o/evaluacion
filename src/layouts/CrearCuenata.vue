@@ -4,41 +4,21 @@
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo"></Navbar>
         </div>
         <div class="form-container">
-            <!-- <form>
-                <div class="form-group">
-                    <label for="name">Nombres y Apellidos:</label>
-                    <input type="text" id="name" name="name" placeholder="Ingresa tu nombre..." />
-                </div>
-                <div class="form-group">
-                    <label for="email">Contraseña:</label>
-                    <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña..." />
-                </div>
-
-
-                <ComboBox :titulo="'Edad'"></ComboBox>
-                <br>
-                <ComboBox :titulo="'Sexo'"></ComboBox>
-                <br>
-                <ComboBox :titulo="'Centro de Salud'"></ComboBox>
-                <br>
-                <ComboBox :titulo="'Distrito'"></ComboBox>
-                <br>
-                <ComboBox :titulo="'Diresa'"></ComboBox>
-                <br>
-
-
-                <br>
-                <button type="submit">Enviar</button>
-
-
-            </form> -->
+                <FormSectionDatosPersonales></FormSectionDatosPersonales>
+                <FormSectionUbicacion></FormSectionUbicacion>
         </div>
+        <div class="button-container">
+            <button class="button-guardar">Guardar</button>
+        </div>
+        
     </div>
 </template>
 
 
 <script>
 import Navbar from '@/components/Navbar.vue';
+import FormSectionDatosPersonales from '@/components/FormSectionDatosPersonales.vue';
+import FormSectionUbicacion from '@/components/FormSectionUbicacion.vue';
 //import ComboBox from '@/components/ComboBox.vue';
 export default {
     setup() {
@@ -48,23 +28,38 @@ export default {
     },
     components: {
         Navbar,
-        //ComboBox
+        FormSectionDatosPersonales,
+        FormSectionUbicacion
     }
 }
 </script>
 <style lang="scss" scoped>
+$color-azul: #1B62BF;
+$color-azul-ligth: #62A1D9;
+$color-azul-intermedio: #616C8C;
+$color-placeholder: #4f4d4db5;
+$color-negro: #2c3e50;
 .pantalla {
     display: flex;
     /* activa el modo flexible en el contenedor */
     flex-direction: column;
     /* establece la dirección de los elementos en vertical */
-    height: 100vh;
-    /* establece la altura del contenedor al 100% de la pantalla */
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
+    
+    max-width: 1600px;
 }
+
+ .button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+ width: 100%;
+}
+/*
+button {
+  width: 150px;
+
+} */
 
 .cabecera {
     height: 100px;
@@ -78,105 +73,57 @@ export default {
     //background-color: blue;
 }
 
+button{
+    
+    width: 10%;
+}
 
+.form-section {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 
-.form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f2f2f2;
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}
 
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 30px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+.button-guardar {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: $color-azul-intermedio;
+    color: #fff;
+    cursor: pointer;
 
-        .label {
-            margin-bottom: 10px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .dropdown-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-            max-width: 300px;
-
-            .dropdown {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                background: transparent;
-                font-size: 14px;
-                cursor: pointer;
-            }
-
-            i {
-                position: absolute;
-                top: 50%;
-                right: 10px;
-                transform: translateY(-50%);
-                color: #aaa;
-            }
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            width: 100%;
-
-            label {
-                font-size: 18px;
-                font-weight: bold;
-                margin-bottom: 10px;
-            }
-
-            input {
-                width: 100%;
-                padding: 10px;
-                border: none;
-                border-bottom: 2px solid #ccc;
-                font-size: 16px;
-
-                &:focus {
-                    outline: none;
-                    border-bottom: 2px solid #1b62bf;
-                }
-
-                &::placeholder {
-                    color: #ccc;
-                }
-            }
-        }
-
-        button[type="submit"] {
-            background-color: #1b62bf;
-            color: #fff;
-            font-size: 18px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #0d3c7c;
-            }
-        }
-
+    &:hover {
+        background-color: $color-azul;
     }
 
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 5px #555;
+    }
+
+    &.secondary {
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #333;
+
+        &:hover {
+            background-color: #eee;
+        }
+    }
+
+    &.large {
+        padding: 15px 30px;
+        font-size: 20px;
+    }
 }
+
+
 </style>

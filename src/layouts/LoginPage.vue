@@ -1,46 +1,45 @@
 <template>
     <div class="pantalla">
-    <div class="cabecera">
-        <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo"></Navbar>
-    </div>
-    <div class="cuerpo">
-        <div class="container">
-        <div class="column-left">
-            <div class="login">
-                <div class="formBx">
-                    <h2>PLATAFORMA VIRTUAL</h2>
+        <div class="cabecera">
+            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo"></Navbar>
+        </div>
+        <div class="cuerpo">
+            <div class="container">
+                <div class="column-left">
+                    <div class="login">
+                        <div class="formBx">
+                            <h2>PLATAFORMA VIRTUAL</h2>
 
-                    <div class="imgBox">
-                        <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100" height="100">
-                    </div>
+                            <div class="imgBox">
+                                <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100" height="100">
+                            </div>
 
-                    <div class="inputBx">
-                        <p>DNI</p>
-                        <input type="text" placeholder="DNI del usuario..." name="dni" class="form-control"
-                            maxlength="15" />
-                    </div>
-                    <div class="inputBx">
-                        <p>Contraseña</p>
-                        <input type="password" placeholder="Contraseña..." name="pasword" class="form-control"
-                            maxlength="15" />
-                    </div>
-                    <button class="btnLogin">Iniciar Sesión</button>
-                    <a href="#">Ha olvidado la contraseña</a>
-                    <router-link to="/crear-cuenta">CREAR CUENTA</router-link>
+                            <div class="inputBx">
+                                <p>DNI</p>
+                                <input type="text" placeholder="DNI del usuario..." name="dni" class="form-control"
+                                    maxlength="15" />
+                            </div>
+                            <div class="inputBx">
+                                <p>Contraseña</p>
+                                <input type="password" placeholder="Contraseña..." name="pasword" class="form-control"
+                                    maxlength="15" />
+                            </div>
+                            <button class="btnLogin">Iniciar Sesión</button>
+                            <a href="#">Ha olvidado la contraseña</a>
+                            <router-link to="/agenda">CREAR CUENTA</router-link>
 
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="column-right">
 
                 </div>
             </div>
         </div>
-
-
-        <div class="column-right">
-
-        </div>
     </div>
-    </div>
-    </div>
-    
 </template>
 
 <script>
@@ -48,7 +47,7 @@ import Navbar from '../components/Navbar.vue';
 export default {
     setup() {
         return {
-            titulo:'Login'
+            titulo: 'Login'
         }
     },
     components: {
@@ -88,23 +87,28 @@ body {
 }
 
 .pantalla {
-  display: flex; /* activa el modo flexible en el contenedor */
-  flex-direction: column; /* establece la dirección de los elementos en vertical */
-  height: 100vh; /* establece la altura del contenedor al 100% de la pantalla */
-  width: 100vw;
-  padding: 0;
-  margin: 0;
-  max-width: 100%;
+    display: flex;
+    /* activa el modo flexible en el contenedor */
+    flex-direction: column;
+    /* establece la dirección de los elementos en vertical */
+    height: 100vh;
+    /* establece la altura del contenedor al 100% de la pantalla */
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
 }
 
 .cabecera {
-  height: 100px; /* establece la altura fija del primer div */
-  //background-color: red;
+    height: 100px;
+    /* establece la altura fija del primer div */
+    //background-color: red;
 }
 
 .cuerpo {
-  flex: 1; /* indica que el segundo div debe tomar todo el espacio disponible */
-  //background-color: blue;
+    flex: 1;
+    /* indica que el segundo div debe tomar todo el espacio disponible */
+    //background-color: blue;
 }
 
 .container {

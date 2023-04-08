@@ -2,7 +2,22 @@
   <div class="app-container">
     <router-view />
   </div>
+ 
 </template>
+
+<script>
+//Formulario
+///import Formulario from '@/components/Formulario.vue';
+/* import Navbar from '@/components/Navbar.vue'; */
+
+
+export default {
+  name: 'Home',
+  components: {
+
+  }
+}
+</script>
 
 <style scoped>
   html, body {
