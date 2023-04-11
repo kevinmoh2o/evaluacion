@@ -1,7 +1,7 @@
 <template>
     <div class="pantalla">
         <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="false" :titulo="titulo"></Navbar>
         </div>
         <div class="cuerpo">
             <div class="container">
