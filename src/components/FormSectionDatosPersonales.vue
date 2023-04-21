@@ -2,15 +2,15 @@
     <section class="form-section form-section--datos-personales">
         <h2 class="form-section__title">{{ title }}</h2>
         <form>
-            <Entrada :type="'text'" :placeholder="'Ingrese su nombre aqui...'" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
+            <Entrada :type="'text'" :placeholder="'Ingrese su valor aqui...'" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
             <Entrada :type="'text'" :placeholder="'Usuario...'" :nombre="'nombre'" :label="'Usuario:'"></Entrada>
             <Entrada :type="'password'" :placeholder="'Contraseña...'" :nombre="'password'" :label="'Contraseña:'"></Entrada>
             <div class="container">
                 <!-- <div class="column-left"> -->
-                    <ComboBox :titulo="'Edad'"></ComboBox>
+                    <ComboBox :titulo="'Edad'" :valores="edad"></ComboBox>
                 <!-- </div>
                 <div class="column-right"> -->
-                    <ComboBox :titulo="'Sexo'"></ComboBox>
+                    <ComboBox :titulo="'Sexo'" :valores="sexo"></ComboBox>
                 <!-- </div> -->
             </div>
         </form>
@@ -30,7 +30,22 @@ export default {
     components: {
         Entrada,
         ComboBox
+    },
+    data() {
+    
+    return {
+      edad:[
+      { id: 1, valor:  "     18             " },
+       { id: 2, valor: "     25             " },
+       { id: 3, valor: "     35             " }
+      ],
+      sexo:[
+      { id: 1, valor: "Masculino" },
+       { id: 2, valor: "Femenino" },
+     
+      ]
     }
+  },
 }
 </script>
   

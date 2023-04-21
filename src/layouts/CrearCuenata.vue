@@ -1,7 +1,7 @@
 <template>
     <div class="pantalla">
         <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBack"></Navbar>
         </div>
         <div class="form-container">
                 <FormSectionDatosPersonales></FormSectionDatosPersonales>
@@ -19,17 +19,28 @@
 import Navbar from '@/components/Navbar.vue';
 import FormSectionDatosPersonales from '@/components/FormSectionDatosPersonales.vue';
 import FormSectionUbicacion from '@/components/FormSectionUbicacion.vue';
+import { useRouter } from 'vue-router'
 //import ComboBox from '@/components/ComboBox.vue';
 export default {
     setup() {
+        const router = useRouter()
         return {
-            titulo: 'Crear Cuenta'
+            titulo: 'Crear Cuenta',
+            router: router
         }
     },
     components: {
         Navbar,
         FormSectionDatosPersonales,
         FormSectionUbicacion
+    },
+    methods:{
+
+        async onBack(){
+            console.log("navegando")
+            await this.router.push('/')
+        }
+    
     }
 }
 </script>
@@ -45,7 +56,7 @@ $color-negro: #2c3e50;
     flex-direction: column;
     /* establece la dirección de los elementos en vertical */
     
-    max-width: 1600px;
+    max-width: 2000px;
 }
 
  .button-container {

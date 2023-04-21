@@ -1,7 +1,7 @@
 <template>
     <div class="pantalla">
         <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="false" :titulo="titulo"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onback()"></Navbar>
         </div>
         <div class="cuerpo">
             <div class="container">
@@ -24,9 +24,9 @@
                                 <input type="password" placeholder="Contraseña..." name="pasword" class="form-control"
                                     maxlength="15" />
                             </div>
-                            <button class="btnLogin">Iniciar Sesión</button>
+                            <button class="btnLogin" @click="navegar()">Iniciar Sesión</button>
                             <a href="#">Ha olvidado la contraseña</a>
-                            <router-link to="/agenda">CREAR CUENTA</router-link>
+                            <router-link to="/crear-cuenta">CREAR CUENTA</router-link>
 
 
                         </div>
@@ -44,14 +44,27 @@
 
 <script>
 import Navbar from '../components/Navbar.vue';
+import { useRouter } from 'vue-router'
+
+
 export default {
     setup() {
+        const router = useRouter()
         return {
-            titulo: 'Login'
+            router: router
         }
     },
     components: {
         Navbar
+    },
+    methods:{
+        async navegar(){
+            console.log("navegando")
+            await this.router.push('/menu')
+        },
+        onback(){
+
+        }
     }
 }
 </script>

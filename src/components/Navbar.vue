@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar bg-amarillo">
         <div class="d-flex" >
-            <button class="btn btn-outline-info mx-2" v-if="estadoFlecha">
+            <button class="btn btn-outline-info mx-2" v-if="estadoFlecha" @click="$emit('volver')">
                 <i class="fa fa-arrow-left"></i>
             </button>
         </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="pantalla-menu">
         <div class="cabecera-menu">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'" @volver="onBack()"></Navbar>
         </div>
         <div class="cuerpo-menu">
             <div class="card-container">
@@ -26,8 +26,16 @@
 <script>
 import Navbar from '../components/Navbar.vue';
 import MenuCard from '@/components/MenuCard.vue';
+import { useRouter } from 'vue-router'
 
 export default {
+    setup() {
+        const router = useRouter()
+        return {
+
+            router: router
+        }
+    },
     data() {
 
 
@@ -35,6 +43,13 @@ export default {
     components: {
         Navbar,
         MenuCard,
+
+    },
+    methods:{
+        async onBack(){
+            console.log("navegando")
+            await this.router.push('/')
+        }
 
     }
 }
@@ -69,7 +84,7 @@ export default {
     background-position: center;
     flex: 1;
     background-size: cover;
-    opacity: 0.6; 
+    //opacity: 0.6; 
     /* indica que el segundo div debe tomar todo el espacio disponible */
     //background-color: blue;
     z-index: 1; /* establecer un valor bajo para el z-index */
