@@ -1,6 +1,6 @@
 <template>
     <div class="menu">
-        <div class="menu__card">
+        <div class="menu__card"  @click.prevent="$emit('clickbutton')">
             <div class="card__header">
                 <img src="@/assets/cita-medica.png" height="100">
             </div>
@@ -41,6 +41,12 @@ export default {
     },
     components: {
         
+    },
+    methods:{
+        clickbutton(val) {
+            console.log(val)
+            console.log('Se ha hecho clic en la tarjeta del menú');
+        }
     }
 }
 </script>

@@ -1,24 +1,16 @@
 <template>
     <div class="pantalla-menu">
-        <div class="cabecera-menu">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'" @volver="onBack()"></Navbar>
-        </div>
-        <div class="cuerpo-menu">
-            <div class="card-container">
-                <div class="card">
-                    <MenuCard :titulo="'AA'"></MenuCard>
-                </div>
-                <div class="card">
-                    <MenuCard :titulo="'Temas de Consejeria'"></MenuCard>
-                </div>
-                <div class="card">
-                    <MenuCard :titulo="'Registro de Cuidadores'"></MenuCard>
-                </div>
-                <div class="card">
-                    <MenuCard :titulo="'Equipos de Trabajo'"></MenuCard>
-                </div>
-            </div>
-        </div>
+
+        <Navbar class="cabeceramen" :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'" @volver="onBack()"></Navbar>
+
+        <MenuCard class="card1" :titulo="'Agenda'" @clickbutton="clickbutton(1)"></MenuCard>
+    
+        <MenuCard class="card2" :titulo="'Temas de Consejeria'" @clickbutton="clickbutton(2)"></MenuCard>
+
+        <MenuCard class="card3" :titulo="'Registro de Cuidadores'" @clickbutton="clickbutton(3)"></MenuCard>
+
+        <MenuCard class="card4" :titulo="'Equipos de Trabajo'" @clickbutton="clickbutton(4)"></MenuCard>
+ 
     </div>
 
 </template>
@@ -49,6 +41,25 @@ export default {
         async onBack(){
             console.log("navegando")
             await this.router.push('/')
+        },
+        async clickbutton(valor){
+            //console.log(valor)
+            switch (valor) {
+                case 1:
+                    await this.router.push('/menu');
+                    break;
+                case 2:
+                    await this.router.push('/agenda');
+                    break;
+                case 3:
+                    await this.router.push('/crear-cuenta');
+                    break;
+            
+                default:
+                    await this.router.push('/about');
+                    break;
+            }
+            
         }
 
     }
@@ -56,25 +67,75 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.pantalla-menu >*{
+    text-align: center;
+    width: 100%;
+}
+
+.cabeceramen{
+    grid-column: 1 / -1;
+}
+
+.card1{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.card2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.card3{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.card4{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.pantalla-menu {
+    display: grid;
+    //gap: 10px;
+    grid-template-areas: 
+        "cabeceramen"
+        "card1"
+        "card2"
+        "card3" 
+        "card4";
+}
+
+@media (min-width:900px){
+    .pantalla-menu{
+        grid-template:
+        "cabeceramen cabeceramen" 100px
+        "card1 card2" auto
+        "card3 card4" auto /
+        50% 50% ;
+    }
+}
+</style>
+<!-- 
+<style lang="scss" scoped>
 .pantalla-menu {
     display: flex;
-    /* activa el modo flexible en el contenedor */
     flex-direction: column;
-    /* establece la dirección de los elementos en vertical */
     height: 100vh;
-    /* establece la altura del contenedor al 100% de la pantalla */
     width: 100vw;
     padding: 0;
     margin: 0;
     max-width: 100%;
 }
 
-.cabecera-menu {
+.cabeceramen {
     height: 100px;
     padding: 0;
 
     margin: 0;
-    /* establece la altura fija del primer div */
     //background-color: red;
 }
 
@@ -85,7 +146,6 @@ export default {
     flex: 1;
     background-size: cover;
     //opacity: 0.6; 
-    /* indica que el segundo div debe tomar todo el espacio disponible */
     //background-color: blue;
     z-index: 1; /* establecer un valor bajo para el z-index */
 
@@ -97,7 +157,6 @@ export default {
     padding: 10px;
     background-color: rgba(0,0,0,0);
     border-color: transparent;
-    /* Establecer la opacidad solo para el contenido de la card */
     > * {
         opacity: 1;
     }
@@ -113,4 +172,4 @@ export default {
         
     }
 }
-</style>
+</style> -->
