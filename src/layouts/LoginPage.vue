@@ -24,7 +24,7 @@
                                 <input type="password" placeholder="Contraseña..." name="pasword" class="form-control"
                                     maxlength="15" />
                             </div>
-                            <button class="btnLogin">Iniciar Sesión</button>
+                            <button class="btnLogin" @click="navegar">Iniciar Sesión</button>
                             <a href="#">Ha olvidado la contraseña</a>
                             <router-link to="/agenda">CREAR CUENTA</router-link>
 
@@ -45,9 +45,16 @@
 <script>
 import Navbar from '../components/Navbar.vue';
 export default {
+    name: 'login-layout',
     setup() {
         return {
             titulo: 'Login'
+        }
+    },
+    methods:{
+        navegar:function(){
+            console.log("navegar to");
+            this.$router.push('/menu');
         }
     },
     components: {
@@ -130,9 +137,7 @@ body {
     /* centrar verticalmente */
 }
 
-.column-right {
-    //background-color: blue;
-}
+
 
 // Crear la clase base del botón
 .btnLogin {

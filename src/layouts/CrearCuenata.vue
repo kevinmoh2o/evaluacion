@@ -21,6 +21,7 @@ import FormSectionDatosPersonales from '@/components/FormSectionDatosPersonales.
 import FormSectionUbicacion from '@/components/FormSectionUbicacion.vue';
 //import ComboBox from '@/components/ComboBox.vue';
 export default {
+    name: 'create-layout',
     setup() {
         return {
             titulo: 'Crear Cuenta'

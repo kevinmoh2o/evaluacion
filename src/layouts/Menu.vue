@@ -1,25 +1,24 @@
 <template>
-    <div class="pantalla-menu">
-        <div class="cabecera-menu">
+    <div  ></div>
+    <div class="background-image"></div>
+    <div class="mainContMenu" >
+        <div class="cabeceraMenu">
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"></Navbar>
         </div>
-        <div class="cuerpo-menu">
-            <div class="card-container">
-                <div class="card">
-                    <MenuCard :titulo="'AA'"></MenuCard>
-                </div>
-                <div class="card">
-                    <MenuCard :titulo="'Temas de Consejeria'"></MenuCard>
-                </div>
-                <div class="card">
-                    <MenuCard :titulo="'Registro de Cuidadores'"></MenuCard>
-                </div>
-                <div class="card">
-                    <MenuCard :titulo="'Equipos de Trabajo'"></MenuCard>
-                </div>
+            <div class="card1">
+                <MenuCard :titulo="'Agenda'" @presionado="handlePress(1)" :idCard="idParent"></MenuCard>
             </div>
-        </div>
+            <div class="card2">
+                <MenuCard :titulo="'Temas de Consejeria'" @presionado="handlePress(2)" :idCard="idParent"></MenuCard>
+            </div>
+            <div class="card3">
+                <MenuCard :titulo="'Registro de Cuidadores'" @presionado="handlePress(3)" :idCard="idParent"></MenuCard>
+            </div>
+            <div class="card4">
+                <MenuCard :titulo="'Equipos de Trabajo'" @presionado="handlePress(4)" :idCard="idParent"></MenuCard>
+            </div>
     </div>
+    
 
 </template>
 
@@ -28,10 +27,20 @@ import Navbar from '../components/Navbar.vue';
 import MenuCard from '@/components/MenuCard.vue';
 
 export default {
+    name: 'menu-layout',
     data() {
-
+        return {
+        idParent:0,
+        }
 
     },
+    methods:{
+        handlePress(val){
+            this.idParent=val
+            console.log("val parent",val);
+
+        }
+    },  
     components: {
         Navbar,
         MenuCard,
@@ -41,61 +50,76 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.pantalla-menu {
-    display: flex;
-    /* activa el modo flexible en el contenedor */
-    flex-direction: column;
-    /* establece la dirección de los elementos en vertical */
+
+
+.background-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.45;
+}
+.mainContMenu {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+    grid-template-rows: auto 1fr 1fr; /* Tres filas: cabecera, card1, card2, card3 y card4 */
+    gap: 10px;
     height: 100vh;
-    /* establece la altura del contenedor al 100% de la pantalla */
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
+    background-color:transparent ;
+    grid-template: 
+        "cabeceraMenu cabeceraMenu"
+        "card1 card2"
+        "card3 card4"
+        ;
 }
 
-.cabecera-menu {
-    height: 100px;
-    padding: 0;
-
-    margin: 0;
-    /* establece la altura fija del primer div */
-    //background-color: red;
+.cabeceraMenu {
+    grid-area:cabeceraMenu;
 }
 
-.cuerpo-menu {
+.card1{
+    grid-area:card1;
+}
+.card2{
+    grid-area:card2;
+}
+.card3{
+    grid-area:card3;
+}
+.card4{
+    grid-area:card4;
+}
+
+.card1, .card2, .card3, .card4 {
+  width: 100%; /* Ocupar todo el ancho disponible */
+  height: 100%; /* Ocupar todo el alto disponible */
+}
+/* .cuerpo-menu {
     background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
     background-size: cover;
     background-position: center;
     flex: 1;
     background-size: cover;
     opacity: 0.6; 
-    /* indica que el segundo div debe tomar todo el espacio disponible */
-    //background-color: blue;
-    z-index: 1; /* establecer un valor bajo para el z-index */
+    z-index: 1; 
 
-}
+} */
 
 
-.card {
+/* .card {
     margin: 10px;
     padding: 10px;
     background-color: rgba(0,0,0,0);
     border-color: transparent;
-    /* Establecer la opacidad solo para el contenido de la card */
     > * {
         opacity: 1;
     }
-}
+} */
 
-@media screen and (min-width: 768px) {
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 20px;
-        height: 100%;
-        
-    }
-}
+
 </style>

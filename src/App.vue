@@ -12,7 +12,7 @@
 
 
 export default {
-  name: 'Home',
+  name: 'home-view',
   components: {
 
   }

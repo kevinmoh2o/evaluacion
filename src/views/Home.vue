@@ -14,7 +14,7 @@ import LoginPage from '../layouts/LoginPage.vue';
 
 
 export default {
-  name: 'Home',
+  name: 'home-view',
   components: {
     LoginPage,
   }

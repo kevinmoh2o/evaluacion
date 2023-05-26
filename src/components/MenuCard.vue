@@ -1,11 +1,11 @@
 <template>
-    <div class="menu">
+    <div class="menu" @click.prevent="presionar()">
         <div class="menu__card">
             <div class="card__header">
                 <img src="@/assets/cita-medica.png" height="100">
             </div>
             <div class="card__body" >
-                <h2>{{titulo}}</h2>
+                <h2 class="titulo">{{titulo}}</h2>
             </div>
         </div>
     </div>
@@ -15,28 +15,20 @@
 
 export default {
     props:{
+        idCard: Number,
         titulo:String
     },
     data() {
         return {
             cards: [
-                {
-                    title: "Card 1",
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed leo vitae enim dignissim bibendum vel eget ipsum."
-                },
-                {
-                    title: "Card 2",
-                    description: "Maecenas in turpis vel metus pharetra malesuada a eget massa. Nulla facilisi. Duis fringilla justo sed sem faucibus, nec eleifend tortor accumsan."
-                },
-                {
-                    title: "Card 3",
-                    description: "Fusce volutpat tincidunt quam in convallis. Sed luctus ex ut nulla tincidunt, at convallis turpis blandit. Nunc malesuada erat eu nunc auctor tincidunt."
-                },
-                {
-                    title: "Card 4",
-                    description: "Vestibulum vitae tortor ac nisl mattis molestie eget nec lacus. Donec eget gravida enim. Sed quis leo non dolor scelerisque auctor quis vel nisl."
-                }
+                
             ]
+        }
+    },
+    methods:{
+        presionar() {
+            console.log("id hijo",this.idCard)
+            this.$emit('presionado');
         }
     },
     components: {
@@ -46,10 +38,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@import '../styles/styles.scss';
+
 $color-azul: #1B62BF;
 $color-rojo:#dc3545;
+
+.titulo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2; /* Número de líneas máximo */
+  line-clamp: 2; /* Número de líneas máximo */
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-content: center; /* Alineación vertical al centro */
+  text-align: center; /* Alineación horizontal al centro */
+  width: 100%;
+}
+
 h2 {
-    color: #FFFFFF;
+    color: map-get($theme-colors, light);
     font-size: 18px;
     font-weight: bold;
     margin: 0;
@@ -60,6 +74,7 @@ h2 {
     
 }
 .menu {
+    background-color: transparent;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -71,7 +86,7 @@ h2 {
     &__card {
         width: calc(25% - 10px);
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        border-radius: 20px;
+        border-radius: 10px;
         padding: 0;
         position: relative;
         overflow: hidden;
@@ -100,9 +115,11 @@ h2 {
 }
 
 .menu__card{
-    width: 35%;
+    width: 200px;
+    height: auto;
 }
 .card__header {
+  background-color: #ECB1B5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,7 +130,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
+  height: 90px;
   background-color: $color-rojo;
 }
 

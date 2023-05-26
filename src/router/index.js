@@ -3,12 +3,12 @@ import Home from '../views/Home.vue';
 
 const routes = [{
         path: '/',
-        name: 'Home',
+        name: 'home-view',
         component: Home
     },
     {
         path: '/about',
-        name: 'About',
+        name: 'about-view',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -17,17 +17,17 @@ const routes = [{
     },
     {
         path: '/crear-cuenta',
-        name: 'CrearCuenta',
+        name: 'create-layout',
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/CrearCuenata.vue')
     },
     {
         path: '/menu',
-        name: 'Menu',
+        name: 'menu-layout',
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/Menu.vue')
     },
     {
         path: '/agenda',
-        name: 'Agenda',
+        name: 'agenda-layout',
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/Agenda.vue')
     },
     

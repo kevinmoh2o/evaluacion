@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: 'entrada-component',
   props: {
     label: String,
     placeholder: String,
