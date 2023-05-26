@@ -1,23 +1,29 @@
 <template>
-    <nav class="navbar bg-amarillo">
-        <div class="d-flex" >
-            <button class="btn btn-outline-info mx-2" v-if="estadoFlecha">
+  <div class="containernav">
+  
+    
+        <div class="boton" >
+            <button class="btn btn-outline-info mx-2" v-if="estadoFlecha" @click="$emit('volver')">
                 <i class="fa fa-arrow-left"></i>
             </button>
         </div>
 
-        <a v-if="estadoTitulo" class="navbar-brand text-white">
+        <div class="texto" >
+          <a v-if="estadoTitulo" class="navbar-brand text-white">
             {{ titulo }}
         </a>
+        </div>
+        
 
-        <div class="d-flex">
+        <div class="imagen">
             <img src="@/assets/logo.png" alt="Vue Logo" height="50" class="d-inline-block align-text-top mx-2">
         </div>
-    </nav>
-    <nav class="navbar bg-azul">
-        <a class="navbar-brand text-white">
-        </a>
-    </nav>
+    
+      <nav class="linea">
+          
+      </nav>
+  </div>
+    
 </template>
 
 <script>
@@ -43,6 +49,47 @@ export default {
 $color-amarillo: #F2B749;
 $color-azul: #1B62BF;
 $color-blanco:#f8f9fa;
+
+.containernav >*{
+    //box-shadow: -1px -1px 7px 0px rgba(0, 0, 0, 0.75);
+    //border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    background-color: $color-amarillo;
+}
+.boton{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: $color-amarillo;
+}
+.linea{
+  background-color:$color-azul;
+  width: 100%;
+  height: 10px;
+  grid-column: 1 / -1;
+}
+
+.containernav {
+    display: grid;
+    gap: 0;
+    grid-template: 
+        "boton texto imagen" 70px
+        "linea linea linea" 10px /
+        100px auto 200px;
+}
+
+
+
+/* @media (min-width:900px){
+    .containernav{
+        grid-template:
+        "boton texto imagen" 70px
+        "linea linea linea" 10px/
+        auto auto auto;
+    }
+} */
+
 .navbar-brand {
     display: block;
     text-align: center;

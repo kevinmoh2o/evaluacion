@@ -25,9 +25,9 @@
 <script>
 import Navbar from '../components/Navbar.vue';
 import MenuCard from '@/components/MenuCard.vue';
+import { useRouter } from 'vue-router'
 
 export default {
-    name: 'menu-layout',
     data() {
         return {
         idParent:0,
@@ -45,54 +45,111 @@ export default {
         Navbar,
         MenuCard,
 
+    },
+    methods:{
+        async onBack(){
+            console.log("navegando")
+            await this.router.push('/')
+        },
+        async clickbutton(valor){
+            //console.log(valor)
+            switch (valor) {
+                case 1:
+                    await this.router.push('/menu');
+                    break;
+                case 2:
+                    await this.router.push('/agenda');
+                    break;
+                case 3:
+                    await this.router.push('/crear-cuenta');
+                    break;
+            
+                default:
+                    await this.router.push('/about');
+                    break;
+            }
+            
+        }
+
     }
 }
 </script>
 
 <style lang="scss" scoped>
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-
-.background-image{
-    position: absolute;
-    top: 0;
-    left: 0;
+.pantalla-menu >*{
+    text-align: center;
     width: 100%;
-    height: 100%;
-    background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.45;
-}
-.mainContMenu {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
-    grid-template-rows: auto 1fr 1fr; /* Tres filas: cabecera, card1, card2, card3 y card4 */
-    gap: 10px;
-    height: 100vh;
-    background-color:transparent ;
-    grid-template: 
-        "cabeceraMenu cabeceraMenu"
-        "card1 card2"
-        "card3 card4"
-        ;
 }
 
-.cabeceraMenu {
-    grid-area:cabeceraMenu;
+.cabeceramen{
+    grid-column: 1 / -1;
 }
 
 .card1{
-    grid-area:card1;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .card2{
-    grid-area:card2;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .card3{
-    grid-area:card3;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .card4{
-    grid-area:card4;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.pantalla-menu {
+    display: grid;
+    //gap: 10px;
+    grid-template-areas: 
+        "cabeceramen"
+        "card1"
+        "card2"
+        "card3" 
+        "card4";
+}
+
+@media (min-width:900px){
+    .pantalla-menu{
+        grid-template:
+        "cabeceramen cabeceramen" 100px
+        "card1 card2" auto
+        "card3 card4" auto /
+        50% 50% ;
+    }
+}
+</style>
+<!-- 
+<style lang="scss" scoped>
+.pantalla-menu {
+    display: flex;
+    /* activa el modo flexible en el contenedor */
+    flex-direction: column;
+    /* establece la dirección de los elementos en vertical */
+    height: 100vh;
+    /* establece la altura del contenedor al 100% de la pantalla */
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+}
+
+.cabecera-menu {
+    height: 100px;
+    padding: 0;
+
+    margin: 0;
+    /* establece la altura fija del primer div */
+    //background-color: red;
 }
 
 .card1, .card2, .card3, .card4 {
@@ -106,7 +163,9 @@ export default {
     flex: 1;
     background-size: cover;
     opacity: 0.6; 
-    z-index: 1; 
+    /* indica que el segundo div debe tomar todo el espacio disponible */
+    //background-color: blue;
+    z-index: 1; /* establecer un valor bajo para el z-index */
 
 } */
 
@@ -121,5 +180,14 @@ export default {
     }
 } */
 
-
+@media screen and (min-width: 768px) {
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 20px;
+        height: 100%;
+        
+    }
+}
 </style>

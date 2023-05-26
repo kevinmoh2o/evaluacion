@@ -3,13 +3,13 @@
     <h2 class="form-section__title">Ubicación</h2>
     <div class="row">
       <div class="col-md-4">
-        <ComboBox :titulo="'Centro de Salud'"></ComboBox>
+        <ComboBox :titulo="'Centro de Salud'" :valores="centro"></ComboBox>
       </div>
       <div class="col-md-4">
-        <ComboBox :titulo="'Distrito'"></ComboBox>
+        <ComboBox :titulo="'Distrito'" :valores="distrito"></ComboBox>
       </div>
       <div class="col-md-4">
-        <ComboBox :titulo="'Diris/Diresa'"></ComboBox>
+        <ComboBox :titulo="'Diris/Diresa'" :valores="diresa"></ComboBox>
       </div>
     </div>
   </div>
@@ -26,6 +26,29 @@ export default {
   },
   components: {
     ComboBox
+  },
+  data() {
+    
+    return {
+      centro:[
+      { id: 1, valor:  " La Perla " },
+       { id: 2, valor: " San Pedro " },
+       { id: 3, valor: " San Lucas  " }
+      ],
+      distrito:[
+      { id: 1, valor: "Norte" },
+       { id: 2, valor: "Centro" },
+       { id: 2, valor: "Sur" },
+       { id: 2, valor: "Diresa Callao" },
+      ],
+      diresa:[
+      { id: 1, valor: "Norte" },
+       { id: 2, valor: "Centro" },
+       { id: 2, valor: "Sur" },
+       { id: 2, valor: "Diresa Callao" },
+      ],
+
+    }
   }
 }
 </script>
