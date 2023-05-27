@@ -1,5 +1,5 @@
 <template>
-    <div v-if="true">
+    <div v-if="!confirmacionOperation">
         <div v-if="getEstado()">
             <div class="div1">
                     <Calendar @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId"></Calendar>
@@ -15,7 +15,6 @@
         <Cargando v-else></Cargando>
         
     </div>
-    <!-- <Confirmacion v-if="false" ></Confirmacion> -->
     <confirmacion
       class="carYesNo"
       v-if="confirmacionOperation"
@@ -45,6 +44,7 @@ export default{
     }, 
     data() {
         return {
+            eliminandoStatus:true,
             licenciado:'',
             userId:'',
             flagUpdate:false,
@@ -217,13 +217,13 @@ export default{
     transform: translate(-50%,-50%);
 }
 
-.carYesNo{
+/* .carYesNo{
     z-index: 2;
     position: absolute;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-}
+} */
 .py-12 {
   position: relative;
   overflow: visible;

@@ -76,7 +76,7 @@ export default {
 <style lang="scss" scoped>
 
 
-.background-image{
+/* .background-image{
     position: absolute;
     top: 90px;
     left: 0;
@@ -87,7 +87,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.45;
-}
+} */
 .mainContMenu {
     display: grid;
     
@@ -95,11 +95,10 @@ export default {
     height: 100vh;
     background-color:transparent ;
     grid-template: 
-        "cabeceraMenu cabeceraMenu" 90px
-        "card1 card2" 1fr
-        "card3 card4" 1fr
-        ". ." 1fr/
-        1fr 1fr
+        "cabeceraMenu cabeceraMenu cabeceraMenu cabeceraMenu cabeceraMenu" 90px
+        ". card1 . card2 ." 1fr
+        ". card3 . card4 ." 1fr/
+        1fr 1fr 1fr 1fr 1fr
         ;
 }
 

@@ -1,9 +1,12 @@
 <template>
     <div class="confirmation-dialog">
-      <!-- <div class="overlay" v-if="isActive" @click="cancel"></div> --> <!-- Agrega esta línea -->
       <div class="dialog-content">
+        <i class="fa-sharp fa-solid fa-trash fa-shake fa-2xl" style="color: #dc3a49;"></i>
         <h2>{{ title }}</h2>
-        <p>{{ message }}</p>
+        <div class="mensajito">
+          <p>{{ message }}</p>
+        </div>
+        
         <div class="buttons">
           <button @click="cancel"  class="cancel-button">Cancelar</button>
           <button @click="confirm" class="confirm-button">Confirmar</button>
@@ -33,7 +36,14 @@
   };
   </script>
   
-  <style scoped>
+  <style lang="scss" scoped>
+  @import '@/styles/styles.scss';
+.mensajito{
+  margin: 20px;
+  /* padding: 20px; */
+  width: 300px;
+}
+
 
 .overlay {
   position: fixed;
@@ -48,17 +58,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: transparent;
-    background-color: #fbc02d;
+    /* background-color: #fbc02d; */
   }
   
   .dialog-content {
     background-color: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 9px;
     text-align: center;
+    background-color: map-get($theme-colors, "amarillo");
   }
   
   h2 {
@@ -76,15 +87,43 @@
     cursor: pointer;
   }
   
+  .botonux1{
+    border-radius: 10px; 
+    transition: color 0.5s ease;
+    font-weight: 500;
+    transition: opacity 0.5s ease;
+  }
   .confirm-button {
-    background-color: #13ae4b;
-    color: white;
+    color: #13ae4b;
+    border: 1.7px solid #13ae4b;
+    background-color: white;
+    @extend .botonux1
   }
 
-  .cancel-button{
+  .confirm-button:hover {
+    color: white;
+    background-color: #13ae4b;
+  }
+
+
+  .cancel-button {
+    color: #ef4b4c;
+    border: 1.7px solid #ef4b4c;
+    background-color: white;
+    @extend .botonux1
+    
+  }
+
+  .cancel-button:hover {
+    color: white;
     background-color: #ef4b4c;
+  }
+
+  p{
     color:white
   }
+
+
 
   </style>
   

@@ -1,13 +1,14 @@
 <template>
-    <div class="pantalla-agenda">
-        <div class="cabecera-agenda">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Agenda'"
+    <div class="mainAgenda">
+      
+            <Navbar class="cabeceraAgenda"
+            :estadoTitulo="true" :estadoFlecha="true" :titulo="'Agenda'"
             @volver="onBackHandle"></Navbar>
-        </div>
-        <div class="cuerpo-agenda">
-            <div class="card-container">
-                <Books></Books>
-            </div>
+        
+        <div class="booksContainer">
+            
+                <Books class="books"></Books>
+          
         </div>
     </div>
 
@@ -38,6 +39,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
+.mainAgenda {
+        display: grid;
+        
+        //gap: 10px;
+        height: 100vh;
+        background-color:transparent ;
+        grid-template: 
+            "cabeceraAgenda " 100px
+            "booksContainer" 1fr/
+            1fr             ;
+    }
+
+
+@media (min-width:700px){
+    .mainAgenda {
+        display: grid;
+        
+        //gap: 10px;
+        height: 100vh;
+        background-color:transparent ;
+        grid-template: 
+            "cabeceraAgenda cabeceraAgenda cabeceraAgenda cabeceraAgenda cabeceraAgenda cabeceraAgenda" 100px
+            ". booksContainer booksContainer booksContainer booksContainer ." 1fr/
+            1fr 1fr 1fr 1fr 1fr 1fr
+            ;
+    }
+}
+
+.cabeceraAgenda{
+    grid-area:cabeceraAgenda;
+    
+}
+
+.booksContainer{
+    grid-area:booksContainer;
+    max-width: 1000px;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+
+
+
+
 
 .pantalla-agenda {
     display: flex;
