@@ -3,31 +3,33 @@
     <div class="background-image"></div>
     <div class="mainContMenu" >
         <div class="cabeceraMenu">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"
+            @volver="onBackHandle"
+            ></Navbar>
         </div>
             <div class="card1">
-                <MenuCard :titulo="'Agenda'" @presionado="handlePress(1)" :idCard="idParent"></MenuCard>
+                <MenuCard :titulo="'Agenda'" @clickbutton="handlePress(1)" :idCard="idParent"></MenuCard>
             </div>
             <div class="card2">
-                <MenuCard :titulo="'Temas de Consejeria'" @presionado="handlePress(2)" :idCard="idParent"></MenuCard>
+                <MenuCard :titulo="'Temas de Consejeria'" @clickbutton="handlePress(2)" :idCard="idParent"></MenuCard>
             </div>
             <div class="card3">
-                <MenuCard :titulo="'Registro de Cuidadores'" @presionado="handlePress(3)" :idCard="idParent"></MenuCard>
+                <MenuCard :titulo="'Registro de Cuidadores'" @clickbutton="handlePress(3)" :idCard="idParent"></MenuCard>
             </div>
             <div class="card4">
-                <MenuCard :titulo="'Equipos de Trabajo'" @presionado="handlePress(4)" :idCard="idParent"></MenuCard>
+                <MenuCard :titulo="'Equipos de Trabajo'" @clickbutton="handlePress(4)" :idCard="idParent"></MenuCard>
             </div>
     </div>
-    
+   
 
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue';
 import MenuCard from '@/components/MenuCard.vue';
-import { useRouter } from 'vue-router'
 
 export default {
+    name: 'menu-layout',
     data() {
         return {
         idParent:0,
@@ -38,6 +40,28 @@ export default {
         handlePress(val){
             this.idParent=val
             console.log("val parent",val);
+            switch (val) {
+                case 1:
+                    this.$router.push('/agenda');
+                    break;
+                case 2:
+                    this.$router.push('/');
+                    break;
+                case 3:
+                    this.$router.push('/');
+                    break;
+                case 4:
+                    this.$router.push('/');
+                    break;
+            
+                default:
+                    break;
+            }
+
+        },
+        onBackHandle(){
+            this.$router.push('/');
+            
 
         }
     },  
@@ -45,111 +69,60 @@ export default {
         Navbar,
         MenuCard,
 
-    },
-    methods:{
-        async onBack(){
-            console.log("navegando")
-            await this.router.push('/')
-        },
-        async clickbutton(valor){
-            //console.log(valor)
-            switch (valor) {
-                case 1:
-                    await this.router.push('/menu');
-                    break;
-                case 2:
-                    await this.router.push('/agenda');
-                    break;
-                case 3:
-                    await this.router.push('/crear-cuenta');
-                    break;
-            
-                default:
-                    await this.router.push('/about');
-                    break;
-            }
-            
-        }
-
     }
 }
 </script>
 
 <style lang="scss" scoped>
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
-.pantalla-menu >*{
-    text-align: center;
+
+.background-image{
+    position: absolute;
+    top: 90px;
+    left: 0;
     width: 100%;
+    height: calc(100vh - 90px);
+    background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.45;
+}
+.mainContMenu {
+    display: grid;
+    
+    //gap: 10px;
+    height: 100vh;
+    background-color:transparent ;
+    grid-template: 
+        "cabeceraMenu cabeceraMenu" 90px
+        "card1 card2" 1fr
+        "card3 card4" 1fr
+        ". ." 1fr/
+        1fr 1fr
+        ;
 }
 
-.cabeceramen{
-    grid-column: 1 / -1;
+.cabeceraMenu {
+    grid-area:cabeceraMenu;
+    padding: 0;
+    margin: 0;
 }
 
 .card1{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    grid-area:card1;
+    align-items: center;
+    text-align: center;
+    align-content: center;
 }
 .card2{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    grid-area:card2;
 }
 .card3{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    grid-area:card3;
 }
 .card4{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.pantalla-menu {
-    display: grid;
-    //gap: 10px;
-    grid-template-areas: 
-        "cabeceramen"
-        "card1"
-        "card2"
-        "card3" 
-        "card4";
-}
-
-@media (min-width:900px){
-    .pantalla-menu{
-        grid-template:
-        "cabeceramen cabeceramen" 100px
-        "card1 card2" auto
-        "card3 card4" auto /
-        50% 50% ;
-    }
-}
-</style>
-<!-- 
-<style lang="scss" scoped>
-.pantalla-menu {
-    display: flex;
-    /* activa el modo flexible en el contenedor */
-    flex-direction: column;
-    /* establece la dirección de los elementos en vertical */
-    height: 100vh;
-    /* establece la altura del contenedor al 100% de la pantalla */
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-}
-
-.cabecera-menu {
-    height: 100px;
-    padding: 0;
-
-    margin: 0;
-    /* establece la altura fija del primer div */
-    //background-color: red;
+    grid-area:card4;
 }
 
 .card1, .card2, .card3, .card4 {
@@ -162,10 +135,8 @@ export default {
     background-position: center;
     flex: 1;
     background-size: cover;
-    opacity: 0.6; 
-    /* indica que el segundo div debe tomar todo el espacio disponible */
-    //background-color: blue;
-    z-index: 1; /* establecer un valor bajo para el z-index */
+    opacity: 0.6;
+    z-index: 1;
 
 } */
 
@@ -180,14 +151,5 @@ export default {
     }
 } */
 
-@media screen and (min-width: 768px) {
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 20px;
-        height: 100%;
-        
-    }
-}
+
 </style>

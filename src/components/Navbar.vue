@@ -56,23 +56,34 @@ $color-blanco:#f8f9fa;
     padding: 10px;
     text-align: center;
     background-color: $color-amarillo;
+    
 }
 .boton{
   align-items: center;
   justify-content: center;
   display: flex;
   background-color: $color-amarillo;
+  grid-area: boton;
 }
 .linea{
   background-color:$color-azul;
   width: 100%;
   height: 10px;
-  grid-column: 1 / -1;
+  grid-area: linea;
 }
+
+.texto{
+  grid-area: texto;
+}
+
+.imagen{
+  grid-area: imagen;
+}
+
 
 .containernav {
     display: grid;
-    gap: 0;
+  
     grid-template: 
         "boton texto imagen" 70px
         "linea linea linea" 10px /

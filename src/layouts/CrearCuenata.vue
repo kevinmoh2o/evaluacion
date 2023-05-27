@@ -1,7 +1,8 @@
 <template>
     <div class="pantalla">
         <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBack"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
+            @volver="onBackHandle"></Navbar>
         </div>
         <div class="form-container">
                 <FormSectionDatosPersonales></FormSectionDatosPersonales>
@@ -37,7 +38,7 @@ export default {
     },
     methods:{
 
-        async onBack(){
+        async onBackHandle(){
             console.log("navegando")
             await this.router.push('/')
         }

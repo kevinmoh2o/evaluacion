@@ -1,11 +1,12 @@
 <template>
     <div class="pantalla-agenda">
         <div class="cabecera-agenda">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Agenda'"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Agenda'"
+            @volver="onBackHandle"></Navbar>
         </div>
         <div class="cuerpo-agenda">
             <div class="card-container">
-                
+                <Books></Books>
             </div>
         </div>
     </div>
@@ -14,6 +15,8 @@
 
 <script>
 import Navbar from '../components/Navbar.vue';
+import { defineAsyncComponent } from 'vue'
+
 
 export default {
     name: 'agenda-layout',
@@ -23,12 +26,19 @@ export default {
     },
     components: {
         Navbar,
+        Books: defineAsyncComponent(() => import('../modules/agenda/Books.vue')),
 
+    },
+    methods:{
+        onBackHandle(){
+            this.$router.push('/menu');
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+
 .pantalla-agenda {
     display: flex;
     /* activa el modo flexible en el contenedor */

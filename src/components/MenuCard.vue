@@ -25,16 +25,14 @@ export default {
             ]
         }
     },
-    methods:{
-        presionar() {
-            console.log("id hijo",this.idCard)
-            this.$emit('presionado');
-        }
-    },
     components: {
         
     },
     methods:{
+        presionar() {
+            console.log("id hijo",this.idCard)
+            this.$emit('presionado');
+        },
         clickbutton(val) {
             console.log(val)
             console.log('Se ha hecho clic en la tarjeta del menú');
@@ -81,6 +79,7 @@ h2 {
 }
 .menu {
     background-color: transparent;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -123,6 +122,7 @@ h2 {
 .menu__card{
     width: 200px;
     height: auto;
+    
 }
 .card__header {
   background-color: #ECB1B5;

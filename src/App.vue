@@ -11,15 +11,9 @@
 /* import Navbar from '@/components/Navbar.vue'; */
 
 
-export default {
-  name: 'home-view',
-  components: {
-
-  }
-}
 </script>
 
-<style scoped>
+<style >
   html, body {
     width: 100%;
     height: 100%;
@@ -32,5 +26,10 @@ export default {
     height: 100vh;
     padding: 0;
     margin: 0;
+  }
+
+  a{
+    text-decoration: none !important;
+    color: inherit !important;
   }
 </style>

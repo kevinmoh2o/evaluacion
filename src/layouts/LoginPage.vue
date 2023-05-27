@@ -1,7 +1,8 @@
 <template>
     <div class="pantalla">
         <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onback()"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="false" 
+            @volver="onBackHandle"></Navbar>
         </div>
         <div class="cuerpo">
             <div class="container">
@@ -55,12 +56,6 @@ export default {
             router: router
         }
     },
-    methods:{
-        navegar:function(){
-            console.log("navegar to");
-            this.$router.push('/menu');
-        }
-    },
     components: {
         Navbar
     },
@@ -69,7 +64,7 @@ export default {
             console.log("navegando")
             await this.router.push('/menu')
         },
-        onback(){
+        onBackHandle(){
 
         }
     }
