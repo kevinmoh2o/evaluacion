@@ -16,6 +16,9 @@
   import { mapActions, mapState ,mapGetters,mapMutations} from 'vuex'
 
 
+  import { Hardware } from '@/utils/Hardware.js';
+
+
 export default {
     name: 'calendario-dos',
     components: {
@@ -27,7 +30,20 @@ export default {
         required: true
       },
     },
-
+    async mounted() {
+      await this.loadEntries(this.usuario);
+      this.calendarOptions.events = this.getentriesTest();
+      if (Hardware.isMobile()) {
+        const screenWidth = Hardware.getScreenWidth();
+        console.log("Se está abriendo desde un dispositivo móvil");
+        console.log("Ancho de la pantalla: " + screenWidth + "px");
+        this.calendarOptions.headerToolbar.right = 'timeGridWeek,dayGridMonth';
+      } else {
+        console.log("No se está abriendo desde un dispositivo móvil");
+        this.calendarOptions.headerToolbar.right = 'timeGridDay,timeGridWeek,dayGridMonth,listDay';
+      }
+      console.log("calendarOptions", this.calendarOptions.headerToolbar.right);
+    },
     data() {
       const  calendarOptions= {
                 plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
@@ -36,7 +52,7 @@ export default {
                 headerToolbar: {
                   left: 'prev,next today',
                   center: 'title',
-                  right: 'timeGridDay,timeGridWeek,dayGridMonth,listDay',
+                  right: 'timeGridDay,timeGridWeek,dayGridMonth',
                 },
                 allDaySlot: false,
                 nowIndicator: true,
@@ -49,6 +65,7 @@ export default {
                 dateClick: this.handleDateclick,
                 eventChange:this.eventChangeClick,
                 eventClick: this.handleEventClick,
+                contentHeight: 'auto',
                 eventAdd: (info) => {
                   console.log('create')
                   console.log(info)
@@ -57,16 +74,16 @@ export default {
                   console.log('eventRemove')
                   console.log(arg)
                 },
-                //eventClick: handleEventClick,
-                //eventContent: eventContent
             };
             var showModal = false;
             var selectedItem = {};
+            var mobileSet=[];
             //eventsData: this.getentriesTest()
       return {
       calendarOptions,
       showModal,
-      selectedItem
+      selectedItem,
+      mobileSet
       }
     },
     methods: {

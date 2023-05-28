@@ -27,6 +27,7 @@
 <script>
 import { defineAsyncComponent } from 'vue'
 import { Formatos } from '@/utils/Formatos.js';
+import { Hardware } from '@/utils/Hardware.js';
 import { mapActions,mapGetters } from 'vuex'
 
 export default{
@@ -41,6 +42,14 @@ export default{
     created() {
         this.licenciado ='Kevin Montañez Huamán';//"Pedro Laredo Chuquispuma"
         this.userId = 'kbmont';
+        if (Hardware.isMobile()) {
+        const screenWidth = Hardware.getScreenWidth();
+        console.log("Se está abriendo desde un dispositivo móvil");
+        console.log("Ancho de la pantalla: " + screenWidth + "px");
+        
+        } else {
+        console.log("No se está abriendo desde un dispositivo móvil");
+        }
     }, 
     data() {
         return {
@@ -200,7 +209,10 @@ export default{
 </script>
 
 <style lang="scss" scoped>
-
+ a{
+    text-decoration: none !important;
+    color: inherit !important;
+  }
 .div1{
     z-index: 1;
     /* position: absolute; */

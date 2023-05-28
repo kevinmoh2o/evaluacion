@@ -2,7 +2,9 @@
     <div class="menu">
         <div class="menu__card"  @click.prevent="$emit('clickbutton')">
             <div class="card__header">
-                <img src="@/assets/cita-medica.png" height="100">
+                <!-- <img class="imgClass" src="@/assets/cita-medica.png" height="100"> -->
+                <!-- <img class="imgClass" src="@/assets/menu/calendario.png" alt="Imagen PNG"> -->
+                <img class="imgClass" :src="require(`@/assets/menu/${ruta}.png`)" alt="Imagen PNG">
             </div>
             <div class="card__body" >
                 <h2 class="titulo">{{titulo}}</h2>
@@ -16,8 +18,17 @@
 export default {
     props:{
         idCard: Number,
-        titulo:String
+        titulo:String,
+        ruta: {
+            type: String,
+            default: "calendario" 
+        },
     },
+    created() {
+        console.log("ruta",this.ruta);
+        /* this.licenciado ='Kevin Montañez Huamán';//"Pedro Laredo Chuquispuma"
+        this.userId = 'kbmont'; */
+    }, 
     data() {
         return {
             cards: [
@@ -68,7 +79,7 @@ $color-rojo:#dc3545;
 
 h2 {
     color: map-get($theme-colors, light);
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     margin: 0;
     align-items: cennter;
@@ -118,18 +129,56 @@ h2 {
         }
     }
 }
+//  
 
+.imgClass{
+    width: 50px;
+}
+.menu__card:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
 .menu__card{
-    width: 200px;
+    width: 100px;
     height: auto;
-    
+}
+
+
+@media (min-width:650px){
+    .card__header {
+        background-color: #ecb1b590;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 130px;
+    }
+    .imgClass{
+        width: 50px;
+    }
+
+    h2 {
+        color: map-get($theme-colors, light);
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0;
+        align-items: cennter;
+        align-items: center;
+        max-lines: 2;
+        justify-content: center;
+        
+    }
+    .menu__card{
+        width: 200px;
+        height: auto;
+    }
 }
 .card__header {
-  background-color: #ECB1B5;
+  background-color: #ecb1b590;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 130px;
+  height: 80px;
 }
 
 .card__body {

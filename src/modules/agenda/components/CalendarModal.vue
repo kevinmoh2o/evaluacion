@@ -30,7 +30,7 @@
 
         <div class="selecpatient">
           <select v-if="statusButton && flagUpdateMo" class="entradaStyle" name="idSelector" id="idSelector" v-model="iPaciente" onchange="" required="true">
-            <option value="" selected>Selecciona un paciente</option>
+            <option value="" disabled selected hidden>Selecciona un paciente</option>
             <option v-for="nombre in nombres" :key="nombre.id" :value="nombre.nombre">{{ nombre.nombre }}</option>
           </select>
           <!-- <input v-else v-model="form.title" type="text" name="paciente" class="entradaStyle" size="30" disabled="disabled"> -->

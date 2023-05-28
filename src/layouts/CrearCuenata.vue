@@ -4,13 +4,13 @@
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
             @volver="onBackHandle"></Navbar>
         </div>
-        <div class="form-container">
+        <!-- <div class="form-container"> -->
                 <FormSectionDatosPersonales></FormSectionDatosPersonales>
-                <FormSectionUbicacion></FormSectionUbicacion>
-        </div>
+                <!-- <FormSectionUbicacion></FormSectionUbicacion> -->
+        <!-- </div>
         <div class="button-container">
             <button class="button-guardar">Guardar</button>
-        </div>
+        </div> -->
         
     </div>
 </template>
@@ -19,7 +19,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue';
 import FormSectionDatosPersonales from '@/components/FormSectionDatosPersonales.vue';
-import FormSectionUbicacion from '@/components/FormSectionUbicacion.vue';
+//import FormSectionUbicacion from '@/components/FormSectionUbicacion.vue';
 import { useRouter } from 'vue-router'
 //import ComboBox from '@/components/ComboBox.vue';
 export default {
@@ -34,7 +34,7 @@ export default {
     components: {
         Navbar,
         FormSectionDatosPersonales,
-        FormSectionUbicacion
+        //FormSectionUbicacion
     },
     methods:{
 

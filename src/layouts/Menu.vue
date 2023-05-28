@@ -8,16 +8,20 @@
             ></Navbar>
         </div>
             <div class="card1">
-                <MenuCard :titulo="'Agenda'" @clickbutton="handlePress(1)" :idCard="idParent"></MenuCard>
+                <MenuCard :titulo="'Agenda'" :ruta="link1" 
+                @clickbutton="handlePress(1)" :idCard="idParent"></MenuCard>
             </div>
             <div class="card2">
-                <MenuCard :titulo="'Temas de Consejeria'" @clickbutton="handlePress(2)" :idCard="idParent"></MenuCard>
+                <MenuCard :titulo="'Temas de Consejeria'" :ruta="link2" 
+                @clickbutton="handlePress(2)" :idCard="idParent"></MenuCard>
             </div>
             <div class="card3">
-                <MenuCard :titulo="'Registro de Cuidadores'" @clickbutton="handlePress(3)" :idCard="idParent"></MenuCard>
+                <MenuCard :titulo="'Registro de Cuidadores'" :ruta="link3" 
+                @clickbutton="handlePress(3)" :idCard="idParent"></MenuCard>
             </div>
             <div class="card4">
-                <MenuCard :titulo="'Equipos de Trabajo'" @clickbutton="handlePress(4)" :idCard="idParent"></MenuCard>
+                <MenuCard :titulo="'Equipos de Trabajo'" :ruta="link4" 
+                @clickbutton="handlePress(4)" :idCard="idParent"></MenuCard>
             </div>
     </div>
    
@@ -33,6 +37,10 @@ export default {
     data() {
         return {
         idParent:0,
+        link1:"calendario",
+        link2:"chat",
+        link3:"cuidador",
+        link4:"equipo",
         }
 
     },
@@ -76,30 +84,58 @@ export default {
 <style lang="scss" scoped>
 
 
-/* .background-image{
+.background-image{
     position: absolute;
-    top: 90px;
+    top: 113px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 113px);
     background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.45;
-} */
+}
 .mainContMenu {
-    display: grid;
+        display: grid;
+        height: 100vh;
+        background-color:transparent ;
+        grid-template: 
+            "cabeceraMenu  cabeceraMenu" 100px
+            " card1  card2 " 250px
+            " card3  card4 " 250px/
+            1fr 1fr  
+            ;
+    }
+
+
+@media (min-width:650px){
+    .background-image{
+        position: absolute;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 90px);
+        background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.4;
+    }
+
+    .mainContMenu {
+        display: grid;
+        height: 100vh;
+        background-color:transparent ;
+        grid-template: 
+            "cabeceraMenu cabeceraMenu cabeceraMenu cabeceraMenu cabeceraMenu" 90px
+            ". card1 . card2 ." 1fr
+            ". card3 . card4 ." 1fr/
+            1fr 1fr 1fr 1fr 1fr
+            ;
+    }
     
-    //gap: 10px;
-    height: 100vh;
-    background-color:transparent ;
-    grid-template: 
-        "cabeceraMenu cabeceraMenu cabeceraMenu cabeceraMenu cabeceraMenu" 90px
-        ". card1 . card2 ." 1fr
-        ". card3 . card4 ." 1fr/
-        1fr 1fr 1fr 1fr 1fr
-        ;
+    
 }
 
 .cabeceraMenu {
@@ -128,27 +164,5 @@ export default {
   width: 100%; /* Ocupar todo el ancho disponible */
   height: 100%; /* Ocupar todo el alto disponible */
 }
-/* .cuerpo-menu {
-    background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
-    background-size: cover;
-    background-position: center;
-    flex: 1;
-    background-size: cover;
-    opacity: 0.6;
-    z-index: 1;
-
-} */
-
-
-/* .card {
-    margin: 10px;
-    padding: 10px;
-    background-color: rgba(0,0,0,0);
-    border-color: transparent;
-    > * {
-        opacity: 1;
-    }
-} */
-
 
 </style>

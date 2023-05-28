@@ -6,9 +6,7 @@
             @volver="onBackHandle"></Navbar>
         
         <div class="booksContainer">
-            
                 <Books class="books"></Books>
-          
         </div>
     </div>
 
@@ -43,18 +41,16 @@ export default {
 
 .mainAgenda {
         display: grid;
-        
-        //gap: 10px;
         height: 100vh;
         background-color:transparent ;
         grid-template: 
-            "cabeceraAgenda " 100px
+            "cabeceraAgenda " 120px
             "booksContainer" 1fr/
             1fr             ;
     }
 
 
-@media (min-width:700px){
+@media (min-width:650px){
     .mainAgenda {
         display: grid;
         
@@ -62,9 +58,9 @@ export default {
         height: 100vh;
         background-color:transparent ;
         grid-template: 
-            "cabeceraAgenda cabeceraAgenda cabeceraAgenda cabeceraAgenda cabeceraAgenda cabeceraAgenda" 100px
-            ". booksContainer booksContainer booksContainer booksContainer ." 1fr/
-            1fr 1fr 1fr 1fr 1fr 1fr
+            "cabeceraAgenda cabeceraAgenda cabeceraAgenda" 100px
+            ". booksContainer ." 1fr/
+            1fr auto 1fr 
             ;
     }
 }

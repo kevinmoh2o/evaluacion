@@ -9,19 +9,19 @@
         </div>
 
         <div class="texto" >
-          <a v-if="estadoTitulo" class="navbar-brand text-white">
+          <a v-if="estadoTitulo" class="navbar-brand">
             {{ titulo }}
-        </a>
+          </a>
         </div>
         
 
         <div class="imagen">
-            <img src="@/assets/logo.png" alt="Vue Logo" height="50" class="d-inline-block align-text-top mx-2">
+            <img src="@/assets/logo2.png" alt="Vue Logo" height="70">
         </div>
     
-      <nav class="linea">
+      <div class="linea">
           
-      </nav>
+      </div>
   </div>
     
 </template>
@@ -74,43 +74,69 @@ $color-blanco:#f8f9fa;
 
 .texto{
   grid-area: texto;
+  padding: 0;
+  color: white;
 }
+
 
 .imagen{
   grid-area: imagen;
+  padding: 0;
 }
 
 
 .containernav {
+  display: grid;
+  grid-template: 
+    "boton imagen imagen" 70px
+    "boton texto texto" 22.5px
+    "linea linea linea" 10px /
+    100px auto auto;
+}
+
+
+
+@media (min-width:650px){
+  .texto{
+    padding: 10px;
+    color: white;
+  }
+  .navbar-brand {
+    font-size: 30px;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .containernav {
     display: grid;
-  
     grid-template: 
         "boton texto imagen" 70px
         "linea linea linea" 10px /
         100px auto 200px;
+  }
 }
-
-
-
-/* @media (min-width:900px){
-    .containernav{
-        grid-template:
-        "boton texto imagen" 70px
-        "linea linea linea" 10px/
-        auto auto auto;
-    }
-} */
 
 .navbar-brand {
-    display: block;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #fff;
-    text-decoration: none;
+  padding: 0;
+  margin: 0;
+  /* font-size: 15px; */
+  /* display: block; */
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
+/* .styleTitulo{
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+ */
 
 
 button.btn {

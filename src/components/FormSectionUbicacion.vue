@@ -3,13 +3,13 @@
     <h2 class="form-section__title">Ubicación</h2>
     <div class="row">
       <div class="col-md-4">
-        <ComboBox :titulo="'Centro de Salud'" :valores="centro"></ComboBox>
+        <ComboBox :titulo="'Centro de Salud'" :valores="centroList"></ComboBox>
       </div>
       <div class="col-md-4">
-        <ComboBox :titulo="'Distrito'" :valores="distrito"></ComboBox>
+        <ComboBox :titulo="'Distrito'" :valores="distritoList"></ComboBox>
       </div>
       <div class="col-md-4">
-        <ComboBox :titulo="'Diris/Diresa'" :valores="diresa"></ComboBox>
+        <ComboBox :titulo="'Diris/Diresa'" :valores="diresaList"></ComboBox>
       </div>
     </div>
   </div>
@@ -30,18 +30,18 @@ export default {
   data() {
     
     return {
-      centro:[
+      centroList:[
       { id: 1, valor:  " La Perla " },
        { id: 2, valor: " San Pedro " },
        { id: 3, valor: " San Lucas  " }
       ],
-      distrito:[
+      distritoList:[
       { id: 1, valor: "Norte" },
        { id: 2, valor: "Centro" },
        { id: 2, valor: "Sur" },
        { id: 2, valor: "Diresa Callao" },
       ],
-      diresa:[
+      diresaList:[
       { id: 1, valor: "Norte" },
        { id: 2, valor: "Centro" },
        { id: 2, valor: "Sur" },
@@ -72,7 +72,6 @@ $form-padding: 2rem;
   background-color: $form-background-color;
   border-radius: $border-radius;
   border: 1px solid $border-color;
-  
 }
 
 

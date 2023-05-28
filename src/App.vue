@@ -19,17 +19,23 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: Inter,sans-serif;
   }
 
-  .app-container {
+  /* .app-container {
     width: 100vw;
     height: 100vh;
     padding: 0;
     margin: 0;
-  }
+  } */
 
-  a{
+  .column-container .full-calendar a {
     text-decoration: none !important;
     color: inherit !important;
   }
+
+/*   a{
+    text-decoration: none !important;
+    color: inherit !important;
+  } */
 </style>
