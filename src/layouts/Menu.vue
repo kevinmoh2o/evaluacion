@@ -56,10 +56,10 @@ export default {
                     this.$router.push('/');
                     break;
                 case 3:
-                    this.$router.push('/');
+                    this.$router.push('/consejeria');
                     break;
                 case 4:
-                    this.$router.push('/');
+                    this.$router.push('/about-us');
                     break;
             
                 default:
@@ -101,7 +101,7 @@ export default {
         height: 100vh;
         background-color:transparent ;
         grid-template: 
-            "cabeceraMenu  cabeceraMenu" 100px
+            "cabeceraMenu  cabeceraMenu" 120px
             " card1  card2 " 250px
             " card3  card4 " 250px/
             1fr 1fr  
@@ -128,10 +128,10 @@ export default {
         height: 100vh;
         background-color:transparent ;
         grid-template: 
-            "cabeceraMenu cabeceraMenu cabeceraMenu cabeceraMenu cabeceraMenu" 90px
-            ". card1 . card2 ." 1fr
-            ". card3 . card4 ." 1fr/
-            1fr 1fr 1fr 1fr 1fr
+            "cabeceraMenu cabeceraMenu" 100px
+            " card1  card2 " 1fr
+            " card3  card4 " 1fr/
+            1fr 1fr 
             ;
     }
     
@@ -145,24 +145,37 @@ export default {
 }
 
 .card1{
+    display: flex;
     grid-area:card1;
     align-items: center;
     text-align: center;
     align-content: center;
+    justify-content: center;
 }
 .card2{
+    display: flex;
     grid-area:card2;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
 }
 .card3{
+    display: flex;
     grid-area:card3;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
 }
 .card4{
+    display: flex;
     grid-area:card4;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
 }
 
-.card1, .card2, .card3, .card4 {
-  width: 100%; /* Ocupar todo el ancho disponible */
-  height: 100%; /* Ocupar todo el alto disponible */
-}
 
 </style>

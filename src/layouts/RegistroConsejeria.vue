@@ -1,37 +1,45 @@
 <template>
-    <div class="pantalla">
+    <form class="formDP">
+        <!-- <div class="pantalla"> -->
         <div class="cabecera">
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
             @volver="onBackHandle"></Navbar>
         </div>
-            <FormSectionDatosPersonales></FormSectionDatosPersonales>
-        </div>
+        <FormCuidador class="cuidador"></FormCuidador>
+        <FormPaciente class="paciente"></FormPaciente>
+        <!-- </div> -->
+        <BotonVue class="boton"></BotonVue>
+    </form>
 </template>
 
 
 <script>
 import Navbar from '@/components/Navbar.vue';
-import FormSectionDatosPersonales from '@/components/FormSectionDatosPersonales.vue';
+import FormCuidador from '@/components/FormCuidador.vue';
+import FormPaciente from '@/components/FormPaciente.vue';
+import BotonVue from '@/components/BotonVue.vue';
 import { useRouter } from 'vue-router'
 
 export default {
-    name: 'create-layout',
+    name: 'consejeria-layout',
     setup() {
         const router = useRouter()
         return {
-            titulo: 'Crear Cuenta',
+            titulo: 'REGISTROS DEL CUIDADOR PRIMARIO',
             router: router
         }
     },
     components: {
         Navbar,
-        FormSectionDatosPersonales,
+        FormCuidador,
+        BotonVue,
+        FormPaciente
     },
     methods:{
 
         async onBackHandle(){
             console.log("navegando")
-            await this.router.push('/')
+            await this.router.push('/menu')
         }
     
     }
@@ -43,6 +51,60 @@ $color-azul-ligth: #62A1D9;
 $color-azul-intermedio: #616C8C;
 $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
+
+.formDP{
+    display: grid;
+    height: 100vh;
+    background-color:transparent ;
+    grid-template: 
+        "cabecera" 110px
+        " cuidador" 1fr
+        " paciente" 1fr
+        " boton" 120px/
+        1fr 
+        ;
+}
+
+@media (min-width:650px){
+    .formDP{
+        display: grid;
+        height: 100vh;
+        background-color:transparent ;
+        grid-template: 
+            "cabecera cabecera" 100px
+            " cuidador  paciente " 1fr
+            " boton  boton " 120px/
+            1fr 1fr 
+            ;
+    }
+    
+}
+
+.cabecera{
+    grid-area:cabecera;
+}
+
+
+.cuidador{
+    grid-area:cuidador;
+}
+
+.paciente{
+    grid-area:paciente;
+}
+
+.boton {
+  display: flex; /* Agrega esta línea */
+  grid-area: boton;
+  width: 300px;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+}
+
 .pantalla {
     display: flex;
     flex-direction: column;   
@@ -58,18 +120,11 @@ $color-negro: #2c3e50;
 }
 
 
-.cabecera {
-    height: 100px;
-}
 
-.cuerpo {
-    flex: 1;
-}
-
-button{
+/* button{
     
     width: 10%;
-}
+} */
 
 .form-section {
   padding-bottom: 10px;
@@ -83,7 +138,7 @@ button{
   }
 }
 
-.button-guardar {
+/* .button-guardar {
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
@@ -116,7 +171,7 @@ button{
         padding: 15px 30px;
         font-size: 20px;
     }
-}
+} */
 
 
 </style>

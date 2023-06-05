@@ -19,7 +19,7 @@ export default {
   computed: {
     ayuda() {
         console.log(this.placeholder)
-      return this.placeholder || 'plaace';
+      return this.placeholder || ' ';
     },
     setNombre(){
         return this.nombre;

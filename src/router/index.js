@@ -30,6 +30,17 @@ const routes = [{
         name: 'agenda-layout',
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/Agenda.vue')
     },
+    {
+        path: '/about-us',
+        name: 'about-layout',
+        component: () => import ( /* webpackChunkName: "about" */ '../layouts/About.vue')
+    },
+    {
+        path: '/consejeria',
+        name: 'consejeria-layout',
+        component: () => import ( /* webpackChunkName: "about" */ '../layouts/RegistroConsejeria.vue')
+    },
+    
     
 ]
 

@@ -60,7 +60,7 @@ export default {
         align-items: start;
         grid-area:lbl;
         font-weight: 600;
-        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+        font-family: sans-serif;
         padding-bottom:5px ;
     }
 
@@ -69,7 +69,7 @@ export default {
         border: 1.5px solid #5B5D6B;
         border-radius: 5px;
         width: 100%;
-        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+        font-family: sans-serif;
         padding-left:5px ;
         height: 45px;
     }

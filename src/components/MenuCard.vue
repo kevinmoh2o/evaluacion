@@ -1,12 +1,10 @@
 <template>
     <div class="menu">
-        <div class="menu__card"  @click.prevent="$emit('clickbutton')">
-            <div class="card__header">
-                <!-- <img class="imgClass" src="@/assets/cita-medica.png" height="100"> -->
-                <!-- <img class="imgClass" src="@/assets/menu/calendario.png" alt="Imagen PNG"> -->
+        <div class="card"  @click.prevent="$emit('clickbutton')">
+            <div class="cabeza">
                 <img class="imgClass" :src="require(`@/assets/menu/${ruta}.png`)" alt="Imagen PNG">
             </div>
-            <div class="card__body" >
+            <div class="cuerpo" >
                 <h2 class="titulo">{{titulo}}</h2>
             </div>
         </div>
@@ -56,137 +54,90 @@ export default {
 
 @import '../styles/styles.scss';
 
-$color-azul: #1B62BF;
-$color-rojo:#dc3545;
-
-.titulo {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2; /* Número de líneas máximo */
-  line-clamp: 2; /* Número de líneas máximo */
-  margin-left: 10px;
-  margin-right: 10px;
-  justify-content: center; /* Alineación vertical al centro */
-  text-align: center; /* Alineación horizontal al centro */
-  width: 100%;
-}
-
-h2 {
-    color: map-get($theme-colors, light);
-    font-size: 14px;
-    font-weight: bold;
-    margin: 0;
-    align-items: cennter;
-    align-items: center;
-    max-lines: 2;
-    justify-content: center;
-    
-}
-.menu {
-    background-color: transparent;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-
-
-
-    &__card {
-        width: calc(25% - 10px);
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-        padding: 0;
-        position: relative;
-        overflow: hidden;
+    .card{
+        width: 150px;
+        margin:0 ;
         height: 200px;
-
-        &__header {
-            background-color: #0074D9;
-            padding: 20px;
-            border-radius: 10px 10px 0px 0px;
-            align-items: center;
-            height: 130px;
-
-            
-        }
-
-        &__body {
-            padding: 20px;
-
-            p {
-                color: #333333;
-                font-size: 16px;
-                margin: 0;
-            }
-        }
+        border-radius: 15px;
+        box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+        background-color: #fff;
+        display: grid;
+        grid-template: 
+            "cabeza"130px
+            "cuerpo"50px/
+            auto
+            ;
     }
+
+
+    @media (min-width:650px){
+        .card{
+            width: 200px;
+            margin:0 ;
+            height: 200px;
+            border-radius: 15px;
+            box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+            background-color: #fff;
+            display: grid;
+            grid-template: 
+                "cabeza"130px
+                "cuerpo"50px/
+                auto
+                ;
+        }
+        
+    }
+
+    .cabeza {
+        display:flex;
+        margin: 15px 20px 15px 20px;
+        border-radius: 10px;
+        grid-area: cabeza;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        background-image: linear-gradient(to right, #ff9966, #ff5e62);
+    }
+
+
+.cuerpo{
+    border-radius: 5px;
+    height: 100%;
+    display:flex;
+    grid-area:cuerpo;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    margin: 20px 20px 20px 20px;
+    background-image: linear-gradient(to right, #e6e6e6, #99939339);
 }
-//  
 
 .imgClass{
     width: 50px;
 }
-.menu__card:hover {
+
+.titulo {
+  font-weight: 500;
+  font-family: sans-serif;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+.menu:hover {
     opacity: 0.9;
     transform: scale(1.1);
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); */
+    background-color: transparent;
 }
-.menu__card{
-    width: 100px;
-    height: auto;
-}
-
-
-@media (min-width:650px){
-    .card__header {
-        background-color: #ecb1b590;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 130px;
-    }
-    .imgClass{
-        width: 50px;
-    }
-
-    h2 {
-        color: map-get($theme-colors, light);
-        font-size: 18px;
-        font-weight: bold;
-        margin: 0;
-        align-items: cennter;
-        align-items: center;
-        max-lines: 2;
-        justify-content: center;
-        
-    }
-    .menu__card{
-        width: 200px;
-        height: auto;
-    }
-}
-.card__header {
-  background-color: #ecb1b590;
+.menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80px;
-}
-
-.card__body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 90px;
-  background-color: $color-rojo;
+  text-align: center;
+  /* width: 100%; */
+  /* height: 100%; */
 }
 
 </style>
