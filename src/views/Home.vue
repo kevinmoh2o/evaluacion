@@ -10,7 +10,6 @@
 <script>
 // @ is an alias to /src
 import LoginPage from '../layouts/LoginPage.vue';
-/* import Navbar from '@/components/Navbar.vue'; */
 
 
 export default {

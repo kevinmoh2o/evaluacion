@@ -36,9 +36,14 @@ const routes = [{
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/About.vue')
     },
     {
-        path: '/consejeria',
-        name: 'consejeria-layout',
+        path: '/registro-consejeria',
+        name: 'regiconsejeria-layout',
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/RegistroConsejeria.vue')
+    },
+    {
+        path: '/tema-consejeria',
+        name: 'temaconsejeria-layout',
+        component: () => import ( /* webpackChunkName: "about" */ '../layouts/TemaConsejeria.vue')
     },
     
     

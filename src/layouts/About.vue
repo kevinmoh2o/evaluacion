@@ -10,8 +10,8 @@
 
 
 <script>
-import InfoUx from '@/components/InfoUx.vue';
-import Navbar from '../components/Navbar.vue';
+import InfoUx from '@/components/compose/InfoUx.vue';
+import Navbar from '../components/compose/Navbar.vue';
 import { useRouter } from 'vue-router'
 export default {
     name: 'about-layout',

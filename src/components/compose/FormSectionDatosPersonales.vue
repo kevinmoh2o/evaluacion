@@ -18,9 +18,9 @@
 </template>
   
 <script>
-import Entrada from '@/components/Entrada.vue';
-import ComboBox from '@/components/ComboBox.vue';
-import BotonVue from '@/components/BotonVue.vue';
+import Entrada from '@/components/atomic/Entrada.vue';
+import ComboBox from '@/components/atomic/ComboBox.vue';
+import BotonVue from '@/components/atomic/BotonVue.vue';
 export default {
     props: {
         title: {

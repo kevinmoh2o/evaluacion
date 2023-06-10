@@ -6,9 +6,6 @@
 </template>
 
 <script>
-//Formulario
-///import Formulario from '@/components/Formulario.vue';
-/* import Navbar from '@/components/Navbar.vue'; */
 
 
 </script>

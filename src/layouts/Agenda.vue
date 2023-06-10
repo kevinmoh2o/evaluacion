@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue';
+import Navbar from '../components/compose/Navbar.vue';
 import { defineAsyncComponent } from 'vue'
 
 

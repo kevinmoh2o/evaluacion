@@ -10,8 +10,8 @@
 
 
 <script>
-import Navbar from '@/components/Navbar.vue';
-import FormSectionDatosPersonales from '@/components/FormSectionDatosPersonales.vue';
+import Navbar from '@/components/compose/Navbar.vue';
+import FormSectionDatosPersonales from '@/components/compose/FormSectionDatosPersonales.vue';
 import { useRouter } from 'vue-router'
 
 export default {

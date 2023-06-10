@@ -1,24 +1,22 @@
 <template>
   <section class="form-section form-section--datos-personales">
       <div class="formDP">
-          <h2 class="lblTitulo">DATOS DEL CUIDADOR</h2>
+          <h2 class="lblTitulo">DATOS DEL PACIENTE</h2>
           <div class="imgAb">
-            <!-- <i class="fa-solid fa-user zizeI"></i> -->
-            <img class="zizeI" src="@/assets/terapia.png" alt="Imagen PNG">
+            <img class="zizeI" src="@/assets/tos.png" alt="Imagen PNG">
           </div>
           <Entrada class="inpE1" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
-          <ComboBox class="cboxE1" :titulo="'Edad:'" :valores="edad"></ComboBox>
-          <ComboBox class="cboxE2" :titulo="'Sexo:'" :valores="sexo"></ComboBox>
-          <Entrada class="inpE2" :type="'Nota'" :placeholder="'Nota'" :nombre="'Nota'" :label="'Nota:'"></Entrada>
-          <!-- <BotonVue class="btnGuardar"></BotonVue> -->
+          <ComboBox class="cboxE1" :titulo="'Patologías:'" :valores="edad"></ComboBox>
+          <ComboBox class="cboxE2" :titulo="'Antecedentes:'" :valores="sexo"></ComboBox>
+          <Entrada class="inpE2" :type="'Nota'" :placeholder="'Nota'" :nombre="'Nota'" :label="'Tratamiento:'"></Entrada>
+
       </div>
   </section>
 </template>
 
 <script>
-import Entrada from '@/components/Entrada.vue';
-import ComboBox from '@/components/ComboBox.vue';
-//import BotonVue from '@/components/BotonVue.vue';
+import Entrada from '@/components/atomic/Entrada.vue';
+import ComboBox from '@/components/atomic/ComboBox.vue';
 export default {
   props: {
       title: {
@@ -29,7 +27,6 @@ export default {
   components: {
       Entrada,
       ComboBox,
-      //BotonVue
   },
   data() {
   

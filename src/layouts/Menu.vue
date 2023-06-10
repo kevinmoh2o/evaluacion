@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue';
-import MenuCard from '@/components/MenuCard.vue';
+import Navbar from '../components/compose/Navbar.vue';
+import MenuCard from '@/components/compose/MenuCard.vue';
 
 export default {
     name: 'menu-layout',
@@ -53,10 +53,10 @@ export default {
                     this.$router.push('/agenda');
                     break;
                 case 2:
-                    this.$router.push('/');
+                    this.$router.push('/tema-consejeria');
                     break;
                 case 3:
-                    this.$router.push('/consejeria');
+                    this.$router.push('/registro-consejeria');
                     break;
                 case 4:
                     this.$router.push('/about-us');

@@ -1,27 +1,24 @@
 <template>
     <form class="formDP">
-        <!-- <div class="pantalla"> -->
         <div class="cabecera">
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
             @volver="onBackHandle"></Navbar>
         </div>
-        <FormCuidador class="cuidador"></FormCuidador>
-        <FormPaciente class="paciente"></FormPaciente>
-        <!-- </div> -->
-        <BotonVue class="boton"></BotonVue>
+        <FilterHeader></FilterHeader>
+        <!-- <BotonVue class="boton"></BotonVue> -->
     </form>
 </template>
 
 
 <script>
+
 import Navbar from '@/components/compose/Navbar.vue';
-import FormCuidador from '@/components/compose/FormCuidador.vue';
-import FormPaciente from '@/components/compose/FormPaciente.vue';
-import BotonVue from '@/components/atomic/BotonVue.vue';
+import FilterHeader from '@/components/compose/FilterHeader.vue';
+//import BotonVue from '@/components/atomic/BotonVue.vue';
 import { useRouter } from 'vue-router'
 
 export default {
-    name: 'regiconsejeria-layout',
+    name: 'temaconsejeria-layout',
     setup() {
         const router = useRouter()
         return {
@@ -31,9 +28,8 @@ export default {
     },
     components: {
         Navbar,
-        FormCuidador,
-        BotonVue,
-        FormPaciente
+        FilterHeader,
+        //BotonVue,
     },
     methods:{
 
@@ -45,14 +41,16 @@ export default {
     }
 }
 </script>
+
 <style lang="scss" scoped>
+
 $color-azul: #1B62BF;
 $color-azul-ligth: #62A1D9;
 $color-azul-intermedio: #616C8C;
 $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
-.formDP{
+/* .formDP{
     display: grid;
     height: 100vh;
     background-color:transparent ;
@@ -78,7 +76,7 @@ $color-negro: #2c3e50;
             ;
     }
     
-}
+} */
 
 .cabecera{
     grid-area:cabecera;
@@ -94,7 +92,7 @@ $color-negro: #2c3e50;
 }
 
 .boton {
-  display: flex; /* Agrega esta línea */
+  display: flex; 
   grid-area: boton;
   width: 300px;
   align-content: center;
@@ -120,12 +118,6 @@ $color-negro: #2c3e50;
 }
 
 
-
-/* button{
-    
-    width: 10%;
-} */
-
 .form-section {
   padding-bottom: 10px;
   padding-top: 10px;
@@ -137,41 +129,6 @@ $color-negro: #2c3e50;
     margin-bottom: 1rem;
   }
 }
-
-/* .button-guardar {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    background-color: $color-azul-intermedio;
-    color: #fff;
-    cursor: pointer;
-
-    &:hover {
-        background-color: $color-azul;
-    }
-
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 5px #555;
-    }
-
-    &.secondary {
-        background-color: #fff;
-        color: #333;
-        border: 1px solid #333;
-
-        &:hover {
-            background-color: #eee;
-        }
-    }
-
-    &.large {
-        padding: 15px 30px;
-        font-size: 20px;
-    }
-} */
 
 
 </style>

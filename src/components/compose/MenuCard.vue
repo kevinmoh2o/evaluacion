@@ -24,8 +24,6 @@ export default {
     },
     created() {
         console.log("ruta",this.ruta);
-        /* this.licenciado ='Kevin Montañez Huamán';//"Pedro Laredo Chuquispuma"
-        this.userId = 'kbmont'; */
     }, 
     data() {
         return {
@@ -52,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 
-@import '../styles/styles.scss';
+@import '../../styles/styles.scss';
 
     .card{
         width: 150px;
