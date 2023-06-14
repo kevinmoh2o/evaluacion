@@ -44,6 +44,7 @@ export default {
     align-items: center;
     max-width: none;
     width: 100%;
+    padding: 0px 0px 0px 0px;
   }
 
   .imagen {
@@ -60,6 +61,7 @@ export default {
         align-content: center;
         align-items: center;
         align-self: center;
+        text-align: center;
         justify-content: center;
         border-radius: 7px ;
         color: white;
@@ -72,7 +74,7 @@ export default {
 
     .ctnIpt {
         border: 1.5px solid #ffffff00;
-        padding: 5px;
+        //padding: 5px;
         border-radius: 7px;
         background-color: map-get($theme-colors, "azul");
         width: 100%;

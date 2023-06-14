@@ -3,6 +3,8 @@
         <div class="ctnIpt">
             <EntradaImg :placeholder="'Buscar'" @buscar="realizarConsulta"></EntradaImg>
             <LabelImg :title="'Agregar'" iconName="fa-circle-plus" @agregar="agregarConsulta"></LabelImg>
+            <ComboBoxFil :valores="nroConsejeria" :valorInit="'Nro de Consejería'"></ComboBoxFil>
+            <BotonVue :color="'#198754'" :hovercolor="'#f8f9fa'" :title="'Filtrar'"></BotonVue>
         </div>
     </div>
 </template>
@@ -10,6 +12,9 @@
 <script>
 import EntradaImg from '@/components/atomic/EntradaImg.vue';
 import LabelImg from '@/components/atomic/LabelImg.vue';
+import ComboBoxFil from '@/components/atomic/ComboBoxFil.vue';
+import BotonVue from '@/components/atomic/BotonVue.vue';
+
 export default {
   name: 'filter-component',
   props: {
@@ -18,9 +23,21 @@ export default {
     nombre: String,
     type: String
   },
+  data() {
+  
+  return {
+    nroConsejeria:[
+      { id: 1, valor:  "1" },
+      { id: 2, valor: "2" },
+      { id: 3, valor: "3" }
+      ]
+    }
+  },
   components:{
     EntradaImg,
-    LabelImg
+    LabelImg,
+    ComboBoxFil,
+    BotonVue,
   },
   methods: {
     realizarConsulta(terminoBusqueda) {
@@ -48,8 +65,8 @@ export default {
     max-width: none;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    //padding-left: 15px;
+    //padding-right: 15px;
     width: 100%;
   }
 

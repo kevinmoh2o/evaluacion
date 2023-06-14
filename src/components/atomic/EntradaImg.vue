@@ -39,6 +39,7 @@ export default {
     justify-content: center;
     align-items: center;
     max-width: none;
+    padding: 0px 0px 0px 0px;
     width: 100%;
   }
 
@@ -50,6 +51,7 @@ export default {
     width: 100%;
   }
     .ipt{
+      text-align: center;
         background-color: rgb(111, 140, 193);
         grid-area:ipt;
         border: 2px solid transparent;
@@ -72,7 +74,7 @@ export default {
 
     .ctnIpt {
         border: 1.5px solid #ffffff00;
-        padding: 5px;
+        //padding: 5px;
         border-radius: 7px;
         background-color: map-get($theme-colors, "azul");
         width: 100%;

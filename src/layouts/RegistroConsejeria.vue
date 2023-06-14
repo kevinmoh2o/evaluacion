@@ -1,13 +1,15 @@
 <template>
     <form class="formDP">
-        <!-- <div class="pantalla"> -->
+        
+
         <div class="cabecera">
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
             @volver="onBackHandle"></Navbar>
         </div>
+        <FilterHeader class="filtro"></FilterHeader>
         <FormCuidador class="cuidador"></FormCuidador>
         <FormPaciente class="paciente"></FormPaciente>
-        <!-- </div> -->
+        
         <BotonVue class="boton"></BotonVue>
     </form>
 </template>
@@ -18,6 +20,7 @@ import Navbar from '@/components/compose/Navbar.vue';
 import FormCuidador from '@/components/compose/FormCuidador.vue';
 import FormPaciente from '@/components/compose/FormPaciente.vue';
 import BotonVue from '@/components/atomic/BotonVue.vue';
+import FilterHeader from '@/components/compose/FilterHeader.vue';
 import { useRouter } from 'vue-router'
 
 export default {
@@ -33,7 +36,8 @@ export default {
         Navbar,
         FormCuidador,
         BotonVue,
-        FormPaciente
+        FormPaciente,
+        FilterHeader,
     },
     methods:{
 
@@ -57,7 +61,8 @@ $color-negro: #2c3e50;
     height: 100vh;
     background-color:transparent ;
     grid-template: 
-        "cabecera" 110px
+        " cabecera" 110px
+        " filtro" 250px
         " cuidador" 1fr
         " paciente" 1fr
         " boton" 120px/
@@ -71,15 +76,19 @@ $color-negro: #2c3e50;
         height: 100vh;
         background-color:transparent ;
         grid-template: 
-            "cabecera cabecera" 100px
-            " cuidador  paciente " 1fr
-            " boton  boton " 120px/
-            1fr 1fr 
+            " cabecera cabecera cabecera" 100px
+            " filtro cuidador  paciente " 1fr
+            " filtro boton  boton " 120px/
+            300px 1fr 1fr 
             ;
     }
     
 }
 
+
+.filtro{
+    grid-area:filtro;
+}
 .cabecera{
     grid-area:cabecera;
 }

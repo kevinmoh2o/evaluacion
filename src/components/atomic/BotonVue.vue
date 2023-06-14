@@ -1,6 +1,6 @@
 <template>
     
-        <button class="confirmButton">Confirmar</button>
+        <button class="confirmButton">{{title}}</button>
     
 </template>
 
@@ -10,25 +10,12 @@
 export default {
     name:"boton-vue",
     props: {
-        titulo: String,
-        valores: []
+      title: String
     },
-    data() {
-    
-    return {
-      title:'',
-      nombres: this.valores,
-      format: 'hh:mm',
-      indicadorTotalTime:""
-    }
-  },
     setup() {
         return{
             
         }
-
-    },
-    components: {
 
     }
 }

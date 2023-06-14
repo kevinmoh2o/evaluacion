@@ -78,7 +78,6 @@ export default {
             var showModal = false;
             var selectedItem = {};
             var mobileSet=[];
-            //eventsData: this.getentriesTest()
       return {
       calendarOptions,
       showModal,
@@ -132,13 +131,10 @@ export default {
     },
     computed: {
         ...mapState( 'programacionModule', ['isLoading']),
-        /* textoRecortado() {
-        return recortarTexto(this.textoOriginal);
-      } */
     },
     async created() {
-      await this.loadEntries(this.usuario);
-      this.calendarOptions.events = this.getentriesTest();
+      //await this.loadEntries(this.usuario);
+      //this.calendarOptions.events = this.getentriesTest();
     }, 
     watch: {
       entries() {
@@ -158,22 +154,5 @@ export default {
   flex-direction: column;
 }
 
-
-
-/* 
-.full-calendar .fc-col-header-cell a,
-.full-calendar .fc-day-header a {
-  text-decoration: none !important;
-} */
 </style>
 
-  
-<!-- {
-  id: 1,
-  title: 'Evento 1',
-  start: '2023-05-01',
-  end: '2023-05-01',
-  backgroundColor: '#1f64fd',
-  borderColor: '#039555',
-  textColor: 'white',
-} -->
