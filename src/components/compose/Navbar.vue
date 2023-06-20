@@ -80,6 +80,7 @@ $color-blanco:#f8f9fa;
 
 
 .imagen{
+  background-color: #f2b749da; 
   grid-area: imagen;
   padding: 0;
 }

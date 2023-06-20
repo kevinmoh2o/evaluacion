@@ -31,6 +31,11 @@
     color: inherit !important;
   }
 
+  .inpE4 .ipt .dp__input {
+    border: 1px solid #ffffff;
+  }
+
+
 /*   a{
     text-decoration: none !important;
     color: inherit !important;

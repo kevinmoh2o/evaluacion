@@ -8,7 +8,7 @@
             <button v-else class="btn resaltadoYellow " @click.prevent="$emit('editarModal')" data-toggle="tooltip" title="Editar">
                 <i class="fa-solid fa-pen-to-square ieditar"></i>
             </button>
-            <button class="btn resaltadoRojo" @click.prevent="$emit('eliminarM1',form.id)" data-toggle="tooltip" title="Eliminar">
+            <button v-if="!statusButton" class="btn resaltadoRojo" @click.prevent="$emit('eliminarM1',form.id)" data-toggle="tooltip" title="Eliminar">
                 <i class="fa-solid fa-trash ieliminar"></i>
             </button>
             <button class="btn resaltado" @click.prevent="$emit('closeModal',expandir)" data-toggle="tooltip" title="Cerrar">

@@ -2,17 +2,18 @@
     <section class="form-section form-section--datos-personales">
         <form class="formDP">
             <h2 class="lblTitulo">Datos personales</h2>
-            <Entrada class="inpE1" :type="'text'" :placeholder="'Ingrese su valor aqui...'" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
-            <Entrada class="inpE2" :type="'text'" :placeholder="'Usuario...'" :nombre="'nombre'" :label="'Usuario:'"></Entrada>
-            <Entrada class="inpE3" :type="'password'" :placeholder="'Contraseña...'" :nombre="'password'" :label="'Contraseña:'"></Entrada>
+            <Entrada class="inpE1" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
+            <Entrada class="inpE2" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Usuario:'"></Entrada>
+            <Entrada class="inpE3" :type="'password'" :placeholder="''" :nombre="'password'" :label="'Contraseña:'"></Entrada>
             <ComboBox class="cboxE1" :titulo="'Edad:'" :valores="edad"></ComboBox>
             <ComboBox class="cboxE2" :titulo="'Sexo:'" :valores="sexo"></ComboBox>
+            <DatePickerW class="inpE4" :title="'Fecha de nacimiento'"></DatePickerW>
             <hr class="divider">
             <h2 class="lblSubTitulo">Ubicación</h2>
             <ComboBox class="cboxE3" :titulo="'Centro de Salud'" :valores="centroList"></ComboBox>
             <ComboBox class="cboxE4" :titulo="'Distrito'" :valores="distritoList"></ComboBox>
             <ComboBox class="cboxE5" :titulo="'Diris/Diresa'" :valores="diresaList"></ComboBox>
-            <BotonVue class="btnGuardar"></BotonVue>
+            <BotonVue class="btnGuardar" :title="'Crear'"></BotonVue>
         </form>
     </section>
 </template>
@@ -21,6 +22,8 @@
 import Entrada from '@/components/atomic/Entrada.vue';
 import ComboBox from '@/components/atomic/ComboBox.vue';
 import BotonVue from '@/components/atomic/BotonVue.vue';
+import DatePickerW from '@/components/atomic/DatePickerW.vue';
+//import HourPickerW from '@/components/atomic/HourPickerW.vue';
 export default {
     props: {
         title: {
@@ -31,7 +34,8 @@ export default {
     components: {
         Entrada,
         ComboBox,
-        BotonVue
+        BotonVue,
+        DatePickerW,
     },
     data() {
     
@@ -111,7 +115,7 @@ export default {
                 "lblTitulo lblTitulo"40px
                 "inpE1 inpE2"90px
                 "inpE3 cboxE1"90px
-                "cboxE2 ."90px
+                "cboxE2 inpE4"90px
                 "divider divider"30px
                 "lblSubTitulo lblSubTitulo"50px
                 "cboxE3 cboxE4"90px
@@ -164,6 +168,10 @@ export default {
 
     .inpE3{
         grid-area:inpE3;
+    }
+
+    .inpE4{
+        grid-area:inpE4;
     }
 
     .cboxE1{
