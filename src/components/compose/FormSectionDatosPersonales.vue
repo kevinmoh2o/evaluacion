@@ -90,6 +90,7 @@ export default {
             "inpE3"90px
             "cboxE1"90px
             "cboxE2"90px
+            "inpE4"90px
             "divider"30px
             "lblSubTitulo"50px
             "cboxE3"90px
