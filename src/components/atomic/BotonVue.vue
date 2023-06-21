@@ -1,6 +1,6 @@
 <template>
     
-        <button class="confirmButton">{{title}}</button>
+        <button class="confirmButton" type="button">{{title}}</button>
     
 </template>
 

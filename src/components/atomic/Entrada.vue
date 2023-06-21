@@ -2,7 +2,9 @@
     <div class="container">
         <div class="ctnIpt">
             <label class="lbl" :for="setNombre">{{label}}</label>
-            <input class="ipt"  :type="setType" :name="setNombre" :placeholder= "ayuda"  />          
+            <input class="ipt"  :type="setType" :name="setNombre" :placeholder= "ayuda" @input="handleInput"  
+            :maxlength="maxlength" :pattern="pattern" v-model="valor"
+            />          
         </div>
     </div>
 </template>
@@ -14,11 +16,31 @@ export default {
     label: String,
     placeholder: String,
     nombre: String,
-    type: String
+    type: String,
+    maxlength: {
+      type: Number,
+      default: Infinity
+    },
+    pattern: String,
+    value: {
+      type: [String, Number],
+      default: ''
+    }
+  },
+  methods: {
+    handleInput(event) {
+      const inputValue = event.target.value;
+      this.$emit('change', inputValue);
+    }
+  },
+  data() {
+    
+    return {
+      valor:this.value,
+    }
   },
   computed: {
     ayuda() {
-        console.log(this.placeholder)
       return this.placeholder || ' ';
     },
     setNombre(){

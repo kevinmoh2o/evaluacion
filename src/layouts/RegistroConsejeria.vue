@@ -7,10 +7,12 @@
             @volver="onBackHandle"></Navbar>
         </div>
         <FilterHeader class="filtro"></FilterHeader>
-        <FormCuidador class="cuidador"></FormCuidador>
+        <FormCuidador class="cuidador"
+        @inNombre="inNombre" @inNota="inNota"
+        ></FormCuidador>
         <FormPaciente class="paciente"></FormPaciente>
         
-        <BotonVue class="boton"></BotonVue>
+        <!-- <BotonVue class="boton" title=""></BotonVue> -->
     </form>
 </template>
 
@@ -19,7 +21,7 @@
 import Navbar from '@/components/compose/Navbar.vue';
 import FormCuidador from '@/components/compose/FormCuidador.vue';
 import FormPaciente from '@/components/compose/FormPaciente.vue';
-import BotonVue from '@/components/atomic/BotonVue.vue';
+//import BotonVue from '@/components/atomic/BotonVue.vue';
 import FilterHeader from '@/components/compose/FilterHeader.vue';
 import { useRouter } from 'vue-router'
 
@@ -35,15 +37,20 @@ export default {
     components: {
         Navbar,
         FormCuidador,
-        BotonVue,
+        //BotonVue,
         FormPaciente,
         FilterHeader,
     },
     methods:{
-
         async onBackHandle(){
             console.log("navegando")
             await this.router.push('/menu')
+        },
+        inNombre(value){
+            console.log('onChangeNombre:', value);
+        },
+        inNota(value){
+            console.log('onChangeNota:', value);
         }
     
     }
@@ -87,6 +94,7 @@ $color-negro: #2c3e50;
 
 
 .filtro{
+    align-items: start;
     grid-area:filtro;
 }
 .cabecera{

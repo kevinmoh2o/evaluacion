@@ -17,15 +17,17 @@ export default {
     props: {
         titulo: String,
         valorInit:String,
-        valores: []
+        valores: {
+            type: Array,
+            required: true
+        },
     },
     data() {
     
     return {
       title:'',
       nombres: this.valores,
-      format: 'hh:mm',
-      indicadorTotalTime:""
+      format: 'hh:mm'
     }
   },
     setup() {

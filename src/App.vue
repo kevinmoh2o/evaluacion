@@ -31,7 +31,7 @@
     color: inherit !important;
   }
 
-  .inpE4 .ipt .dp__input {
+  .inpE6 .ipt .dp__input {
     border: 1px solid #ffffff;
   }
 

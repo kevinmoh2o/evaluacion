@@ -8,8 +8,7 @@
           <Entrada class="inpE1" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
           <ComboBox class="cboxE1" :titulo="'Patologías:'" :valores="edad"></ComboBox>
           <ComboBox class="cboxE2" :titulo="'Antecedentes:'" :valores="sexo"></ComboBox>
-          <Entrada class="inpE2" :type="'Nota'" :placeholder="'Nota'" :nombre="'Nota'" :label="'Tratamiento:'"></Entrada>
-
+          <Entrada class="inpE2" :type="'text'" :placeholder="''" :nombre="'Nota'" :label="'Tratamiento:'"></Entrada>
       </div>
   </section>
 </template>

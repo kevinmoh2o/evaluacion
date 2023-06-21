@@ -6,10 +6,14 @@
             <!-- <i class="fa-solid fa-user zizeI"></i> -->
             <img class="zizeI" src="@/assets/terapia.png" alt="Imagen PNG">
           </div>
-          <Entrada class="inpE1" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
+          <Entrada class="inpE1" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Nombres y Apellidos:'"
+          @change="onChangeNombre" :maxlength="50" :value="'Paciente de la cruz'"
+          ></Entrada>
           <ComboBox class="cboxE1" :titulo="'Edad:'" :valores="edad"></ComboBox>
           <ComboBox class="cboxE2" :titulo="'Sexo:'" :valores="sexo"></ComboBox>
-          <Entrada class="inpE2" :type="'Nota'" :placeholder="'Nota'" :nombre="'Nota'" :label="'Nota:'"></Entrada>
+          <Entrada class="inpE2" :type="'number'" :placeholder="''" :nombre="'nota'" :label="'Nota:'"
+          @change="onChangeNota" :value="20"
+          ></Entrada>
           
       </div>
   </section>
@@ -31,36 +35,44 @@ export default {
   },
   data() {
   
-  return {
-    edad:[
-     { id: 1, valor:  "18" },
-     { id: 2, valor: "25" },
-     { id: 3, valor: "35" }
-    ],
-    sexo:[
-     { id: 1, valor: "Masculino" },
-     { id: 2, valor: "Femenino" },
-   
-    ],
-    centroList:[
-     { id: 1, valor:  "La Perla" },
-     { id: 2, valor: "San Pedro" },
-     { id: 3, valor: "San Lucas" }
-    ],
-    distritoList:[
-     { id: 1, valor: "Norte" },
-     { id: 2, valor: "Centro" },
-     { id: 2, valor: "Sur" },
-     { id: 2, valor: "Diresa Callao" },
-    ],
-    diresaList:[
-     { id: 1, valor: "Norte" },
-     { id: 2, valor: "Centro" },
-     { id: 2, valor: "Sur" },
-     { id: 2, valor: "Diresa Callao" },
-    ],
+    return {
+        edad:[
+        { id: 1, valor:  "18" },
+        { id: 2, valor: "25" },
+        { id: 3, valor: "35" }
+        ],
+        sexo:[
+        { id: 1, valor: "Masculino" },
+        { id: 2, valor: "Femenino" },
+    
+        ],
+        centroList:[
+        { id: 1, valor:  "La Perla" },
+        { id: 2, valor: "San Pedro" },
+        { id: 3, valor: "San Lucas" }
+        ],
+        distritoList:[
+        { id: 1, valor: "Norte" },
+        { id: 2, valor: "Centro" },
+        { id: 2, valor: "Sur" },
+        { id: 2, valor: "Diresa Callao" },
+        ],
+        diresaList:[
+        { id: 1, valor: "Norte" },
+        { id: 2, valor: "Centro" },
+        { id: 2, valor: "Sur" },
+        { id: 2, valor: "Diresa Callao" },
+        ],
+    }
+  },
+  methods: {
+    onChangeNombre(value) {
+      this.$emit('inNombre', value);
+    },
+    onChangeNota(value) {
+      this.$emit('inNota', value);
+    }
   }
-},
 }
 </script>
 

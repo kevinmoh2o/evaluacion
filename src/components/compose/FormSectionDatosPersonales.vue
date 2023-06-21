@@ -3,11 +3,13 @@
         <form class="formDP">
             <h2 class="lblTitulo">Datos personales</h2>
             <Entrada class="inpE1" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
-            <Entrada class="inpE2" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Usuario:'"></Entrada>
-            <Entrada class="inpE3" :type="'password'" :placeholder="''" :nombre="'password'" :label="'Contraseña:'"></Entrada>
+            <Entrada class="inpE2" :type="'text'" :placeholder="''" :nombre="'correo'" :label="'Correo:'"></Entrada>
+            <Entrada class="inpE3" :type="'number'" :placeholder="''" :nombre="'telefono'" :label="'Teléfono:'"></Entrada>
+            <Entrada class="inpE4" :type="'password'" :placeholder="''" :nombre="'password'" :label="'Contraseña:'"></Entrada>
+            <Entrada class="inpE5" :type="'password'" :placeholder="''" :nombre="'passwordConfirm'" :label="'Confirmar Contraseña:'"></Entrada>
             <ComboBox class="cboxE1" :titulo="'Edad:'" :valores="edad"></ComboBox>
             <ComboBox class="cboxE2" :titulo="'Sexo:'" :valores="sexo"></ComboBox>
-            <DatePickerW class="inpE4" :title="'Fecha de nacimiento'"></DatePickerW>
+            <DatePickerW class="inpE6" :title="'Fecha de nacimiento'"></DatePickerW>
             <hr class="divider">
             <h2 class="lblSubTitulo">Ubicación</h2>
             <ComboBox class="cboxE3" :titulo="'Centro de Salud'" :valores="centroList"></ComboBox>
@@ -104,10 +106,10 @@ export default {
     @media (min-width:650px){
         .formDP{
             margin-top:0 ;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            padding-right: 30px;
-            padding-left: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+            padding-left: 10px;
             border-radius: 8px;
             /* box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75); */
             background-color: #fff;
@@ -116,7 +118,8 @@ export default {
                 "lblTitulo lblTitulo"40px
                 "inpE1 inpE2"90px
                 "inpE3 cboxE1"90px
-                "cboxE2 inpE4"90px
+                "cboxE2 inpE6"90px
+                "inpE4 inpE5"90px
                 "divider divider"30px
                 "lblSubTitulo lblSubTitulo"50px
                 "cboxE3 cboxE4"90px
@@ -173,6 +176,14 @@ export default {
 
     .inpE4{
         grid-area:inpE4;
+    }
+
+    .inpE5{
+        grid-area:inpE5;
+    }
+
+    .inpE6{
+        grid-area:inpE6;
     }
 
     .cboxE1{

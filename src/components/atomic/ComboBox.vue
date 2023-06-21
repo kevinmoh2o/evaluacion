@@ -2,7 +2,7 @@
     <div class="container">
       <div class="ctnIpt">
             <label class="lbl" for="dropdown" >{{titulo}}</label>
-            <select class="ipt" name="idSelector" id="idSelector"  v-model="title" onchange="" required="">>
+            <select class="ipt" name="idSelector" id="idSelector"  v-model="seleccion" onchange="" required="">>
                 <option value="" disabled selected hidden>Selecciona un valor</option>
                 <option v-for="nombre in nombres" :key="nombre.id" :value="nombre.valor">{{ nombre.valor }}</option>
             </select>
@@ -16,12 +16,15 @@
 export default {
     props: {
         titulo: String,
-        valores: []
+        valores: {
+            type: Array,
+            required: true
+        },
     },
     data() {
     
     return {
-      title:'',
+      seleccion:'',
       nombres: this.valores,
       format: 'hh:mm',
       indicadorTotalTime:""

@@ -41,14 +41,10 @@ export default {
   },
   methods: {
     realizarConsulta(terminoBusqueda) {
-      // Realizar la búsqueda y consulta por API REST utilizando el término de búsqueda
       console.log('Realizando consulta con:', terminoBusqueda);
-      // Aquí puedes realizar la llamada a tu API REST y procesar la respuesta
     },
     agregarConsulta(terminoBusqueda) {
-      // Realizar la búsqueda y consulta por API REST utilizando el término de búsqueda
       console.log('Presionando PLUS:', terminoBusqueda);
-      // Aquí puedes realizar la llamada a tu API REST y procesar la respuesta
     }
   }
 }
