@@ -6,7 +6,7 @@ import { createPinia } from 'pinia'
 import store from './store/module-template'
 
 import '@/styles/styles.scss'
-
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 
 createApp(App)

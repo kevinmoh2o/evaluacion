@@ -1,18 +1,32 @@
 <template>
-    <div class="container">
+    <!-- <div class="container">
         <div class="ctnIpt">
             <label class="lbl" :for="setNombre">{{label}}</label>
             <input class="ipt"  :type="setType" :name="setNombre" :placeholder= "ayuda" @input="handleInput"  
-            :maxlength="maxlength" :pattern="pattern" v-model="valor"
+            :maxlength="maxlength" :pattern="pattern" v-model="valor" autocomplete="new-password"
             />          
         </div>
+    </div> -->
+    <div class="col-12">
+        <label class="form-label form-label-top" :for="setId">{{label}}<span class="form-required">*</span></label>
+        <Field  
+            :name="setId"
+            :type="setType"
+            v-model="valor"
+            class="form-control"
+            :placeholder="placeholder"
+            :rules="validateEmail" 
+        />
+        <ErrorMessage class="form-required" :name="setId" />
     </div>
 </template>
 
 <script>
+import { Field,ErrorMessage  } from 'vee-validate';
 export default {
   name: 'entrada-component',
   props: {
+    idf:String,
     label: String,
     placeholder: String,
     nombre: String,
@@ -21,16 +35,27 @@ export default {
       type: Number,
       default: Infinity
     },
+    rule:Function,
     pattern: String,
     value: {
       type: [String, Number],
       default: ''
     }
   },
+  components: {
+        Field,
+        ErrorMessage,
+    },
+    async created() {
+      console.log(`id: ${this.idf}`)
+    }, 
   methods: {
     handleInput(event) {
       const inputValue = event.target.value;
       this.$emit('change', inputValue);
+    },
+    validateEmail(value){
+      this.$emit('validate', value);
     }
   },
   data() {
@@ -48,7 +73,11 @@ export default {
     },
     setType(){
        return this.type 
+    },
+    setId(){
+       return this.idf 
     }
+
   }
 }
 </script>
@@ -56,6 +85,36 @@ export default {
 
 <style lang="scss" scoped>
 
+input.form-control {
+    height: 45px;
+}
+
+
+.custom-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 25px;
+}
+.form-label-top {
+    width: 100%;
+    margin-left: 2px;
+    //margin-bottom: 10px;
+    //margin: 0;
+    padding: 0;
+}
+
+.form-label {
+    color: #2c3345;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.form-required {
+    color: #f23a3c;
+}
   .container{
     display: flex;
     align-content: center;

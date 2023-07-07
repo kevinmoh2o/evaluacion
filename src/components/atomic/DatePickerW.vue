@@ -59,11 +59,12 @@ export default {
     justify-content: center;
     align-items: center;
     max-width: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    //padding-top: 5px;
+    //padding-bottom: 5px;
+    //padding-left: 15px;
+    //padding-right: 15px;
     width: 100%;
+    padding: 0;
   }
 
     .lbl{
@@ -71,9 +72,10 @@ export default {
       align-self: start;
       align-items: start;
       grid-area:lbl;
-      font-weight: 600;
+      font-weight: 500;
       font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
       padding-bottom:5px ;
+      color: rgb(68, 68, 68);
     }
 
     .ipt{
@@ -82,7 +84,7 @@ export default {
         border-radius: 5px;
         width: 100%;
         font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-        padding-left:5px ;
+        //padding-left:5px ;
         height: 45px;
     }
 

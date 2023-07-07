@@ -2,7 +2,7 @@
     <div class="container">
       <div class="ctnIpt">
             <label class="lbl" for="dropdown" >{{titulo}}</label>
-            <select class="ipt" name="idSelector" id="idSelector"  v-model="seleccion" onchange="" required="">>
+            <select class="ipt" :name="idSelector" :id="idSelector"  v-model="seleccion" onchange="" required="">>
                 <option value="" disabled selected hidden>Selecciona un valor</option>
                 <option v-for="nombre in nombres" :key="nombre.id" :value="nombre.valor">{{ nombre.valor }}</option>
             </select>
@@ -20,6 +20,7 @@ export default {
             type: Array,
             required: true
         },
+        idSelector:String
     },
     data() {
     

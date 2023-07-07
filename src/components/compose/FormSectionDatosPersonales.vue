@@ -1,30 +1,145 @@
 <template>
     <section class="form-section form-section--datos-personales">
-        <form class="formDP">
-            <h2 class="lblTitulo">Datos personales</h2>
-            <Entrada class="inpE1" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Nombres y Apellidos:'"></Entrada>
-            <Entrada class="inpE2" :type="'text'" :placeholder="''" :nombre="'correo'" :label="'Correo:'"></Entrada>
-            <Entrada class="inpE3" :type="'number'" :placeholder="''" :nombre="'telefono'" :label="'Teléfono:'"></Entrada>
-            <Entrada class="inpE4" :type="'password'" :placeholder="''" :nombre="'password'" :label="'Contraseña:'"></Entrada>
-            <Entrada class="inpE5" :type="'password'" :placeholder="''" :nombre="'passwordConfirm'" :label="'Confirmar Contraseña:'"></Entrada>
-            <ComboBox class="cboxE1" :titulo="'Edad:'" :valores="edad"></ComboBox>
-            <ComboBox class="cboxE2" :titulo="'Sexo:'" :valores="sexo"></ComboBox>
-            <DatePickerW class="inpE6" :title="'Fecha de nacimiento'"></DatePickerW>
-            <hr class="divider">
-            <h2 class="lblSubTitulo">Ubicación</h2>
-            <ComboBox class="cboxE3" :titulo="'Centro de Salud'" :valores="centroList"></ComboBox>
-            <ComboBox class="cboxE4" :titulo="'Distrito'" :valores="distritoList"></ComboBox>
-            <ComboBox class="cboxE5" :titulo="'Diris/Diresa'" :valores="diresaList"></ComboBox>
-            <BotonVue class="btnGuardar" :title="'Crear'"></BotonVue>
-        </form>
+        <Form @submit="onSubmit" class="formDP">
+            <div class="row">
+                
+                    <h2 class="lblTitulo">Datos personales</h2>
+                    <!-- <Entrada :idf="'id1'" class="inpE1" :type="'text'" :placeholder="''" :nombre="'nombre'" :label="'Nombres y Apellidos:'"
+                    @validate="validarNombre"
+                    ></Entrada> 
+                    <Entrada :idf="'id2'" class="inpE3" :type="'number'" :placeholder="''" :nombre="'telefono'" :label="'Teléfono:'"></Entrada>
+                    -->
+                    <div class="inpE1 col-12 col-sm-4 my-3">
+                        <label class="form-label form-label-top" for="first_name">Nombres y Apellidos<span class="form-required">*</span></label>
+                        <Field  name="first_name"
+                            type="text"
+                            class="form-control"
+                            v-model="employee.last_name"
+                            placeholder="Nombres y Apellidos"
+                            :rules="isRequired" 
+                        />
+                        <ErrorMessage class="form-required" name="first_name" />
+                    </div>
+                    <div class="inpE2 col-12 col-sm-4 my-3">
+                        <label class="form-label form-label-top" for="email">Email<span class="form-required">*</span></label>
+                        
+                        <Field  name="email"
+                            type="email"
+                            class="form-control"
+                            v-model="employee.email"
+                            placeholder="Email"
+                            :rules="validateEmail" 
+                        />
+                        <ErrorMessage class="form-required" name="email" />
+                    </div>
+                    <div class="inpE3 col-12 col-sm-4 my-3">
+                        <label class="form-label form-label-top" for="telefono">Teléfono<span class="form-required">*</span></label>
+                        
+                        <Field  name="telefono"
+                            type="number"
+                            class="form-control"
+                            v-model="employee.phone"
+                            placeholder="Teléfono"
+                            :rules="isRequired" 
+                        />
+                        <ErrorMessage class="form-required" name="number" />
+                    </div>
+                
+                <div class="inpE4 col-12 col-sm-4 my-3">
+                    <label class="form-label form-label-top" for="contrasenia">Contraseña<span class="form-required">*</span></label>
+                    <Field  name="contrasenia"
+                        type="password"
+                        class="form-control"
+                        v-model="employee.password"
+                        placeholder="Contraseña"
+                        :rules="isRequired" 
+                    />
+                    <ErrorMessage class="form-required" name="contrasenia" />
+                </div>
+                <div class="inpE5 col-12 col-sm-4 my-3">
+                    <label class="form-label form-label-top" for="passwordConfirm">Confirmar Contraseña<span class="form-required">*</span></label>
+                    <Field  name="passwordConfirm"
+                        type="password"
+                        class="form-control"
+                        v-model="employee.passwordConfirm"
+                        placeholder="Confirmar Contraseña"
+                        :rules="isRequired" 
+                    />
+                    <ErrorMessage class="form-required" name="passwordConfirm" />
+                </div>
+
+                <div class="cboxE1 col-12 col-sm-4 my-3">
+                    <label class="form-label form-label-top" for="centrosalud">Edad<span class="form-required">*</span></label>              
+                    <div class="col-12 h-75" >
+                        <Field name="edad" as="select" class="form-control ddbtn" v-model="employee.age">
+                            <option value="" disabled selected hidden>Seleccione un valor</option>
+                            <option v-for="nombre in edad" :key="nombre.id" :value="nombre.valor">{{ nombre.valor }}</option>
+                        </Field>
+                    </div>
+                    <ErrorMessage name="edad" />
+                </div>
+                <div class="cboxE2 col-12 col-sm-4 my-3">
+                    <label class="form-label form-label-top" for="centrosalud">Sexo<span class="form-required">*</span></label>              
+                    <div class="col-12 h-75" >
+                        <Field name="sexo" as="select" class="form-control ddbtn" v-model="employee.gender">
+                            <option value="" disabled selected hidden>Seleccione un valor</option>
+                            <option v-for="nombre in sexo" :key="nombre.id" :value="nombre.valor">{{ nombre.valor }}</option>
+                        </Field>
+                    </div>
+                    <ErrorMessage name="sexo" />
+                </div>
+                <div class="inpE6 col-12 col-sm-4 my-3">
+                    <DatePickerW :title="'Fecha de nacimiento'"></DatePickerW>
+                </div>
+                
+                <hr class="divider">
+                <h2 class="lblSubTitulo">Ubicación</h2>
+                <div class="cboxE3 col-12 col-sm-4 my-3">
+                    <label class="form-label form-label-top" for="centrosalud">Centro de Salud<span class="form-required">*</span></label>              
+                    <div class="col-12 h-75" >
+                        <Field name="centro" as="select" class="form-control ddbtn" v-model="employee.centro">
+                            <option value="" disabled selected hidden>Seleccione un valor</option>
+                            <option v-for="nombre in centroList" :key="nombre.id" :value="nombre.valor">{{ nombre.valor }}</option>
+                        </Field>
+                    </div>
+                    <ErrorMessage name="centro" />
+                </div>
+                <div class="cboxE4 col-12 col-sm-4 my-3">
+                    <label class="form-label form-label-top" for="centrosalud">Distrito<span class="form-required">*</span></label>              
+                    <div class="col-12 h-75" >
+                        <Field name="distrito" as="select" class="form-control ddbtn" v-model="employee.distrito">
+                            <option value="" disabled selected hidden>Seleccione un valor</option>
+                            <option v-for="nombre in distritoList" :key="nombre.id" :value="nombre.valor">{{ nombre.valor }}</option>
+                        </Field>
+                    </div>
+                    <ErrorMessage name="distrito" />
+                </div>
+                <div class="cboxE5 col-12 col-sm-4 my-3">
+                    <label class="form-label form-label-top" for="centrosalud">Diris/Diresa<span class="form-required">*</span></label>              
+                    <div class="col-12 h-75" >
+                        <Field name="diresa" as="select" class="form-control ddbtn" v-model="employee.diris">
+                            <option value="" disabled selected hidden>Seleccione un valor</option>
+                            <option v-for="nombre in diresaList" :key="nombre.id" :value="nombre.valor">{{ nombre.valor }}</option>
+                        </Field>
+                    </div>
+                    <ErrorMessage name="diresa" />
+                </div>
+            
+            </div>
+            <div class="btnGuardar col-12 col-sm-4 my-3">
+                <button class="btn btn-primary" type="submit">SUBMIT</button>
+            </div>
+            
+        </Form>
     </section>
 </template>
   
 <script>
-import Entrada from '@/components/atomic/Entrada.vue';
-import ComboBox from '@/components/atomic/ComboBox.vue';
-import BotonVue from '@/components/atomic/BotonVue.vue';
+//import Entrada from '@/components/atomic/Entrada.vue';
+//import ComboBox from '@/components/atomic/ComboBox.vue';
+//import BotonVue from '@/components/atomic/BotonVue.vue';
 import DatePickerW from '@/components/atomic/DatePickerW.vue';
+import { Form, Field,ErrorMessage  } from 'vee-validate';
 //import HourPickerW from '@/components/atomic/HourPickerW.vue';
 export default {
     props: {
@@ -34,10 +149,14 @@ export default {
         }
     },
     components: {
-        Entrada,
-        ComboBox,
-        BotonVue,
+        //Entrada,
+        //ComboBox,
+        //BotonVue,
         DatePickerW,
+        Form,
+        Field,
+        ErrorMessage,
+    
     },
     data() {
     
@@ -69,143 +188,243 @@ export default {
        { id: 2, valor: "Sur" },
        { id: 2, valor: "Diresa Callao" },
       ],
+      'employee': {
+            'nombres':'',
+            'last_name':'',
+            'email':'',
+            'phone':'',
+            'password':'',
+            'passwordConfirm':'',
+            'city':'',
+            'current_experience':'',
+            'age':'',
+            'centro':'',
+            'distrito':'',
+            'diris':'',
+            'gender':''
+        }
     }
-  },
+    },
+    methods:{
+        onSubmit(values) {
+        console.log(values);
+        },
+        isRequired(value) {
+            if (value && value.trim()) {
+                return true;
+            }
+            return 'This is required';
+        },
+        validateEmail(value) {
+        if (!value) {
+            return 'Este campo es obligatorio';
+        }
+        const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+        if (!regex.test(value)) {
+            return 'Ingrese un email válido';
+        }
+        return true;
+        },
+        validarNombre(value){
+            if (!value) {
+                return 'Este campo es obligatorio';
+            }
+            console.log(`validar value: ${value}`);
+            return "ERF"
+        }
+    }
+
 }
 </script>
   
 <style lang="scss" scoped>
-    .formDP{
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-right: 10px;
-        padding-left: 10px;
-        border-radius: 8px;
-        margin-top:20px ;
-        /* box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75); */
-        background-color: #fff;
-        display: grid;
-        grid-template: 
-            "lblTitulo"40px
-            "inpE1"90px
-            "inpE2"90px
-            "inpE3"90px
-            "cboxE1"90px
-            "cboxE2"90px
-            "inpE4"90px
-            "divider"30px
-            "lblSubTitulo"50px
-            "cboxE3"90px
-            "cboxE4"90px
-            "cboxE5"90px
-            "btnGuardar"90px/
-            100%
-            ;
-    }
 
-    @media (min-width:650px){
-        .formDP{
-            margin-top:0 ;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 10px;
-            padding-left: 10px;
-            border-radius: 8px;
-            /* box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75); */
-            background-color: #fff;
-            display: grid;
-            grid-template: 
-                "lblTitulo lblTitulo"40px
-                "inpE1 inpE2"90px
-                "inpE3 cboxE1"90px
-                "cboxE2 inpE6"90px
-                "inpE4 inpE5"90px
-                "divider divider"30px
-                "lblSubTitulo lblSubTitulo"50px
-                "cboxE3 cboxE4"90px
-                "cboxE5 ."90px
-                "btnGuardar btnGuardar"90px/
-                50% 50%
-                ;
+input.form-control {
+    height: 45px;
+}
 
-        }
-    }
+select.form-control.ddbtn{
+    margin: 0;
+    height: 45px;
 
-    .btnGuardar{
-        grid-area:btnGuardar;
+}
+
+.control2{
+    width:100%;
+    border: white;
+}
+
+
+.control2:focus {
+  outline: none;
+}
+.arrow-icon {
+  position: static;
+  top: -5px;
+  //right: 10px;
+  align-content: center;
+  display: flex;
+  transform: translateX(-50px);
+
+}
+.custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-select select {
+
+}
+.form-label-top {
+    width: 100%;
+    margin-left: 2px;
+    //margin-bottom: 10px;
+    //margin: 0;
+    padding: 0;
+}
+
+.form-label {
+
+}
+
+.form-required {
+    color: #f23a3c;
+}
+
+.btnGuardar{
+        //grid-area:btnGuardar;
         justify-self: center;
         align-self: center;
-        margin: 0 15px 0 15px;
-        width: 200px;
+        //margin: 0 15px 0 15px;
+        width: 400px;
     }
 
-    .lblSubTitulo{
-        grid-area:lblSubTitulo;
-        font-family: Helvetica Neue, sans-serif;
-        font-size: 25px;
-        padding: 0;
-        margin: 0;
-    }
 
-    .lblTitulo{
-        grid-area:lblTitulo;
-        font-family: Helvetica Neue, sans-serif;
-        font-size: 25px;
-        padding: 0;
-        margin: 0;
-    }
-
-    .divider {
-        grid-area:divider;
-        border: none;
-        border-top: 1px solid #000000;
-        margin: 20px 0;
-    }
-
-    .inpE1{
-        grid-area:inpE1;
-    }
-
-    .inpE2{
-        grid-area:inpE2;
-    }
-
-    .inpE3{
-        grid-area:inpE3;
-    }
-
-    .inpE4{
-        grid-area:inpE4;
-    }
-
-    .inpE5{
-        grid-area:inpE5;
-    }
-
-    .inpE6{
-        grid-area:inpE6;
-    }
-
-    .cboxE1{
-        grid-area:cboxE1;
-    }
-
-    .cboxE2{
-        grid-area:cboxE2;
-    }
-
-    .cboxE3{
-        grid-area:cboxE3;
-    }
-
-    .cboxE4{
-        grid-area:cboxE4;
-    }
-
-    .cboxE5{
-        grid-area:cboxE5;
-    }
-
+//    .formDP{
+//        padding-top: 10px;
+//        padding-bottom: 10px;
+//        padding-right: 10px;
+//        padding-left: 10px;
+//        border-radius: 8px;
+//        margin-top:20px ;
+//        /* box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75); */
+//        background-color: #fff;
+//        display: grid;
+//        grid-template: 
+//            "lblTitulo"40px
+//            "inpE1"90px
+//            "inpE2"90px
+//            "inpE3"90px
+//            "cboxE1"90px
+//            "cboxE2"90px
+//            "inpE4"90px
+//            "divider"30px
+//            "lblSubTitulo"50px
+//            "cboxE3"90px
+//            "cboxE4"90px
+//            "cboxE5"90px
+//            "btnGuardar"90px/
+//            100%
+//            ;
+//    }
+//
+//    @media (min-width:650px){
+//        .formDP{
+//            margin-top:0 ;
+//            padding-top: 10px;
+//            padding-bottom: 10px;
+//            padding-right: 10px;
+//            padding-left: 10px;
+//            border-radius: 8px;
+//            /* box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75); */
+//            background-color: #fff;
+//            display: grid;
+//            grid-template: 
+//                "lblTitulo lblTitulo"40px
+//                "inpE1 inpE2"90px
+//                "inpE3 cboxE1"90px
+//                "cboxE2 inpE6"90px
+//                "inpE4 inpE5"90px
+//                "divider divider"30px
+//                "lblSubTitulo lblSubTitulo"50px
+//                "cboxE3 cboxE4"90px
+//                "cboxE5 ."90px
+//                "btnGuardar btnGuardar"90px/
+//                50% 50%
+//                ;
+//
+//        }
+//    }
+//
+    
+//
+//    .lblSubTitulo{
+//        grid-area:lblSubTitulo;
+//        font-family: Helvetica Neue, sans-serif;
+//        font-size: 25px;
+//        padding: 0;
+//        margin: 0;
+//    }
+//
+//    .lblTitulo{
+//        grid-area:lblTitulo;
+//        font-family: Helvetica Neue, sans-serif;
+//        font-size: 25px;
+//        padding: 0;
+//        margin: 0;
+//    }
+//
+//    .divider {
+//        grid-area:divider;
+//        border: none;
+//        border-top: 1px solid #000000;
+//        margin: 20px 0;
+//    }
+//
+//    .inpE1{
+//        grid-area:inpE1;
+//    }
+//
+//    .inpE2{
+//        grid-area:inpE2;
+//    }
+//
+//    .inpE3{
+//        grid-area:inpE3;
+//    }
+//
+//    .inpE4{
+//        grid-area:inpE4;
+//    }
+//
+//    .inpE5{
+//        grid-area:inpE5;
+//    }
+//
+//    .inpE6{
+//        grid-area:inpE6;
+//    }
+//
+//    .cboxE1{
+//        grid-area:cboxE1;
+//    }
+//
+//    .cboxE2{
+//        grid-area:cboxE2;
+//    }
+//
+//    .cboxE3{
+//        grid-area:cboxE3;
+//    }
+//
+//    .cboxE4{
+//        grid-area:cboxE4;
+//    }
+//
+//    .cboxE5{
+//        grid-area:cboxE5;
+//    }
+//
 
 
 
