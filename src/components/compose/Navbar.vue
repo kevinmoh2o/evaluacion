@@ -1,7 +1,43 @@
 <template>
-  <div class="containernav">
-  
+  <nav class="navbar navbar-expand navbar-dark bg-amarillo m-0 p-0" aria-label="Second navbar example">
+    <div class="container-fluid">
+      <div class="col">
+        <div class="row">
+          <div class="col-2 d-flex align-items-center" >
+            <button class="btn btn-outline-info mx-2" v-if="estadoFlecha" @click="$emit('volver')" >
+                <i class="fa fa-arrow-left"></i>
+            </button>
+          </div>
+          <div class="col-10">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 d-flex align-items-center" >
+                <a v-if="estadoTitulo" class="navbar-brand container-fluid" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  {{ titulo }}
+                </a>
+              </div>
+                
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <img src="@/assets/logo2.png" alt="Vue Logo" height="70">
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+        <div class="row">
+          <div class="linea">
+          
+        </div>
+        </div>
+
+      </div>
+      
     
+      
+
+    </div>
+  </nav>
+  <!-- <div class="containernav">
         <div class="boton" >
             <button class="btn btn-outline-info mx-2" v-if="estadoFlecha" @click="$emit('volver')">
                 <i class="fa fa-arrow-left"></i>
@@ -22,7 +58,7 @@
       <div class="linea">
           
       </div>
-  </div>
+  </div> -->
     
 </template>
 
@@ -97,7 +133,7 @@ $color-blanco:#f8f9fa;
 
 
 
-@media (min-width:650px){
+@media (min-width:768px){
   .texto{
     padding: 10px;
     color: white;

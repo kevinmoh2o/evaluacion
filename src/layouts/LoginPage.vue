@@ -1,13 +1,12 @@
 <template>
     <div class="pantalla">
         <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="false" 
-            @volver="onBackHandle"></Navbar>
+            <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onBackHandle"></Navbar>
         </div>
         <div class="cuerpo">
             <div class="container">
                 <div class="column-left">
-                    <div class="login">
+                    <!-- <div class="login">
                         <div class="formBx">
                             <h2>PLATAFORMA VIRTUAL</h2>
 
@@ -31,12 +30,55 @@
 
 
                         </div>
+                    </div> -->
+                    <div class="modal-sheet position-static d-block bg-body-secondary p-4 py-md-5 d-flex justify-content-evenly flex-column " tabindex="-1"
+                        role="dialog" id="modalSignin">
+                        <div class="modal-dialog " role="document">
+                            
+                            <div class="modal-content rounded-4 shadow align-items-center bg-azul pt-4">
+                                <h2 class="text-white">PLATAFORMA VIRTUAL</h2>
+                                <div class="imgBox">
+                                <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100" height="100">
+                            </div>
+
+                                <div class="modal-body p-5 pt-0">
+                                    <form class="">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control rounded-3" id="floatingInput"
+                                                placeholder="name@example.com">
+                                            <label for="floatingInput">DNI del usuario...</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="password" class="form-control rounded-3" id="floatingPassword"
+                                                placeholder="Password">
+                                            <label for="floatingPassword">Contraseña...</label>
+                                        </div>
+                                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" @click="navegar()">Iniciar Sesión</button>
+                                        <small class="text-white">By clicking Sign up, you agree to the terms of use.</small>
+                                        <hr class="my-4 text-white">
+
+ 
+                                        <div class="container-fluid row justify-content-center align-items-center">
+                                            <a href="#" class="link-light  link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover custom-center">Ha olvidado la contraseña</a>
+                                        </div>
+                                        <div class="container-fluid row justify-content-center align-items-center">
+                                            <router-link class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover custom-center" to="/crear-cuenta">CREAR CUENTA</router-link>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
 
                 <div class="column-right">
-
+                    <div>
+                        <div class="column-right">
+                            <img class="responsive-image" src="@/assets/login.png" alt="Imagen" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,12 +101,12 @@ export default {
     components: {
         Navbar
     },
-    methods:{
-        async navegar(){
+    methods: {
+        async navegar() {
             console.log("navegando")
             await this.router.push('/menu')
         },
-        onBackHandle(){
+        onBackHandle() {
 
         }
     }
@@ -266,4 +308,15 @@ body {
 
     }
 
+}
+
+.custom-center {
+  text-align: center !important;
+}
+
+.responsive-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
 }</style>

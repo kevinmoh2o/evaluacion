@@ -42,7 +42,7 @@
                             placeholder="Teléfono"
                             :rules="isRequired" 
                         />
-                        <ErrorMessage class="form-required" name="number" />
+                        <ErrorMessage class="form-required" name="telefono" />
                     </div>
                 
                 <div class="inpE4 col-12 col-sm-4 my-3">
@@ -69,14 +69,26 @@
                 </div>
 
                 <div class="cboxE1 col-12 col-sm-4 my-3">
-                    <label class="form-label form-label-top" for="centrosalud">Edad<span class="form-required">*</span></label>              
+                    <label class="form-label form-label-top" for="edad">Teléfono<span class="form-required">*</span></label>
+                        
+                    <Field  name="edad"
+                        type="number"
+                        class="form-control"
+                        v-model="employee.edad"
+                        placeholder="Edad"
+                        :min="18"
+                        :max="60"
+                        :rules="validarEdad" 
+                    />
+                    <ErrorMessage class="form-required" name="edad" />
+                    <!-- <label class="form-label form-label-top" for="centrosalud">Edad<span class="form-required">*</span></label>              
                     <div class="col-12 h-75" >
                         <Field name="edad" as="select" class="form-control ddbtn" v-model="employee.age">
                             <option value="" disabled selected hidden>Seleccione un valor</option>
                             <option v-for="nombre in edad" :key="nombre.id" :value="nombre.valor">{{ nombre.valor }}</option>
                         </Field>
                     </div>
-                    <ErrorMessage name="edad" />
+                    <ErrorMessage name="edad" /> -->
                 </div>
                 <div class="cboxE2 col-12 col-sm-4 my-3">
                     <label class="form-label form-label-top" for="centrosalud">Sexo<span class="form-required">*</span></label>              
@@ -126,7 +138,7 @@
                 </div>
             
             </div>
-            <div class="btnGuardar col-12 col-sm-4 my-3">
+            <div class="btnGuardar ">
                 <button class="btn btn-primary" type="submit">SUBMIT</button>
             </div>
             
@@ -231,6 +243,15 @@ export default {
             }
             console.log(`validar value: ${value}`);
             return "ERF"
+        },
+        validarEdad(value){
+            if(value<18){
+                return 'Ingrese un número mayor que 18'
+            }
+            if(value>60){
+                return 'Ingrese un número menor que 60'
+            }
+
         }
     }
 
@@ -296,7 +317,10 @@ select.form-control.ddbtn{
         justify-self: center;
         align-self: center;
         //margin: 0 15px 0 15px;
-        width: 400px;
+        //width: 400px;
+        align-content: center;
+        display: flex;
+        justify-content: space-around;
     }
 
 
