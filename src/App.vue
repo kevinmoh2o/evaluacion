@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="container-fluid p-0 m-0 custom-container">
     <router-view />
   </div>
  
@@ -33,6 +33,10 @@
 
   .inpE6 .ipt .dp__input {
     border: 1px solid #ffffff;
+  }
+
+  .custom-container {
+    height: 100vh;
   }
 
 

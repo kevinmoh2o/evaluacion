@@ -1,31 +1,27 @@
-  <template>
-      <transition name="modal-animation">
-          <div v-show="modalActive" class="modal container-fluid">
-            <div v-show="modalActive" class="modal container-fluid">
-              <transition name="modal-animation-inner">
-                  <div v-show="modalActive" class="col" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                      <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close" @click="close" style="margin-left: auto;"></button>
-                      <slot />
-                      <YouTube
-                          class="col-lg-12 text-center"
-                          :width="youtubeWidth"
-                          :height="youtubeHeight"
-                          :key="youtubeWidth"
-                          :aspect-ratio="16/9"
-                          src="https://www.youtube.com/watch?v=NRHCHVrq8nY"
-                          ref="youtube"
-                          @playing="playing"
-                          @ready="onReady"
-                      />
-                  </div>
-              </transition>
+<template>
+  <transition name="modal-animation">
+    <div v-show="modalActive" class="modal container-fluid">
+      <div v-show="modalActive" class="modal container-fluid">
+        <transition name="modal-animation-inner">
+          <div v-show="modalActive" class="col"
+            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close" @click="close"
+              style="margin-left: auto;"></button>
+            <slot />
+            <YouTube class="col-lg-12 text-center" :width="youtubeWidth" :height="youtubeHeight" :key="youtubeWidth"
+              :aspect-ratio="16 / 9" src="https://www.youtube.com/watch?v=NRHCHVrq8nY" ref="youtube" @playing="playing"
+              @ready="onReady" />
           </div>
+        </transition>
       </div>
-    </transition>
-    <div class="aplication" >
-      <LoginPage></LoginPage>
     </div>
-  </template>
+  </transition>
+
+  <div class="aplication vh-100">
+    <LoginPage></LoginPage>
+  </div>
+  
+</template>
 
 <script>
 // @ is an alias to /src
@@ -38,33 +34,33 @@ export default {
     LoginPage,
     YouTube,
   },
-  data(){
+  data() {
     return {
-      'modalActive':true,
+      'modalActive': true,
       windowWidth: window.innerWidth,
     }
   },
   computed: {
     youtubeWidth() {
-      return this.windowWidth*0.9; 
+      return this.windowWidth * 0.9;
     },
     youtubeHeight() {
-      return this.windowWidth*7/16;
+      return this.windowWidth * 7 / 16;
     },
   },
   created() {
-      window.addEventListener('resize', this.handleWindowResize);
-    },
-    unmounted() {
-      window.removeEventListener('resize', this.handleWindowResize);
-    },
-  methods:{
-    close(){
+    window.addEventListener('resize', this.handleWindowResize);
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.handleWindowResize);
+  },
+  methods: {
+    close() {
       this.$refs.youtube.pauseVideo();
-      this.modalActive=false;
+      this.modalActive = false;
     },
     onReady() {
-      this.$refs.youtube.playVideo();
+      //this.$refs.youtube.playVideo();
     },
     handleWindowResize() {
       this.windowWidth = window.innerWidth;
@@ -146,6 +142,7 @@ export default {
     }
   }
 }
+
 .modal-animation-inner-leave-to {
   transform: scale(0.8);
 }
@@ -156,7 +153,7 @@ export default {
   height: 700px !important;
 }
 
- /* iframe.custom-youtube {
+/* iframe.custom-youtube {
   width: 900px !important;
   height: 700px !important;
 } */

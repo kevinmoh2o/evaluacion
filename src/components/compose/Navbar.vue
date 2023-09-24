@@ -16,7 +16,7 @@
                 </a>
               </div>
                 
-              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 align-items-end"  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                   <img src="@/assets/logo2.png" alt="Vue Logo" height="70">
               </div>
             </div>
@@ -31,34 +31,10 @@
         </div>
 
       </div>
-      
-    
-      
 
     </div>
   </nav>
-  <!-- <div class="containernav">
-        <div class="boton" >
-            <button class="btn btn-outline-info mx-2" v-if="estadoFlecha" @click="$emit('volver')">
-                <i class="fa fa-arrow-left"></i>
-            </button>
-        </div>
-
-        <div class="texto" >
-          <a v-if="estadoTitulo" class="navbar-brand">
-            {{ titulo }}
-          </a>
-        </div>
-        
-
-        <div class="imagen">
-            <img src="@/assets/logo2.png" alt="Vue Logo" height="70">
-        </div>
-    
-      <div class="linea">
-          
-      </div>
-  </div> -->
+  
     
 </template>
 

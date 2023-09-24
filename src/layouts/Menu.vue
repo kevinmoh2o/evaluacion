@@ -1,28 +1,36 @@
 <template>
-    <div  ></div>
+    <!-- <div  ></div> -->
     <div class="background-image"></div>
-    <div class="mainContMenu" >
-        <div class="cabeceraMenu">
+    <div class="container-fluid m-0 p-0">
+        <!-- <div class="row m-0"> -->
+            <!-- <div class="cabeceraMenu"> -->
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"
             @volver="onBackHandle"
             ></Navbar>
-        </div>
-            <div class="card1">
-                <MenuCard :titulo="'Agenda'" :ruta="link1" 
-                @clickbutton="handlePress(1)" :idCard="idParent"></MenuCard>
+            <!-- </div> -->
+
+            <div class="row">
+                <div class="card1">
+                    <MenuCard :titulo="'Agenda'" :ruta="link1" 
+                    @clickbutton="handlePress(1)" :idCard="idParent"></MenuCard>
+                </div>
+                <div class="card2">
+                    <MenuCard :titulo="'Temas de Consejeria'" :ruta="link2" 
+                    @clickbutton="handlePress(2)" :idCard="idParent"></MenuCard>
+                </div>
+                <div class="card3">
+                    <MenuCard :titulo="'Registro de Cuidadores'" :ruta="link3" 
+                    @clickbutton="handlePress(3)" :idCard="idParent"></MenuCard>
+                </div>
+                <div class="card4">
+                    <MenuCard :titulo="'Equipos de Trabajo'" :ruta="link4" 
+                    @clickbutton="handlePress(4)" :idCard="idParent"></MenuCard>
+                </div>
             </div>
-            <div class="card2">
-                <MenuCard :titulo="'Temas de Consejeria'" :ruta="link2" 
-                @clickbutton="handlePress(2)" :idCard="idParent"></MenuCard>
-            </div>
-            <div class="card3">
-                <MenuCard :titulo="'Registro de Cuidadores'" :ruta="link3" 
-                @clickbutton="handlePress(3)" :idCard="idParent"></MenuCard>
-            </div>
-            <div class="card4">
-                <MenuCard :titulo="'Equipos de Trabajo'" :ruta="link4" 
-                @clickbutton="handlePress(4)" :idCard="idParent"></MenuCard>
-            </div>
+
+        <!-- </div> -->
+        
+            
     </div>
    
 
@@ -86,30 +94,30 @@ export default {
 
 .background-image{
     position: absolute;
-    top: 113px;
+    //top: 113px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 113px);
+    //height: calc(100vh - 113px);
     background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.45;
 }
-.mainContMenu {
+/* .mainContMenu {
         display: grid;
         height: 100vh;
         background-color:transparent ;
         grid-template: 
-            "cabeceraMenu  cabeceraMenu" 120px
+            "cabeceraMenu  cabeceraMenu" auto
             " card1  card2 " 250px
             " card3  card4 " 250px/
             1fr 1fr  
             ;
     }
+ */
 
-
-@media (min-width:650px){
+/* @media (min-width:650px){
     .background-image{
         position: absolute;
         top: 90px;
@@ -128,7 +136,7 @@ export default {
         height: 100vh;
         background-color:transparent ;
         grid-template: 
-            "cabeceraMenu cabeceraMenu" 100px
+            "cabeceraMenu cabeceraMenu" auto
             " card1  card2 " 1fr
             " card3  card4 " 1fr/
             1fr 1fr 
@@ -136,7 +144,7 @@ export default {
     }
     
     
-}
+} */
 
 .cabeceraMenu {
     grid-area:cabeceraMenu;
@@ -145,6 +153,7 @@ export default {
 }
 
 .card1{
+    padding: 0;
     display: flex;
     grid-area:card1;
     align-items: center;
@@ -153,6 +162,7 @@ export default {
     justify-content: center;
 }
 .card2{
+    padding: 0;
     display: flex;
     grid-area:card2;
     align-items: center;
@@ -161,6 +171,7 @@ export default {
     justify-content: center;
 }
 .card3{
+    padding: 0;
     display: flex;
     grid-area:card3;
     align-items: center;
@@ -169,6 +180,7 @@ export default {
     justify-content: center;
 }
 .card4{
+    padding: 0;
     display: flex;
     grid-area:card4;
     align-items: center;

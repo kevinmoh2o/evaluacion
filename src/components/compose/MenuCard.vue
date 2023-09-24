@@ -1,5 +1,5 @@
 <template>
-    <div class="menu">
+    <!-- <div class="menu">
         <div class="card"  @click.prevent="$emit('clickbutton')">
             <div class="cabeza">
                 <img class="imgClass" :src="require(`@/assets/menu/${ruta}.png`)" alt="Imagen PNG">
@@ -8,7 +8,35 @@
                 <h2 class="titulo">{{titulo}}</h2>
             </div>
         </div>
-    </div>
+    </div> -->
+    <!-- <div class="container px-4 py-5" id="custom-cards"> -->
+    <!-- <h2 class="pb-2 border-bottom">Custom cards</h2> -->
+
+    <!-- <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col"> -->
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-color: red;">
+          <!-- <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> -->
+            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h3>
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="me-auto">
+                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"/></svg>
+                <small>Earth</small>
+              </li>
+              <li class="d-flex align-items-center">
+                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+                <small>3d</small>
+              </li>
+            </ul>
+          <!-- </div> -->
+        <!-- </div>
+      </div> -->
+
+    
+    <!-- </div> -->
+  </div>
 </template>
 
 <script>
@@ -52,7 +80,7 @@ export default {
 
 @import '../../styles/styles.scss';
 
-    .card{
+    /* .card{
         width: 150px;
         margin:0 ;
         height: 200px;
@@ -126,7 +154,7 @@ export default {
 .menu:hover {
     opacity: 0.9;
     transform: scale(1.1);
-    /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); */
+    
     background-color: transparent;
 }
 .menu {
@@ -134,8 +162,35 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* width: 100%; */
-  /* height: 100%; */
+
+} */
+
+.feature-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: .75rem;
 }
+
+.icon-square {
+  width: 3rem;
+  height: 3rem;
+  border-radius: .75rem;
+}
+
+.text-shadow-1 { text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25); }
+.text-shadow-2 { text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25); }
+.text-shadow-3 { text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25); }
+
+.card-cover {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.feature-icon-small {
+  width: 3rem;
+  height: 3rem;
+}
+
 
 </style>

@@ -1,60 +1,35 @@
 <template>
-    <div class="pantalla">
+    <div class="pantalla vh-100">
         <div class="cabecera">
             <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onBackHandle"></Navbar>
         </div>
-        <div class="cuerpo">
-            <div class="container">
-                <div class="column-left">
-                    <!-- <div class="login">
-                        <div class="formBx">
-                            <h2>PLATAFORMA VIRTUAL</h2>
-
-                            <div class="imgBox">
-                                <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100" height="100">
-                            </div>
-
-                            <div class="inputBx">
-                                <p>DNI</p>
-                                <input type="text" placeholder="DNI del usuario..." name="dni" class="form-control"
-                                    maxlength="15" />
-                            </div>
-                            <div class="inputBx">
-                                <p>Contraseña</p>
-                                <input type="password" placeholder="Contraseña..." name="pasword" class="form-control"
-                                    maxlength="15" />
-                            </div>
-                            <button class="btnLogin" @click="navegar()">Iniciar Sesión</button>
-                            <a href="#">Ha olvidado la contraseña</a>
-                            <router-link to="/crear-cuenta">CREAR CUENTA</router-link>
-
-
-                        </div>
-                    </div> -->
-                    <div class="modal-sheet position-static d-block bg-body-secondary p-4 py-md-5 d-flex justify-content-evenly flex-column " tabindex="-1"
-                        role="dialog" id="modalSignin">
+        <div class="container-fluid d-flex flex-column vh-100 align-items-center">
+            <div class="row flex-grow-1">
+                
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 p-0">
+                    <div class="modal modal-sheet position-static d-block bg-body-secondary d-flex justify-content-evenly flex-column " tabindex="-1" role="dialog" id="modalSignin">
                         <div class="modal-dialog " role="document">
                             
                             <div class="modal-content rounded-4 shadow align-items-center bg-azul pt-4">
                                 <h2 class="text-white">PLATAFORMA VIRTUAL</h2>
-                                <div class="imgBox">
+                                <div class="imgBox mt-4">
                                 <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100" height="100">
                             </div>
 
-                                <div class="modal-body p-5 pt-0">
+                                <div class="container-fluid modal-body p-5 pt-0 mt-4">
                                     <form class="">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-3" id="floatingInput"
                                                 placeholder="name@example.com">
                                             <label for="floatingInput">DNI del usuario...</label>
                                         </div>
-                                        <div class="form-floating mb-3">
+                                        <div class="form-floating mb-3 mt-4">
                                             <input type="password" class="form-control rounded-3" id="floatingPassword"
                                                 placeholder="Password">
                                             <label for="floatingPassword">Contraseña...</label>
                                         </div>
-                                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" @click="navegar()">Iniciar Sesión</button>
-                                        <small class="text-white">By clicking Sign up, you agree to the terms of use.</small>
+                                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary mt-4" type="submit" @click="navegar()">Iniciar Sesión</button>
+                                        <!-- <small class="text-white">By clicking Sign up, you agree to the terms of use.</small> -->
                                         <hr class="my-4 text-white">
 
  
@@ -72,14 +47,11 @@
                     </div>
                 </div>
 
-
-                <div class="column-right">
-                    <div>
-                        <div class="column-right">
-                            <img class="responsive-image" src="@/assets/login.png" alt="Imagen" />
-                        </div>
-                    </div>
+                <div class="d-none d-lg-block col-lg-6 col-xl-6 col-xxl-6 p-0 m-0">
+                    <img class="responsive-image" src="@/assets/login.jpg" alt="Imagen" />
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -143,24 +115,12 @@ body {
 
 }
 
-.pantalla {
-    display: flex;
-    /* activa el modo flexible en el contenedor */
-    flex-direction: column;
-    /* establece la dirección de los elementos en vertical */
-    height: 100vh;
-    /* establece la altura del contenedor al 100% de la pantalla */
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-}
 
-.cabecera {
+
+/* .cabecera {
     height: 100px;
-    /* establece la altura fija del primer div */
     //background-color: red;
-}
+} */
 
 .cuerpo {
     flex: 1;
@@ -319,4 +279,19 @@ body {
     max-height: 100%;
     width: auto;
     height: auto;
-}</style>
+}
+
+.modal-sheet .modal-dialog {
+  width: 380px;
+  transition: bottom .75s ease-in-out;
+}
+.modal-sheet .modal-footer {
+  padding-bottom: 2rem;
+}
+
+.responsive-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
