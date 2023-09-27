@@ -1,35 +1,29 @@
 <template>
-    <!-- <div  ></div> -->
     <div class="background-image"></div>
     <div class="container-fluid m-0 p-0">
-        <!-- <div class="row m-0"> -->
-            <!-- <div class="cabeceraMenu"> -->
+
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"
             @volver="onBackHandle"
             ></Navbar>
-            <!-- </div> -->
 
-            <div class="row">
-                <div class="card1">
+            <div class="row m-0 p-0">
+                <div class="card1 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 my-sm-2 my-md-3 my-lg-5 my-xl-5 my-xxl-5">
                     <MenuCard :titulo="'Agenda'" :ruta="link1" 
                     @clickbutton="handlePress(1)" :idCard="idParent"></MenuCard>
                 </div>
-                <div class="card2">
+                <div class="card2 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 my-sm-2 my-md-3 my-lg-5 my-xl-5 my-xxl-5">
                     <MenuCard :titulo="'Temas de Consejeria'" :ruta="link2" 
                     @clickbutton="handlePress(2)" :idCard="idParent"></MenuCard>
                 </div>
-                <div class="card3">
+                <div class="card3 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 my-sm-2 my-md-3 my-lg-5 my-xl-5 my-xxl-5">
                     <MenuCard :titulo="'Registro de Cuidadores'" :ruta="link3" 
                     @clickbutton="handlePress(3)" :idCard="idParent"></MenuCard>
                 </div>
-                <div class="card4">
+                <div class="card4 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 my-sm-2 my-md-3 my-lg-5 my-xl-5 my-xxl-5">
                     <MenuCard :titulo="'Equipos de Trabajo'" :ruta="link4" 
                     @clickbutton="handlePress(4)" :idCard="idParent"></MenuCard>
                 </div>
-            </div>
-
-        <!-- </div> -->
-        
+            </div>        
             
     </div>
    
@@ -92,18 +86,20 @@ export default {
 <style lang="scss" scoped>
 
 
-.background-image{
-    position: absolute;
-    //top: 113px;
-    left: 0;
-    width: 100%;
-    //height: calc(100vh - 113px);
-    background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.45;
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.45;
+  z-index: -1; /* Coloca la imagen de fondo detrás de todo */
 }
+
 /* .mainContMenu {
         display: grid;
         height: 100vh;

@@ -10,24 +10,26 @@
           </div>
           <div class="col-10">
             <div class="row">
-              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 d-flex align-items-center" >
+              
+              <div class="col-10 col-sm-6 col-md-6 col-lg-8 col-xl-6 col-xxl-6 d-flex align-items-center" >
                 <a v-if="estadoTitulo" class="navbar-brand container-fluid" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                   {{ titulo }}
                 </a>
               </div>
                 
-              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 align-items-end"  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                  <img src="@/assets/logo2.png" alt="Vue Logo" height="70">
-              </div>
+              <div class="col-2 col-sm-6 col-md-6 col-lg-4 col-xl-6 col-xxl-6 align-items-end p-0 m-0" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <img class="d-none d-sm-block" src="@/assets/logo2.png" alt="Vue Logo" height="70">
+                <img class="d-block d-sm-none" src="@/assets/logo3.png" alt="Vue Logo" height="70">
+            </div>
+
             </div>
           </div>
 
           
         </div>
-        <div class="row">
-          <div class="linea">
-          
-        </div>
+          <div class="row">
+            <div class="linea">
+          </div>
         </div>
 
       </div>
@@ -98,7 +100,7 @@ $color-blanco:#f8f9fa;
 }
 
 
-.containernav {
+/* .containernav {
   display: grid;
   grid-template: 
     "boton imagen imagen" 70px
@@ -129,7 +131,7 @@ $color-blanco:#f8f9fa;
         "linea linea linea" 10px /
         100px auto 200px;
   }
-}
+} */
 
 .navbar-brand {
   padding: 0;
