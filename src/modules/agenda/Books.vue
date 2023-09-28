@@ -2,7 +2,7 @@
     <div v-if="!confirmacionOperation">
         <div v-if="getEstado()">
             <div class="div1">
-                    <Calendar @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId"></Calendar>
+                <Calendar @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId"></Calendar>
             </div>
             <div class="div2">
                 <CalendarModal v-if="showModal" 
