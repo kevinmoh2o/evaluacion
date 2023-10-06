@@ -1,16 +1,21 @@
 <template>
     <div v-if="!confirmacionOperation">
         <div v-if="getEstado()">
-            <div class="div1">
-                    <Calendar @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId"></Calendar>
-            </div>
-            <div class="div2">
-                <CalendarModal v-if="showModal" 
+            <!-- <div class="div1"> -->
+                    <Calendar @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" data-bs-toggle="modal" data-bs-target="#exampleModal"
+      data-bs-whatever="@mdo"></Calendar>
+            <!-- </div>
+            <div class="div2"> -->
+                <!-- <CalendarModal v-if="showModal" 
                 :fechaProgramar="fechaProgramar" :estadoModalOpt="estadoModalOptPa" :item="itemVar" :forma="newEvent"
                 :nombreOpt="nombreOpt" :selectedOpt="itemVar" :flagUpdateMo="flagUpdate"
                 @closeModal="closeModal" @saveAppt="saveAppt" @editarModal="editarModal" @eliminarM1="eliminarM1"
-                ></CalendarModal>    
-            </div>
+                ></CalendarModal>     -->
+                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+      data-bs-whatever="@mdo">Open modal for @mdo</button> -->
+                
+            <!-- </div> -->
+            <Modal></Modal>
         </div>
         <Cargando v-else></Cargando>
         
@@ -34,7 +39,8 @@ export default{
     name: 'book-list',
     components: {
         Calendar: defineAsyncComponent(() => import('./components/Calendar.vue')),
-        CalendarModal: defineAsyncComponent(() => import('./components/CalendarModal.vue')),
+        //CalendarModal: defineAsyncComponent(() => import('./components/CalendarModal.vue')),
+        Modal: defineAsyncComponent(() => import('./components/Modal.vue')),
         Cargando: defineAsyncComponent(() => import('./components/Cargando.vue')),
         Confirmacion: defineAsyncComponent(() => import('./components/Confirmacion.vue')),
 
