@@ -1,12 +1,12 @@
 <template>
-    <div class="mainAgenda">
-      
-            <Navbar class="cabeceraAgenda"
+    <div class="container-fluid p-0 m-0 align-items-center">
+        
+            <Navbar class="col-12"
             :estadoTitulo="true" :estadoFlecha="true" :titulo="'Agenda'"
             @volver="onBackHandle"></Navbar>
         
-        <div class="booksContainer">
-                <Books class="books"></Books>
+        <div class="col m-2">
+            <Books class="books"></Books>
         </div>
     </div>
 
@@ -39,7 +39,7 @@ export default {
 <style lang="scss" scoped>
 
 
-.mainAgenda {
+/* .mainAgenda {
         display: grid;
         height: 100vh;
         background-color:transparent ;
@@ -47,10 +47,10 @@ export default {
             "cabeceraAgenda " 120px
             "booksContainer" 1fr/
             1fr             ;
-    }
+    } */
 
 
-@media (min-width:650px){
+/* @media (min-width:650px){
     .mainAgenda {
         display: grid;
         
@@ -63,7 +63,7 @@ export default {
             1fr auto 1fr 
             ;
     }
-}
+} */
 
 .cabeceraAgenda{
     grid-area:cabeceraAgenda;

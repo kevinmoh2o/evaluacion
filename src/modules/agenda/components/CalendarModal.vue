@@ -1,6 +1,6 @@
 <template>
     <div class="containermodal">
-      <form class="cal-grcontainer">
+      <form class="cal-grcontainer ">
         <div  class="botones">
             <button v-if="statusButton" class="btn resaltadoVerde " @click.prevent="store(form)" data-toggle="tooltip" title="Guardar">
                 <i class="fa-solid fa-floppy-disk istore"></i>
@@ -64,6 +64,10 @@
         <div class="nota">
           <textarea v-if="statusButton" placeholder="Nota ..." name="message" v-model="iDescription"></textarea>
           <label v-else class="lblOculto">{{getCommCab }}</label>
+        </div>
+        <div class="form-group col-12">
+          <label for="message-text" class="col-form-label">Message:</label>
+          <textarea class="form-control" id="message-text" placeholder="Nota ..."></textarea>
         </div>
 
       </form>
@@ -502,10 +506,10 @@ textarea{
   align-items: center;
   align-content: center;
   padding: 20px;
-  margin: auto;
-  display: grid;
-  width: 360px;
-  grid-template: 
+  //margin: auto;
+  //display: grid;
+  //width: 360px;
+ /*  grid-template: 
         "titulo botones"50px
         "automatico automatico"100px
         "selecpatient selecpatient"50px
@@ -513,10 +517,10 @@ textarea{
         "link link"50px
         "nota nota"110px /
         160px 160px
-        ;
+        ; */
 }
 
-@media (min-width:700px){
+/* @media (min-width:700px){
     .cal-grcontainer{
       width: 682px;
         grid-template:
@@ -528,7 +532,7 @@ textarea{
         320px 320px;
     }
 }
-
+ */
 
 .istore{
   color: #0f893b;

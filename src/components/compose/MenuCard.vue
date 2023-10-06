@@ -1,10 +1,10 @@
 <template>
   <div class="col-10 col-md-8 col-lg-8 col-xl-8 col-xxl-8 btn"  @click.prevent="$emit('clickbutton')">
-    <div class="row g-0 border rounded overflow-hidden flex-md-row m-1 shadow-sm position-relative align-items-center"  style="background: linear-gradient(to right, #1B62BF, #F2B749);">
-      <div class="col p-0 d-flex flex-column position-static">
+    <div class="row g-0 border border-warning rounded overflow-hidden flex-md-row m-1 shadow-sm position-relative align-items-center h-145"  style="background: linear-gradient(to right, #1B62BF, #F2B749);">
+      <div class="col-8 p-0 d-flex flex-column position-static">
         <h5 class="m-2 p-0 text-light">{{titulo}}</h5>
       </div>
-      <div class="col-auto" style="background-color: white;">
+      <div class="col-4 h-100 d-flex justify-content-center align-items-center" style="background-color: white;">
           <img class="m-3" :src="require(`@/assets/menu/${ruta}.png`)" alt="Imagen PNG" width="70" height="70">
       </div>
     </div>
@@ -53,139 +53,9 @@ export default {
 
 @import '../../styles/styles.scss';
 
-    /* .card{
-        width: 150px;
-        margin:0 ;
-        height: 200px;
-        border-radius: 15px;
-        box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
-        background-color: #fff;
-        display: grid;
-        grid-template: 
-            "cabeza"130px
-            "cuerpo"50px/
-            auto
-            ;
-    }
-
-
-    @media (min-width:650px){
-        .card{
-            width: 200px;
-            margin:0 ;
-            height: 200px;
-            border-radius: 15px;
-            box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
-            background-color: #fff;
-            display: grid;
-            grid-template: 
-                "cabeza"130px
-                "cuerpo"50px/
-                auto
-                ;
-        }
-        
-    }
-
-    .cabeza {
-        display:flex;
-        margin: 15px 20px 15px 20px;
-        border-radius: 10px;
-        grid-area: cabeza;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        background-image: linear-gradient(to right, #ff9966, #ff5e62);
-    }
-
-
-.cuerpo{
-    border-radius: 5px;
-    height: 100%;
-    display:flex;
-    grid-area:cuerpo;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    align-self: center;
-    margin: 20px 20px 20px 20px;
-    background-image: linear-gradient(to right, #e6e6e6, #99939339);
+.h-145 {
+  height: 145px;
 }
-
-.imgClass{
-    width: 50px;
-}
-
-.titulo {
-  font-weight: 500;
-  font-family: sans-serif;
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
-}
-
-.menu:hover {
-    opacity: 0.9;
-    transform: scale(1.1);
-    
-    background-color: transparent;
-}
-.menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-} */
-
-/* .feature-icon {
-  width: 4rem;
-  height: 4rem;
-  border-radius: .75rem;
-}
-
-.icon-square {
-  width: 3rem;
-  height: 3rem;
-  border-radius: .75rem;
-}
-
-.text-shadow-1 { text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25); }
-.text-shadow-2 { text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25); }
-.text-shadow-3 { text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25); }
-
-.card-cover {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-
-.feature-icon-small {
-  width: 3rem;
-  height: 3rem;
-}
-
-
-.blog-header-logo:hover {
-  text-decoration: none;
-}
-
-.flex-auto {
-  flex: 0 0 auto;
-}
-
-.blog-pagination {
-  margin-bottom: 4rem;
-}
-
-
-.blog-post {
-  margin-bottom: 4rem;
-}
-.blog-post-meta {
-  margin-bottom: 1.25rem;
-  color: #727272;
-} */
 
 </style>
 
