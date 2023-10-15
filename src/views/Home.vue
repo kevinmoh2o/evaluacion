@@ -57,11 +57,13 @@ export default {
   methods: {
     close() {
       this.$refs.youtube.pauseVideo();
+      this.$refs.youtube.pauseVideo();
+      
       this.modalActive = false;
     },
     onReady() {
-      //this.$refs.youtube.playVideo();
-    },
+            this.$refs.youtube.playVideo()
+        },
     handleWindowResize() {
       this.windowWidth = window.innerWidth;
     },

@@ -1,5 +1,5 @@
 <template>
-    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
+    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Crear Cuenta'" 
             @volver="onBackHandle"></Navbar>
     <div class="container-fluid px-3">
         <form @submit="submitForm" class="needs-validation" novalidate>
@@ -39,6 +39,20 @@
                     Escriba una edad válida.
                     </div>
                 </div>
+                <!-- <div class="col-sm-6 col-lg-4 align-left mt-2">
+                    <label for="validationCustom07" class="form-label">DNI:</label>
+                    <input type="number" class="form-control" id="validationCustom07" max="99999999" min="8" maxlength="8" required>
+                    <div class="invalid-feedback">
+                    Escriba una edad válida.
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 align-left mt-2">
+                    <label for="validationCustom08" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="validationCustom08" name="email" required>
+                    <div class="invalid-feedback">
+                    Por favor, ingrese un correo electrónico válido.
+                    </div>
+                </div> -->
                 <div class="col-sm-6 col-lg-4 align-left mt-2">
                     <label for="validationCustom06" class="form-label">Sexo:</label>
                     <select class="form-select" id="validationCustom06" required>
@@ -143,6 +157,7 @@
   
 <script>
 import Navbar from '@/components/compose/Navbar.vue';
+import { useRouter } from 'vue-router'
 export default {
     name: 'Crear-Cuenta',
     components: {
@@ -152,9 +167,11 @@ export default {
         msg: String
     },
     data() {
+        const router = useRouter()
         return {
             selectedTime: '',
             timeOptions: [],
+            router: router
         };
     },
     mounted() {
@@ -183,6 +200,10 @@ export default {
             }
             form.classList.add('was-validated');
         },
+        async onBackHandle(){
+            console.log("navegando")
+            await this.router.push('/')
+        }
     },
 }
 </script>

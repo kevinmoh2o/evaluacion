@@ -1,21 +1,10 @@
+/* eslint-disable */
+
 <template>
     <div v-if="!confirmacionOperation">
         <div v-if="getEstado()">
-            <!-- <div class="div1"> -->
-                    <Calendar @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" data-bs-toggle="modal" data-bs-target="#exampleModal"
-      data-bs-whatever="@mdo"></Calendar>
-            <!-- </div>
-            <div class="div2"> -->
-                <!-- <CalendarModal v-if="showModal" 
-                :fechaProgramar="fechaProgramar" :estadoModalOpt="estadoModalOptPa" :item="itemVar" :forma="newEvent"
-                :nombreOpt="nombreOpt" :selectedOpt="itemVar" :flagUpdateMo="flagUpdate"
-                @closeModal="closeModal" @saveAppt="saveAppt" @editarModal="editarModal" @eliminarM1="eliminarM1"
-                ></CalendarModal>     -->
-                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-      data-bs-whatever="@mdo">Open modal for @mdo</button> -->
-                
-            <!-- </div> -->
-            <Modal></Modal>
+            <Calendar @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" ></Calendar>
+            <Modal ref="exampleModalModal"></Modal>
         </div>
         <Cargando v-else></Cargando>
         
@@ -34,7 +23,10 @@ import { defineAsyncComponent } from 'vue'
 import { Formatos } from '@/utils/Formatos.js';
 import { Hardware } from '@/utils/Hardware.js';
 import { mapActions,mapGetters } from 'vuex'
-
+import { Modal } from 'bootstrap';
+import jQuery from "jquery";
+const $ = jQuery;
+window.$ = $;
 export default{
     name: 'book-list',
     components: {
@@ -92,8 +84,9 @@ export default{
             
             console.log('Recibiendo datos arg1: ', arg1);
             console.log('Recibiendo datos arg2: ', arg2);
-
-            
+            const modalEl = document.getElementById('exampleModal');
+            const modal = new Modal(modalEl);
+            modal.show();
             if(arg2){
                 console.log("Crear nuevo programa")
                 this.itemVar={
@@ -295,7 +288,9 @@ export default{
     position: absolute;
     z-index: 2;
     width: 100%;
-}</style>
+}
+
+</style>
 
 /* this.itemVar={
     backgroundColor: "#3484F0",
@@ -310,4 +305,15 @@ export default{
     userid: "kbmont",
     encargado:"Carlos Sipan Seminario",
     id:"asdasd"
-}; */
+}; 
+
+<!-- </div>
+            <div class="div2"> -->
+                <!-- <CalendarModal v-if="showModal" 
+                :fechaProgramar="fechaProgramar" :estadoModalOpt="estadoModalOptPa" :item="itemVar" :forma="newEvent"
+                :nombreOpt="nombreOpt" :selectedOpt="itemVar" :flagUpdateMo="flagUpdate"
+                @closeModal="closeModal" @saveAppt="saveAppt" @editarModal="editarModal" @eliminarM1="eliminarM1"
+                ></CalendarModal>     -->
+                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+      data-bs-whatever="@mdo">Open modal for @mdo</button> -->
+*/

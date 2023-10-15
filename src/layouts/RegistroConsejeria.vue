@@ -1,26 +1,22 @@
 <template>
-    <form class="formDP">
-        
-
-        <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
+    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
             @volver="onBackHandle"></Navbar>
+        
+        <div class="cabecera pry">
+            <FilterHeader class="filtro"></FilterHeader>
         </div>
-        <FilterHeader class="filtro"></FilterHeader>
-        <FormCuidador class="cuidador"
+        
+        <!-- <FormCuidador class="cuidador"
         @inNombre="inNombre" @inNota="inNota"
         ></FormCuidador>
-        <FormPaciente class="paciente"></FormPaciente>
-        
-        <!-- <BotonVue class="boton" title=""></BotonVue> -->
-    </form>
+        <FormPaciente class="paciente"></FormPaciente> -->
 </template>
 
 
 <script>
 import Navbar from '@/components/compose/Navbar.vue';
-import FormCuidador from '@/components/compose/FormCuidador.vue';
-import FormPaciente from '@/components/compose/FormPaciente.vue';
+//import FormCuidador from '@/components/compose/FormCuidador.vue';
+//import FormPaciente from '@/components/compose/FormPaciente.vue';
 //import BotonVue from '@/components/atomic/BotonVue.vue';
 import FilterHeader from '@/components/compose/FilterHeader.vue';
 import { useRouter } from 'vue-router'
@@ -36,9 +32,9 @@ export default {
     },
     components: {
         Navbar,
-        FormCuidador,
+        //FormCuidador,
         //BotonVue,
-        FormPaciente,
+        //FormPaciente,
         FilterHeader,
     },
     methods:{
@@ -63,33 +59,27 @@ $color-azul-intermedio: #616C8C;
 $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
-.formDP{
-    display: grid;
-    height: 100vh;
-    background-color:transparent ;
-    grid-template: 
-        " cabecera" 110px
-        " filtro" 250px
-        " cuidador" 1fr
-        " paciente" 1fr
-        " boton" 120px/
-        1fr 
-        ;
+.cabecera{
+    display: flex;
+    border-radius: 10px;
+    margin: 5px 10px 5px 10px;
+    padding: 10px 20px 10px 20px;
+    justify-items: center;
+    align-content: center;
+    flex-direction: column;
 }
 
-@media (min-width:650px){
-    .formDP{
-        display: grid;
-        height: 100vh;
-        background-color:transparent ;
-        grid-template: 
-            " cabecera cabecera cabecera" 100px
-            " filtro cuidador  paciente " 1fr
-            " filtro boton  boton " 120px/
-            300px 1fr 1fr 
-            ;
-    }
-    
+.pry {
+        //background-color: #f3f4eb;
+        background-color: --primary;
+    } 
+/* 
+.h-150{
+    height: 150px;
+}
+
+.w-90{
+    width: 90%;
 }
 
 
@@ -97,9 +87,7 @@ $color-negro: #2c3e50;
     align-items: start;
     grid-area:filtro;
 }
-.cabecera{
-    grid-area:cabecera;
-}
+
 
 
 .cuidador{
@@ -108,10 +96,10 @@ $color-negro: #2c3e50;
 
 .paciente{
     grid-area:paciente;
-}
+} */
 
-.boton {
-  display: flex; /* Agrega esta línea */
+/* .boton {
+  display: flex; 
   grid-area: boton;
   width: 300px;
   align-content: center;
@@ -120,9 +108,9 @@ $color-negro: #2c3e50;
   text-align: center;
   align-self: center;
   justify-self: center;
-}
+} */
 
-.pantalla {
+/* .pantalla {
     display: flex;
     flex-direction: column;   
     max-width: 2000px;
@@ -135,7 +123,7 @@ $color-negro: #2c3e50;
   margin-top: 10px;
  width: 100%;
 }
-
+ */
 
 
 /* button{
@@ -143,7 +131,7 @@ $color-negro: #2c3e50;
     width: 10%;
 } */
 
-.form-section {
+/* .form-section {
   padding-bottom: 10px;
   padding-top: 10px;
   padding-left: 20px;
@@ -155,40 +143,5 @@ $color-negro: #2c3e50;
   }
 }
 
-/* .button-guardar {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    background-color: $color-azul-intermedio;
-    color: #fff;
-    cursor: pointer;
-
-    &:hover {
-        background-color: $color-azul;
-    }
-
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 5px #555;
-    }
-
-    &.secondary {
-        background-color: #fff;
-        color: #333;
-        border: 1px solid #333;
-
-        &:hover {
-            background-color: #eee;
-        }
-    }
-
-    &.large {
-        padding: 15px 30px;
-        font-size: 20px;
-    }
-} */
-
-
-</style>
+*/
+</style>s
