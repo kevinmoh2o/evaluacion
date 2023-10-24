@@ -38,7 +38,7 @@ const routes = [{
     {
         path: '/registro-consejeria',
         name: 'regiconsejeria-layout',
-        component: () => import ( /* webpackChunkName: "about" */ '../layouts/RegistroConsejeria.vue')
+        component: () => import ( /* webpackChunkName: "about" */ '../layouts/RegistroCuidadorPrimario.vue')
     },
     {
         path: '/tema-consejeria',

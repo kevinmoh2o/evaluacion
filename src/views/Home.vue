@@ -57,7 +57,7 @@ export default {
   methods: {
     close() {
       this.$refs.youtube.pauseVideo();
-      this.$refs.youtube.pauseVideo();
+      this.$refs.youtube.stopVideo();
       
       this.modalActive = false;
     },

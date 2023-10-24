@@ -1,12 +1,12 @@
 <template>
   
     <div class="contenedor">
-      <button class="imagen" data-bs-toggle="modal" data-bs-target="#modalPaciente" data-bs-whatever="@mdo">
+      <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalPaciente" data-bs-whatever="@mdo">
         <img src="../../assets/boton/multitud.png">
         <h5><span class="primary">Agregar Paciente</span></h5>
       </button>
 
-      <button class="imagen" data-bs-toggle="modal" data-bs-target="#modalCuidador" data-bs-whatever="@mdo">
+      <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalCuidador" data-bs-whatever="@mdo">
         <img src="../../assets/boton/doctor.png">
         <h5><span class="primary">Agregar Cuidador</span></h5>
       </button>
@@ -179,6 +179,17 @@ input{
 
 .w-200{
   width: 200px;
+}
+
+.boton-efecto {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.boton-efecto:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
 }
 
     

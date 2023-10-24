@@ -39,20 +39,7 @@
                     Escriba una edad válida.
                     </div>
                 </div>
-                <!-- <div class="col-sm-6 col-lg-4 align-left mt-2">
-                    <label for="validationCustom07" class="form-label">DNI:</label>
-                    <input type="number" class="form-control" id="validationCustom07" max="99999999" min="8" maxlength="8" required>
-                    <div class="invalid-feedback">
-                    Escriba una edad válida.
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 align-left mt-2">
-                    <label for="validationCustom08" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="validationCustom08" name="email" required>
-                    <div class="invalid-feedback">
-                    Por favor, ingrese un correo electrónico válido.
-                    </div>
-                </div> -->
+
                 <div class="col-sm-6 col-lg-4 align-left mt-2">
                     <label for="validationCustom06" class="form-label">Sexo:</label>
                     <select class="form-select" id="validationCustom06" required>
@@ -66,7 +53,7 @@
                 </div>
                 <div class="col-sm-6 col-lg-4 align-left mt-2">
                     <label for="startDate" class="form-label">Fecha de Nacimiento</label>
-                    <input id="startDate" class="form-control" type="date" />
+                    <input id="startDate" class="form-control" type="date" required/>
                     <span id="startDateSelected"></span>
                     <div class="invalid-feedback">
                     Fecha incorrecta.
