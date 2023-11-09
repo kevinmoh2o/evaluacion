@@ -1,27 +1,23 @@
 <template>
     <div class="background-image"></div>
-    <div class="container-fluid m-0 p-0">
+    <div class="contenedor">
 
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"
             @volver="onBackHandle"
             ></Navbar>
 
-            <div class="row m-0 p-0">
-                <div class="card1 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 my-sm-2 my-md-3 my-lg-5 my-xl-5 my-xxl-5">
-                    <MenuCard :titulo="'Agenda'" :ruta="link1" 
-                    @clickbutton="handlePress(1)" :idCard="idParent"></MenuCard>
+            <div class="menu-general">
+                <div class="card1">
+                    <MenuCard :titulo="'AGENDA'" :ruta="link1" @clickbutton="handlePress(1)" :idCard="idParent"></MenuCard>
                 </div>
-                <div class="card2 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 my-sm-2 my-md-3 my-lg-5 my-xl-5 my-xxl-5">
-                    <MenuCard :titulo="'Temas de Consejeria'" :ruta="link2" 
-                    @clickbutton="handlePress(2)" :idCard="idParent"></MenuCard>
+                <div class="card1">
+                    <MenuCard :titulo="'TEMAS DE CONSEJERIA'" :ruta="link2" @clickbutton="handlePress(2)" :idCard="idParent"></MenuCard>
                 </div>
-                <div class="card3 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 my-sm-2 my-md-3 my-lg-5 my-xl-5 my-xxl-5">
-                    <MenuCard :titulo="'Registro de Cuidadores'" :ruta="link3" 
-                    @clickbutton="handlePress(3)" :idCard="idParent"></MenuCard>
+                <div class="card1">
+                    <MenuCard :titulo="'REGISTRO DE CUIDADORES'" :ruta="link3" @clickbutton="handlePress(3)" :idCard="idParent"></MenuCard>
                 </div>
-                <div class="card4 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 my-sm-2 my-md-3 my-lg-5 my-xl-5 my-xxl-5">
-                    <MenuCard :titulo="'Equipos de Trabajo'" :ruta="link4" 
-                    @clickbutton="handlePress(4)" :idCard="idParent"></MenuCard>
+                <div class="card1">
+                    <MenuCard :titulo="'EQUIPOS DE TRABAJO'" :ruta="link4" @clickbutton="handlePress(4)" :idCard="idParent"></MenuCard>
                 </div>
             </div>        
             
@@ -71,8 +67,6 @@ export default {
         },
         onBackHandle(){
             this.$router.push('/');
-            
-
         }
     },  
     components: {
@@ -84,6 +78,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.contenedor{
+    
+    height: auto;
+}
+.menu-general{
+    display: flex;
+    flex-direction: row;
+    align-content: space-evenly;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
 
 
 .background-image {
@@ -99,6 +109,54 @@ export default {
   opacity: 0.45;
   z-index: -1; /* Coloca la imagen de fondo detrás de todo */
 }
+
+
+.cabeceraMenu {
+    grid-area:cabeceraMenu;
+    padding: 0;
+    margin: 0;
+}
+
+.card1{
+    //padding: 0;
+    display: flex;
+    margin: 30px 15px 15px 15px;
+    //grid-area:card1;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    width: 300px;
+}
+
+.card2{
+    padding: 0;
+    display: flex;
+    grid-area:card2;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+.card3{
+    padding: 0;
+    display: flex;
+    grid-area:card3;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+.card4{
+    padding: 0;
+    display: flex;
+    grid-area:card4;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
 
 /* .mainContMenu {
         display: grid;
@@ -141,49 +199,4 @@ export default {
     
     
 } */
-
-.cabeceraMenu {
-    grid-area:cabeceraMenu;
-    padding: 0;
-    margin: 0;
-}
-
-.card1{
-    padding: 0;
-    display: flex;
-    grid-area:card1;
-    align-items: center;
-    text-align: center;
-    align-content: center;
-    justify-content: center;
-}
-.card2{
-    padding: 0;
-    display: flex;
-    grid-area:card2;
-    align-items: center;
-    text-align: center;
-    align-content: center;
-    justify-content: center;
-}
-.card3{
-    padding: 0;
-    display: flex;
-    grid-area:card3;
-    align-items: center;
-    text-align: center;
-    align-content: center;
-    justify-content: center;
-}
-.card4{
-    padding: 0;
-    display: flex;
-    grid-area:card4;
-    align-items: center;
-    text-align: center;
-    align-content: center;
-    justify-content: center;
-}
-
-
 </style>

@@ -16,11 +16,11 @@
                         <hr class="solid white-line">
                         <Label class="etq-normal">Enfermero</Label>
                     </div>
-                    <!-- <div class="caja">
+                    <div class="caja">
                         <h2>Emilio Pedragón</h2>
                         <i class="fas fa-user-md"></i>
                         <label>Primo</label>
-                    </div> -->
+                    </div>
                 </div>
                 
                   
@@ -67,7 +67,8 @@ $color-azul: #1B62BF;
 }
 .caja {
     border-radius: 10px ;
-    background: $color-azul;
+    //background: $color-azul;
+    background: linear-gradient(to right, #ff0000, #0000ff);
     display: flex;
     width: 400px;
     align-items: start;

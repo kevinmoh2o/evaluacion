@@ -1,12 +1,38 @@
 <template>
-  <div class="container-fluid p-0 m-0 custom-container">
+  <div class="app">
     <router-view />
   </div>
+
+  <PopUp v-show="popUp" @close="togglePopUp"></PopUp>
  
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 
+export default {
+  name: 'app-main',
+  components: {
+    PopUp: defineAsyncComponent(() => import('@/components/compose/PopUp.vue')),
+  },
+  data() {
+    return {
+      popUp:true,
+    }
+  },
+  methods: {
+    togglePopUp(){
+        this.popUp=!this.popUp;
+        console.log("pressed");
+    },
+    close() {
+      this.$refs.youtube.pauseVideo();
+      this.$refs.youtube.stopVideo();
+      
+      this.modalActive = false;
+    },
+  },
+}
 
 </script>
 
@@ -27,6 +53,7 @@ body{
     overflow-x: hidden;
     color: var(--color-dark);
     background-color: var(--color-background);
+    
 }
 
 /*   html, body {
@@ -50,4 +77,7 @@ body{
     height: 100vh;
   }
 
+/* .app{
+  position: fixed;
+} */
 </style>

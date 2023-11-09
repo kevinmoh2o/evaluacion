@@ -133,7 +133,7 @@
             <hr class="solid">
 
             <div class="container-fluid my-5 align-items-center align-center">
-                <button type="submit" class="btn btn-success btn-150">Guardar</button>
+                <button type="submit" class="btn btn-success btn-150">Crear</button>
             </div>
             <hr/>
             <hr/>

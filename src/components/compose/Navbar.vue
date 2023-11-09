@@ -14,7 +14,7 @@
         </a>
       </div>
 
-      <div class="caja3" style="display: flex; flex-direction: column; justify-content: center; align-items: center;background-color: #f0c87c;">
+      <div class="caja3" style="display: flex; flex-direction: column; justify-content: center; align-items: center;background-color: #fff;">
         <img class="d-none d-sm-block" src="@/assets/logo2.png" alt="Vue Logo" height="70">
         <img class="d-block d-sm-none" src="@/assets/logo3.png" alt="Vue Logo" height="70">
       </div>
@@ -50,6 +50,16 @@ export default {
 $color-amarillo: #F2B749;
 $color-azul: #1B62BF;
 $color-blanco: #f8f9fa;
+
+
+button{
+    transition: all .55s ease;
+}
+
+button:hover{
+    transform: translateX(10px);
+}
+
 
 a{
   color: $color-blanco;

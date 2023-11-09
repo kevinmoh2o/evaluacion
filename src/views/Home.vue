@@ -3,10 +3,9 @@
     <div v-show="modalActive" class="modal container-fluid">
       <div v-show="modalActive" class="modal container-fluid">
         <transition name="modal-animation-inner">
-          <div v-show="modalActive" class="col"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <button type="button" class="btn btn-close" data-bs-dismiss="toast" aria-label="Close" @click="close"
-              style="margin-left: auto;"></button>
+          <div v-show="modalActive" class="col" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <button type="button" class="btn btn-close" aria-label="Close" @click="close" style="margin-left: auto;">
+            </button>
             <slot />
             <YouTube class="col-lg-12 text-center" :width="youtubeWidth" :height="youtubeHeight" :key="youtubeWidth"
               :aspect-ratio="16 / 9" src="https://www.youtube.com/watch?v=NRHCHVrq8nY" ref="youtube" @playing="playing"
@@ -16,17 +15,24 @@
       </div>
     </div>
   </transition>
-
-  <div class="aplication vh-100">
+  
+  <div class="aplication">
     <LoginPage></LoginPage>
   </div>
+
+  
+
+  <!-- <button class="btn" @click="togglePopUp">
+    Open Modal 
+  </button> -->
   
 </template>
 
 <script>
 // @ is an alias to /src
 import LoginPage from '../layouts/LoginPage.vue';
-import YouTube from 'vue3-youtube'
+import YouTube from 'vue3-youtube';
+
 
 export default {
   name: 'home-view',
@@ -36,8 +42,10 @@ export default {
   },
   data() {
     return {
-      'modalActive': true,
+      modalActive: true,
       windowWidth: window.innerWidth,
+      popUp:true,
+      playing: true
     }
   },
   computed: {
@@ -50,15 +58,19 @@ export default {
   },
   created() {
     window.addEventListener('resize', this.handleWindowResize);
+    
   },
   unmounted() {
     window.removeEventListener('resize', this.handleWindowResize);
   },
   methods: {
+    togglePopUp(){
+        this.popUp=!this.popUp;
+        console.log("pressed");
+    },
     close() {
-      this.$refs.youtube.pauseVideo();
+      //this.$refs.youtube.pauseVideo();
       this.$refs.youtube.stopVideo();
-      
       this.modalActive = false;
     },
     onReady() {

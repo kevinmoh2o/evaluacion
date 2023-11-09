@@ -5,16 +5,18 @@
         </div>
         <div class="container-fluid d-flex flex-column vh-100 align-items-center">
             <div class="row flex-grow-1">
-                
+
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 p-0">
-                    <div class="modal modal-sheet position-static d-block bg-body-secondary d-flex justify-content-evenly flex-column " tabindex="-1" role="dialog" id="modalSignin">
+                    <div class="modal modal-sheet position-static d-block bg-body-secondary d-flex justify-content-evenly flex-column "
+                        tabindex="-1" role="dialog" id="modalSignin">
                         <div class="modal-dialog " role="document">
-                            
+
                             <div class="modal-content rounded-4 shadow align-items-center bg-azul pt-4">
                                 <h2 class="text-white">PLATAFORMA VIRTUAL</h2>
                                 <div class="imgBox mt-4">
-                                <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100" height="100">
-                            </div>
+                                    <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100"
+                                        height="100">
+                                </div>
 
                                 <div class="container-fluid modal-body p-5 pt-0 mt-4">
                                     <form class="">
@@ -28,18 +30,20 @@
                                                 placeholder="Password">
                                             <label for="floatingPassword">Contraseña...</label>
                                         </div>
-                                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary mt-4" type="submit" @click="navegar()">Iniciar Sesión</button>
+                                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary mt-4"
+                                            @click="navegar">Iniciar Sesión</button>
                                         <!-- <small class="text-white">By clicking Sign up, you agree to the terms of use.</small> -->
                                         <hr class="my-4 text-white">
 
- 
-                                        <div class="container-fluid row justify-content-center align-items-center">
-                                            <a href="#" class="link-light  link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover custom-center">Ha olvidado la contraseña</a>
+
+                                        <!-- <div class="container-fluid row justify-content-center align-items-center"> -->
+                                        <div class="text-link">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalCambioPassword" data-bs-whatever="@mdo">¿Ha olvidado la contraseña?</a>
                                         </div>
-                                        <div class="container-fluid row justify-content-center align-items-center">
-                                            <router-link class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover custom-center" to="/crear-cuenta">CREAR CUENTA</router-link>
+                                        <div class="text-link">
+                                            <router-link to="/crear-cuenta">Crear cuenta</router-link>
                                         </div>
-                                        
+
                                     </form>
                                 </div>
                             </div>
@@ -54,29 +58,35 @@
 
             </div>
         </div>
+        
     </div>
+    <ModalCambioPassword ></ModalCambioPassword>
 </template>
 
 <script>
 import Navbar from '../components/compose/Navbar.vue';
-import { useRouter } from 'vue-router'
+//import { defineAsyncComponent } from 'vue'
+import ModalCambioPassword from '@/components/compose/ModalCambioPassword.vue';
+//import { useRouter } from 'vue-router'
 
 
 export default {
     name: 'login-layout',
     setup() {
-        const router = useRouter()
+        //const router = useRouter()
         return {
-            router: router
+            //router: router
         }
     },
     components: {
-        Navbar
+        Navbar,
+        ModalCambioPassword,
     },
     methods: {
-        async navegar() {
+        navegar() {
             console.log("navegando")
-            await this.router.push('/menu')
+            //await this.$router.push('/menu')
+            this.$router.push('/menu')
         },
         onBackHandle() {
 
@@ -99,28 +109,30 @@ $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Popins', sans-serif;
-    display: flex;
+.text-link a {
+    padding: 5px 0 5px 0;
     justify-content: center;
-    align-items: center;
-    width: 100vw;
-    background: #2fbf77;
-
+    display: flex;
+    transition: all .55s ease;
+    text-decoration: none;
+    color: $color-blanco;
 }
 
+.text-link a:hover {
+    transform: translateY(-10px);
+    text-decoration: underline;
+    font-size: 20px;
+    color: $color-amarillo;
+}
 
+button {
+    transition: all .55s ease;
+}
 
-/* .cabecera {
-    height: 100px;
-    //background-color: red;
-} */
+button:hover {
+    transform: translateY(-10px);
+}
+
 
 .cuerpo {
     flex: 1;
@@ -271,7 +283,7 @@ body {
 }
 
 .custom-center {
-  text-align: center !important;
+    text-align: center !important;
 }
 
 .responsive-image {
@@ -282,11 +294,12 @@ body {
 }
 
 .modal-sheet .modal-dialog {
-  width: 380px;
-  transition: bottom .75s ease-in-out;
+    width: 380px;
+    transition: bottom .75s ease-in-out;
 }
+
 .modal-sheet .modal-footer {
-  padding-bottom: 2rem;
+    padding-bottom: 2rem;
 }
 
 .responsive-image {
@@ -294,4 +307,28 @@ body {
     height: 100%;
     object-fit: cover;
 }
-</style>
+
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Popins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    background: #2fbf77;
+
+} */
+
+
+
+/* .cabecera {
+    height: 100px;
+    //background-color: red;
+} */</style>
+

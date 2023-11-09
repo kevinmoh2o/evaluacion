@@ -28,7 +28,7 @@
         </select>
       </div>
     </div>
-    <ModalPaciente></ModalPaciente>
+    <ModalPaciente data-bs-toggle="modal" data-bs-target="#modalCuidadorSeleccion" data-bs-whatever="@mdo"></ModalPaciente>
     <ModalCuidador></ModalCuidador>
 </template>
 
