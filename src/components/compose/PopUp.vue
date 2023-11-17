@@ -106,15 +106,6 @@ export default {
         }
 }
 
-/* .pop-up-inner{
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-    justify-items: center;
-    justify-self: center;
-} */
 
 
 </style>

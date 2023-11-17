@@ -3,17 +3,17 @@
     <router-view />
   </div>
 
-  <PopUp v-show="popUp" @close="togglePopUp"></PopUp>
+  <!-- <PopUp v-show="popUp" @close="togglePopUp"></PopUp> -->
  
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
+//import { defineAsyncComponent } from 'vue';
 
 export default {
   name: 'app-main',
   components: {
-    PopUp: defineAsyncComponent(() => import('@/components/compose/PopUp.vue')),
+    //PopUp: defineAsyncComponent(() => import('@/components/compose/PopUp.vue')),
   },
   data() {
     return {
@@ -66,7 +66,24 @@ body{
 
   .column-container .full-calendar a {
     text-decoration: none !important;
-    color: inherit !important;
+    color: var(--warning) !important;
+  }
+
+  .column-container .full-calendar button {
+    text-decoration: none !important;
+    color: white !important;
+    background-color: #F2B749;
+    border-color: white;
+  }
+
+  .column-container .full-calendar button:hover {
+    color: white !important;
+    background-color: #bd974f;
+  }
+
+  .column-container .full-calendar button::after {
+    color: white !important;
+    background-color: red;
   }
 
   .inpE6 .ipt .dp__input {

@@ -160,63 +160,30 @@ nav .superior{
 
 button.btn {
   &.btn-outline-info {
+    border-radius:10px;
     color: $color-azul;
-    border-color: $color-azul;
+    //border-color: var(--light);
     inline-size: 70px;
     size-adjust: 50px;
-    border: 2px solid $color-azul;
+    border: 2px solid var(--light);
 
     &:hover {
-      background-color: $color-blanco;
-      color: $color-blanco;
+      //background-color: $color-blanco;
+      //color: $color-blanco;
     }
 
     i.fa {
-      color: $color-azul;
+      color: var(--light);
+      font-size: 20px;
+      font-weight: 700;
+      transition: all .55s ease;
+      &:hover{
+        font-size: 30px;
+        font-weight: 700;
+      }
     }
   }
 
   background-color: $color-amarillo;
 }
 </style>
-
-<!-- 
-<nav class="navbar navbar-expand navbar-dark bg-amarillo m-0 p-0" aria-label="Second navbar example">
-    <div class="container-fluid">
-      <div class="col">
-        <div class="row">
-          <div class="col-2 d-flex align-items-center p-0 m-0 justify-content-center" >
-            <button class="btn btn-outline-info mx-2 rounded-pill btn-200" v-if="estadoFlecha" @click="$emit('volver')" >
-                <i class="fa fa-arrow-left"></i>
-            </button>
-          </div>
-          <div class="col-10">
-            <div class="row">
-              
-              <div class="col-10 col-sm-6 col-md-6 col-lg-8 col-xl-6 col-xxl-6 d-flex align-items-center" >
-                <a v-if="estadoTitulo" class="navbar-brand container-fluid" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                  {{ titulo }}
-                </a>
-              </div>
-                
-              <div class="col-2 col-sm-6 col-md-6 col-lg-4 col-xl-6 col-xxl-6 align-items-end p-0 m-0" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <img class="d-none d-sm-block" src="@/assets/logo2.png" alt="Vue Logo" height="70">
-                <img class="d-block d-sm-none" src="@/assets/logo3.png" alt="Vue Logo" height="70">
-            </div>
-
-            </div>
-          </div>
-
-          
-        </div>
-          <div class="row">
-            <div class="linea">
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </nav>
-
- -->

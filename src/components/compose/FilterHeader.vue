@@ -1,14 +1,14 @@
 <template>
   
     <div class="contenedor">
-      <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalPaciente" data-bs-whatever="@mdo">
+      <!-- <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalPaciente" data-bs-whatever="@mdo">
         <img src="../../assets/boton/multitud.png">
         <h5><span class="primary">Agregar Paciente</span></h5>
-      </button>
+      </button> -->
 
-      <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalCuidador" data-bs-whatever="@mdo">
+      <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo">
         <img src="../../assets/boton/doctor.png">
-        <h5><span class="primary">Agregar Cuidador</span></h5>
+        <h5><span class="primary">Agregar Cuidador - <br>Paciente</span></h5>
       </button>
     </div>
 
@@ -17,7 +17,7 @@
     <div class="filtro">
       <div class="form-input">
           <input type="search" placeholder="Buscar...">
-          <button class="search-btn" type="submit"><i class="bx bx-search"></i></button>
+          <button class="search-btn" type="submit" data-bs-toggle="modal" data-bs-target="#modalCuidadorSeleccion" data-bs-whatever="@mdo"><i class="bx bx-search"></i></button>
       </div>
       <div class="form-input">
         <select class="form-select" aria-label="Default select example">
@@ -28,13 +28,13 @@
         </select>
       </div>
     </div>
-    <ModalPaciente data-bs-toggle="modal" data-bs-target="#modalCuidadorSeleccion" data-bs-whatever="@mdo"></ModalPaciente>
-    <ModalCuidador></ModalCuidador>
+    <ModalCuidadorPaciente></ModalCuidadorPaciente>
+    <ModalCuidadorSelecionado></ModalCuidadorSelecionado>
 </template>
 
 <script>
-import ModalCuidador from '@/components/compose/ModalCuidador.vue';
-import ModalPaciente from '@/components/compose/ModalPaciente.vue';
+import ModalCuidadorSelecionado from '@/components/compose/ModalCuidadorSelecionado.vue';
+import ModalCuidadorPaciente from '@/components/compose/ModalCuidadorPaciente.vue';
 
 export default {
   name: 'filter-component',
@@ -55,8 +55,8 @@ export default {
     }
   },
   components:{
-    ModalPaciente,
-    ModalCuidador
+    ModalCuidadorPaciente,
+    ModalCuidadorSelecionado,
   },
   methods: {
     realizarConsulta(terminoBusqueda) {
@@ -71,7 +71,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 
 
 hr{

@@ -1,9 +1,10 @@
 <template>
-    <form class="formDP">
-        <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
-            @volver="onBackHandle"></Navbar>
-        </div>
+    
+    <div class="cabecera">
+        <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" 
+        @volver="onBackHandle"></Navbar>
+    </div>
+    <!-- <form class="formDP">    
         <FilterHeader></FilterHeader>
 
         <div class="mentoria">
@@ -20,14 +21,14 @@
             <button type="button" class="btn btn-success estilo-btn" data-bs-dismiss="modal">Registrar Consejería</button>
         </div>
         
-    </form>
+    </form> -->
 </template>
 
 
 <script>
 
 import Navbar from '@/components/compose/Navbar.vue';
-import FilterHeader from '@/components/compose/FilterHeader.vue';
+//import FilterHeader from '@/components/compose/FilterHeader.vue';
 //import BotonVue from '@/components/atomic/BotonVue.vue';
 import { useRouter } from 'vue-router'
 
@@ -36,13 +37,13 @@ export default {
     setup() {
         const router = useRouter()
         return {
-            titulo: 'REGISTROS DEL CUIDADOR PRIMARIO',
+            titulo: 'TEMAS DE CONSEJERÍA',
             router: router
         }
     },
     components: {
         Navbar,
-        FilterHeader,
+        //FilterHeader,
         //BotonVue,
     },
     methods:{

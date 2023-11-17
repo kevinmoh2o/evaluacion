@@ -7,16 +7,16 @@
         <FilterHeader></FilterHeader>
 
         <div class="mentoria">
-            <div class="participante" v-on:click="select(1)"  data-bs-toggle="modal" data-bs-target="#modalCuidadorSeleccion" data-bs-whatever="@mdo">
+            <div class="participante" v-on:click="select(1)" >
                 
             </div>
-            <div class="participante" v-on:click="select(2)"  data-bs-toggle="modal" data-bs-target="#modalPacienteSeleccion" data-bs-whatever="@mdo">
+            <div class="participante" v-on:click="select(2)" >
                 
             </div>
             
         </div>
-        <ModalCuidadorSelecionado></ModalCuidadorSelecionado>
-        <ModalPacienteSeleccionado></ModalPacienteSeleccionado>
+        <!-- <ModalCuidadorSelecionado></ModalCuidadorSelecionado>
+        <ModalPacienteSeleccionado></ModalPacienteSeleccionado> -->
         <div class="btn-contendor">
             <button type="button" class="btn btn-success estilo-btn" data-bs-dismiss="modal">Registrar Consejería</button>
         </div>
@@ -30,7 +30,7 @@ import Navbar from '@/components/compose/Navbar.vue';
 import FilterHeader from '@/components/compose/FilterHeader.vue';
 //import BotonVue from '@/components/atomic/BotonVue.vue';
 import { useRouter } from 'vue-router'
-import { defineAsyncComponent } from 'vue'
+//import { defineAsyncComponent } from 'vue'
 
 export default {
     name: 'regiconsejeria-layout',
@@ -42,8 +42,8 @@ export default {
         }
     },
     components: {
-        ModalCuidadorSelecionado: defineAsyncComponent(() => import('../components/compose/ModalCuidadorSelecionado.vue')),
-        ModalPacienteSeleccionado: defineAsyncComponent(() => import('../components/compose/ModalPacienteSeleccionado.vue')),
+        //ModalCuidadorSelecionado: defineAsyncComponent(() => import('../components/compose/ModalCuidadorSelecionado.vue')),
+        //ModalPacienteSeleccionado: defineAsyncComponent(() => import('../components/compose/ModalPacienteSeleccionado.vue')),
         Navbar,
         FilterHeader,
     },

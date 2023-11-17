@@ -1,9 +1,9 @@
 /* eslint-disable */
 
 <template>
-    <div v-if="!confirmacionOperation">
-        <div v-if="getEstado()">
-            <Calendar @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" ></Calendar>
+    <div class="book" v-if="!confirmacionOperation">
+        <div class="book" v-if="getEstado()">
+            <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" ></Calendar>
             <Modal ref="exampleModalModal"></Modal>
         </div>
         <Cargando v-else></Cargando>
@@ -208,6 +208,18 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+
+.book{
+    width: calc(100vw - 400px);
+    //width: 100%;
+}
+
+@media (min-width:750px){
+
+    .books{
+        width: 100%;
+    }
+} 
  a{
     text-decoration: none !important;
     color: inherit !important;
@@ -290,8 +302,6 @@ export default{
     width: 100%;
 }
 
-</style>
-
 /* this.itemVar={
     backgroundColor: "#3484F0",
     borderColor: "#C4DBFA",
@@ -317,3 +327,5 @@ export default{
                 <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
       data-bs-whatever="@mdo">Open modal for @mdo</button> -->
 */
+</style>
+

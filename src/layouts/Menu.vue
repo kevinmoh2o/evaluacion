@@ -59,7 +59,6 @@ export default {
                 case 4:
                     this.$router.push('/about-us');
                     break;
-            
                 default:
                     break;
             }

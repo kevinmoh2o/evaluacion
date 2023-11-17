@@ -1,7 +1,7 @@
 <template>
   <div class="card-inkwell"  @click.prevent="$emit('clickbutton')">
     <!-- <div class="card-container"  style="background: linear-gradient(to right, #006eff, #ffa600);"> -->
-    <div class="card-container"  style="background: #006eff;">
+    <div class="card-container"  style="background: var(--primary);">
 
       <div class="imagen">
           <img class="m-3" :src="require(`@/assets/menu/${ruta}.png`)" alt="Imagen PNG" width="70" height="70">

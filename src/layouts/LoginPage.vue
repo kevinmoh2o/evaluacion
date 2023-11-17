@@ -44,6 +44,13 @@
                                             <router-link to="/crear-cuenta">Crear cuenta</router-link>
                                         </div>
 
+                                        <div class="creditos">
+                                            <!-- <i class="fas fa-heart"></i> -->
+                                            <i class="fas fa-copyright"></i>
+                                            <i class="fas fa-info-circle"></i>
+
+                                        </div>
+
                                     </form>
                                 </div>
                             </div>
@@ -109,6 +116,21 @@ $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
 
+i{
+    padding: 10px;
+    color: var(--light);
+    font-size: 20px;
+    transition: all .55s ease;
+    
+    &:hover{
+        font-size: 30px;
+    }
+}
+
+.creditos{
+    display: flex;
+    justify-content: center;
+}
 .text-link a {
     padding: 5px 0 5px 0;
     justify-content: center;

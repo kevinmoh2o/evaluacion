@@ -86,14 +86,6 @@
                               </div>
                           </div>
 
-                          <div class="row col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-0 p-1 align-items-center"
-                              style="height: 41.6px;">
-                              <div class="col-auto mx-2 d-flex align-items-center p-0"><i class="fas fa-link"></i></div>
-                              <div class="col-10 m-0 p-0 align-left">
-                                  <a href="https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D"
-                                      class="link-success">Link de la reunión</a>
-                              </div>
-                          </div>
 
                           <div class="row col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-0 p-1">
                               <div class="col-auto mx-2 d-flex align-items-center p-0"><i
@@ -106,6 +98,17 @@
                                   </select>
                               </div>
                           </div>
+
+                          <div class="row col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-0 p-1 align-items-center"
+                              style="height: 41.6px;">
+                              <div class="col-auto mx-2 d-flex align-items-center p-0"><i class="fas fa-link"></i></div>
+                              <div class="col-10 m-0 p-0 align-left">
+                                  <a href="https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D"
+                                      class="link-success">Link de la reunión</a>
+                              </div>
+                          </div>
+
+                          
                           <div class="my-3">
                               <textarea class="form-control" id="message-text" placeholder="Notas" maxlength="200"></textarea>
                           </div>
@@ -176,5 +179,10 @@ export default {
 
 .align-left {
   text-align: left;
+}
+
+i{
+    color: var(--warning);
+    font-size: 20px;
 }
 </style>

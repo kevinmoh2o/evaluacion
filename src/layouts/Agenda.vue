@@ -1,14 +1,31 @@
 <template>
-    <div class="container-fluid p-0 m-0 align-items-center">
+    <!-- <div class="container-fluid p-0 m-0 align-items-center"> -->
         
             <Navbar class="col-12"
             :estadoTitulo="true" :estadoFlecha="true" :titulo="'Agenda'"
             @volver="onBackHandle"></Navbar>
         
-        <div class="col m-2">
+        <div class="cuerpo">
+            <div class="fitro-calendario">
+                <CalendarioFilter></CalendarioFilter>
+                <div class="selector">
+                    <select class="form-select" id="validationCustom10" required>
+                    <option selected disabled value="">Seleccionar cuidador</option>
+                        <option value="2">Juan</option>
+                        <option value="3">Pedro</option>
+                        <option value="3">Lucas</option>
+                        <option value="3">Alberto</option>
+                    </select>
+                    <div class="invalid-feedback">
+                    Seleccione un valor.
+                    </div>
+                </div>
+                <button class="btn boton" type="submit"><i class="fas fa-search" ></i>Buscar</button>
+            </div>
+            
             <Books class="books"></Books>
         </div>
-    </div>
+    <!-- </div> -->
 
 </template>
 
@@ -26,6 +43,7 @@ export default {
     components: {
         Navbar,
         Books: defineAsyncComponent(() => import('../modules/agenda/Books.vue')),
+        CalendarioFilter: defineAsyncComponent(() => import('@/components/compose/CalendarioFilter.vue')),
 
     },
     methods:{
@@ -38,34 +56,94 @@ export default {
 
 <style lang="scss" scoped>
 
+button i{
+    padding: 5px;
+}
 
-/* .mainAgenda {
-        display: grid;
-        height: 100vh;
-        background-color:transparent ;
-        grid-template: 
-            "cabeceraAgenda " 120px
-            "booksContainer" 1fr/
-            1fr             ;
-    } */
+/* @media (min-width:750px){
+    .cuerpo{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        text-align: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
 
-
-/* @media (min-width:650px){
-    .mainAgenda {
-        display: grid;
-        
-        //gap: 10px;
-        height: 100vh;
-        background-color:transparent ;
-        grid-template: 
-            "cabeceraAgenda cabeceraAgenda cabeceraAgenda" 100px
-            ". booksContainer ." 1fr/
-            1fr auto 1fr 
-            ;
+    .books{
+        width: 100%;
     }
 } */
 
-.cabeceraAgenda{
+.form-select{
+    text-align: center;
+}
+
+.form-select:hover{
+  //background-color: #eaeaea;
+  //color: #333;
+  border: 1px solid #F2B749;;
+
+}
+.form-select:focus {
+  outline: 2px solid #F2B749;; /* Puedes ajustar el color y el grosor según tus preferencias */
+  box-shadow: #F2B749;
+  border-color:#F2B749;
+  color: #F2B749;
+}
+.boton{
+    width: 90%;
+    border-radius: 10px;
+    background-color: #F2B749;
+    color: white;
+    transition: all .55s ease;
+    align-self: center;
+}
+
+.boton:hover{
+    transform: translateX(-10px);
+    //border-bottom-color: red !important;;
+}
+.cuerpo{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: calc(100vh - 60px);
+}
+
+
+.selector{
+    margin: 10px 0 10px 0;
+    width: 90%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.fitro-calendario{
+    
+    //padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    
+}
+
+
+
+/* .books{
+    width: calc(100vw - 400px);
+} */
+/* .cabeceraAgenda{
     grid-area:cabeceraAgenda;
     
 }
@@ -79,19 +157,10 @@ export default {
 }
 
 
-
-
-
-
-
-
 .pantalla-agenda {
     display: flex;
-    /* activa el modo flexible en el contenedor */
     flex-direction: column;
-    /* establece la dirección de los elementos en vertical */
     height: 100vh;
-    /* establece la altura del contenedor al 100% de la pantalla */
     width: 100vw;
     padding: 0;
     margin: 0;
@@ -101,10 +170,7 @@ export default {
 .cabecera-agenda {
     height: 100px;
     padding: 0;
-
     margin: 0;
-    /* establece la altura fija del primer div */
-    //background-color: red;
 }
 
 .cuerpo-agenda {
@@ -113,11 +179,7 @@ export default {
     background-position: center;
     flex: 1;
     background-size: cover;
- 
-    /* indica que el segundo div debe tomar todo el espacio disponible */
-    //background-color: blue;
-
 }
-
+ */
 
 </style>
