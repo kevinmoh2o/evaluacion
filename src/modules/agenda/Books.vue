@@ -2,11 +2,11 @@
 
 <template>
     <div class="book" v-if="!confirmacionOperation">
-        <div class="book" v-if="getEstado()">
+        <!-- <div class="book" v-if="getEstado()"> -->
             <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" ></Calendar>
             <Modal ref="exampleModalModal"></Modal>
-        </div>
-        <Cargando v-else></Cargando>
+        <!-- </div> -->
+        <!-- <Cargando v-else></Cargando> -->
         
     </div>
     <confirmacion
@@ -33,7 +33,7 @@ export default{
         Calendar: defineAsyncComponent(() => import('./components/Calendar.vue')),
         //CalendarModal: defineAsyncComponent(() => import('./components/CalendarModal.vue')),
         Modal: defineAsyncComponent(() => import('./components/Modal.vue')),
-        Cargando: defineAsyncComponent(() => import('./components/Cargando.vue')),
+        //Cargando: defineAsyncComponent(() => import('./components/Cargando.vue')),
         Confirmacion: defineAsyncComponent(() => import('./components/Confirmacion.vue')),
 
     },
@@ -214,10 +214,10 @@ export default{
     //width: 100%;
 }
 
-@media (min-width:750px){
+@media (max-width:750px){
 
-    .books{
-        width: 100%;
+    .book{
+        width: calc(100vw);
     }
 } 
  a{
@@ -240,13 +240,6 @@ export default{
     transform: translate(-50%,-50%);
 }
 
-/* .carYesNo{
-    z-index: 2;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-} */
 .py-12 {
   position: relative;
   overflow: visible;

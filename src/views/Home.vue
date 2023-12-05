@@ -20,6 +20,23 @@
     <LoginPage></LoginPage>
   </div>
 
+  <!-- <div v-if="getEstado().loading" class="loading-indicator">
+    <div class="loader">
+      
+    </div>
+    <Label class="txtLoading">Autenticando Usuario</Label>
+  </div>
+  
+
+  <div v-if="getEstado().success" class="loading-indicator">
+    <LoadingMainView></LoadingMainView>
+  </div>
+
+
+  <div v-if="getEstado().error" class="loading-indicator">
+
+  </div> -->
+
   
 
   <!-- <button class="btn" @click="togglePopUp">
@@ -32,6 +49,8 @@
 // @ is an alias to /src
 import LoginPage from '../layouts/LoginPage.vue';
 import YouTube from 'vue3-youtube';
+import { mapActions,mapGetters } from 'vuex'
+//import { defineAsyncComponent } from 'vue'
 
 
 export default {
@@ -39,13 +58,15 @@ export default {
   components: {
     LoginPage,
     YouTube,
+    //LoadingMainView: defineAsyncComponent(() => import('@/components/indicadores/LoadingMainView.vue')),
   },
   data() {
     return {
       modalActive: true,
       windowWidth: window.innerWidth,
       popUp:true,
-      playing: true
+      playing: true,
+      loading: true,
     }
   },
   computed: {
@@ -64,6 +85,8 @@ export default {
     window.removeEventListener('resize', this.handleWindowResize);
   },
   methods: {
+    ...mapActions('programacionModule', ['deleteEntry','setIsLoading']),
+    ...mapGetters('programacionModule', ['getEstado']),
     togglePopUp(){
         this.popUp=!this.popUp;
         console.log("pressed");
@@ -83,13 +106,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-/* .aplication{
+.aplication{
   
-  width: 100vw;
-  height: 100vh;
-  padding: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-} */
+  background-color: yellow;
+}
 .modal-animation-enter-active,
 .modal-animation-leave-active {
   transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
@@ -166,6 +186,22 @@ export default {
   width: 900px !important;
   height: 700px !important;
 }
+
+/* .loading-indicator{
+  background: var(--gradient-primary);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+
 
 /* iframe.custom-youtube {
   width: 900px !important;

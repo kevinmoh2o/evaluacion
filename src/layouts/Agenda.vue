@@ -111,7 +111,9 @@ button i{
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
-    height: calc(100vh - 60px);
+    //height: calc(100vh - 60px);
+    //width: 600px;
+    padding: 20px 0 0 0;
 }
 
 

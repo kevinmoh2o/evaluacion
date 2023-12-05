@@ -20,10 +20,10 @@
       </div>
 
     </div>
-    <div class="row">
+    <!-- <div class="row"> -->
       <div class="linea">
       </div>
-    </div>
+    <!-- </div> -->
   </nav>
 </template>
 

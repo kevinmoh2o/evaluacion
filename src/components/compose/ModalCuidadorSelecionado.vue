@@ -115,6 +115,7 @@ button{
     align-content: center;
     align-items: center;
     justify-content: center;
+    
 }
 .caja {
     border-radius: 10px ;
@@ -127,6 +128,7 @@ button{
     margin: 10px 10px 10px 10px;
     padding: 10px 10px 10px 10px;
     transition: all .55s ease;
+    cursor: pointer;
 }
 
 .caja:hover{

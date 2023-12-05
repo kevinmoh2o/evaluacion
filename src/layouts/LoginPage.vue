@@ -1,9 +1,9 @@
 <template>
-    <div class="pantalla vh-100">
-        <div class="cabecera">
-            <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onBackHandle"></Navbar>
-        </div>
-        <div class="container-fluid d-flex flex-column vh-100 align-items-center">
+    <div class="pantalla">
+        <!-- <div class="cabecera"> -->
+        <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onBackHandle"></Navbar>
+        <!-- </div> -->
+        <div class="contenedor-body">
             <div class="row flex-grow-1">
 
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 p-0">
@@ -22,12 +22,13 @@
                                     <form class="">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-3" id="floatingInput"
-                                                placeholder="name@example.com">
+                                                placeholder="name@example.com" v-model="email" />
                                             <label for="floatingInput">DNI del usuario...</label>
                                         </div>
+
                                         <div class="form-floating mb-3 mt-4">
                                             <input type="password" class="form-control rounded-3" id="floatingPassword"
-                                                placeholder="Password">
+                                                placeholder="Password" v-model="password" />
                                             <label for="floatingPassword">Contraseña...</label>
                                         </div>
                                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary mt-4"
@@ -38,7 +39,8 @@
 
                                         <!-- <div class="container-fluid row justify-content-center align-items-center"> -->
                                         <div class="text-link">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalCambioPassword" data-bs-whatever="@mdo">¿Ha olvidado la contraseña?</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalCambioPassword"
+                                                data-bs-whatever="@mdo">¿Ha olvidado la contraseña?</a>
                                         </div>
                                         <div class="text-link">
                                             <router-link to="/crear-cuenta">Crear cuenta</router-link>
@@ -65,9 +67,9 @@
 
             </div>
         </div>
-        
+
     </div>
-    <ModalCambioPassword ></ModalCambioPassword>
+    <ModalCambioPassword></ModalCambioPassword>
 </template>
 
 <script>
@@ -75,10 +77,18 @@ import Navbar from '../components/compose/Navbar.vue';
 //import { defineAsyncComponent } from 'vue'
 import ModalCambioPassword from '@/components/compose/ModalCambioPassword.vue';
 //import { useRouter } from 'vue-router'
+import { mapActions, mapGetters } from 'vuex'
+import { authService } from '@/services/authService';
 
 
 export default {
     name: 'login-layout',
+    data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
     setup() {
         //const router = useRouter()
         return {
@@ -90,14 +100,32 @@ export default {
         ModalCambioPassword,
     },
     methods: {
-        navegar() {
+        ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
+        ...mapGetters('programacionModule', ['getEstado']),
+        /* async navegar() {
+            this.setIsLoading({ loading: true, success: false, error: false });
+            await this.sleep(3000);
             console.log("navegando")
-            //await this.$router.push('/menu')
-            this.$router.push('/menu')
+            this.$router.push('/menu');
+            this.setIsLoading({ loading: false, success: false, error: false });
+        }, */
+        async sleep(ms) {
+            return await new Promise(resolve => setTimeout(resolve, ms));
         },
         onBackHandle() {
 
-        }
+        },
+        async navegar() {
+            const { success, user, error } = await authService.autenticar(this.email, this.password);
+            if (success) {
+                // Usuario registrado con éxito, puedes redirigir o realizar otras acciones
+                console.log('Usuario registrado:', user);
+                this.$router.push('/menu');
+            } else {
+                // Ocurrió un error durante el registro, puedes mostrar un mensaje de error
+                console.error('Error al registrar usuario:', error);
+            }
+        },
     }
 }
 </script>
@@ -115,22 +143,26 @@ $color-azul-intermedio: #616C8C;
 $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
+.contenedor-body{
+    width: 100%;
+}
 
-i{
+i {
     padding: 10px;
     color: var(--light);
     font-size: 20px;
     transition: all .55s ease;
-    
-    &:hover{
+
+    &:hover {
         font-size: 30px;
     }
 }
 
-.creditos{
+.creditos {
     display: flex;
     justify-content: center;
 }
+
 .text-link a {
     padding: 5px 0 5px 0;
     justify-content: center;
@@ -352,5 +384,6 @@ body {
 /* .cabecera {
     height: 100px;
     //background-color: red;
-} */</style>
+} */
+</style>
 

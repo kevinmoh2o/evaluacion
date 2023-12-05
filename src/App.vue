@@ -3,17 +3,25 @@
     <router-view />
   </div>
 
+  <!-- <div v-if="getEstado().success" class="loading-indicator">
+    <LoadingMainView></LoadingMainView>
+  </div> -->
+
   <!-- <PopUp v-show="popUp" @close="togglePopUp"></PopUp> -->
  
 </template>
 
 <script>
 //import { defineAsyncComponent } from 'vue';
+//import { defineAsyncComponent } from 'vue'
+//import { mapActions,mapGetters } from 'vuex'
+
 
 export default {
   name: 'app-main',
   components: {
     //PopUp: defineAsyncComponent(() => import('@/components/compose/PopUp.vue')),
+    //LoadingMainView: defineAsyncComponent(() => import('@/components/indicadores/LoadingMainView.vue')),
   },
   data() {
     return {
@@ -21,6 +29,8 @@ export default {
     }
   },
   methods: {
+    //...mapActions('programacionModule', ['deleteEntry','setIsLoading']),
+    //...mapGetters('programacionModule', ['getEstado']),
     togglePopUp(){
         this.popUp=!this.popUp;
         console.log("pressed");
@@ -37,32 +47,13 @@ export default {
 </script>
 
 <style >
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap'); */
 
 
 html{
     font-size: 14px;
 }
 
-body{
-    width: 100vw;
-    height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.88rem;
-    user-select: none;
-    overflow-x: hidden;
-    color: var(--color-dark);
-    background-color: var(--color-background);
-    
-}
-
-/*   html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Inter,sans-serif;
-  } */
 
   .column-container .full-calendar a {
     text-decoration: none !important;
@@ -94,7 +85,18 @@ body{
     height: 100vh;
   }
 
-/* .app{
-  position: fixed;
-} */
+  .loading-indicator{
+  background: var(--gradient-primary);
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 </style>
