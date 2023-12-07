@@ -13,6 +13,67 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue'
+
+export default {
+  name: 'indicador-layout',
+  components: {
+    SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+    ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
+    LoadingView: defineAsyncComponent(() => import('@/components/indicadores/LoadingView.vue')),
+  },
+  data() {
+    return {
+      isLoading: false,
+      isSuccess: false,
+      isError: false,
+    };
+  },
+  props: {
+    callback: Function, // Propiedad para recibir la función de retorno de llamada
+  },
+  mounted() {
+    // Inicia automáticamente el proceso al montar el componente
+    this.realizarPeticion();
+  },
+
+  methods: {
+    async realizarPeticion() {
+      this.isLoading = true;
+      await this.sleep(3000);
+      console.log({isLoading:this.isLoading,isSuccess:this.isSuccess,isError:this.isError})
+      try {
+        // Realizar tu petición asíncrona aquí
+        await this.callback();
+        // La petición fue exitosa
+        this.isSuccess = true;
+      } catch (error) {
+        // Hubo un error en la petición
+        this.isError = true;
+      } finally {
+        // Independientemente del resultado, la carga ha terminado
+        this.isLoading = false;
+      }
+    },
+
+    /* async miPeticionAsync() {
+      // Simular una petición asíncrona (reemplaza con tu lógica real)
+      return new Promise((resolve, reject) => {
+        console.log(reject)
+        setTimeout(() => {
+          // Supongamos que la petición es exitosa después de 2 segundos
+          resolve();
+          // Si hubo un error, puedes llamar a reject() en lugar de resolve()
+        }, 2000);
+      });
+    }, */
+    async sleep(ms) {
+      return await new Promise(resolve => setTimeout(resolve, ms));
+    },
+  },
+};
+</script>
+<!-- <script>
 import { mapActions, mapGetters } from 'vuex'
 import { defineAsyncComponent } from 'vue'
 
@@ -22,6 +83,11 @@ export default {
     SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
     ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     LoadingView: defineAsyncComponent(() => import('@/components/indicadores/LoadingView.vue')),
+  },
+  props: {
+    props: {
+      callback: Function, // Propiedad para recibir la función de retorno de llamada
+    },
   },
   computed: {
     isLoading() {
@@ -54,8 +120,12 @@ export default {
       await this.sleep(3000);
       this.setIsLoading({ loading: false, success: true, error: false });
     },
+    invokeCallback() {
+      if (typeof this.callback === "function") {
+        this.callback();
+      }
+    },
   },
 }
-</script>
-
+</script> -->
 <style lang="scss" scoped></style>

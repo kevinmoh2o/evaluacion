@@ -1,12 +1,12 @@
 <template>
-    <div class="contenedor">
+    <div v-if="reponse.status" class="contenedor">
             <div class="card-color">
                 <img src="@/assets/images/confirmacion.png" alt="" width="100" height="100">
                 <div class="grid-flow">
-                    <p class="result-rank">¡ Genial !</p>
-                    <p>Los cambios se han grabado correctamente</p>
+                    <p class="result-rank">{{reponse.title}}</p>
+                    <p>{{reponse.descripccion}}</p>
                 </div>
-                <button class="button">Continuar</button>
+                <button class="button" @click="onPress">{{reponse.btnText}}</button>
             </div>
         </div>
     
@@ -14,23 +14,48 @@
 
 
 <script>
-
+export default {
+  props: {
+    reponse: Object,
+  },
+  methods: {
+    onPress() {
+      this.$emit('cerrar-indicador', false);
+      this.$router.push(this.reponse.navTo);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 .contenedor{
   --padding: 2.5rem;
   --border-radius: 2rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  max-width: 46rem;
+  //display: flex;
+  //flex-direction: row;
+  //flex-wrap: wrap;
+  //align-items: center;
+  //justify-content: center;
+  max-width: 100%;
+
+  background: var(--gradient-primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 998;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-color{
-  height: 100%;
+  height: 50%;
   background: var(--clr-neutral-100);
   /* color: hsl(var(--clr-neutral-hsl-100), .7); */
   border-radius: 30px;

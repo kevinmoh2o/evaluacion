@@ -1,15 +1,14 @@
 <template>
     <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Crear Cuenta'" @volver="onBackHandle"></Navbar>
 
-    <!-- <div class=""> -->
-    <form @submit="submitForm" class="pagina" novalidate>
+    <form @submit="onPressCrear" class="pagina" novalidate>
         <div class="seccion">
             <h4>DATOS PERSONALES</h4>
             <hr class="hr-estilo" />
             <div class="form-crear ">
 
                 <div class="box">
-                    <label for="validationCustom01" class="form-label">Primer Nombre:</label>
+                    <label for="validationCustom01" class="form-label"><span>*</span> Primer Nombre:</label>
                     <input type="text" class="form-control" id="validationCustom01" required>
                     <div class="invalid-feedback">
                         Escriba un nombre válido.
@@ -23,7 +22,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="validationCustom03" class="form-label">Apellido Paterno:</label>
+                    <label for="validationCustom03" class="form-label"><span>*</span> Apellido Paterno:</label>
                     <input type="text" class="form-control" id="validationCustom03" required>
                     <div class="invalid-feedback">
                         Escriba un apellido válido.
@@ -31,7 +30,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="validationCustom04" class="form-label">Apellido Materno:</label>
+                    <label for="validationCustom04" class="form-label"><span>*</span> Apellido Materno:</label>
                     <input type="text" class="form-control" id="validationCustom04" required>
                     <div class="invalid-feedback">
                         Escriba un apellido válido.
@@ -39,7 +38,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="validationCustom05" class="form-label">Edad:</label>
+                    <label for="validationCustom05" class="form-label"><span>*</span> Edad:</label>
                     <input type="number" class="form-control" id="validationCustom05" max="80" min="18" maxlength="2"
                         required>
                     <div class="invalid-feedback">
@@ -48,7 +47,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="validationCustom06" class="form-label">Sexo:</label>
+                    <label for="validationCustom06" class="form-label"><span>*</span> Sexo:</label>
                     <select class="form-select" id="validationCustom06" required>
                         <option selected disabled value="">Seleccionar</option>
                         <option value="2">Masculino</option>
@@ -60,7 +59,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="startDate" class="form-label">Fecha de Nacimiento</label>
+                    <label for="startDate" class="form-label"><span>*</span> Fecha de Nacimiento</label>
                     <input id="startDate" class="form-control" type="date" required />
                     <span id="startDateSelected"></span>
                     <div class="invalid-feedback">
@@ -71,7 +70,7 @@
             </div>
         </div>
 
-        
+
 
 
         <div class="seccion">
@@ -80,7 +79,7 @@
             <div class="form-crear">
 
                 <div class="box">
-                    <label for="validationCustom08" class="form-label">Centro de Salud:</label>
+                    <label for="validationCustom08" class="form-label"><span>*</span> Centro de Salud:</label>
                     <select class="form-select" id="validationCustom08" required>
                         <option selected disabled value="">Seleccionar</option>
                         <option value="2">La Perla</option>
@@ -93,7 +92,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="validationCustom09" class="form-label">Distrito:</label>
+                    <label for="validationCustom09" class="form-label"><span>*</span> Distrito:</label>
                     <select class="form-select" id="validationCustom09" required>
                         <option selected disabled value="">Seleccionar</option>
                         <option value="2">Norte</option>
@@ -107,7 +106,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="validationCustom10" class="form-label">Diris/Diresa:</label>
+                    <label for="validationCustom10" class="form-label"><span>*</span> Diris/Diresa:</label>
                     <select class="form-select" id="validationCustom10" required>
                         <option selected disabled value="">Seleccionar</option>
                         <option value="2">Diris-Norte</option>
@@ -130,7 +129,7 @@
             <div class="form-crear">
 
                 <div class="box">
-                    <label for="validationCustom13" class="form-label">Usuario:</label>
+                    <label for="validationCustom13" class="form-label"><span>*</span> Usuario:</label>
                     <input type="text" class="form-control" id="validationCustom13" required>
                     <div class="invalid-feedback">
                         Escriba una contraseña válida.
@@ -138,7 +137,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="validationCustom11" class="form-label">Contraseña:</label>
+                    <label for="validationCustom11" class="form-label"><span>*</span> Contraseña:</label>
                     <input type="password" class="form-control" id="validationCustom11" maxlength="12" minlength="6"
                         autocomplete="new-password" required>
                     <div class="invalid-feedback">
@@ -147,7 +146,7 @@
                 </div>
 
                 <div class="box">
-                    <label for="validationCustom12" class="form-label">Confirmar Contraseña:</label>
+                    <label for="validationCustom12" class="form-label"><span>*</span> Confirmar Contraseña:</label>
                     <input type="password" class="form-control" id="validationCustom12" maxlength="12" minlength="6"
                         autocomplete="new-password" required>
                     <div class="invalid-feedback">
@@ -162,24 +161,29 @@
         <hr class="hr-estilo">
 
         <div class="btn-estilo">
-            <button type="submit" class="btn btn-success" @click="onPressCrear">Crear</button>
+            <button type="submit" class="btn btn-success">Crear</button>
         </div>
 
     </form>
 
-    <!-- </div> -->
+    <LoadingOverlay :loading="loadingData" @cerrar-indicador="hadlerCloseIndicator"/>
+    <SuccessView :reponse="successApi" />
+    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator"/>
 </template>
   
 <script>
 import Navbar from '@/components/compose/Navbar.vue';
 import { useRouter } from 'vue-router'
 import { mapActions, mapGetters } from 'vuex'
-
+import { defineAsyncComponent } from 'vue'
 
 export default {
     name: 'Crear-Cuenta',
     components: {
         Navbar,
+        LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
+        SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+        ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     },
     props: {
         msg: String
@@ -187,25 +191,60 @@ export default {
     data() {
         const router = useRouter()
         return {
+            loadingData: {
+                status: false,
+                title: "Creando usuario..."
+            },
+            successApi: {
+                status: false,
+                title: '¡ Genial !',
+                descripccion: 'Se ha creado el usuario correctmente',
+                btnText: 'Continuar',
+                navTo: '/',
+            },
+            errorApi: {
+                status: false,
+                title: '¡ ooPs !',
+                descripccion: 'Se ha producido un error al autenticar',
+                btnText: 'Cerrar',
+                navTo: '',
+            },
             selectedTime: '',
             timeOptions: [],
             router: router
         };
     },
     mounted() {
-        // Genera las opciones de tiempo al montar el componente
         this.generateTimeOptions();
     },
     methods: {
         ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
         ...mapGetters('programacionModule', ['getEstado']),
-        async onPressCrear() {
-            /* console.log("onPressCrear");
-            this.setIsLoading({loading:false,success:true,error:false});
-            console.log(this.getEstado()); */
+        async onPressCrear(event) {
+            var validateForm = this.submitForm(event);
+            console.log("validateForm: "+validateForm)
+            if(!validateForm){
+                this.errorApi.status = true;
+                this.errorApi.descripccion = 'Por favor, completa todos los campos obligatorios';
+                return null;
+            }
+            try {
+                console.log("try")
+                this.loadingData.status = true;
+                await this.sleep(1000);
+            } catch (error) {
+                console.log("error: " + error)
+            } finally {
+                console.log("finally")
+                
+            }
+            this.loadingData.status = false;
             //await this.sleep(3000);
-            //this.setIsLoading({loading:false,success:false,error:false});
-            this.$router.push("/indicador-loading");
+            this.successApi.status=true;
+            //this.$router.push("/indicador-loading");
+        },
+        async sleep(ms) {
+            return await new Promise(resolve => setTimeout(resolve, ms));
         },
         generateTimeOptions() {
             for (let hour = 8; hour <= 20; hour++) {
@@ -217,32 +256,55 @@ export default {
                 }
             }
         },
-        isValid(fieldName) {
+        /* isValid(fieldName) {
+            console.log()
             return this.validation[fieldName];
-        },
+        }, */
         submitForm(event) {
             const form = event.target;
-            if (!form.checkValidity()) {
+            var validador = form.checkValidity(); 
+            //console.log(form.checkValidity())
+            if (!validador) {
                 event.preventDefault();
                 event.stopPropagation();
+                
             }
             form.classList.add('was-validated');
+            return validador;
         },
         async onBackHandle() {
             console.log("navegando")
             await this.router.push('/')
+        },
+        hadlerCloseIndicator(value){
+            this.errorApi.status=value;
         }
     },
 }
 </script>
   
 <style scoped>
-
-.pagina{
-    widows: 100%;
-    overflow-y: auto;
-    overflow-x: hidden; 
+/* label{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: start;
+  margin: 0;
+} */
+span{
+    padding: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color:red;
+    font-weight: bolder;
+    font-size: 20px;
 }
+.pagina {
+    padding: 10px;
+}
+
 .seccion {
     width: 100%;
 }
@@ -250,6 +312,7 @@ export default {
 .seccion>h4 {
     padding: 20px 20px 5px 20px;
     font-weight: 600;
+    color: rgb(75, 72, 72);
 }
 
 button {
@@ -264,6 +327,7 @@ button {
     display: flex;
     justify-content: center;
     width: 100%;
+    margin: 20px;
 }
 
 .form-crear {

@@ -1,8 +1,8 @@
 <template>
     <div class="pantalla">
-        <!-- <div class="cabecera"> -->
+
         <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onBackHandle"></Navbar>
-        <!-- </div> -->
+
         <div class="contenedor-body">
             <div class="row flex-grow-1">
 
@@ -43,7 +43,7 @@
                                                 data-bs-whatever="@mdo">¿Ha olvidado la contraseña?</a>
                                         </div>
                                         <div class="text-link">
-                                            <router-link to="/crear-cuenta">Crear cuenta</router-link>
+                                            <router-link to="/crear-cuenta" class="nav-link">Crear cuenta</router-link>
                                         </div>
 
                                         <div class="creditos">
@@ -70,11 +70,15 @@
 
     </div>
     <ModalCambioPassword></ModalCambioPassword>
+
+    <LoadingOverlay :loading="loadingData" />
+    <SuccessView :reponse="successApi" />
+    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator"/>
 </template>
 
 <script>
 import Navbar from '../components/compose/Navbar.vue';
-//import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import ModalCambioPassword from '@/components/compose/ModalCambioPassword.vue';
 //import { useRouter } from 'vue-router'
 import { mapActions, mapGetters } from 'vuex'
@@ -84,11 +88,29 @@ import { authService } from '@/services/authService';
 export default {
     name: 'login-layout',
     data() {
-    return {
-      email: '',
-      password: '',
-    };
-  },
+        return {
+            loadingData: {
+                status: false,
+                title: "Autenticando usuario..."
+            },
+            successApi: {
+                status: false,
+                title: '¡ Genial !',
+                descripccion: 'Usuario correctmente autenticado',
+                btnText: 'Continuar',
+                navTo: '',
+            },
+            errorApi: {
+                status: false,
+                title: '¡ ooPs !',
+                descripccion: 'Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.',
+                btnText: 'Cerrar',
+                navTo: '',
+            },
+            email: '',
+            password: '',
+        };
+    },
     setup() {
         //const router = useRouter()
         return {
@@ -98,6 +120,9 @@ export default {
     components: {
         Navbar,
         ModalCambioPassword,
+        LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
+        SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+        ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     },
     methods: {
         ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
@@ -116,16 +141,24 @@ export default {
 
         },
         async navegar() {
+            this.loadingData.status = true;
             const { success, user, error } = await authService.autenticar(this.email, this.password);
             if (success) {
                 // Usuario registrado con éxito, puedes redirigir o realizar otras acciones
                 console.log('Usuario registrado:', user);
+                //this.loadingData.status = false;
                 this.$router.push('/menu');
             } else {
                 // Ocurrió un error durante el registro, puedes mostrar un mensaje de error
+                this.errorApi.status=true;
                 console.error('Error al registrar usuario:', error);
             }
+            this.loadingData.status = false;
+            
         },
+        hadlerCloseIndicator(value){
+            this.errorApi.status=value;
+        }
     }
 }
 </script>
@@ -143,7 +176,12 @@ $color-azul-intermedio: #616C8C;
 $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
-.contenedor-body{
+
+.nav-link {
+  transition: color 0.3s ease-in-out;
+}
+
+.contenedor-body {
     width: 100%;
 }
 
