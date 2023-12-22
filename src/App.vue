@@ -55,6 +55,10 @@ html{
 }
 
 
+.app{
+  height: 100vh;
+}
+
   .column-container .full-calendar a {
     text-decoration: none !important;
     color: var(--warning) !important;

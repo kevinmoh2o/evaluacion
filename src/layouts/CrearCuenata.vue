@@ -198,7 +198,7 @@ export default {
             successApi: {
                 status: false,
                 title: '¡ Genial !',
-                descripccion: 'Se ha creado el usuario correctmente',
+                descripccion: 'Su cuenta se creó con éxito',
                 btnText: 'Continuar',
                 navTo: '/',
             },

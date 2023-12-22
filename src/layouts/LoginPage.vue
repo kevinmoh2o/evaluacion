@@ -22,13 +22,13 @@
                                     <form class="">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-3" id="floatingInput"
-                                                placeholder="name@example.com" v-model="email" />
+                                                placeholder="name@example.com" v-model="email" required/>
                                             <label for="floatingInput">DNI del usuario...</label>
                                         </div>
 
                                         <div class="form-floating mb-3 mt-4">
                                             <input type="password" class="form-control rounded-3" id="floatingPassword"
-                                                placeholder="Password" v-model="password" />
+                                                placeholder="Password" v-model="password" required/>
                                             <label for="floatingPassword">Contraseña...</label>
                                         </div>
                                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary mt-4"
@@ -47,10 +47,8 @@
                                         </div>
 
                                         <div class="creditos">
-                                            <!-- <i class="fas fa-heart"></i> -->
                                             <i class="fas fa-copyright"></i>
                                             <i class="fas fa-info-circle"></i>
-
                                         </div>
 
                                     </form>
@@ -177,12 +175,17 @@ $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
 
+.pantalla{
+    height: 100vh;
+}
+
 .nav-link {
   transition: color 0.3s ease-in-out;
 }
 
 .contenedor-body {
     width: 100%;
+    height: auto;
 }
 
 i {

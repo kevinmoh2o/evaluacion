@@ -16,9 +16,9 @@
     </div>
   </transition>
   
-  <div class="aplication">
+  <!-- <div class="aplication"> -->
     <LoginPage></LoginPage>
-  </div>
+  <!-- </div> -->
 
   <!-- <div v-if="getEstado().loading" class="loading-indicator">
     <div class="loader">
