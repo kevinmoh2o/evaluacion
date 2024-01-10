@@ -7,9 +7,11 @@ import investigacionApi from '@/apis/investigacionapi'
 export const loadEntries = async ({ commit },groupId) => {
     /* console.log("daloadEntriesta"); */
     var path = `resultados.json?orderBy="groupId"&equalTo="${groupId}"`;
+    console.log(`loadEntries: ${path}`);
     var data = [];
         try {
             var respuesta = await investigacionApi.get(path);
+            console.log(respuesta);
             const myObj = respuesta.data;
             /* console.log(myObj); */
             for (const key in myObj) {

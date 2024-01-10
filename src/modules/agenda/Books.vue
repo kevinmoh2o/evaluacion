@@ -3,7 +3,8 @@
 <template>
     <div class="book" v-if="!confirmacionOperation">
         <!-- <div class="book" v-if="getEstado()"> -->
-            <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" ></Calendar>
+            <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" 
+            @saveAppt="saveAppt"></Calendar>
             <Modal ref="exampleModalModal"></Modal>
         <!-- </div> -->
         <!-- <Cargando v-else></Cargando> -->

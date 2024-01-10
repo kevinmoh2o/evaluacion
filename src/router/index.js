@@ -33,6 +33,11 @@ const routes = [{
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/About.vue')
     },
     {
+        path: '/video-conference',
+        name: 'video-conference',
+        component: () => import ( /* webpackChunkName: "about" */ '../layouts/VideoConference.vue')
+    },
+    {
         path: '/registro-consejeria',
         name: 'regiconsejeria-layout',
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/RegistroCuidadorPrimario.vue')

@@ -59,7 +59,7 @@ export default {
       for (let i = 1; i <= lastDateofMonth; i++) {
         let isToday = i === new Date().getDate() && this.currMonth === new Date().getMonth()
                       &&this.currYear === new Date().getFullYear()?"active":"";
-        console.log(isToday,this.currMonth,this.currYear,i,"dasd");
+        //console.log(isToday,this.currMonth,this.currYear,i,"dasd");
         let decidir = isToday?{ day: i, active: isToday, today: isToday }:{ day: i, inactive: isToday, today: isToday };
         calendarDays.push(decidir);
       }
