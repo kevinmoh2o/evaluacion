@@ -2,11 +2,11 @@
     <div>
         <Navbar class="card-wrap" :estadoTitulo="true" :estadoFlecha="true" :titulo="'Video Conferencia'"
             @volver="onBackHandle"></Navbar>
-
+    </div>
         <iframe allow="camera; microphone; fullscreen; display-capture; autoplay"
             src="https://jitsi.techkevmoh2o.com/legendarywatchesdarelow#config.prejoinPageEnabled=false&config.startWithAudioMuted=true&config.startWithVideoMuted=true"
             style="height: calc(100vh - 80px); width: 100%; border: 0;"></iframe>
-    </div>
+   
 </template>
 
 <script>
