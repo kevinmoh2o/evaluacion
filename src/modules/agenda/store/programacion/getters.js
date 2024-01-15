@@ -3,6 +3,11 @@
 //  return state
 // }
 
+export const getCounter = (state) => {
+    console.log("state",state)
+    return state.counter;
+  };
+
 export const getEvents = ( state ) => {
     return state.entries
 }

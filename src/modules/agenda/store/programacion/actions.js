@@ -5,7 +5,7 @@
 import investigacionApi from '@/apis/investigacionapi'
 
 export const loadEntries = async ({ commit },groupId) => {
-    /* console.log("daloadEntriesta"); */
+    console.log("daloadEntriesta");
     var path = `resultados.json?orderBy="groupId"&equalTo="${groupId}"`;
     console.log(`loadEntries: ${path}`);
     var data = [];
@@ -19,7 +19,7 @@ export const loadEntries = async ({ commit },groupId) => {
                 value["id"]=key;
                 data.push(value);
             }
-            /* console.log(data); */
+            console.log(data);
             commit('setEntries', data)
             localStorage.setItem('entries', JSON.stringify(data));
           } catch (error) {

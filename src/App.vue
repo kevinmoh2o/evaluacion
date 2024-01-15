@@ -4,8 +4,10 @@
   </div>
 
   <!-- <div v-if="getEstado().success" class="loading-indicator">
-    <LoadingMainView></LoadingMainView>
+    
   </div> -->
+
+  <!-- <LoadingMainView></LoadingMainView> -->
 
   <!-- <PopUp v-show="popUp" @close="togglePopUp"></PopUp> -->
  

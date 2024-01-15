@@ -5,9 +5,15 @@
 
 
 export const setEntries = (state, entries) => {
-  state.entries = entries
-  
+  state.entries = entries;
 }
+
+
+export const setCounter = (state, newCounterValue) => {
+  state.counter = newCounterValue;
+  localStorage.setItem('counter', newCounterValue);
+};
+
 
 /* export const updateEntry = (state, entry) => {
   const index = state.entries.findIndex(e => e.id === entry.id)

@@ -8,13 +8,11 @@
                 </div>
                 <div class="modal-body">
 
-
                     <form @submit="submitForm" class="needs-validation" novalidate>
 
-                        <div class="row px-2 m-0">
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 row m-0 p-0">
-                                <div
-                                    class="col-1 my-0 my-sm-1 my-md-1 my-lg-1 my-xl-1 my-xxl-1 d-flex align-items-center p-0">
+                        <div class="form-crear">
+                            <div class="box-sup">
+                                <div class="img-mod">
                                     <i class="fas fa-user-md"></i>
                                 </div>
                                 <div class="col-11 m-0 p-0">
@@ -25,15 +23,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 row m-0 p-0">
-                                <div
-                                    class="col-1 my-0 my-sm-1 my-md-1 my-lg-1 my-xl-1 my-xxl-1 d-flex align-items-center p-0">
+                            <div class="box-sup">
+                                <div class="img-mod">
                                     <i class="bi bi-calendar-event-fill"></i>
                                 </div>
                                 <div class="col-11 m-0 p-0">
                                     <label for="recipient-name" class="col-12 fw-semibold px-1 align-left">Fecha de
                                         cita:</label>
-                                    <label for="recipient-name" class="col-12 px-1 align-left">20/01/2023</label>
+                                    <label for="recipient-name" class="col-12 px-1 align-left">{{
+                                        Formatos.ymdFechaToView(inFecha) }}</label>
                                 </div>
                             </div>
                         </div>
@@ -42,17 +40,16 @@
 
 
 
-                        <div class="row m-0 p-0">
-                            <div class="row col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-0 p-1">
-                                <div class="col-auto mx-2 d-flex align-items-center p-0"><i class="bi bi-person-fill"></i>
+                        <div class="form-crear">
+                            <div class="box">
+                                <div class="img-mod"><i class="bi bi-person-fill"></i>
                                 </div>
                                 <div class="col-10 m-0 p-0">
-                                    <select class="form-select" aria-label="Default select example" required>
+                                    <select class="form-select" v-model="output.title" aria-label="Default select example"
+                                        required>
                                         <option value="" disabled selected hidden>Paciente</option>
-                                        <option value="1">Maria</option>
-                                        <option value="2">Pedro</option>
-                                        <option value="3">Ana</option>
-                                        <option value="3">Isabel</option>
+                                        <option v-for="paciente in listPaciente" :key="paciente.label"
+                                            :value="paciente.value">{{ paciente.value }}</option>
                                     </select>
                                 </div>
                                 <div class="valid-feedback">
@@ -61,8 +58,8 @@
                             </div>
 
 
-                            <div class="row col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-0 p-1">
-                                <div class="col-auto mx-2 d-flex align-items-center p-0">
+                            <div class="box">
+                                <div class="img-mod">
                                     <i class="bi bi-alarm-fill"></i>
                                 </div>
                                 <div class="col-10 m-0 p-0">
@@ -75,48 +72,46 @@
                             </div>
 
 
-                            <div class="row col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-0 p-1">
-                                <div class="col-auto mx-2 d-flex align-items-center p-0"><i class="bi bi-bell-fill"></i>
+                            <div class="box">
+                                <div class="img-mod"><i class="bi bi-bell-fill"></i>
                                 </div>
                                 <div class="col-10 m-0 p-0">
-                                    <select class="form-select" aria-label="Default select example" required>
+                                    <select class="form-select" v-model="output.extendedProps.recordar"
+                                        aria-label="Default select example" required>
                                         <option value="" disabled selected hidden>Recordatorio</option>
-                                        <option value="1">No</option>
-                                        <option value="2">1 día antes</option>
-                                        <option value="3">1 hora antes</option>
+                                        <option v-for="index in listRecordar" :key="index.label" :value="index.value">{{
+                                            index.value }}</option>
                                     </select>
                                 </div>
                             </div>
 
 
-                            <div class="row col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-0 p-1">
-                                <div class="col-auto mx-2 d-flex align-items-center p-0"><i
-                                        class="bi bi-life-preserver"></i></div>
+                            <div class="box">
+                                <div class="img-mod"><i class="bi bi-life-preserver"></i></div>
                                 <div class="col-10 m-0 p-0">
-                                    <select class="form-select" aria-label="Default select example" required>
-                                        <option value="" disabled selected hidden>Asistió</option>
-                                        <option value="1">No</option>
-                                        <option value="2">Si</option>
+                                    <select class="form-select" v-model="output.extendedProps.asistencia"
+                                        aria-label="Default select example">
+                                        <option value="" disabled selected hidden>¿Asistió?</option>
+                                        <option v-for="index in listAsistio" :key="index.label" :value="index.value">{{
+                                            index.value }}</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="row col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-0 p-1 align-items-center"
-                                style="height: 41.6px;">
-                                <div class="col-auto mx-2 d-flex align-items-center p-0"><i class="fas fa-link"></i></div>
-                                <div class="col-10 m-0 p-0 align-left">
-                                    <!-- <a href="https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D"
-                                        class="link-success">Link de la reunión</a> -->
-                                        <router-link to="/video-conference" class="link-success">Link de la reunión</router-link>
+                            <!-- <div class="box" style="height: 41.6px;">
+                                <div class="img-mod"><i class="fas fa-link"></i></div>
+                                <div class="img-mod">
+                                    <router-link to="/video-conference" class="link-success">Link de la
+                                        reunión</router-link>
                                 </div>
-                            </div>
+                            </div> -->
 
-
-                            <div class="my-3">
-                                <textarea class="form-control" id="message-text" placeholder="Notas"
-                                    maxlength="200"></textarea>
-                            </div>
                         </div>
+
+                        <div class="my-3">
+                            <textarea class="form-control"  v-model="output.extendedProps.description" id="message-text" placeholder="Notas" maxlength="200"></textarea>
+                        </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-success">Guardar</button>
@@ -131,15 +126,59 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import { Formatos } from '@/utils/Formatos.js';
+
 export default {
     name: 'Model-Component',
     props: {
-        msg: String
+        msg: String,
+        inFecha: String,
+    },
+    setup() {
+        return {
+            Formatos
+        };
     },
     data() {
         return {
+            form: this.selectedOpt,
             selectedTime: '',
             timeOptions: [],
+            listPaciente: [
+                { label: "1", value: "Maria" },
+                { label: "2", value: "Pedro" },
+                { label: "3", value: "Ana" },
+                { label: "4", value: "Isabel" },
+            ],
+            listRecordar: [
+                { label: "1", value: "No" },
+                { label: "2", value: "1 día antes" },
+                { label: "3", value: "1 hora antes" },
+            ],
+            listAsistio: [
+                { label: "1", value: "Si" },
+                { label: "2", value: "No" },
+            ],
+            output: {
+                backgroundColor: "#F43E3D",
+                borderColor: "#F50B00",
+                end: "",
+                extendedProps: {
+                    description: "",
+                    encargado: "",
+                    link: "/video-conference",
+                    recordar: "",
+                    asistencia: "",
+                    hora: "",
+                    fecha: this.inFecha,
+                    meeting:"",
+                },
+                groupId: "kbmont",
+                start: this.selectedTime,
+                title: "",
+                id: ""
+            }
         };
     },
     mounted() {
@@ -147,6 +186,39 @@ export default {
         this.generateTimeOptions();
     },
     methods: {
+        ...mapActions('programacionModule', ['createEntry', 'updateEntry', 'setIsLoading']),
+        ...mapGetters('programacionModule', ['getEstado']),
+        async store(form) {
+            //this.setIsLoading(false);
+            var {meeting,end} = this.camposAdicionales();
+            this.output.end=end;
+            this.output.extendedProps.meeting=meeting;
+            console.log("selectedTime: ", this.selectedTime)
+                
+            console.log({meeting,end} )
+
+            console.log("output: ", this.output)
+            this.$emit('saveAppt', form);
+            console.log("this.flagUpdateMo")
+            await this.createEntry(this.output)
+            /* if (this.flagUpdateMo) {
+                console.log("this.grabar", this.grabar)
+                try {
+                    console.log("createEntry", this.update)
+                    //await this.createEntry(this.grabar)
+                } catch (error) {
+                    console.log("Error en creacion", error);
+                }
+            } else {
+                try {
+                    console.log("update", this.update)
+                    //await this.updateEntry(this.update)
+                } catch (error) {
+                    console.log("Error en update", error);
+                }
+            }
+            this.setIsLoading(true); */
+        },
         generateTimeOptions() {
             for (let hour = 8; hour <= 20; hour++) {
                 for (let minute = 0; minute < 60; minute += 10) {
@@ -161,18 +233,63 @@ export default {
             return this.validation[fieldName];
         },
         submitForm(event) {
+            console.log("submitForm")
             const form = event.target;
             if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
             }
             form.classList.add('was-validated');
+            this.store(form)
         },
+        camposAdicionales() {
+            return {
+                meeting: `Reunión ${this.output.start}`,
+                end: Formatos.addOneHour(this.output.start),
+            }
+        },
+ 
+
+    },
+    watch: {
+        inFecha(newFecha) {
+            // Actualizar la propiedad en el objeto output cuando inFecha cambia
+            this.output.extendedProps.fecha = newFecha;
+        },
+        selectedTime(valor) {
+            this.output.start = `${this.output.extendedProps.fecha}T${valor}:00`
+            this.output.extendedProps.hora = `${valor}:00`
+        }
     },
 }
 </script>
 
 <style scoped>
+.form-crear {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: left;
+}
+
+.box {
+    width: 200px;
+    padding: 5px;
+    margin: 0 10px 0 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.box-sup {
+    width: auto;
+    padding: 5px;
+    margin: 0 10px 0 10px;
+    display: flex;
+    flex-direction: row;
+
+}
+
 .custom-modal {
     max-width: 800px !important;
 }
@@ -188,4 +305,14 @@ export default {
 i {
     color: var(--warning);
     font-size: 20px;
-}</style>
+}
+
+.img-mod {
+    margin: 0 10px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+                                    <!-- <a href="https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D"
+                                        class="link-success">Link de la reunión</a> -->

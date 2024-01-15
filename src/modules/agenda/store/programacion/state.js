@@ -8,5 +8,7 @@ export default () => ({
     },
     entries: localStorage.getItem('entries')
         ? JSON.parse(localStorage.getItem('entries'))
-        : []
+        : [],
+    counter: localStorage.getItem('counter') ? parseInt(localStorage.getItem('counter')) : 0
+
 })  

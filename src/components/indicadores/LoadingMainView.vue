@@ -40,7 +40,7 @@ export default {
   methods: {
     async realizarPeticion() {
       this.isLoading = true;
-      await this.sleep(3000);
+      await this.sleep(60000);
       console.log({isLoading:this.isLoading,isSuccess:this.isSuccess,isError:this.isError})
       try {
         // Realizar tu petición asíncrona aquí

@@ -1,55 +1,32 @@
 <template>
-  <transition name="modal-animation">
+  <transition v-if="contador<3" name="modal-animation">
     <div v-show="modalActive" class="modal container-fluid">
       <div v-show="modalActive" class="modal container-fluid">
         <transition name="modal-animation-inner">
-          <div v-show="modalActive" class="col" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <div v-show="modalActive" class="col"
+            style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <button type="button" class="btn btn-close" aria-label="Close" @click="close" style="margin-left: auto;">
             </button>
             <slot />
             <YouTube class="col-lg-12 text-center" :width="youtubeWidth" :height="youtubeHeight" :key="youtubeWidth"
-              :aspect-ratio="16 / 9" src="https://www.youtube.com/watch?v=NRHCHVrq8nY" ref="youtube" @playing="playing"
+              :aspect-ratio="16 / 9" :src="'http://www.youtube.com/watch?v=NRHCHVrq8nY'" ref="youtube" @playing="playing"
               @ready="onReady" />
           </div>
         </transition>
       </div>
     </div>
   </transition>
-  
-  <!-- <div class="aplication"> -->
-    <LoginPage></LoginPage>
-  <!-- </div> -->
 
-  <!-- <div v-if="getEstado().loading" class="loading-indicator">
-    <div class="loader">
-      
-    </div>
-    <Label class="txtLoading">Autenticando Usuario</Label>
-  </div>
-  
+  <LoginPage></LoginPage>
 
-  <div v-if="getEstado().success" class="loading-indicator">
-    <LoadingMainView></LoadingMainView>
-  </div>
-
-
-  <div v-if="getEstado().error" class="loading-indicator">
-
-  </div> -->
-
-  
-
-  <!-- <button class="btn" @click="togglePopUp">
-    Open Modal 
-  </button> -->
-  
 </template>
 
 <script>
 // @ is an alias to /src
 import LoginPage from '../layouts/LoginPage.vue';
 import YouTube from 'vue3-youtube';
-import { mapActions,mapGetters } from 'vuex'
+import { mapActions, mapGetters,mapMutations } from 'vuex'
+
 //import { defineAsyncComponent } from 'vue'
 
 
@@ -64,9 +41,10 @@ export default {
     return {
       modalActive: true,
       windowWidth: window.innerWidth,
-      popUp:true,
+      popUp: true,
       playing: true,
       loading: true,
+      contador:0,
     }
   },
   computed: {
@@ -79,41 +57,51 @@ export default {
   },
   created() {
     window.addEventListener('resize', this.handleWindowResize);
-    
+    this.contador = this.getCounter();
   },
   unmounted() {
     window.removeEventListener('resize', this.handleWindowResize);
   },
   methods: {
-    ...mapActions('programacionModule', ['deleteEntry','setIsLoading']),
-    ...mapGetters('programacionModule', ['getEstado']),
-    togglePopUp(){
-        this.popUp=!this.popUp;
-        console.log("pressed");
+    ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
+    ...mapGetters('programacionModule', ['getEstado','getCounter']),
+    ...mapMutations('programacionModule', ['setCounter']),
+    togglePopUp() {
+      this.popUp = !this.popUp;
+      console.log("pressed");
     },
     close() {
       //this.$refs.youtube.pauseVideo();
+      console.log("Close");
       this.$refs.youtube.stopVideo();
       this.modalActive = false;
+      //var contador = this.getCounter();
+      //console.log('contador: ',contador);
+      this.setCounter(this.contador+1);
     },
     onReady() {
-            this.$refs.youtube.playVideo()
-        },
+      this.$refs.youtube.playVideo()
+    },
     handleWindowResize() {
       this.windowWidth = window.innerWidth;
     },
   },
 }
 </script>
+
+
 <style lang="scss" scoped>
-.aplication{
-  
+.aplication {
+
   background-color: yellow;
 }
+
+
 .modal-animation-enter-active,
 .modal-animation-leave-active {
   transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
 }
+
 
 .modal-animation-enter-from,
 .modal-animation-leave-to {

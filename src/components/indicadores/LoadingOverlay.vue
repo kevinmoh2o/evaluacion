@@ -46,7 +46,7 @@ export default {
   justify-content:center;
   text-align: end;
   align-items:center;
-  background-color:#f7f9fb;
+  background-color:transparent;
   transition:opacity 0.75s, visibility 0.75s;
 }
 

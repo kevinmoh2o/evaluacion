@@ -5,15 +5,18 @@
   <div class="column-container">
     <Fullcalendar ref="fullCalendar" :options="calendarOptions" class="full-calendar">
       <template #eventContent="arg">
-        <p><span class="card-box">consectetur<span class="card-popup">
-          <CalendarModal2></CalendarModal2>
+        <p class="card-box">
+          <span>
+            <!-- <div class="fc-content"> -->
+              <i class="fa fa-check-circle fc-content"></i>
+              <span class="fc-title">{{ arg.event.title }}</span>
+            <!-- </div> -->
+            <span class="card-popup">
+              <CalendarModal2></CalendarModal2>
             </span>
           </span>
         </p>
-        <div class="fc-content">
-          <i class="fa fa-check-circle"></i>
-          <span class="fc-title">{{ arg.event.title }}</span>
-        </div>
+
       </template>
     </Fullcalendar>
   </div>
@@ -176,69 +179,82 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@import '@/styles/styles.scss';
+
 .column-container {
   display: flex;
   flex-direction: column;
 }
 
 .card-box {
-	position: relative;
-	font-weight: 900;
-	font-size: 14px;
-	cursor: pointer;
-	text-decoration: underline;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  position: relative;
+  font-weight: 500;
+  color: rgb(64, 60, 60);
+  font-size: 12.5px;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .card-popup {
-	box-sizing: border-box;
-	position: absolute;
-	top: 30px;
-	left: -85px;
-	z-index: 9;
-	background: purple;
-	color: #fff;
-	font-weight: normal;
-	width: 250px;
-	height: auto;
-	padding: 10px;
-	font-size: 12px;
-	line-height: 22px;
-	letter-spacing: normal;
-	cursor: text;
-	visibility: hidden;
-	opacity: 0;
-	transform: translate3d(0, 20px, 0);
-	z-index: 1;
-	transition: .5s;
+  box-sizing: border-box;
+  position: absolute;
+  top: 30px;
+  left: -85px;
+  z-index: 9;
+  //background: purple;
+  color: #fff;
+  font-weight: normal;
+  //width: 250px;
+  //height: auto;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: normal;
+  cursor: text;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  z-index: 1;
+  transition: .5s;
 }
 
 .card-popup:before {
-	position: absolute;
-	content: '';
-	width: 25px;
-	height: 25px;
-	background: purple;
-	top: -5px;
-	left: 0;
-	right: 0;
-	margin: auto;
-	transform: rotate(45deg);
-	z-index: -1;
+  position: absolute;
+  content: '';
+  width: 25px;
+  height: 25px;
+  background:  map-get($theme-colors, amarillo); ;
+  top: -5px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: rotate(45deg);
+  z-index: -1;
 }
 
 .card-popup img {
-	width: 100%;
-	height: auto;
-	margin-bottom: 20px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 /*Hover-Section*/
 .card-box:hover .card-popup {
-	visibility: visible;
-	opacity: 1;
-	transform: translate3d(0, 0px, 0);
-	transition: .5s;
+  visibility: visible;
+  opacity: 1;
+  transform: translate3d(0, 0px, 0);
+  transition: .5s;
 }
 
+.fc-content{
+  margin: 0 5px 0 5px;
+  //padding: 0 5px 0 5px;
+}
 </style>
 

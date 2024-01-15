@@ -5,7 +5,7 @@
         <!-- <div class="book" v-if="getEstado()"> -->
             <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" 
             @saveAppt="saveAppt"></Calendar>
-            <Modal ref="exampleModalModal"></Modal>
+            <Modal ref="exampleModalModal" :inFecha="fechaProgramar"></Modal>
         <!-- </div> -->
         <!-- <Cargando v-else></Cargando> -->
         
@@ -21,7 +21,7 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
-import { Formatos } from '@/utils/Formatos.js';
+//import { Formatos } from '@/utils/Formatos.js';
 import { Hardware } from '@/utils/Hardware.js';
 import { mapActions,mapGetters } from 'vuex'
 import { Modal } from 'bootstrap';
@@ -109,15 +109,15 @@ export default{
                 this.itemVar=arg1.event
                 this.flagUpdate = false;
             }
-            const {date} = arg1;
+            //const {date} = arg1;
             
             console.log('itemVar: ', this.itemVar);
 
             this.fechaProgramar=arg1.dateStr;
-            /* console.log("this.fechaProgramar",this.fechaProgramar) */
+            
             this.estadoModalOptPa=arg2;
-            this.fechaProgramar=Formatos.soloFechaDMY(date);
-
+            //this.fechaProgramar=Formatos.soloFechaDMY(date);
+            console.log("this.fechaProgramar",this.fechaProgramar);
         },
         async registrarUser() {
            // var respuesta = await createUserWithEmailAndPassword(auth,'kevsssinmohu@gmail.com',"1234567");
