@@ -1,5 +1,5 @@
 <template>
-  <transition v-if="contador<3" name="modal-animation">
+  <transition v-if="contador<2" name="modal-animation">
     <div v-show="modalActive" class="modal container-fluid">
       <div v-show="modalActive" class="modal container-fluid">
         <transition name="modal-animation-inner">

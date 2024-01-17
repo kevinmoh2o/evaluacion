@@ -213,6 +213,7 @@ export default{
 .book{
     width: calc(100vw - 400px);
     //width: 100%;
+    //z-index: 100;
 }
 
 @media (max-width:750px){

@@ -1,23 +1,23 @@
 <template>
-  <!-- <div class="column-container">
-    <Fullcalendar id="YourCalendar" ref="fullCalendar" :options="calendarOptions" class="full-calendar" />
-  </div> -->
   <div class="column-container">
     <Fullcalendar ref="fullCalendar" :options="calendarOptions" class="full-calendar">
+
       <template #eventContent="arg">
-        <p class="card-box">
+        <p class="card-box" @mouseenter="handleEventMouseEnter(arg)">
           <span>
-            <!-- <div class="fc-content"> -->
+            <div class="fc-content">
               <i class="fa fa-check-circle fc-content"></i>
               <span class="fc-title">{{ arg.event.title }}</span>
-            <!-- </div> -->
-            <span class="card-popup">
-              <CalendarModal2></CalendarModal2>
+            </div>
+            <span class="card-popup popover">
+              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData"
+                :evento="eventoPopover"
+              ></CalendarModal2>
             </span>
           </span>
         </p>
-
       </template>
+
     </Fullcalendar>
   </div>
 </template>
@@ -74,6 +74,7 @@ export default {
   },
   data() {
     const calendarOptions = {
+      eventMouseEnter: this.handleEventMouseEnter,
       plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
       initialView: 'dayGridMonth',
       locale: esLocale,
@@ -107,14 +108,31 @@ export default {
     var showModal = false;
     var selectedItem = {};
     var mobileSet = [];
+    var popoverVisible = false;
+    var selectedEventData = null;
+    var eventoPopover = {};
     return {
       calendarOptions,
       showModal,
       selectedItem,
-      mobileSet
+      mobileSet,
+      popoverVisible,
+      selectedEventData,
+      eventoPopover,
     }
   },
   methods: {
+    handleEventMouseEnter({ event }) {
+      this.showPopover(event);
+      console.log("method handleEventMouseEnter",event);
+      this.eventoPopover=event
+      console.log(event.title);
+    },
+    showPopover(event) {
+      this.popoverVisible = true;
+      this.selectedEventData = event;
+      console.log("method showPopover",event);
+    },
     handleEventClick(info) {
       const cal = info.event;
       console.log('selected SCHEDULE', cal)
@@ -179,7 +197,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 @import '@/styles/styles.scss';
 
 .column-container {
@@ -199,6 +216,7 @@ export default {
   font-size: 12.5px;
   cursor: pointer;
   text-decoration: underline;
+
 }
 
 .card-popup {
@@ -206,9 +224,9 @@ export default {
   position: absolute;
   top: 30px;
   left: -85px;
-  z-index: 9;
+  z-index: 1001;
   //background: purple;
-  color: #fff;
+  color: rgb(42, 39, 39);
   font-weight: normal;
   //width: 250px;
   //height: auto;
@@ -229,7 +247,8 @@ export default {
   content: '';
   width: 25px;
   height: 25px;
-  background:  map-get($theme-colors, amarillo); ;
+  background: map-get($theme-colors, amarillo);
+  ;
   top: -5px;
   left: 0;
   right: 0;
@@ -252,9 +271,15 @@ export default {
   transition: .5s;
 }
 
-.fc-content{
+.fc-content {
   margin: 0 5px 0 5px;
   //padding: 0 5px 0 5px;
+}
+
+.popover {
+  position: absolute;
+  z-index: 1000;
+
 }
 </style>
 
