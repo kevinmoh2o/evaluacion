@@ -45,7 +45,18 @@ export const Formatos = {
     var offsetMinutes = fechaInicial.getTimezoneOffset();
     fechaInicial.setMinutes(fechaInicial.getMinutes() - offsetMinutes);
     return fechaInicial.toISOString().replace(/\.000Z$/, '');
-  }
+  },
+  calcularDiferenciaEnHoras(fecha1, fecha2) {
+    var date1 = new Date(fecha1);
+    var date2 = new Date(fecha2);
+    if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
+        console.error("Fechas inválidas");
+        return null;  // O manejar el error de acuerdo a tus necesidades
+    }
+    var diferenciaEnMilisegundos = date2 - date1;
+    var diferenciaEnHoras = diferenciaEnMilisegundos / (1000 * 60 * 60);
+    return diferenciaEnHoras;
+}
 
 
 

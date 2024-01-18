@@ -3,19 +3,20 @@
     <Fullcalendar ref="fullCalendar" :options="calendarOptions" class="full-calendar">
 
       <template #eventContent="arg">
-        <p class="card-box" @mouseenter="handleEventMouseEnter(arg)">
+        <div class="event-container">
+          <p class="card-box" @mouseenter="handleEventMouseEnter(arg)">
           <span>
             <div class="fc-content">
               <i class="fa fa-check-circle fc-content"></i>
               <span class="fc-title">{{ arg.event.title }}</span>
             </div>
             <span class="card-popup popover">
-              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData"
-                :evento="eventoPopover"
-              ></CalendarModal2>
+              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover"></CalendarModal2>
             </span>
           </span>
         </p>
+        </div>
+        
       </template>
 
     </Fullcalendar>
@@ -124,14 +125,14 @@ export default {
   methods: {
     handleEventMouseEnter({ event }) {
       this.showPopover(event);
-      console.log("method handleEventMouseEnter",event);
-      this.eventoPopover=event
+      console.log("method handleEventMouseEnter", event);
+      this.eventoPopover = event
       console.log(event.title);
     },
     showPopover(event) {
       this.popoverVisible = true;
       this.selectedEventData = event;
-      console.log("method showPopover",event);
+      console.log("method showPopover", event);
     },
     handleEventClick(info) {
       const cal = info.event;
@@ -199,9 +200,23 @@ export default {
 <style lang="scss" scoped>
 @import '@/styles/styles.scss';
 
+
+.full-calendar {
+  position: relative; /* Asegura que el Fullcalendar tenga posición relativa */
+  z-index: 1; /* Establece el z-index del Fullcalendar */
+}
+
 .column-container {
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.event-container {
+  position: absolute; /* Cambiado a absolute */
+  z-index: 2; /* Establece un z-index mayor para los eventos */
+  cursor: pointer;
+  height: auto;
 }
 
 .card-box {
@@ -210,21 +225,20 @@ export default {
   padding: 0;
   margin: 0;
   background-color: transparent;
-  position: relative;
   font-weight: 500;
   color: rgb(64, 60, 60);
   font-size: 12.5px;
   cursor: pointer;
   text-decoration: underline;
-
 }
 
 .card-popup {
-  box-sizing: border-box;
+  //box-sizing: border-box;
   position: absolute;
   top: 30px;
   left: -85px;
-  z-index: 1001;
+  z-index: 1002;
+  /* Añadido: Asegura que el z-index del popover sea mayor que el del Fullcalendar */
   //background: purple;
   color: rgb(42, 39, 39);
   font-weight: normal;
@@ -238,17 +252,14 @@ export default {
   visibility: hidden;
   opacity: 0;
   transform: translate3d(0, 20px, 0);
-  z-index: 1;
+  /* z-index: 1; */
   transition: .5s;
 }
 
 .card-popup:before {
   position: absolute;
   content: '';
-  width: 25px;
-  height: 25px;
   background: map-get($theme-colors, amarillo);
-  ;
   top: -5px;
   left: 0;
   right: 0;
@@ -278,7 +289,7 @@ export default {
 
 .popover {
   position: absolute;
-  z-index: 1000;
+  z-index: 1002;
 
 }
 </style>

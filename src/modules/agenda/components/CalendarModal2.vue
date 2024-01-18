@@ -42,7 +42,8 @@
         </div>
 
         <div class="fecha">
-            <label>{{ evento.start }} - {{ evento.end  }}</label>
+            <!-- eslint-disable-next-line no-unused-vars -->
+            <label>{{ Formatos.calcularDiferenciaEnHoras(evento.start,evento.end)}}</label>
         </div>
 
         <div class="alarma">
@@ -57,13 +58,19 @@
 </template>
 
 <script>
-
+/* eslint-disable no-unused-vars */
+import { Formatos } from '@/utils/Formatos.js';
 
 
 export default {
     name: 'model-dos',
     props:{
         evento:Object
+    },
+    setup() {
+        return {
+            Formatos
+        };
     },
     components: {
 
@@ -158,8 +165,8 @@ export default {
 }
 
 .container2 {
-    z-index: 1000;
-    position: absolute;
+    /* z-index: 1000; */
+    position: relative;
     box-shadow: -1px 1px 7px 0px rgba(0, 0, 0, 0.75);
     background-color: #fff;
     display: grid;
@@ -181,8 +188,8 @@ export default {
 
 @media (min-width:600px) {
     .container2 {
-        z-index: 1000;
-        position: absolute;
+        /* z-index: 1000; */
+        /* position: absolute; */
         box-shadow: -1px 1px 7px 0px rgba(0, 0, 0, 0.75);
         background-color: #fff;
         display: grid;

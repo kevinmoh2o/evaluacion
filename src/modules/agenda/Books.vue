@@ -2,33 +2,24 @@
 
 <template>
     <div class="book" v-if="!confirmacionOperation">
-        <!-- <div class="book" v-if="getEstado()"> -->
-            <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" 
-            @saveAppt="saveAppt"></Calendar>
-            <Modal ref="exampleModalModal" :inFecha="fechaProgramar"></Modal>
-        <!-- </div> -->
-        <!-- <Cargando v-else></Cargando> -->
-        
+        <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" @saveAppt="saveAppt">
+        </Calendar>
+        <Modal ref="exampleModalModal" :inFecha="fechaProgramar"></Modal>
     </div>
-    <confirmacion
-      class="carYesNo"
-      v-if="confirmacionOperation"
-      :message="'¿Desea eliminar la siguiente programación?'"
-      :onConfirm="handleConfirm"
-      :onCancel="handleCancel"
-    ></confirmacion>
+    <confirmacion class="carYesNo" v-if="confirmacionOperation" :message="'¿Desea eliminar la siguiente programación?'"
+        :onConfirm="handleConfirm" :onCancel="handleCancel"></confirmacion>
 </template>
 
 <script>
 import { defineAsyncComponent } from 'vue'
 //import { Formatos } from '@/utils/Formatos.js';
 import { Hardware } from '@/utils/Hardware.js';
-import { mapActions,mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { Modal } from 'bootstrap';
 import jQuery from "jquery";
 const $ = jQuery;
 window.$ = $;
-export default{
+export default {
     name: 'book-list',
     components: {
         Calendar: defineAsyncComponent(() => import('./components/Calendar.vue')),
@@ -39,29 +30,29 @@ export default{
 
     },
     created() {
-        this.licenciado ='Kevin Montañez Huamán';//"Pedro Laredo Chuquispuma"
+        this.licenciado = 'Kevin Montañez Huamán';//"Pedro Laredo Chuquispuma"
         this.userId = 'kbmont';
         if (Hardware.isMobile()) {
-        const screenWidth = Hardware.getScreenWidth();
-        console.log("Se está abriendo desde un dispositivo móvil");
-        console.log("Ancho de la pantalla: " + screenWidth + "px");
-        
+            const screenWidth = Hardware.getScreenWidth();
+            console.log("Se está abriendo desde un dispositivo móvil");
+            console.log("Ancho de la pantalla: " + screenWidth + "px");
+
         } else {
-        console.log("No se está abriendo desde un dispositivo móvil");
+            console.log("No se está abriendo desde un dispositivo móvil");
         }
-    }, 
+    },
     data() {
         return {
-            eliminandoStatus:true,
-            licenciado:'',
-            userId:'',
-            flagUpdate:false,
-            eliminatedId:'',
-            confirmacionOperation:false,
+            eliminandoStatus: true,
+            licenciado: '',
+            userId: '',
+            flagUpdate: false,
+            eliminatedId: '',
+            confirmacionOperation: false,
             showModal: false,
-            estadoModalOptPa:false,
-            fechaProgramar:'',
-            itemVar:{},
+            estadoModalOptPa: false,
+            fechaProgramar: '',
+            itemVar: {},
             newEvent: {
                 title: " ",
                 date_at: " ",
@@ -73,58 +64,58 @@ export default{
                 { id: 1, nombre: 'Juan' },
                 { id: 2, nombre: 'Maria' },
                 { id: 3, nombre: 'Pedro' }
-            ] 
+            ]
         }
     },
     methods: {
-        ...mapActions('programacionModule', ['deleteEntry','setIsLoading']),
+        ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
         ...mapGetters('programacionModule', ['getEstado']),
-        dateClick(arg1,arg2) {
+        dateClick(arg1, arg2) {
             this.showModal = true;
             this.flagUpdate = true;
-            
+
             console.log('Recibiendo datos arg1: ', arg1);
             console.log('Recibiendo datos arg2: ', arg2);
             const modalEl = document.getElementById('exampleModal');
             const modal = new Modal(modalEl);
             modal.show();
-            if(arg2){
+            if (arg2) {
                 console.log("Crear nuevo programa")
-                this.itemVar={
+                this.itemVar = {
                     backgroundColor: "#FD1F64",
                     borderColor: "#FD1F64",
                     end: "",
                     extendedProps: {
                         description: "",
-                        encargado:this.licenciado,
+                        encargado: this.licenciado,
                         link: "",
                     },
                     groupId: this.userId,
                     start: "",
                     title: "",
-                    id:""
+                    id: ""
                 };
-            }else{
+            } else {
                 console.log("EDITAR programa")
-                this.itemVar=arg1.event
+                this.itemVar = arg1.event
                 this.flagUpdate = false;
             }
             //const {date} = arg1;
-            
+
             console.log('itemVar: ', this.itemVar);
 
-            this.fechaProgramar=arg1.dateStr;
-            
-            this.estadoModalOptPa=arg2;
+            this.fechaProgramar = arg1.dateStr;
+
+            this.estadoModalOptPa = arg2;
             //this.fechaProgramar=Formatos.soloFechaDMY(date);
-            console.log("this.fechaProgramar",this.fechaProgramar);
+            console.log("this.fechaProgramar", this.fechaProgramar);
         },
         async registrarUser() {
-           // var respuesta = await createUserWithEmailAndPassword(auth,'kevsssinmohu@gmail.com',"1234567");
-           // console.log("consultando xD",respuesta)
+            // var respuesta = await createUserWithEmailAndPassword(auth,'kevsssinmohu@gmail.com',"1234567");
+            // console.log("consultando xD",respuesta)
         },
         async autenticar() {
-            
+
             //var respuesta = await counterStore.login('kevinmohu@gmail.com',"1234567");
             //console.log("respuesta",respuesta)
             //console.log(counterStore.user)
@@ -143,64 +134,64 @@ export default{
             this.showModal = false;
             this.flagUpdate = true;
         },
-        recortarFecha(fecha){
+        recortarFecha(fecha) {
             const fechaOriginal = new Date(fecha);
             const dia = fechaOriginal.getDate();
             const mes = fechaOriginal.getMonth() + 1;
             const anio = fechaOriginal.getFullYear();
             return `${dia.toString().padStart(2, '0')}/${mes.toString().padStart(2, '0')}/${anio}`;
         },
-        escucharHijo(valor){
-            console.log("escucharhijo",valor);
+        escucharHijo(valor) {
+            console.log("escucharhijo", valor);
             this.$data.showModal = true;
-            this.itemVar=valor
+            this.itemVar = valor
         },
-        saveAppt(param){
+        saveAppt(param) {
             console.log("param")
-            console.log({param})
+            console.log({ param })
             this.$data.showModal = false;
         },
-        editarModal(){
-            
-            this.estadoModalOptPa=true;
-            console.log("editarModalPa",this.estadoModalOptPa);
+        editarModal() {
+
+            this.estadoModalOptPa = true;
+            console.log("editarModalPa", this.estadoModalOptPa);
         },
-        eliminarM1(value){
-            
-            console.log("eliminarM1 Books",value);
-            this.eliminatedId=value;
-            this.confirmacionOperation=true;
+        eliminarM1(value) {
+
+            console.log("eliminarM1 Books", value);
+            this.eliminatedId = value;
+            this.confirmacionOperation = true;
 
             //this.createEntry(objeto)
         },
         async handleConfirm() {
-        // Lógica para confirmar la acción
-        this.setIsLoading(false);
-        this.confirmacionOperation=false;
-        console.log('Confirmado');
+            // Lógica para confirmar la acción
+            this.setIsLoading(false);
+            this.confirmacionOperation = false;
+            console.log('Confirmado');
             try {
                 var rptaDelete = await this.deleteEntry(this.eliminatedId)
-                console.log("DELETE rptaDelete",rptaDelete)
-                if(rptaDelete.statusCode==200){
-                    this.showModal=false
+                console.log("DELETE rptaDelete", rptaDelete)
+                if (rptaDelete.statusCode == 200) {
+                    this.showModal = false
                 }
             } catch (error) {
-                console.log('error',error);
+                console.log('error', error);
             }
-        
-        this.setIsLoading(true);
+
+            this.setIsLoading(true);
         },
         handleCancel() {
-        // Lógica para cancelar la acción
-        console.log('Cancelado');
-        this.confirmacionOperation=false;
+            // Lógica para cancelar la acción
+            console.log('Cancelado');
+            this.confirmacionOperation = false;
         },
-        
-        
+
+
     },
-    computed:{
-        estadoCargando(){
-            console.log("setIsLoading",this.setIsLoading())
+    computed: {
+        estadoCargando() {
+            console.log("setIsLoading", this.setIsLoading())
             return this.setIsLoading()
         }
     }
@@ -209,24 +200,27 @@ export default{
 </script>
 
 <style lang="scss" scoped>
-
-.book{
+.book {
     width: calc(100vw - 400px);
     //width: 100%;
     //z-index: 100;
+    //z-index: 1000;
 }
 
-@media (max-width:750px){
+@media (max-width:750px) {
 
-    .book{
+    .book {
         width: calc(100vw);
+       // z-index: 1000;
     }
-} 
- a{
+}
+
+a {
     text-decoration: none !important;
     color: inherit !important;
-  }
-.div1{
+}
+
+.div1 {
     z-index: 1;
     /* position: absolute; */
     /* background-color:green ; */
@@ -234,37 +228,39 @@ export default{
     width: 100%;
 }
 
-.div2{
+.div2 {
     z-index: 2;
     position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .py-12 {
-  position: relative;
-  overflow: visible;
+    position: relative;
+    overflow: visible;
 }
+
 .component-a {
-  position: absolute;
-  top: 200;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+    position: absolute;
+    top: 200;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
-  
+
 .component-b {
-  position: relative;
+    position: relative;
 
 
-  width: 100%;
-  max-width: 500px;
-  height: 50%;
-  background-color: transparent;
-  z-index: 2;
+    width: 100%;
+    max-width: 500px;
+    height: 50%;
+    background-color: transparent;
+    z-index: 2;
 }
+
 ._2H35C-container {
     -moz-box-align: center;
     -moz-box-flex: 1;
