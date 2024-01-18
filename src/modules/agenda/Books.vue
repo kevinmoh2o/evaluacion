@@ -30,7 +30,7 @@ export default {
 
     },
     created() {
-        this.licenciado = 'Kevin Montañez Huamán';//"Pedro Laredo Chuquispuma"
+        this.licenciado = 'Kevin Montañez Huamán.';//"Pedro Laredo Chuquispuma"
         this.userId = 'kbmont';
         if (Hardware.isMobile()) {
             const screenWidth = Hardware.getScreenWidth();
@@ -38,7 +38,7 @@ export default {
             console.log("Ancho de la pantalla: " + screenWidth + "px");
 
         } else {
-            console.log("No se está abriendo desde un dispositivo móvil");
+            console.log("No se está abriendo desde un dispositivo móvil en mi phone");
         }
     },
     data() {
