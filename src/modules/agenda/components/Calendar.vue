@@ -3,20 +3,18 @@
     <Fullcalendar ref="fullCalendar" :options="calendarOptions" class="full-calendar">
 
       <template #eventContent="arg">
-        <div class="event-container">
-          <p class="card-box" @mouseenter="handleEventMouseEnter(arg)">
+        <p class="card-box" @mouseenter="handleEventMouseEnter(arg)" @mouseleave="handleMouseLeave">
           <span>
             <div class="fc-content">
               <i class="fa fa-check-circle fc-content"></i>
               <span class="fc-title">{{ arg.event.title }}</span>
             </div>
             <span class="card-popup popover">
-              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover"></CalendarModal2>
+              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover">
+              </CalendarModal2>
             </span>
           </span>
         </p>
-        </div>
-        
       </template>
 
     </Fullcalendar>
@@ -128,11 +126,17 @@ export default {
       console.log("method handleEventMouseEnter", event);
       this.eventoPopover = event
       console.log(event.title);
+      document.body.classList.add('hovered');
+
     },
     showPopover(event) {
       this.popoverVisible = true;
       this.selectedEventData = event;
       console.log("method showPopover", event);
+    },
+    handleMouseLeave() {
+      // Elimina la clase del body cuando el cursor deja cualquier elemento .fc-title
+      document.body.classList.remove('hovered');
     },
     handleEventClick(info) {
       const cal = info.event;
@@ -202,22 +206,24 @@ export default {
 
 
 .full-calendar {
-  position: relative; /* Asegura que el Fullcalendar tenga posición relativa */
-  z-index: 1; /* Establece el z-index del Fullcalendar */
+  position: relative;
+  z-index: 1;
 }
 
 .column-container {
   display: flex;
   flex-direction: column;
   position: relative;
+  z-index: 10;
 }
 
 .event-container {
-  position: absolute; /* Cambiado a absolute */
-  z-index: 2; /* Establece un z-index mayor para los eventos */
+  position: absolute;
+  z-index: 2;
   cursor: pointer;
   height: auto;
 }
+
 
 .card-box {
   width: 100%;
@@ -230,20 +236,16 @@ export default {
   font-size: 12.5px;
   cursor: pointer;
   text-decoration: underline;
+  z-index: 3; /* Añadido: Asegura que el z-index del card-box sea mayor que el del popover */
 }
 
 .card-popup {
-  //box-sizing: border-box;
   position: absolute;
   top: 30px;
   left: -85px;
   z-index: 1002;
-  /* Añadido: Asegura que el z-index del popover sea mayor que el del Fullcalendar */
-  //background: purple;
   color: rgb(42, 39, 39);
   font-weight: normal;
-  //width: 250px;
-  //height: auto;
   padding: 10px;
   font-size: 12px;
   line-height: 22px;
@@ -252,7 +254,6 @@ export default {
   visibility: hidden;
   opacity: 0;
   transform: translate3d(0, 20px, 0);
-  /* z-index: 1; */
   transition: .5s;
 }
 
@@ -284,12 +285,31 @@ export default {
 
 .fc-content {
   margin: 0 5px 0 5px;
-  //padding: 0 5px 0 5px;
+  z-index: 2;
+}
+.fc-content {
+  text-decoration: none !important;
+}
+
+.fc-title:hover{
+  opacity: 1;
+  color: black;
+  background-color: white;
+}
+
+body.hovered .fc-content {
+  opacity: 0;
+  color: transparent;
+  background-color: transparent;
+}
+
+.dialog-btns:hover .dialog-btn{
+background-color: gold;
 }
 
 .popover {
   position: absolute;
-  z-index: 1002;
+  z-index: 1003;
 
 }
 </style>

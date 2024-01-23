@@ -10,7 +10,6 @@
   <!-- <LoadingMainView></LoadingMainView> -->
 
   <!-- <PopUp v-show="popUp" @close="togglePopUp"></PopUp> -->
- 
 </template>
 
 <script>
@@ -27,20 +26,20 @@ export default {
   },
   data() {
     return {
-      popUp:true,
+      popUp: true,
     }
   },
   methods: {
     //...mapActions('programacionModule', ['deleteEntry','setIsLoading']),
     //...mapGetters('programacionModule', ['getEstado']),
-    togglePopUp(){
-        this.popUp=!this.popUp;
-        console.log("pressed");
+    togglePopUp() {
+      this.popUp = !this.popUp;
+      console.log("pressed");
     },
     close() {
       this.$refs.youtube.pauseVideo();
       this.$refs.youtube.stopVideo();
-      
+
       this.modalActive = false;
     },
   },
@@ -52,46 +51,59 @@ export default {
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap'); */
 
 
-html{
-    font-size: 14px;
+html {
+  font-size: 14px;
 }
 
 
-.app{
+.app {
   height: 100vh;
 }
 
-  .column-container .full-calendar a {
-    text-decoration: none !important;
-    color: var(--warning) !important;
-  }
+.column-container .full-calendar a {
+  text-decoration: none !important;
+  color: var(--warning) !important;
+}
 
-  .column-container .full-calendar button {
-    text-decoration: none !important;
-    color: white !important;
-    background-color: #F2B749;
-    border-color: white;
-  }
+.column-container .full-calendar button {
+  text-decoration: none !important;
+  color: white !important;
+  background-color: #F2B749;
+  border-color: white;
+}
 
-  .column-container .full-calendar button:hover {
-    color: white !important;
-    background-color: #bd974f;
-  }
+.column-container .full-calendar button:hover {
+  color: white !important;
+  background-color: #bd974f;
+}
 
-  .column-container .full-calendar button::after {
-    color: white !important;
-    background-color: red;
-  }
+.column-container .full-calendar button::after {
+  color: white !important;
+  background-color: red;
+}
 
-  .inpE6 .ipt .dp__input {
-    border: 1px solid #ffffff;
-  }
+.inpE6 .ipt .dp__input {
+  border: 1px solid #ffffff;
+}
 
-  .custom-container {
-    height: 100vh;
-  }
+.custom-container {
+  height: 100vh;
+}
 
-  .loading-indicator{
+
+/* .column-container .full-calendar .fc-content {
+    z-index: 0 !important;
+    color: aqua;
+    position: fixed;
+  } */
+
+/* .column-container .fc-content {
+  z-index: 2;
+  margin: 0 5px 0 5px;
+}
+ */
+
+.loading-indicator {
   background: var(--gradient-primary);
   width: 100vw;
   height: 100%;
@@ -99,7 +111,7 @@ html{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2; 
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;

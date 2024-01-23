@@ -95,6 +95,12 @@ export default {
 </script>
 
 <style scoped>
+
+.container2{
+    z-index: 1000;
+}
+
+
 .resaltado {
     border-radius: 50%;
     opacity: 1;
@@ -103,14 +109,13 @@ export default {
 
 
 .resaltado:hover {
-    opacity: 0.5;
+    /* opacity: 0.5; */
     background-color: #73777b71;
 }
 
 
 .botones {
     height: 40px;
-    /*  background-color: blue; */
     grid-area: botones;
     align-items: end;
     align-content: end;
@@ -121,7 +126,6 @@ export default {
 
 
 .fecha {
-    /*  background-color: yellow; */
     height: 40px;
     grid-area: fecha;
     text-align: left;
@@ -129,14 +133,12 @@ export default {
 }
 
 .alarma {
-    /*  background-color: orange; */
     height: 40px;
     grid-area: alarma;
     text-align: left;
 }
 
 .titulo {
-    /*  background-color: brown; */
     height: 40px;
     grid-area: titulo;
     text-align: left;
@@ -144,7 +146,6 @@ export default {
 }
 
 .owner {
-    /*  background-color: black; */
     height: 40px;
     grid-area: owner;
     text-align: left;
@@ -165,10 +166,9 @@ export default {
 }
 
 .container2 {
-    /* z-index: 1000; */
-    position: relative;
+    z-index: 1005;
     box-shadow: -1px 1px 7px 0px rgba(0, 0, 0, 0.75);
-    background-color: #fff;
+    background-color: white;
     display: grid;
     gap: 0;
     width: 350px;
@@ -188,10 +188,9 @@ export default {
 
 @media (min-width:600px) {
     .container2 {
-        /* z-index: 1000; */
-        /* position: absolute; */
+        z-index: 9999;
         box-shadow: -1px 1px 7px 0px rgba(0, 0, 0, 0.75);
-        background-color: #fff;
+        background-color: white;
         display: grid;
         gap: 0;
         width: 450px;

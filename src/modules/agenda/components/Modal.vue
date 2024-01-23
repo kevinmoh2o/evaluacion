@@ -86,7 +86,7 @@
                             </div>
 
 
-                            <div class="box">
+                            <!-- <div class="box">
                                 <div class="img-mod"><i class="bi bi-life-preserver"></i></div>
                                 <div class="col-10 m-0 p-0">
                                     <select class="form-select" v-model="output.extendedProps.asistencia"
@@ -96,7 +96,7 @@
                                             index.value }}</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- <div class="box" style="height: 41.6px;">
                                 <div class="img-mod"><i class="fas fa-link"></i></div>

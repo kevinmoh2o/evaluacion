@@ -1,6 +1,5 @@
 <template>
   <div class="card-inkwell"  @click.prevent="$emit('clickbutton')">
-    <!-- <div class="card-container"  style="background: linear-gradient(to right, #006eff, #ffa600);"> -->
     <div class="card-container"  style="background: var(--primary);">
 
       <div class="imagen">

@@ -3,7 +3,7 @@
     <div v-show="modalActive" class="modal container-fluid">
       <div v-show="modalActive" class="modal container-fluid">
         <transition name="modal-animation-inner">
-          <div v-show="modalActive" class="col"
+          <div v-show="modalActive" class="col container-video"
             style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <button type="button" class="btn btn-close" aria-label="Close" @click="close" style="margin-left: auto;">
             </button>
@@ -49,10 +49,10 @@ export default {
   },
   computed: {
     youtubeWidth() {
-      return this.windowWidth * 0.9;
+      return this.windowWidth * 0.7;
     },
     youtubeHeight() {
-      return this.windowWidth * 7 / 16;
+      return this.windowWidth * 5 / 16;
     },
   },
   created() {
@@ -96,6 +96,9 @@ export default {
   background-color: yellow;
 }
 
+.container-video{
+  margin: 10px;
+}
 
 .modal-animation-enter-active,
 .modal-animation-leave-active {
