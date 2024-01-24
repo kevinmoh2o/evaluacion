@@ -10,14 +10,15 @@
               <span class="fc-title">{{ arg.event.title }}</span>
             </div>
             <span class="card-popup popover">
-              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover">
-              </CalendarModal2>
+              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover"/>
             </span>
           </span>
         </p>
       </template>
 
     </Fullcalendar>
+    <!-- <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover">
+    </CalendarModal2> -->
   </div>
 </template>
 
@@ -65,11 +66,6 @@ export default {
     }
     console.log("calendarOptions", this.calendarOptions.headerToolbar.right);
 
-    /* $("#YourCalendar").fullCalendar({
-      eventRender: function (event, element) {
-        element.find(".fc-event-time").after($("<span class=\"fc-event-icons\"></span>").html("Whatever you want the content of the span to be"));
-      }
-    }); */
   },
   data() {
     const calendarOptions = {
@@ -84,7 +80,7 @@ export default {
       },
       allDaySlot: false,
       nowIndicator: true,
-      editable: true,
+      editable: false,
       selectable: true,
       weekends: true,
       themeSystem: 'bootstrap5',
@@ -236,7 +232,8 @@ export default {
   font-size: 12.5px;
   cursor: pointer;
   text-decoration: underline;
-  z-index: 3; /* Añadido: Asegura que el z-index del card-box sea mayor que el del popover */
+  z-index: 3;
+  /* Añadido: Asegura que el z-index del card-box sea mayor que el del popover */
 }
 
 .card-popup {
@@ -246,8 +243,8 @@ export default {
   z-index: 1002;
   color: rgb(42, 39, 39);
   font-weight: normal;
-  padding: 10px;
-  font-size: 12px;
+  //padding: 10px;
+  //font-size: 12px;
   line-height: 22px;
   letter-spacing: normal;
   cursor: text;
@@ -260,7 +257,6 @@ export default {
 .card-popup:before {
   position: absolute;
   content: '';
-  background: map-get($theme-colors, amarillo);
   top: -5px;
   left: 0;
   right: 0;
@@ -279,7 +275,7 @@ export default {
 .card-box:hover .card-popup {
   visibility: visible;
   opacity: 1;
-  transform: translate3d(0, 0px, 0);
+  transform: translate3d(0, -100px, 0);
   transition: .5s;
 }
 
@@ -287,11 +283,12 @@ export default {
   margin: 0 5px 0 5px;
   z-index: 2;
 }
+
 .fc-content {
   text-decoration: none !important;
 }
 
-.fc-title:hover{
+.fc-title:hover {
   opacity: 1;
   color: black;
   background-color: white;
@@ -301,11 +298,12 @@ body.hovered .fc-content {
   opacity: 0;
   color: transparent;
   background-color: transparent;
+  z-index: 9999;
 }
 
-.dialog-btns:hover .dialog-btn{
-background-color: gold;
-}
+/* .dialog-btns:hover .dialog-btn {
+  background-color: gold;
+} */
 
 .popover {
   position: absolute;

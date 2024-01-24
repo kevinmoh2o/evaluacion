@@ -244,7 +244,7 @@ export default {
         },
         camposAdicionales() {
             return {
-                meeting: `Reunión ${this.output.start}`,
+                meeting: `Reunión ${Formatos.fechaMeeting(this.output.start)}`,
                 end: Formatos.addOneHour(this.output.start),
             }
         },

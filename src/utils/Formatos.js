@@ -50,13 +50,22 @@ export const Formatos = {
     var date1 = new Date(fecha1);
     var date2 = new Date(fecha2);
     if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
-        console.error("Fechas inválidas");
-        return null;  // O manejar el error de acuerdo a tus necesidades
+      console.error("Fechas inválidas");
+      return null;  // O manejar el error de acuerdo a tus necesidades
     }
     var diferenciaEnMilisegundos = date2 - date1;
     var diferenciaEnHoras = diferenciaEnMilisegundos / (1000 * 60 * 60);
     return diferenciaEnHoras;
-}
+  },
+  fechaMeeting(input) {
+    //var fech1 = input.split("T");
+    //var dateObj = new Date(fech1[0]);
+    var dateObj = new Date(input);
+
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var formattedDate = dateObj.toLocaleDateString('es-ES', options);
+    return formattedDate;
+  }
 
 
 

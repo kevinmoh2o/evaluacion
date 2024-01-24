@@ -1539,6 +1539,11 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
+"@mycure/vue-jitsi-meet@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.npmjs.org/@mycure/vue-jitsi-meet/-/vue-jitsi-meet-0.0.8.tgz"
+  integrity sha512-02L4v42Og3UX9KBZjR/+OkRpBDVsWrrvTaS+PhP6D8o0IDqLJ9SycHxVOEzNjYNaCxsqjaaS2jrub0a1qrk3XA==
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
   resolved "https://registry.npmjs.org/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz"

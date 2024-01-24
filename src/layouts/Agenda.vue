@@ -1,32 +1,29 @@
 <template>
-    <!-- <div class="container-fluid p-0 m-0 align-items-center"> -->
-        
-            <Navbar class="col-12"
-            :estadoTitulo="true" :estadoFlecha="true" :titulo="'Agenda'"
-            @volver="onBackHandle"></Navbar>
-        
+    <div class="contenedor">
+        <Navbar class="nav-tag" :estadoTitulo="true" :estadoFlecha="true" :titulo="'Agenda'" @volver="onBackHandle">
+        </Navbar>
+
         <div class="cuerpo">
             <div class="fitro-calendario">
                 <CalendarioFilter></CalendarioFilter>
                 <div class="selector">
                     <select class="form-select" id="validationCustom10" required>
-                    <option selected disabled value="">Seleccionar cuidador</option>
+                        <option selected disabled value="">Seleccionar cuidador</option>
                         <option value="2">Juan</option>
                         <option value="3">Pedro</option>
                         <option value="3">Lucas</option>
                         <option value="3">Alberto</option>
                     </select>
                     <div class="invalid-feedback">
-                    Seleccione un valor.
+                        Seleccione un valor.
                     </div>
                 </div>
-                <button class="btn boton" type="submit"><i class="fas fa-search" ></i>Buscar</button>
+                <button class="btn boton" type="submit"><i class="fas fa-search"></i>Buscar</button>
             </div>
-            
+
             <Books class="books"></Books>
         </div>
-    <!-- </div> -->
-
+    </div>
 </template>
 
 <script>
@@ -46,8 +43,8 @@ export default {
         CalendarioFilter: defineAsyncComponent(() => import('@/components/compose/CalendarioFilter.vue')),
 
     },
-    methods:{
-        onBackHandle(){
+    methods: {
+        onBackHandle() {
             this.$router.push('/menu');
         }
     }
@@ -55,8 +52,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-button i{
+button i {
     padding: 5px;
 }
 
@@ -76,23 +78,28 @@ button i{
     }
 } */
 
-.form-select{
+.form-select {
     text-align: center;
 }
 
-.form-select:hover{
-  //background-color: #eaeaea;
-  //color: #333;
-  border: 1px solid #F2B749;;
+.form-select:hover {
+    //background-color: #eaeaea;
+    //color: #333;
+    border: 1px solid #F2B749;
+    ;
 
 }
+
 .form-select:focus {
-  outline: 2px solid #F2B749;; /* Puedes ajustar el color y el grosor según tus preferencias */
-  box-shadow: #F2B749;
-  border-color:#F2B749;
-  color: #F2B749;
+    outline: 2px solid #F2B749;
+    ;
+    /* Puedes ajustar el color y el grosor según tus preferencias */
+    box-shadow: #F2B749;
+    border-color: #F2B749;
+    color: #F2B749;
 }
-.boton{
+
+.boton {
     width: 90%;
     border-radius: 10px;
     background-color: #F2B749;
@@ -101,11 +108,12 @@ button i{
     align-self: center;
 }
 
-.boton:hover{
+.boton:hover {
     transform: translateX(-10px);
     //border-bottom-color: red !important;;
 }
-.cuerpo{
+
+.cuerpo {
     display: flex;
     text-align: center;
     align-items: center;
@@ -113,11 +121,14 @@ button i{
     flex-direction: row;
     //height: calc(100vh - 60px);
     //width: 600px;
-    padding: 20px 0 0 0;
+    justify-content: center;
+    flex-grow: 1;
+    height: 100%;
+    width: 100vw;
 }
 
 
-.selector{
+.selector {
     margin: 10px 0 10px 0;
     width: 90%;
     display: flex;
@@ -129,15 +140,15 @@ button i{
     justify-items: center;
 }
 
-.fitro-calendario{
-    
+.fitro-calendario {
+
     //padding: 10px;
     display: flex;
     flex-direction: column;
     align-content: center;
     text-align: center;
     justify-content: center;
-    
+
 }
 
 
@@ -183,5 +194,4 @@ button i{
     background-size: cover;
 }
  */
-
 </style>

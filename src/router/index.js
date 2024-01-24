@@ -35,6 +35,7 @@ const routes = [{
     {
         path: '/video-conference',
         name: 'video-conference',
+        props: true, 
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/VideoConference.vue')
     },
     {

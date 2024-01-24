@@ -15,44 +15,48 @@
             </button>
         </div>
 
-        <!-- <div class="eliminar">
-            <button class="btn mx-2">
-                <i class="fa-solid fa-trash" style="color: #73777b;"></i>
-            </button>
+        <div class="box">
+            <i class="fa-solid fa-square imagen" style="color: #039BE5;"></i>
+            <div class="contenido">
+                <label>{{ evento.title }}</label>
+            </div>
         </div>
 
-        <div class="close">
-            <button class="btn mx-2">
-                <i class="fa-solid fa-xmark" style="color: #73777b;"></i>
-            </button>
-        </div> -->
-
-        <div class="icon1">
-            <i class="fa-solid fa-square" style="color: #039BE5;"></i>
+        <div class="box">
+            <i class="fas fa-calendarZZ imagen" style="color: #039BE5;"></i>
+            <div class="contenido">
+                <label>{{ evento.extendedProps.meeting }}</label>
+            </div>
         </div>
-        <div class="icon2">
-            <i class="fa-solid fa-bell" style="color: #73777b;"></i>
+        <div class="box">
+            <i class="fa fa-clock imagen" style="color: #039BE5;"></i>
+            <div class="contenido">
+                <label>{{ evento.extendedProps.hora }}</label>
+            </div>
         </div>
-        <div class="icon3">
-            <i class="fa-solid fa-calendar" style="color: #73777b;"></i>
-        </div>
-
-        <div class="titulo">
-            <label>{{ evento.title }}</label>
-        </div>
-
-        <div class="fecha">
-            <!-- eslint-disable-next-line no-unused-vars -->
-            <label>{{ Formatos.calcularDiferenciaEnHoras(evento.start,evento.end)}}</label>
+        <div class="box">
+            <i class="fas fa-link imagen" style="color: #039BE5;"></i>
+            <div class="contenido">
+                <router-link
+                    :to="{ name: 'video-conference', query: { valor: encodeURIComponent(JSON.stringify(evento)) ,meeting:`Reunion con ${evento.title}`} }">Ir a la
+                    Video Conferencia</router-link>
+            </div>
         </div>
 
-        <div class="alarma">
+        <!-- <router-link :to="evento.extendedProps.link" class="link-success">Link de la reunión</router-link> -->
+
+
+
+
+        <!--  <div class="alarma">
             <label>30 minutos antes</label>
         </div>
 
         <div class="owner">
             <label>{{ evento.extendedProps.meeting }}</label>
-        </div>
+        </div> -->
+
+
 
     </div>
 </template>
@@ -64,8 +68,8 @@ import { Formatos } from '@/utils/Formatos.js';
 
 export default {
     name: 'model-dos',
-    props:{
-        evento:Object
+    props: {
+        evento: Object
     },
     setup() {
         return {
@@ -95,10 +99,13 @@ export default {
 </script>
 
 <style scoped>
+.box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-.container2{
-    z-index: 1000;
 }
+
 
 
 .resaltado {
@@ -115,12 +122,10 @@ export default {
 
 
 .botones {
-    height: 40px;
-    grid-area: botones;
+    /* height: 40px; */
     align-items: end;
     align-content: end;
     text-align: right;
-    padding-top: 5px;
 }
 
 
@@ -162,10 +167,28 @@ export default {
 
 .icon3 {
     grid-area: icon3;
-
 }
 
+
 .container2 {
+    z-index: 1005;
+    box-shadow: -1px 1px 7px 0px rgba(0, 0, 0, 0.75);
+    background-color: white;
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 10px 5px 10px;
+    font-size: 15px;
+}
+
+/* .container2 {
     z-index: 1005;
     box-shadow: -1px 1px 7px 0px rgba(0, 0, 0, 0.75);
     background-color: white;
@@ -210,5 +233,5 @@ export default {
             50px 40px 40px auto
         ;
     }
-}
+} */
 </style>
