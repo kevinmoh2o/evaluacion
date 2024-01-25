@@ -1,18 +1,13 @@
 <template>
   
-    <div class="contenedor">
-      <!-- <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalPaciente" data-bs-whatever="@mdo">
-        <img src="../../assets/boton/multitud.png">
-        <h5><span class="primary">Agregar Paciente</span></h5>
-      </button> -->
-
+    <!-- <div class="contenedor">
       <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo">
         <img src="../../assets/boton/doctor.png">
         <h5><span class="primary">Agregar Cuidador - <br>Paciente</span></h5>
       </button>
-    </div>
+    </div> -->
 
-    <hr class="solid">
+   <!--  <hr class="solid"> -->
 
     <div class="filtro">
       <div class="form-input">
@@ -28,13 +23,13 @@
         </select>
       </div>
     </div>
-    <ModalCuidadorPaciente></ModalCuidadorPaciente>
+    <!-- <ModalCuidadorPaciente></ModalCuidadorPaciente> -->
     <ModalCuidadorSelecionado></ModalCuidadorSelecionado>
 </template>
 
 <script>
 import ModalCuidadorSelecionado from '@/components/compose/ModalCuidadorSelecionado.vue';
-import ModalCuidadorPaciente from '@/components/compose/ModalCuidadorPaciente.vue';
+//import ModalCuidadorPaciente from '@/components/compose/ModalCuidadorPaciente.vue';
 
 export default {
   name: 'filter-component',
@@ -55,7 +50,7 @@ export default {
     }
   },
   components:{
-    ModalCuidadorPaciente,
+    //ModalCuidadorPaciente,
     ModalCuidadorSelecionado,
   },
   methods: {

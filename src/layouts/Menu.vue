@@ -25,7 +25,7 @@ export default {
         return {
             idParent: 0,
             menus: [
-                { id: 1, titulo: 'REGISTRO DE USUARIO', ruta: 'cuidador', path: '' },
+                { id: 1, titulo: 'REGISTRO DE USUARIO', ruta: 'cuidador', path: 'registrar-cuidador-paciente' },
                 { id: 2, titulo: 'EQUIPOS DE TRABAJO', ruta: 'equipo', path: 'about-us' },
                 { id: 3, titulo: 'REGISTRO DE CONSEJERÍA', ruta: 'registro', path: 'registro-consejeria' },
                 { id: 4, titulo: 'AGENDA', ruta: 'calendario', path: 'agenda' },

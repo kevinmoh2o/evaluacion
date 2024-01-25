@@ -41,7 +41,7 @@ const routes = [{
     {
         path: '/registro-consejeria',
         name: 'regiconsejeria-layout',
-        component: () => import ( /* webpackChunkName: "about" */ '../layouts/RegistroCuidadorPrimario.vue')
+        component: () => import ( /* webpackChunkName: "about" */ '../layouts/RegistroConsejeria.vue')
     },
     {
         path: '/tema-consejeria',
@@ -52,6 +52,11 @@ const routes = [{
         path: '/indicador-loading',
         name: 'indicador-layout',
         component: () => import ('@/components/indicadores/LoadingMainView.vue')
+    },
+    {
+        path: '/registrar-cuidador-paciente',
+        name: 'regis-cuidador-paciente',
+        component: () => import (/* webpackChunkName: "about" */'../layouts/RegistroCuidadorPaciente.vue')
     }
     
     

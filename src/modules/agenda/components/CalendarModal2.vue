@@ -23,7 +23,7 @@
         </div>
 
         <div class="box">
-            <i class="fas fa-calendarZZ imagen" style="color: #039BE5;"></i>
+            <i class="fas fa-calendar imagen" style="color: #039BE5;"></i>
             <div class="contenido">
                 <label>{{ evento.extendedProps.meeting }}</label>
             </div>
