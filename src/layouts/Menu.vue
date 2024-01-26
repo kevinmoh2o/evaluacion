@@ -31,7 +31,7 @@ export default {
                 { id: 4, titulo: 'AGENDA', ruta: 'calendario', path: 'agenda' },
                 { id: 5, titulo: 'TEMAS DE CONSEJERIA', ruta: 'chat', path: 'tema-consejeria' },
                 { id: 6, titulo: 'SOPORTE TÉCNICO', ruta: 'servicio-cliente', path: '' },
-                { id: 7, titulo: 'CUESTIONARIOS', ruta: 'cuestionario', path: '' },
+                { id: 7, titulo: 'CUESTIONARIO DE SATISFACCIÓN', ruta: 'cuestionario', path: 'cuestionario-satisfaccion' },
             ],
         }
     },

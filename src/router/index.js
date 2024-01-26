@@ -57,6 +57,11 @@ const routes = [{
         path: '/registrar-cuidador-paciente',
         name: 'regis-cuidador-paciente',
         component: () => import (/* webpackChunkName: "about" */'../layouts/RegistroCuidadorPaciente.vue')
+    },
+    {
+        path: '/cuestionario-satisfaccion',
+        name: 'cuestionario-satisfaccion',
+        component: () => import (/* webpackChunkName: "about" */'../layouts/SatisfaccionPage.vue')
     }
     
     

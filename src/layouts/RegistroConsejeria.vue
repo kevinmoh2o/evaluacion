@@ -37,7 +37,7 @@ export default {
     setup() {
         const router = useRouter()
         return {
-            titulo: 'REGISTROS DEL CUIDADOR PRIMARIO',
+            titulo: 'REGISTROS DE CONSEJERÍA',
             router: router
         }
     },
