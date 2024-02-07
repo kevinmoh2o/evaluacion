@@ -1,25 +1,34 @@
 <template>
-    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
-    <div class="contenedor" v-for="item in cuestionario" :key="item.nro" :value="item.pregunta">
-        <h3 class="pregunta">
-            <span>{{ item.nro }}. </span>
-            <strong class="numer">{{ item.pregunta }}</strong>
+    <div>
+        <class class="navbar">
+            <Navbar  :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
+        </class>
+        
 
-        </h3>
-        <div class="opcion">
-            <div class="form-check elemnto" v-for="opcion in item.opciones" :key="opcion.value">
-                <input class="form-check-input" type="radio" :name="'flexRadioDefault' + item.nro"
-                    :id="'flexRadioDefault' + opcion.value" v-model="item.respuesta" :value="opcion.label">
-                <label :for="'flexRadioDefault' + opcion.value" class="form-check-label">
-                    {{ opcion.label }}
-                </label>
+        <div class="formulario">
+            <div class="contenedor" v-for="item in cuestionario" :key="item.nro" :value="item.pregunta">
+                <h3 class="pregunta">
+                    <span>{{ item.nro }}. </span>
+                    <strong class="numer">{{ item.pregunta }}</strong>
+
+                </h3>
+                <div class="opcion">
+                    <div class="form-check elemnto" v-for="opcion in item.opciones" :key="opcion.value">
+                        <input class="form-check-input" type="radio" :name="'flexRadioDefault' + item.nro"
+                            :id="'flexRadioDefault' + opcion.value" v-model="item.respuesta" :value="opcion.label">
+                        <label :for="'flexRadioDefault' + opcion.value" class="form-check-label">
+                            {{ opcion.label }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-form">
+                <button type="submit" class="btn btn-success">Guardar</button>
             </div>
         </div>
     </div>
 
-    <div class="footer-form">
-        <button type="submit" class="btn btn-success">Guardar</button>
-    </div>
 </template>
 
 <script>
@@ -146,6 +155,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+//@import '@/styles/styles.scss';
+
 .pregunta {
     font-size: 15px;
     font-weight: 400;
@@ -176,13 +188,33 @@ export default {
 }
 
 
-.footer-form{
+.footer-form {
     display: flex;
     width: 100vw;
     align-items: center;
     justify-content: center;
     align-content: center;
-    margin: 5px ;    
-    padding: 10px ;    
+    margin: 5px;
+    padding: 10px;
 }
+
+.formulario {
+    height:calc(100vh);
+    width: 100vw;
+    overflow-y: scroll;
+    margin-top: 60px;
+    padding: 20px; 
+  //scrollbar-color: map-get($theme-colors, "azul");;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    
+}
+
 </style>

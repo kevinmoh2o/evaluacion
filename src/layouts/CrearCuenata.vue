@@ -303,6 +303,7 @@ span{
 }
 .pagina {
     padding: 10px;
+    
 }
 
 .seccion {

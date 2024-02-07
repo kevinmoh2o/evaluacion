@@ -62,7 +62,14 @@ const routes = [{
         path: '/cuestionario-satisfaccion',
         name: 'cuestionario-satisfaccion',
         component: () => import (/* webpackChunkName: "about" */'../layouts/SatisfaccionPage.vue')
+    },
+    {
+        path: '/test-component',
+        name: 'test-component',
+        component: () => import (/* webpackChunkName: "about" */'../layouts/TestComponent.vue')
     }
+
+    //
     
     
 ]

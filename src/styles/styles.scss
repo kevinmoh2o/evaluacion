@@ -1,3 +1,7 @@
+
+
+
+
 $theme-colors: ( 
     "primary": #2c3e50,
     "secondary": #1d6042,
@@ -82,11 +86,12 @@ $color-amarillo:#F2CB05;
 
 html, body {
     width: 100vw;
-    height: auto;
+    //height: auto;
     margin: 0;
     padding: 0;
     font-family: Inter,sans-serif;
     overflow-x: hidden;
+    //overflow-y: hidden;
   }
 
 h1{
@@ -142,4 +147,28 @@ b{
 .nav-tag {
     width: 100vw;
     flex-wrap: wrap;
+}
+
+/* Así quedaría con Mixins */
+@mixin neo( $estado ,$br , $dis1 ){
+	color			: var(--negro);
+	transition		: all .4s ease;
+	border-radius 	: $br ;
+	
+	@if $estado == 1 {
+		background-color	: var(--blanco);
+		box-shadow			: 
+			$dis1    $dis1    $dis1*2 var(--sombra-ppal),
+			$dis1*-1 $dis1*-1 $dis1*2 var(--sombra-sec),
+			inset 0 0 0 transparent,
+			inset 0 0 0 transparent;
+	}@else if $estado == 2 {
+		background-color	: var(--blanco);
+		box-shadow			: 
+			0 0 0 transparent,
+			0 0 0 transparent,
+			inset $dis1    $dis1    $dis1*2 var(--sombra-ppal),
+			inset $dis1*-1 $dis1*-1 $dis1*2 var(--sombra-sec);
+	}
+    
 }

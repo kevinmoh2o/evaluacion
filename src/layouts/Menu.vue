@@ -30,8 +30,10 @@ export default {
                 { id: 3, titulo: 'REGISTRO DE CONSEJERÍA', ruta: 'registro', path: 'registro-consejeria' },
                 { id: 4, titulo: 'AGENDA', ruta: 'calendario', path: 'agenda' },
                 { id: 5, titulo: 'TEMAS DE CONSEJERIA', ruta: 'chat', path: 'tema-consejeria' },
+                //{ id: 5, titulo: 'TEMAS DE CONSEJERIA', ruta: 'chat', path: 'test-component' },
                 { id: 6, titulo: 'SOPORTE TÉCNICO', ruta: 'servicio-cliente', path: '' },
                 { id: 7, titulo: 'CUESTIONARIO DE SATISFACCIÓN', ruta: 'cuestionario', path: 'cuestionario-satisfaccion' },
+                //test-component
             ],
         }
     },
@@ -52,27 +54,6 @@ export default {
 
     }
 }
-/* handlePress(val) {
-            this.idParent = val
-            console.log("val parent", val);
-            switch (val) {
-                case 1:
-                    this.$router.push('/agenda');
-                    break;
-                case 2:
-                    this.$router.push('/tema-consejeria');
-                    break;
-                case 3:
-                    this.$router.push('/registro-consejeria');
-                    break;
-                case 4:
-                    this.$router.push('/about-us');
-                    break;
-                default:
-                    break;
-            }
-
-        }, */
 </script>
 
 <style lang="scss" scoped>

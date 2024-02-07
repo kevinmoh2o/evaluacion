@@ -52,6 +52,10 @@ $color-azul: #1B62BF;
 $color-blanco: #f8f9fa;
 
 
+.navbar-container{
+  width: 100vw;
+}
+
 button{
     transition: all .55s ease;
 }
