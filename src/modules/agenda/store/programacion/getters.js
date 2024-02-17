@@ -3,10 +3,15 @@
 //  return state
 // }
 
+export const getRptHttp = (state) => {
+    console.log("getRptHttp")
+    return state.respuesta;
+};
+
 export const getCounter = (state) => {
     console.log("state",state)
     return state.counter;
-  };
+};
 
 export const getEvents = ( state ) => {
     return state.entries

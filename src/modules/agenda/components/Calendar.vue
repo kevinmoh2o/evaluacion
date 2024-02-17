@@ -1,7 +1,6 @@
 <template>
   <div class="column-container">
     <Fullcalendar ref="fullCalendar" :options="calendarOptions" class="full-calendar">
-
       <template #eventContent="arg">
         <p class="card-box" @mouseenter="handleEventMouseEnter(arg)" @mouseleave="handleMouseLeave">
           <span>
@@ -17,8 +16,6 @@
       </template>
 
     </Fullcalendar>
-    <!-- <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover">
-    </CalendarModal2> -->
   </div>
 </template>
 
@@ -53,6 +50,7 @@ export default {
     },
   },
   async mounted() {
+    this.handleEventMount();
     await this.loadEntries(this.usuario);
     this.calendarOptions.events = this.getentriesTest();
     if (Hardware.isMobile()) {
@@ -176,6 +174,18 @@ export default {
     eliminarM3() {
       console.log("eliminarM3")
     },
+    handleEventMount() {
+      // Aplica la lógica de jQuery cuando se monta un evento
+      const eventElements = document.querySelectorAll('.fc-event');
+      eventElements.forEach(eventElement => {
+        const fcContentElement = eventElement.querySelector('.fc-content');
+        const calEventTitle = fcContentElement.textContent;
+        fcContentElement.setAttribute("data-toggle", "popover");
+        fcContentElement.setAttribute("title", calEventTitle);
+        fcContentElement.setAttribute("data-content", calEventTitle);
+        fcContentElement.setAttribute("data-container", "body");
+      });
+    }
 
   },
   computed: {

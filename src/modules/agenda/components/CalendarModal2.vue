@@ -150,26 +150,6 @@ export default {
 
 }
 
-.owner {
-    height: 40px;
-    grid-area: owner;
-    text-align: left;
-}
-
-.icon1 {
-    grid-area: icon1;
-}
-
-.icon2 {
-    grid-area: icon2;
-
-}
-
-.icon3 {
-    grid-area: icon3;
-}
-
-
 .container2 {
     z-index: 1005;
     box-shadow: -1px 1px 7px 0px rgba(0, 0, 0, 0.75);

@@ -56,11 +56,16 @@ export default {
     },
   },
   created() {
-    window.addEventListener('resize', this.handleWindowResize);
+    
     this.contador = this.getCounter();
+    if(this.contador>2){
+      window.addEventListener('resize', this.handleWindowResize);
+    }
   },
   unmounted() {
-    window.removeEventListener('resize', this.handleWindowResize);
+    if(this.contador>2){
+      window.removeEventListener('resize', this.handleWindowResize);
+    }
   },
   methods: {
     ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),

@@ -87,7 +87,7 @@ export default {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-image: url('https://www.semfyc.es/wp-content/uploads/2016/05/semFYC_Corazon.jpg');
+    background-image: url('../assets/consejeria-menu.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

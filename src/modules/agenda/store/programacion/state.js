@@ -6,6 +6,7 @@ export default () => ({
         success:false,
         error:false
     },
+    respuesta:{},
     entries: localStorage.getItem('entries')
         ? JSON.parse(localStorage.getItem('entries'))
         : [],

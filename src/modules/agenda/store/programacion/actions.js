@@ -4,6 +4,40 @@
 // }
 import investigacionApi from '@/apis/investigacionapi'
 
+export const cargarUsuarios = async () => {
+  /* console.log("daloadEntriesta"); */
+  var path = `/api/usuarios`;
+  //var data = [];
+      try {
+          console.log("path: ",path)
+
+          var {status,data} = await investigacionApi.get(path);
+          //const myObj = respuesta.data;
+          console.log(data)
+          console.log(status)
+
+        } catch (error) {
+           console.error(error)
+        }
+}
+
+
+export const crearUsuario = async ({ commit }, entry) => {
+  var fechaActual = new Date();
+  try {
+    //{config,data,headers,request,status,statusText}
+    entry.createdAt = fechaActual.toISOString();
+    const {data} = await investigacionApi.post(`/api/usuarios`,entry);
+    const {status,message} = data;
+    commit('addUser', {status,message,data:entry})
+    console.log("crearUsuario action:",{status,message},entry);
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
+
 export const loadEntries = async ({ commit },groupId) => {
     console.log("daloadEntriesta");
     var path = `resultados.json?orderBy="groupId"&equalTo="${groupId}"`;

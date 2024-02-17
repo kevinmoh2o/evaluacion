@@ -4,6 +4,9 @@
 // }
 import investigacionApi from '@/apis/investigacionapi'
 
+
+
+
 export const loadEntries = async ({ commit },groupId) => {
     /* console.log("daloadEntriesta"); */
     var path = `resultados.json?orderBy="groupId"&equalTo="${groupId}"`;

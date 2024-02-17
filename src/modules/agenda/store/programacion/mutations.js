@@ -44,3 +44,10 @@ export const setIsLoading = (state, valor) => {
   console.log("valor setIsLoading",valor) */
   state.isLoading = valor
 }
+
+
+export const addUser = (state, valor) => {
+  state.respuesta = valor
+}
+
+

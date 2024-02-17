@@ -9,7 +9,7 @@
 
                 <div class="box">
                     <label for="validationCustom01" class="form-label"><span>*</span> Primer Nombre:</label>
-                    <input type="text" class="form-control" id="validationCustom01" required>
+                    <input type="text" class="form-control" id="validationCustom01" v-model="data.firstName" required>
                     <div class="invalid-feedback">
                         Escriba un nombre válido.
                     </div>
@@ -17,13 +17,13 @@
 
                 <div class="box">
                     <label for="validationCustom02" class="form-label">Segundo Nombre:</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" v-model="data.secondName">
 
                 </div>
 
                 <div class="box">
                     <label for="validationCustom03" class="form-label"><span>*</span> Apellido Paterno:</label>
-                    <input type="text" class="form-control" id="validationCustom03" required>
+                    <input type="text" class="form-control" id="validationCustom03" v-model="data.apelPaterno" required>
                     <div class="invalid-feedback">
                         Escriba un apellido válido.
                     </div>
@@ -31,7 +31,7 @@
 
                 <div class="box">
                     <label for="validationCustom04" class="form-label"><span>*</span> Apellido Materno:</label>
-                    <input type="text" class="form-control" id="validationCustom04" required>
+                    <input type="text" class="form-control" id="validationCustom04" v-model="data.apelMaterno" required>
                     <div class="invalid-feedback">
                         Escriba un apellido válido.
                     </div>
@@ -39,8 +39,7 @@
 
                 <div class="box">
                     <label for="validationCustom05" class="form-label"><span>*</span> Edad:</label>
-                    <input type="number" class="form-control" id="validationCustom05" max="80" min="18" maxlength="2"
-                        required>
+                    <input type="number" class="form-control" id="validationCustom05" max="80" min="18" maxlength="2" v-model="data.age" required>
                     <div class="invalid-feedback">
                         Escriba una edad válida.
                     </div>
@@ -48,10 +47,10 @@
 
                 <div class="box">
                     <label for="validationCustom06" class="form-label"><span>*</span> Sexo:</label>
-                    <select class="form-select" id="validationCustom06" required>
+                    <select class="form-select" id="validationCustom06" v-model="data.gender" required>
                         <option selected disabled value="">Seleccionar</option>
-                        <option value="2">Masculino</option>
-                        <option value="3">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
                     </select>
                     <div class="invalid-feedback">
                         Seleccione un valor.
@@ -60,10 +59,18 @@
 
                 <div class="box">
                     <label for="startDate" class="form-label"><span>*</span> Fecha de Nacimiento</label>
-                    <input id="startDate" class="form-control" type="date" required />
+                    <input id="startDate" class="form-control" type="date" v-model="data.birthDate" required />
                     <span id="startDateSelected"></span>
                     <div class="invalid-feedback">
                         Fecha incorrecta.
+                    </div>
+                </div>
+
+                <div class="box">
+                    <label for="valiEmail" class="form-label"><span>*</span> Email:</label>
+                    <input type="email" class="form-control" id="valiEmail" v-model="data.email" required>
+                    <div class="invalid-feedback">
+                        Escriba un dirección de correo electrónico válida.
                     </div>
                 </div>
 
@@ -80,7 +87,7 @@
 
                 <div class="box">
                     <label for="validationCustom08" class="form-label"><span>*</span> Centro de Salud:</label>
-                    <select class="form-select" id="validationCustom08" required>
+                    <select class="form-select" id="validationCustom08" v-model="data.centroSalud" required>
                         <option selected disabled value="">Seleccionar</option>
                         <option value="2">La Perla</option>
                         <option value="3">San Pedro</option>
@@ -93,7 +100,7 @@
 
                 <div class="box">
                     <label for="validationCustom09" class="form-label"><span>*</span> Distrito:</label>
-                    <select class="form-select" id="validationCustom09" required>
+                    <select class="form-select" id="validationCustom09" v-model="data.distrito" required>
                         <option selected disabled value="">Seleccionar</option>
                         <option value="2">Norte</option>
                         <option value="3">Centro</option>
@@ -107,7 +114,7 @@
 
                 <div class="box">
                     <label for="validationCustom10" class="form-label"><span>*</span> Diris/Diresa:</label>
-                    <select class="form-select" id="validationCustom10" required>
+                    <select class="form-select" id="validationCustom10" v-model="data.diris" required>
                         <option selected disabled value="">Seleccionar</option>
                         <option value="2">Diris-Norte</option>
                         <option value="3">Diris-Centro</option>
@@ -130,7 +137,7 @@
 
                 <div class="box">
                     <label for="validationCustom13" class="form-label"><span>*</span> Usuario:</label>
-                    <input type="text" class="form-control" id="validationCustom13" required>
+                    <input type="text" class="form-control" id="validationCustom13" v-model="data.username" required>
                     <div class="invalid-feedback">
                         Escriba una contraseña válida.
                     </div>
@@ -139,7 +146,7 @@
                 <div class="box">
                     <label for="validationCustom11" class="form-label"><span>*</span> Contraseña:</label>
                     <input type="password" class="form-control" id="validationCustom11" maxlength="12" minlength="6"
-                        autocomplete="new-password" required>
+                        autocomplete="new-password" v-model="data.password" required>
                     <div class="invalid-feedback">
                         Entre 6-12 caracteres.
                     </div>
@@ -148,7 +155,7 @@
                 <div class="box">
                     <label for="validationCustom12" class="form-label"><span>*</span> Confirmar Contraseña:</label>
                     <input type="password" class="form-control" id="validationCustom12" maxlength="12" minlength="6"
-                        autocomplete="new-password" required>
+                        autocomplete="new-password" v-model="data.verifyPassword" required>
                     <div class="invalid-feedback">
                         Entre 6-12 caracteres.
                     </div>
@@ -191,6 +198,25 @@ export default {
     data() {
         const router = useRouter()
         return {
+            data:{
+                firstName:'',
+                secondName:'',
+                apelPaterno:'',
+                apelMaterno:'',
+                age:'',
+                gender:'',
+                birthDate:'',
+                centroSalud:'',
+                distrito:'',
+                diris:'',
+                username:'',
+                password:'',
+                verifyPassword:'',
+                email:'',
+                role:'USER_ROLE',
+                createdAt:'',
+                state:false,
+            },
             loadingData: {
                 status: false,
                 title: "Creando usuario..."
@@ -216,31 +242,35 @@ export default {
     },
     mounted() {
         this.generateTimeOptions();
+        //this.cargarUsuarios();
     },
     methods: {
-        ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
-        ...mapGetters('programacionModule', ['getEstado']),
+        ...mapActions('programacionModule', ['crearUsuario','deleteEntry', 'setIsLoading']),
+        ...mapGetters('programacionModule', ['getEstado','getRptHttp']),
         async onPressCrear(event) {
+            //console.log("this.data: ",this.data)
             var validateForm = this.submitForm(event);
-            console.log("validateForm: "+validateForm)
+            //console.log("validateForm: "+validateForm)
             if(!validateForm){
                 this.errorApi.status = true;
                 this.errorApi.descripccion = 'Por favor, completa todos los campos obligatorios';
                 return null;
             }
+            this.loadingData.status = true;
             try {
-                console.log("try")
-                this.loadingData.status = true;
-                await this.sleep(1000);
+                await this.crearUsuario(this.data);
+                //console.log("respuesta http ",this.getRptHttp())
+                //await this.sleep(1000);
             } catch (error) {
-                console.log("error: " + error)
+                //console.log("error: " + error)
             } finally {
-                console.log("finally")
+                //console.log("finally")
                 
             }
             this.loadingData.status = false;
-            //await this.sleep(3000);
-            this.successApi.status=true;
+            var {state} = this.getRptHttp();
+            this.successApi.status=!state;
+            this.errorApi.status = state;
             //this.$router.push("/indicador-loading");
         },
         async sleep(ms) {
@@ -261,6 +291,7 @@ export default {
             return this.validation[fieldName];
         }, */
         submitForm(event) {
+            
             const form = event.target;
             var validador = form.checkValidity(); 
             //console.log(form.checkValidity())
