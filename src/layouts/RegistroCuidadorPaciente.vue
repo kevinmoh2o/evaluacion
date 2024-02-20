@@ -10,7 +10,7 @@
                             <h2>Cuidador - Paciente <b></b></h2>
                         </div>
                         <div class="col-6">
-                            <a href="#addEmployeeModal" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo">><i
+                            <a href="#addEmployeeModal" @dataPersona="getData" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo"><i
                                     class="material-icons">&#xE147;</i> <span>Agregar nuevo</span></a>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
         </div>
     </div>
 
-    <ModalCuidadorPaciente></ModalCuidadorPaciente>
+    <ModalCuidadorPaciente ></ModalCuidadorPaciente>
     <!-- <section class="formulario">
 
         <div class="modal-header">
@@ -286,6 +286,9 @@ export default {
         async onBackHandle() {
             console.log("navegando")
             await this.router.push('/menu')
+        },
+        getData(value){
+            console.log("getData: ",value)
         },
         submitForm(event) {
             const form = event.target;

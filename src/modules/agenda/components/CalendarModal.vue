@@ -11,7 +11,7 @@
             <button v-if="!statusButton" class="btn resaltadoRojo" @click.prevent="$emit('eliminarM1',form.id)" data-toggle="tooltip" title="Eliminar">
                 <i class="fa-solid fa-trash ieliminar"></i>
             </button>
-            <button class="btn resaltado" @click.prevent="$emit('closeModal',expandir)" data-toggle="tooltip" title="Cerrar">
+            <button class="btn resaltado" @click.prevent="$('closeModal',expandir)" data-toggle="tooltip" title="Cerrar">
                 <i class="fa-solid fa-xmark iclose"></i>
             </button>
         </div>

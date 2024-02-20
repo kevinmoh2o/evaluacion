@@ -22,13 +22,13 @@
                                     <form class="">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control rounded-3" id="floatingInput"
-                                                placeholder="name@example.com" v-model="email" required/>
+                                                placeholder="name@example.com" v-model="email" required />
                                             <label for="floatingInput">DNI del usuario...</label>
                                         </div>
 
                                         <div class="form-floating mb-3 mt-4">
                                             <input type="password" class="form-control rounded-3" id="floatingPassword"
-                                                placeholder="Password" v-model="password" required/>
+                                                placeholder="Password" v-model="password" required />
                                             <label for="floatingPassword">Contraseña...</label>
                                         </div>
                                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary mt-4"
@@ -71,7 +71,7 @@
 
     <LoadingOverlay :loading="loadingData" />
     <SuccessView :reponse="successApi" />
-    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator"/>
+    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator" />
 </template>
 
 <script>
@@ -139,23 +139,33 @@ export default {
 
         },
         async navegar() {
+            var msgLoading="";
             this.loadingData.status = true;
-            const { success, user, error } = await authService.autenticar(this.email, this.password);
-            if (success) {
-                // Usuario registrado con éxito, puedes redirigir o realizar otras acciones
+            const { status, user, message } = await authService.autenticar(this.email, this.password);
+            if (status) {
                 console.log('Usuario registrado:', user);
-                //this.loadingData.status = false;
                 this.$router.push('/menu');
             } else {
-                // Ocurrió un error durante el registro, puedes mostrar un mensaje de error
-                this.errorApi.status=true;
-                console.error('Error al registrar usuario:', error);
+                if (message.includes("auth/invalid-email")) {
+                    msgLoading = "Email invalido";
+                } else if (message.includes("auth/user-not-found")) {
+                    msgLoading = "No hay cuenta creada con ese email";
+                } else if (message.includes("auth/wrong-password")) {
+                    msgLoading = "Contraseña Incorrecta";
+                } else {
+                    msgLoading = "Email o Contraseña incorrectos";
+                }
+
+                console.log('Error login:',msgLoading);
+                this.errorApi.status = true;
+                this.errorApi.descripccion = msgLoading;
+                console.error('Error al registrar usuario:', msgLoading);
             }
             this.loadingData.status = false;
-            
+
         },
-        hadlerCloseIndicator(value){
-            this.errorApi.status=value;
+        hadlerCloseIndicator(value) {
+            this.errorApi.status = value;
         }
     }
 }
@@ -175,12 +185,12 @@ $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
 
-.pantalla{
+.pantalla {
     height: 100vh;
 }
 
 .nav-link {
-  transition: color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
 }
 
 .contenedor-body {

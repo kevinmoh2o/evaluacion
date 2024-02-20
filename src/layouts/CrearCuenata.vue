@@ -39,7 +39,8 @@
 
                 <div class="box">
                     <label for="validationCustom05" class="form-label"><span>*</span> Edad:</label>
-                    <input type="number" class="form-control" id="validationCustom05" max="80" min="18" maxlength="2" v-model="data.age" required>
+                    <input type="number" class="form-control" id="validationCustom05" max="80" min="18" maxlength="2"
+                        v-model="data.age" required>
                     <div class="invalid-feedback">
                         Escriba una edad válida.
                     </div>
@@ -173,16 +174,17 @@
 
     </form>
 
-    <LoadingOverlay :loading="loadingData" @cerrar-indicador="hadlerCloseIndicator"/>
+    <LoadingOverlay :loading="loadingData" @cerrar-indicador="hadlerCloseIndicator" />
     <SuccessView :reponse="successApi" />
-    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator"/>
+    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator" />
 </template>
   
 <script>
 import Navbar from '@/components/compose/Navbar.vue';
-import { useRouter } from 'vue-router'
-import { mapActions, mapGetters } from 'vuex'
-import { defineAsyncComponent } from 'vue'
+import { useRouter } from 'vue-router';
+import { mapActions, mapGetters } from 'vuex';
+import { defineAsyncComponent } from 'vue';
+import { authService } from '@/services/authService';
 
 export default {
     name: 'Crear-Cuenta',
@@ -198,24 +200,24 @@ export default {
     data() {
         const router = useRouter()
         return {
-            data:{
-                firstName:'',
-                secondName:'',
-                apelPaterno:'',
-                apelMaterno:'',
-                age:'',
-                gender:'',
-                birthDate:'',
-                centroSalud:'',
-                distrito:'',
-                diris:'',
-                username:'',
-                password:'',
-                verifyPassword:'',
-                email:'',
-                role:'USER_ROLE',
-                createdAt:'',
-                state:false,
+            data: {
+                firstName: '',
+                secondName: '',
+                apelPaterno: '',
+                apelMaterno: '',
+                age: '',
+                gender: '',
+                birthDate: '',
+                centroSalud: '',
+                distrito: '',
+                diris: '',
+                username: '',
+                password: '',
+                verifyPassword: '',
+                email: '',
+                role: 'USER_ROLE',
+                createdAt: '',
+                state: false,
             },
             loadingData: {
                 status: false,
@@ -245,33 +247,38 @@ export default {
         //this.cargarUsuarios();
     },
     methods: {
-        ...mapActions('programacionModule', ['crearUsuario','deleteEntry', 'setIsLoading']),
-        ...mapGetters('programacionModule', ['getEstado','getRptHttp']),
+        ...mapActions('programacionModule', ['crearUsuario', 'deleteEntry', 'setIsLoading']),
+        ...mapGetters('programacionModule', ['getEstado', 'getRptHttp']),
         async onPressCrear(event) {
             //console.log("this.data: ",this.data)
             var validateForm = this.submitForm(event);
-            //console.log("validateForm: "+validateForm)
-            if(!validateForm){
+            if (!validateForm) {
                 this.errorApi.status = true;
                 this.errorApi.descripccion = 'Por favor, completa todos los campos obligatorios';
                 return null;
             }
+            if (this.data.password != this.data.verifyPassword) {
+                this.errorApi.status = true;
+                this.errorApi.descripccion = 'Las contraseñas deben de coincidir';
+                return null;
+            }
+
             this.loadingData.status = true;
+
             try {
                 await this.crearUsuario(this.data);
-                //console.log("respuesta http ",this.getRptHttp())
-                //await this.sleep(1000);
+                const { success, user, error } = await authService.createUser(this.data.email, this.data.password);
+                console.log("respuesta http ", { success, user, error })
             } catch (error) {
-                //console.log("error: " + error)
+                console.log("error: " + error)
             } finally {
-                //console.log("finally")
-                
+                console.log("finally")
+
             }
             this.loadingData.status = false;
-            var {state} = this.getRptHttp();
-            this.successApi.status=!state;
+            var { state } = this.getRptHttp();
+            this.successApi.status = !state;
             this.errorApi.status = state;
-            //this.$router.push("/indicador-loading");
         },
         async sleep(ms) {
             return await new Promise(resolve => setTimeout(resolve, ms));
@@ -291,14 +298,13 @@ export default {
             return this.validation[fieldName];
         }, */
         submitForm(event) {
-            
+
             const form = event.target;
-            var validador = form.checkValidity(); 
+            var validador = form.checkValidity();
             //console.log(form.checkValidity())
             if (!validador) {
                 event.preventDefault();
                 event.stopPropagation();
-                
             }
             form.classList.add('was-validated');
             return validador;
@@ -307,8 +313,8 @@ export default {
             console.log("navegando")
             await this.router.push('/')
         },
-        hadlerCloseIndicator(value){
-            this.errorApi.status=value;
+        hadlerCloseIndicator(value) {
+            this.errorApi.status = value;
         }
     },
 }
@@ -323,18 +329,19 @@ export default {
   justify-content: start;
   margin: 0;
 } */
-span{
+span {
     padding: 0;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    color:red;
+    color: red;
     font-weight: bolder;
     font-size: 20px;
 }
+
 .pagina {
     padding: 10px;
-    
+
 }
 
 .seccion {

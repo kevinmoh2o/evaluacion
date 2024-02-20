@@ -13,6 +13,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 console.log({nombre:app.name})
 createApp(App)
     .use(createPinia())
-    .use( store )
+    .use(store)
     .use(router)
     .mount('#app')
