@@ -1,6 +1,6 @@
 <template>
-    <div class="modal fade" id="modalCuidadorPaciente" tabindex="-1" aria-labelledby="modalCuidadorPaciente"
-        aria-hidden="true">
+    <div class="modal fade" id="modalCuidadorPaciente" ref="modalCuidadorPaciente" tabindex="-1"
+        aria-labelledby="modalCuidadorPaciente" aria-hidden="true">
         <div class="modal-dialog modal-md modal-lg modal-xl modal-xxl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -10,7 +10,7 @@
                 <div class="modal-body">
 
 
-                    <form @submit="onPressCrear" class="needs-validation" novalidate>
+                    <form @submit="submitForm" class="needs-validation" novalidate>
                         <div class="cuidador-box">
 
                             <div class="caja">
@@ -37,11 +37,11 @@
                                 <span id="startDateSelected"></span>
                             </div>
 
-                            <div class="caja">
+                           <!--  <div class="caja">
                                 <i class="fas fa-user"></i>
                                 <input type="number" class="form-control" id="validationCustom01" placeholder="Edad"
                                     min="18" max="100" v-model="perCui.age" required>
-                            </div>
+                            </div> -->
 
                             <div class="caja">
                                 <i class="fas fa-mars"></i>
@@ -105,11 +105,11 @@
                                 <span id="startDateSelected"></span>
                             </div>
 
-                            <div class="caja">
+                            <!-- <div class="caja">
                                 <i class="fas fa-user"></i>
                                 <input type="number" class="form-control" id="validationCustom01" placeholder="Edad"
                                     min="18" max="100" v-model="perPac.age" required>
-                            </div>
+                            </div> -->
 
                             <div class="caja">
                                 <i class="fas fa-mars"></i>
@@ -171,13 +171,20 @@
             </div>
         </div>
     </div>
+    <!-- <LoadingOverlay :loading="loadingData" />
+    <SuccessView :reponse="successApi" />
+    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator" /> -->
 </template>
 
 
 <script>
+import { defineAsyncComponent } from 'vue'
 export default {
     name: 'Modal-Cuidador',
     components: {
+        /* LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
+        SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+        ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')), */
     },
     props: {
         intitulo: String,
@@ -185,6 +192,33 @@ export default {
     },
     data() {
         return {
+            showModal: false,
+            loading: {
+                statusLodingData: false,
+                statusSuccessApi: false,
+                statusErrorApi: false,
+                descripccion: 'Usuario correctmente autenticado',
+                btnText: 'Continuar',
+                navTo: '',
+            },
+            /* loadingData: {
+                status: false,
+                title: "Autenticando usuario..."
+            },
+            successApi: {
+                status: false,
+                title: '¡ Genial !',
+                descripccion: 'Usuario correctmente autenticado',
+                btnText: 'Continuar',
+                navTo: '',
+            },
+            errorApi: {
+                status: false,
+                title: '¡ ooPs !',
+                descripccion: 'Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.',
+                btnText: 'Cerrar',
+                navTo: '',
+            }, */
             perPac: {
                 dni: '',
                 tipoDoc: "",
@@ -192,7 +226,7 @@ export default {
                 apelPaterno: "",
                 apelMaterno: "",
                 birthDate: "",
-                age: "",
+                //age: "",
                 gender: "",
                 ocupation: "",
                 phone: "",
@@ -207,7 +241,7 @@ export default {
                 apelPaterno: "",
                 apelMaterno: "",
                 birthDate: "",
-                age: "",
+                //age: "",
                 gender: "",
                 ocupation: "",
                 phone: "",
@@ -221,23 +255,30 @@ export default {
         isValid(fieldName) {
             return this.validation[fieldName];
         },
-        onPressCrear() {
-            console.log("onpress", {perPac:this.perPac,perCui:this.perCui})
-            var state = true;
-            var validateForm = this.submitForm(event);
-            if (!validateForm) {
-                return null;
-            }
- 
-            this.$emit('dataPersona', {state,perPac:this.perPac,perCui:this.perCui});
+        async onPressCrear() {
+            this.$emit('createUSer', { state: true, perPac: this.perPac, perCui: this.perCui });
         },
         submitForm(event) {
+            event.preventDefault(); // Prevent default form submission
+            event.stopPropagation();
             const form = event.target;
             if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
             }
             form.classList.add('was-validated');
+            //console.log("validando submitForm");
+            //console.log(form);
+            this.onPressCrear()
+        },
+        hadlerCloseIndicator(value) {
+            this.errorApi.status = value;
+        },
+        closeModal() {
+            this.showModal = false;
+        },
+        async sleep(ms) {
+            return await new Promise(resolve => setTimeout(resolve, ms));
         },
     }
 }
@@ -270,4 +311,5 @@ export default {
 
 i {
     color: var(--warning);
-}</style>
+}
+</style>

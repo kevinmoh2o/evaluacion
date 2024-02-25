@@ -1,10 +1,10 @@
 <template>
-  <div v-if="reponse.status" class="contenedor">
+  <div v-if="!reponse.status" class="contenedor">
     <div class="card-color">
       <img src="@/assets/images/error.png" alt="" width="100" height="100">
       <div class="grid-flow">
         <p class="result-rank">{{ reponse.title }}</p>
-        <p>{{ reponse.descripccion }}</p>
+        <p>{{ reponse.message }}</p>
       </div>
       <button class="button" type="button" @click="onPress">{{ reponse.btnText }}</button>
 

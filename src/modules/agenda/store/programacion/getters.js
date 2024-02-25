@@ -3,6 +3,12 @@
 //  return state
 // }
 
+
+export const getUserProvider = (state) => {
+    console.log("getUserProvider")
+    return state.userProvider;
+};
+
 export const getRptHttp = (state) => {
     console.log("getRptHttp")
     return state.respuesta;

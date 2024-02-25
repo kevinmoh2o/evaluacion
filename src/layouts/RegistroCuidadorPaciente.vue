@@ -1,7 +1,7 @@
 <template>
-    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
+    <Navbar  :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
 
-    <div class="container">
+    <div class="container" >
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -10,7 +10,7 @@
                             <h2>Cuidador - Paciente <b></b></h2>
                         </div>
                         <div class="col-6">
-                            <a href="#addEmployeeModal" @dataPersona="getData" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo"><i
+                            <a  href="#addEmployeeModal"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo"><i
                                     class="material-icons">&#xE147;</i> <span>Agregar nuevo</span></a>
                         </div>
                     </div>
@@ -105,7 +105,18 @@
         </div>
     </div>
 
-    <ModalCuidadorPaciente ></ModalCuidadorPaciente>
+    <ModalCuidadorPaciente @createUSer="createUSer"></ModalCuidadorPaciente>
+    <!-- <div v-if="loadingData.status === true">
+        <LoadingOverlay :loading="loadingData" />
+    </div>
+    <div v-else>
+        <div v-if="apiResponse.status === true">
+            <SuccessView :reponse="apiResponse" />
+        </div>
+        <div v-if="apiResponse.status === false">
+            <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
+        </div>
+    </div> -->
     <!-- <section class="formulario">
 
         <div class="modal-header">
@@ -268,6 +279,7 @@
 import Navbar from '@/components/compose/Navbar.vue';
 import { useRouter } from 'vue-router'
 import ModalCuidadorPaciente from '@/components/compose/ModalCuidadorPaciente.vue';
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'regis-cuidador-paciente',
@@ -278,17 +290,25 @@ export default {
     setup() {
         const router = useRouter()
         return {
+            apiResponse: { status: null, },
             titulo: 'REGISTROS DEL CUIDADOR PRIMARIO Y PACIENTE',
             router: router
         }
     },
     methods: {
+        ...mapActions('programacionModule', ['transactionUserPeople']),
+        ...mapGetters('programacionModule', ['getUserProvider']),
         async onBackHandle() {
             console.log("navegando")
             await this.router.push('/menu')
         },
-        getData(value){
-            console.log("getData: ",value)
+        async createUSer(value){
+            const rptaUSrProv = this.getUserProvider();
+            console.log("rptaUSrProv: ",rptaUSrProv)
+            console.log("createUSer: ",value)
+            //await this.transactionUserPeople({})
+
+            //transactionUserPeople
         },
         submitForm(event) {
             const form = event.target;

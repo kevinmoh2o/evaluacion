@@ -69,9 +69,19 @@
     </div>
     <ModalCambioPassword></ModalCambioPassword>
 
-    <LoadingOverlay :loading="loadingData" />
-    <SuccessView :reponse="successApi" />
-    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator" />
+
+
+    <div v-if="loadingData.status === true">
+        <LoadingOverlay :loading="loadingData" />
+    </div>
+    <div v-else>
+        <div v-if="apiResponse.status === true">
+            <SuccessView :reponse="apiResponse" />
+        </div>
+        <div v-if="apiResponse.status === false">
+            <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -91,23 +101,13 @@ export default {
                 status: false,
                 title: "Autenticando usuario..."
             },
-            successApi: {
-                status: false,
-                title: '¡ Genial !',
-                descripccion: 'Usuario correctmente autenticado',
-                btnText: 'Continuar',
-                navTo: '',
-            },
-            errorApi: {
-                status: false,
-                title: '¡ ooPs !',
-                descripccion: 'Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.',
-                btnText: 'Cerrar',
-                navTo: '',
-            },
+            apiResponse: { status: null, },
             email: '',
             password: '',
         };
+    },
+    mounted() {
+        //this.apiResponse= { status: false };
     },
     setup() {
         //const router = useRouter()
@@ -123,15 +123,8 @@ export default {
         ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     },
     methods: {
-        ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
-        ...mapGetters('programacionModule', ['getEstado']),
-        /* async navegar() {
-            this.setIsLoading({ loading: true, success: false, error: false });
-            await this.sleep(3000);
-            console.log("navegando")
-            this.$router.push('/menu');
-            this.setIsLoading({ loading: false, success: false, error: false });
-        }, */
+        ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading', 'getUserByEmail']),
+        ...mapGetters('programacionModule', ['getEstado', 'getUserProvider']),
         async sleep(ms) {
             return await new Promise(resolve => setTimeout(resolve, ms));
         },
@@ -139,36 +132,36 @@ export default {
 
         },
         async navegar() {
-            var msgLoading="";
             this.loadingData.status = true;
-            const { status, user, message } = await authService.autenticar(this.email, this.password);
+            await this.getUserByEmail({ dni: this.email, password: this.password });
+            const { status, data, message } = await this.getUserProvider();
             if (status) {
-                console.log('Usuario registrado:', user);
+                this.apiResponse = Object.assign({ status, data, message }, { title: '¡Genial!', btnText: 'Continuar', navTo: '' });
                 this.$router.push('/menu');
             } else {
-                if (message.includes("auth/invalid-email")) {
-                    msgLoading = "Email invalido";
-                } else if (message.includes("auth/user-not-found")) {
-                    msgLoading = "No hay cuenta creada con ese email";
-                } else if (message.includes("auth/wrong-password")) {
-                    msgLoading = "Contraseña Incorrecta";
-                } else {
-                    msgLoading = "Email o Contraseña incorrectos";
-                }
-
-                console.log('Error login:',msgLoading);
-                this.errorApi.status = true;
-                this.errorApi.descripccion = msgLoading;
-                console.error('Error al registrar usuario:', msgLoading);
+                this.apiResponse = Object.assign({ status, data, message }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
             }
             this.loadingData.status = false;
-
         },
         hadlerCloseIndicator(value) {
-            this.errorApi.status = value;
+            this.apiResponse.status = null;
         }
     }
 }
+/* if (error != null) {
+    msgLoading=error;
+} else {
+    if (message.includes("auth/invalid-email")) {
+        msgLoading = "DNI invalido";
+    } else if (message.includes("auth/user-not-found")) {
+        msgLoading = "No hay cuenta creada con ese DNI";
+    } else if (message.includes("auth/wrong-password")) {
+        msgLoading = "Contraseña Incorrecta";
+    } else {
+        msgLoading = "DNI o Contraseña incorrectos";
+    }
+} */
+
 </script>
 
 

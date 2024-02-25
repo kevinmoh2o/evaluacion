@@ -37,14 +37,14 @@
                     </div>
                 </div>
 
-                <div class="box">
+                <!-- <div class="box">
                     <label for="validationCustom05" class="form-label"><span>*</span> Edad:</label>
                     <input type="number" class="form-control" id="validationCustom05" max="80" min="18" maxlength="2"
                         v-model="data.age" required>
                     <div class="invalid-feedback">
                         Escriba una edad válida.
                     </div>
-                </div>
+                </div> -->
 
                 <div class="box">
                     <label for="validationCustom06" class="form-label"><span>*</span> Sexo:</label>
@@ -137,10 +137,10 @@
             <div class="form-crear">
 
                 <div class="box">
-                    <label for="validationCustom13" class="form-label"><span>*</span> Usuario:</label>
-                    <input type="text" class="form-control" id="validationCustom13" v-model="data.username" required>
+                    <label for="validationCustom13" class="form-label"><span>*</span> DNI:</label>
+                    <input type="text" class="form-control" id="validationCustom13" v-model="data.dni" maxlength="8" minlength="8" required>
                     <div class="invalid-feedback">
-                        Escriba una contraseña válida.
+                        Escriba un DNI válido.
                     </div>
                 </div>
 
@@ -174,9 +174,22 @@
 
     </form>
 
-    <LoadingOverlay :loading="loadingData" @cerrar-indicador="hadlerCloseIndicator" />
+    <!-- <LoadingOverlay :loading="loadingData" @cerrar-indicador="hadlerCloseIndicator" />
     <SuccessView :reponse="successApi" />
-    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator" />
+    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator" /> -->
+
+    <div v-if="loadingData.status === true">
+        <LoadingOverlay :loading="loadingData" />
+    </div>
+    <div v-else>
+        <div v-if="apiResponse.status === true">
+            <SuccessView :reponse="apiResponse" />
+        </div>
+        <div v-if="apiResponse.status === false">
+            <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
+        </div>
+    </div>
+
 </template>
   
 <script>
@@ -205,13 +218,12 @@ export default {
                 secondName: '',
                 apelPaterno: '',
                 apelMaterno: '',
-                age: '',
-                gender: '',
+                    gender: '',
                 birthDate: '',
                 centroSalud: '',
                 distrito: '',
                 diris: '',
-                username: '',
+                dni: '',
                 password: '',
                 verifyPassword: '',
                 email: '',
@@ -221,7 +233,7 @@ export default {
             },
             loadingData: {
                 status: false,
-                title: "Creando usuario..."
+                title: "Registrando Cuidador - Paciente ..."
             },
             successApi: {
                 status: false,
@@ -244,7 +256,6 @@ export default {
     },
     mounted() {
         this.generateTimeOptions();
-        //this.cargarUsuarios();
     },
     methods: {
         ...mapActions('programacionModule', ['crearUsuario', 'deleteEntry', 'setIsLoading']),

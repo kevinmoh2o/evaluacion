@@ -4,7 +4,7 @@
                 <img src="@/assets/images/confirmacion.png" alt="" width="100" height="100">
                 <div class="grid-flow">
                     <p class="result-rank">{{reponse.title}}</p>
-                    <p>{{reponse.descripccion}}</p>
+                    <p>{{reponse.message}}</p>
                 </div>
                 <button class="button" @click="onPress">{{reponse.btnText}}</button>
             </div>

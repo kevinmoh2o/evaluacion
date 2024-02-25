@@ -7,6 +7,10 @@ export default () => ({
         error:false
     },
     respuesta:{},
+    userProvider:{
+        status:false, data:null, message:"null"
+    },
+    tranUserPeople:{},
     entries: localStorage.getItem('entries')
         ? JSON.parse(localStorage.getItem('entries'))
         : [],

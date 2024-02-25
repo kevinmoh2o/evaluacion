@@ -1,8 +1,14 @@
 //El state es reativo y notificar todos los lugares que escuchan el store
 // export const myAction = ( state ) => {
-
 // }
 
+export const setTranUserPeople = (state, entries) => {
+  state.tranUserPeople = entries;
+}
+
+export const setUserProvider = (state, entries) => {
+  state.userProvider = entries;
+}
 
 export const setEntries = (state, entries) => {
   state.entries = entries;

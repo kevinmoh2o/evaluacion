@@ -4,21 +4,37 @@
 // }
 import investigacionApi from '@/apis/investigacionapi'
 
-export const cargarUsuarios = async () => {
-  /* console.log("daloadEntriesta"); */
+/* export const cargarUsuarios = async () => {
   var path = `/api/usuarios`;
-  //var data = [];
-      try {
-          console.log("path: ",path)
+  try {
+    console.log("path: ", path)
+    var rptReq = await investigacionApi.get(path);
+    console.log("rptReq: ", rptReq)
+    const { status, data, message } = rptReq.data;
+    console.log("data")
+    console.log({ status, data, message })
+  } catch (error) {
+    console.error(error)
+  }
+} */
 
-          var {status,data} = await investigacionApi.get(path);
-          //const myObj = respuesta.data;
-          console.log(data)
-          console.log(status)
 
-        } catch (error) {
-           console.error(error)
-        }
+export const getUserByEmail = async ({ commit }, { dni, password }) => {
+  var path = `/api/usuarios/dni`;
+  try {
+    const params = { dni, password };
+    const url = `${path}?${new URLSearchParams(params)}`;
+    var rptReq = await investigacionApi.get(url);
+      if (!rptReq || !rptReq.data) {
+        throw new Error('La respuesta recibida es inválida');
+      }
+      const { status, data } = rptReq.data;
+      commit('setUserProvider', { status, data, message: `Usuario ${data.apelPaterno} ${data.firstName} autenticado correctamente.` });
+  } catch (error) {
+    const {status,message} = error.response.data;
+    console.log("error: ",{status,message} );
+    commit('setUserProvider', { status,message })
+  }
 }
 
 
@@ -27,10 +43,22 @@ export const crearUsuario = async ({ commit }, entry) => {
   try {
     //{config,data,headers,request,status,statusText}
     entry.createdAt = fechaActual.toISOString();
-    const {data} = await investigacionApi.post(`/api/usuarios`,entry);
-    const {status,message} = data;
-    commit('addUser', {status,message,data:entry})
-    console.log("crearUsuario action:",{status,message},entry);
+    const { data } = await investigacionApi.post(`/api/usuarios`, entry);
+    const { status, message } = data;
+    commit('addUser', { status, message, data: entry })
+    console.log("crearUsuario action:", { status, message }, entry);
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const transactionUserPeople = async ({ commit }, entry) => {
+  try {
+    const datos = await investigacionApi.post(`/api/usuarios/transUser`, entry);
+    console.log(`datos transactionUserPeople: `,datos)
+    //const { status, message } = data;
+    commit('addTranUserPeople', datos)
+    //console.log("crearUsuario action:", { status, message }, entry);
   } catch (error) {
     console.error(error)
   }
@@ -38,27 +66,28 @@ export const crearUsuario = async ({ commit }, entry) => {
 
 
 
-export const loadEntries = async ({ commit },groupId) => {
-    console.log("daloadEntriesta");
-    var path = `resultados.json?orderBy="groupId"&equalTo="${groupId}"`;
-    console.log(`loadEntries: ${path}`);
-    var data = [];
-        try {
-            var respuesta = await investigacionApi.get(path);
-            console.log(respuesta);
-            const myObj = respuesta.data;
-            /* console.log(myObj); */
-            for (const key in myObj) {
-                const value = myObj[key];
-                value["id"]=key;
-                data.push(value);
-            }
-            console.log(data);
-            commit('setEntries', data)
-            localStorage.setItem('entries', JSON.stringify(data));
-          } catch (error) {
-             console.error(error)
-          }
+
+
+export const loadEntries = async ({ commit }, groupId) => {
+  console.log("daloadEntriesta");
+  var path = `resultados.json?orderBy="groupId"&equalTo="${groupId}"`;
+  console.log(`loadEntries: ${path}`);
+  var data = [];
+  try {
+    var respuesta = await investigacionApi.get(path);
+    console.log(respuesta);
+    const myObj = respuesta.data;
+    for (const key in myObj) {
+      const value = myObj[key];
+      value["id"] = key;
+      data.push(value);
+    }
+    console.log(data);
+    commit('setEntries', data)
+    localStorage.setItem('entries', JSON.stringify(data));
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export const updateEntry = async ({ commit }, entry) => {
@@ -75,43 +104,42 @@ export const updateEntry = async ({ commit }, entry) => {
     console.error(error);
   }
 };
-  
-  export const createEntry = async ({ commit }, entry) => {
-    try {
-      const newEntry = await investigacionApi.post(`/resultados.json`,entry);
-     if(newEntry.status === 200){
-      entry["id"]=newEntry.data.name;
-      console.log("CREATE newEntry",newEntry,entry)
+
+export const createEntry = async ({ commit }, entry) => {
+  try {
+    const newEntry = await investigacionApi.post(`/resultados.json`, entry);
+    if (newEntry.status === 200) {
+      entry["id"] = newEntry.data.name;
+      console.log("CREATE newEntry", newEntry, entry)
       commit('addEntry', entry)
-      return {entry,stausCode:200};
-     }else{
-      return null;
-     }
-      
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  export const deleteEntry = async ({ commit }, id) => {
-    try {
-      var rpta = await investigacionApi.delete(`/resultados/${id}.json`);
-      /* console.log("DELETE por id",rpta) */
-      if(rpta.status==200){
-        commit('deleteEntry', id);
-        return { id, statusCode: 200 };
-      }else{
-        console.log(id)
-      }
-    } catch (error) {
-      console.error(error);
+      return { entry, stausCode: 200 };
+    } else {
       return null;
     }
-  }
 
-  export const setIsLoading = async ({ commit }, valor) => {
-        
-        commit('setIsLoading', valor);
-        
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const deleteEntry = async ({ commit }, id) => {
+  try {
+    var rpta = await investigacionApi.delete(`/resultados/${id}.json`);
+    /* console.log("DELETE por id",rpta) */
+    if (rpta.status == 200) {
+      commit('deleteEntry', id);
+      return { id, statusCode: 200 };
+    } else {
+      console.log(id)
     }
-  
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export const setIsLoading = async ({ commit }, valor) => {
+
+  commit('setIsLoading', valor);
+
+}
