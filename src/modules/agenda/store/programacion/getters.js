@@ -3,6 +3,16 @@
 //  return state
 // }
 
+export const getUsuarioPersonaList = (state) => {
+    console.log("usuarioPersonaList")
+    return state.usuarioPersonaList;
+};
+
+
+export const getTranUserPeople = (state) => {
+    console.log("getUserProvider")
+    return state.tranUserPeople;
+};
 
 export const getUserProvider = (state) => {
     console.log("getUserProvider")

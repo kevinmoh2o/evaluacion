@@ -2,6 +2,10 @@
 // export const myAction = ( state ) => {
 // }
 
+export const setUsuarioPersonaList = (state, entries) => {
+  state.usuarioPersonaList = entries;
+}
+
 export const setTranUserPeople = (state, entries) => {
   state.tranUserPeople = entries;
 }

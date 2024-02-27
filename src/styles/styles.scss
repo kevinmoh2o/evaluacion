@@ -17,8 +17,9 @@ $theme-colors: (
 $color-amarillo:#F2CB05;
 
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+ */
+ @import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Quicksand:wght@300..700&display=swap');
 
 
 :root{
@@ -89,7 +90,7 @@ html, body {
     //height: auto;
     margin: 0;
     padding: 0;
-    font-family: Inter,sans-serif;
+    font-family: "Quicksand", sans-serif;
     overflow-x: hidden;
     //overflow-y: hidden;
   }

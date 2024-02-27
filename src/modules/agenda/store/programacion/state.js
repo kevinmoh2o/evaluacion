@@ -10,6 +10,7 @@ export default () => ({
     userProvider:{
         status:false, data:null, message:"null"
     },
+    usuarioPersonaList:[],
     tranUserPeople:{},
     entries: localStorage.getItem('entries')
         ? JSON.parse(localStorage.getItem('entries'))

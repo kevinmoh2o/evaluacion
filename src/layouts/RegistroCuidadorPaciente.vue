@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr v-for="(item, index) in valorTabla" :key="index">
                             <td>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="checkbox1" name="options[]" value="1">
@@ -44,18 +44,17 @@
                                 <a href="#deleteEmployeeModal" class="done" data-toggle="modal"><i class="material-icons"
                                         data-toggle="tooltip" title="Done">&#xe86c;</i></a>
                             </td>
-                            <td>Thomas Rengifo</td>
-                            <td>Eduardo Peréz</td>
-                            <td>thomasreng@mail.com</td>
-                            <td>(51) 987654321</td>
+                            <td>{{item.cuidador.name}}</td>
+                            <td>{{item.paciente.name}}</td>
+                            <td>{{item.paciente.email}}</td>
+                            <td>{{item.paciente.phone}}</td>
                             <td>
                                 <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
                                         data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <!-- <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                        data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
+                                
                             </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="checkbox2" name="options[]" value="1">
@@ -95,9 +94,10 @@
                                 <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
                                         data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             </td>
-                        </tr>
+                        </tr> -->
 
-
+<!-- <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
+                                        data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
                     </tbody>
                 </table>
 
@@ -106,7 +106,7 @@
     </div>
 
     <ModalCuidadorPaciente @createUSer="createUSer"></ModalCuidadorPaciente>
-    <!-- <div v-if="loadingData.status === true">
+    <div v-if="loadingData.status === true">
         <LoadingOverlay :loading="loadingData" />
     </div>
     <div v-else>
@@ -116,7 +116,8 @@
         <div v-if="apiResponse.status === false">
             <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
         </div>
-    </div> -->
+    </div>
+    
     <!-- <section class="formulario">
 
         <div class="modal-header">
@@ -280,35 +281,65 @@ import Navbar from '@/components/compose/Navbar.vue';
 import { useRouter } from 'vue-router'
 import ModalCuidadorPaciente from '@/components/compose/ModalCuidadorPaciente.vue';
 import { mapActions, mapGetters } from 'vuex'
+import { defineAsyncComponent } from 'vue'
 
 export default {
     name: 'regis-cuidador-paciente',
     components: {
         Navbar,
         ModalCuidadorPaciente,
+        LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
+        SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+        ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     },
-    setup() {
+    async mounted() {
+        const userProv = await this.getUserProvider();
+        await this.llamarLista(userProv.data.id)
+    },
+    data() {
         const router = useRouter()
         return {
+            valorTabla:[],
             apiResponse: { status: null, },
+            estadoModal:true,
+            loadingData: {
+                status: false,
+                title: "¡Estamos guardando la información del paciente y del cuidador!<br><br>Por favor, espera un momento mientras asociamos estos datos al especialista."
+            },
             titulo: 'REGISTROS DEL CUIDADOR PRIMARIO Y PACIENTE',
             router: router
         }
     },
     methods: {
-        ...mapActions('programacionModule', ['transactionUserPeople']),
-        ...mapGetters('programacionModule', ['getUserProvider']),
+        ...mapActions('programacionModule', ['transactionUserPeople','usuarioPersonas']),
+        ...mapGetters('programacionModule', ['getUserProvider','getTranUserPeople','getUsuarioPersonaList']),
         async onBackHandle() {
             console.log("navegando")
             await this.router.push('/menu')
         },
         async createUSer(value){
+            console.log("createUSer value:",value)
+            this.loadingData.status = true;
             const rptaUSrProv = this.getUserProvider();
-            console.log("rptaUSrProv: ",rptaUSrProv)
-            console.log("createUSer: ",value)
-            //await this.transactionUserPeople({})
-
-            //transactionUserPeople
+            //const { status, data, message } = await this.getUserProvider();
+            const userProv = await this.getUserProvider();
+            //console.log("hideModal")
+            const {perPac,perCui} = value;
+            await this.transactionUserPeople({id:userProv.data.id,perPac,perCui})
+            const { status, data,message } = await this.getTranUserPeople();
+            console.log("{ status, data,message }: ",{ status, data,message })
+            if(status){
+                this.apiResponse = Object.assign({ status, data, message }, { title: '¡Genial!', btnText: 'Continuar', navTo: '/menu' });
+            }else{
+                this.apiResponse = Object.assign({ status, data, message }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
+            }
+            await this.llamarLista(userProv.data.id)
+            this.loadingData.status = false;
+            
+            //console.log("rptaUSrProv: ",rptaUSrProv);
+            //console.log("createUSer: ",value);
+            //console.log("{ status, data, message }: ",{ status, data, message });
+            //this.$refs.modalCuidadorPaciente.hide();
         },
         submitForm(event) {
             const form = event.target;
@@ -318,6 +349,14 @@ export default {
             }
             form.classList.add('was-validated');
         },
+        hadlerCloseIndicator(value) {
+            this.apiResponse.status = null;
+        },
+        async llamarLista(value) {
+            await this.usuarioPersonas({ id: value, isActive: true });
+            const { status, data } = this.getUsuarioPersonaList();
+            this.valorTabla=data;
+        }
     }
 }
 </script>

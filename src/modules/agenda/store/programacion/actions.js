@@ -54,13 +54,35 @@ export const crearUsuario = async ({ commit }, entry) => {
 
 export const transactionUserPeople = async ({ commit }, entry) => {
   try {
-    const datos = await investigacionApi.post(`/api/usuarios/transUser`, entry);
-    console.log(`datos transactionUserPeople: `,datos)
-    //const { status, message } = data;
-    commit('addTranUserPeople', datos)
+    const rptReq = await investigacionApi.post(`/api/usuarios/transUser`, entry);
+    if (!rptReq || !rptReq.data) {
+      throw new Error('La respuesta recibida es inválida');
+    }
+    console.log(`rptReq transactionUserPeople: `,rptReq)
+    const { status, data,message } = rptReq.data;
+    commit('setTranUserPeople', { status, data, message })
     //console.log("crearUsuario action:", { status, message }, entry);
   } catch (error) {
-    console.error(error)
+    const {status,message} = error.response.data;
+    commit('setTranUserPeople', { status,message })
+  }
+}
+
+
+export const usuarioPersonas = async ({ commit }, { id, isActive }) => {
+  try {
+    var path = `/api/usuarios/userPeople`;
+    const params = { id, isActive };
+    const url = `${path}?${new URLSearchParams(params)}`;
+    var rptReq = await investigacionApi.get(url);
+      if (!rptReq || !rptReq.data) {
+        throw new Error('La respuesta recibida es inválida');
+      }
+      const { status, data } = rptReq.data;
+      commit('setUsuarioPersonaList', { status, data, message: `` });
+  } catch (error) {
+    const {status,message} = error.response.data;
+    commit('setTranUserPeople', { status,message })
   }
 }
 

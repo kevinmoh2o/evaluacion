@@ -31,7 +31,7 @@
         <div></div>
       </div>
     </div>
-    <label class="txtLoading">{{ loading.title }}</label>
+    <label class="txtLoading" v-html="loading.title"></label>
   </div>
 </template>
   
@@ -100,11 +100,11 @@ export default {
 
  */
 .txtLoading {
-  font-weight: 300;
+  font-weight: 400;
   color: black;
   font-size: 18px;
   letter-spacing: 2px;
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
   text-align: center;
   justify-content: center;
   background-color: white;

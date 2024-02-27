@@ -31,13 +31,31 @@
                             </div>
 
                             <div class="caja">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre"
+                                 v-model.trim="perCui.name" required>
+                            </div>
+
+                            <div class="caja">
+                                <i class="fas fa-id-badge"></i>
+                                <input type="text" class="form-control" id="validationCustom01" placeholder="Apellido Paterno"
+                                 v-model.trim="perCui.apelPaterno" required>
+                            </div>
+
+                            <div class="caja">
+                                <i class="fas fa-id-badge"></i>
+                                <input type="text" class="form-control" id="validationCustom01" placeholder="Apellido Materno"
+                                 v-model.trim="perCui.apelMaterno" required>
+                            </div>
+
+                            <div class="caja">
                                 <i class="fas fa-calendar"></i>
                                 <input id="startDate" class="form-control" type="date" v-model="perCui.birthDate"
                                     required />
                                 <span id="startDateSelected"></span>
                             </div>
 
-                           <!--  <div class="caja">
+                            <!--  <div class="caja">
                                 <i class="fas fa-user"></i>
                                 <input type="number" class="form-control" id="validationCustom01" placeholder="Edad"
                                     min="18" max="100" v-model="perCui.age" required>
@@ -96,6 +114,25 @@
                                 <input type="number" class="form-control" id="validationCustom01"
                                     placeholder="Documento de Identidad" min="0" max="1000000000000000" v-model="perPac.dni"
                                     required>
+                            </div>
+
+
+                            <div class="caja">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre"
+                                 v-model.trim="perPac.name" required>
+                            </div>
+
+                            <div class="caja">
+                                <i class="fas fa-id-badge"></i>
+                                <input type="text" class="form-control" id="validationCustom01" placeholder="Apellido Paterno"
+                                 v-model.trim="perPac.apelPaterno" required>
+                            </div>
+
+                            <div class="caja">
+                                <i class="fas fa-id-badge"></i>
+                                <input type="text" class="form-control" id="validationCustom01" placeholder="Apellido Materno"
+                                 v-model.trim="perPac.apelMaterno" required>
                             </div>
 
                             <div class="caja">
@@ -222,7 +259,7 @@ export default {
             perPac: {
                 dni: '',
                 tipoDoc: "",
-                nombre: "",
+                name: "",
                 apelPaterno: "",
                 apelMaterno: "",
                 birthDate: "",
@@ -237,7 +274,7 @@ export default {
             perCui: {
                 dni: '',
                 tipoDoc: "",
-                nombre: "",
+                name: "",
                 apelPaterno: "",
                 apelMaterno: "",
                 birthDate: "",
@@ -256,6 +293,13 @@ export default {
             return this.validation[fieldName];
         },
         async onPressCrear() {
+            console.log("this.$refs: ", this.$refs.modalCuidadorPaciente.dispatchEvent)
+            if (this.$refs.modalCuidadorPaciente) {
+                const closeButton = this.$refs.modalCuidadorPaciente.querySelector('.btn-close');
+                if (closeButton) {
+                    closeButton.click();
+                }
+            }
             this.$emit('createUSer', { state: true, perPac: this.perPac, perCui: this.perCui });
         },
         submitForm(event) {
@@ -267,8 +311,6 @@ export default {
                 event.stopPropagation();
             }
             form.classList.add('was-validated');
-            //console.log("validando submitForm");
-            //console.log(form);
             this.onPressCrear()
         },
         hadlerCloseIndicator(value) {
