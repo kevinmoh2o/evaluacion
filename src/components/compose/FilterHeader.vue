@@ -23,7 +23,6 @@
         </select>
       </div>
     </div>
-    <!-- <ModalCuidadorPaciente></ModalCuidadorPaciente> -->
     <ModalCuidadorSelecionado></ModalCuidadorSelecionado>
 </template>
 

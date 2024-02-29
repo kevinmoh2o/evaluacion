@@ -211,7 +211,7 @@ export default {
 
     .book {
         width: calc(100vw);
-       // z-index: 1000;
+        // z-index: 1000;
     }
 }
 

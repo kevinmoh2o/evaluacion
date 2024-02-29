@@ -138,7 +138,8 @@
 
                 <div class="box">
                     <label for="validationCustom13" class="form-label"><span>*</span> DNI:</label>
-                    <input type="text" class="form-control" id="validationCustom13" v-model="data.dni" maxlength="8" minlength="8" required>
+                    <input type="text" class="form-control" id="validationCustom13" v-model="data.dni" maxlength="8"
+                        minlength="8" required>
                     <div class="invalid-feedback">
                         Escriba un DNI válido.
                     </div>
@@ -189,7 +190,6 @@
             <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
         </div>
     </div>
-
 </template>
   
 <script>
@@ -218,7 +218,7 @@ export default {
                 secondName: '',
                 apelPaterno: '',
                 apelMaterno: '',
-                    gender: '',
+                gender: '',
                 birthDate: '',
                 centroSalud: '',
                 distrito: '',
@@ -233,22 +233,9 @@ export default {
             },
             loadingData: {
                 status: false,
-                title: "Registrando Cuidador - Paciente ..."
+                title: "Creando cuenta de Usuario ..."
             },
-            successApi: {
-                status: false,
-                title: '¡ Genial !',
-                descripccion: 'Su cuenta se creó con éxito',
-                btnText: 'Continuar',
-                navTo: '/',
-            },
-            errorApi: {
-                status: false,
-                title: '¡ ooPs !',
-                descripccion: 'Se ha producido un error al autenticar',
-                btnText: 'Cerrar',
-                navTo: '',
-            },
+            apiResponse: { status: null, },
             selectedTime: '',
             timeOptions: [],
             router: router
@@ -264,32 +251,37 @@ export default {
             //console.log("this.data: ",this.data)
             var validateForm = this.submitForm(event);
             if (!validateForm) {
-                this.errorApi.status = true;
-                this.errorApi.descripccion = 'Por favor, completa todos los campos obligatorios';
+                this.apiResponse = Object.assign({ status: false, data: null, message: 'Por favor, completa todos los campos obligatorios' }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
+                this.loadingData.status = false;
                 return null;
             }
             if (this.data.password != this.data.verifyPassword) {
-                this.errorApi.status = true;
-                this.errorApi.descripccion = 'Las contraseñas deben de coincidir';
+                this.apiResponse = Object.assign({ status: false, data: null, message: 'Las contraseñas deben de coincidir' }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
+                this.loadingData.status = false;
                 return null;
             }
 
-            this.loadingData.status = true;
 
+            this.loadingData.status = true;
             try {
                 await this.crearUsuario(this.data);
-                const { success, user, error } = await authService.createUser(this.data.email, this.data.password);
-                console.log("respuesta http ", { success, user, error })
+                //const { success, user, error } = await authService.createUser(this.data.email, this.data.password);
+                //console.log("respuesta http ", { success, user, error })
+                
+                var { status, message } = this.getRptHttp();
+                console.log("crear usuario ", { status, message })
+                if (status) {
+                    this.apiResponse = { status, data: null, message, title: '¡Genial!', btnText: 'Continuar', navTo: '/' };
+                } else {
+                    this.apiResponse = { status, data: null, message, title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' };
+                }
+                console.log("this.apiResponse ", this.apiResponse);
             } catch (error) {
                 console.log("error: " + error)
-            } finally {
-                console.log("finally")
-
             }
+
+
             this.loadingData.status = false;
-            var { state } = this.getRptHttp();
-            this.successApi.status = !state;
-            this.errorApi.status = state;
         },
         async sleep(ms) {
             return await new Promise(resolve => setTimeout(resolve, ms));
@@ -325,7 +317,7 @@ export default {
             await this.router.push('/')
         },
         hadlerCloseIndicator(value) {
-            this.errorApi.status = value;
+            this.apiResponse.status = null;
         }
     },
 }

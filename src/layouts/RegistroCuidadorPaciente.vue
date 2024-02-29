@@ -1,9 +1,9 @@
 <template>
     <Navbar  :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
 
-    <div class="container" >
+    <!-- <div class="container" > -->
         <div class="table-responsive">
-            <div class="table-wrapper">
+            <div clacontainerss="table-wrapper">
                 <div class="table-title">
                     <div class="row">
                         <div class="col-6">
@@ -18,12 +18,12 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>
+                            <!-- <th>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="selectAll">
                                     <label for="selectAll"></label>
                                 </span>
-                            </th>
+                            </th> -->
                             <th>Estado</th>
                             <th>Cuidador</th>
                             <th>Paciente</th>
@@ -34,12 +34,12 @@
                     </thead>
                     <tbody>
                         <tr v-for="(item, index) in valorTabla" :key="index">
-                            <td>
+                            <!-- <td>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="checkbox1" name="options[]" value="1">
                                     <label for="checkbox1"></label>
                                 </span>
-                            </td>
+                            </td> -->
                             <td>
                                 <a href="#deleteEmployeeModal" class="done" data-toggle="modal"><i class="material-icons"
                                         data-toggle="tooltip" title="Done">&#xe86c;</i></a>
@@ -103,7 +103,7 @@
 
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 
     <ModalCuidadorPaciente @createUSer="createUSer"></ModalCuidadorPaciente>
     <div v-if="loadingData.status === true">
@@ -362,6 +362,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.container{
+    width: 100vw;
+    margin: 10px 10px 10px 10px;
+}
+
+
 .formulario {
     margin: 10px;
 }
@@ -410,7 +417,8 @@ i {
 
 
 .table-responsive {
-    margin: 30px 0;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
 }
 
 .table-wrapper {

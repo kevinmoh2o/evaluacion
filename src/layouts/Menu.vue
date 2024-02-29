@@ -26,14 +26,12 @@ export default {
             idParent: 0,
             menus: [
                 { id: 1, titulo: 'REGISTRO DE USUARIO', ruta: 'cuidador', path: 'registrar-cuidador-paciente' },
-                { id: 2, titulo: 'EQUIPOS DE TRABAJO', ruta: 'equipo', path: 'about-us' },
-                { id: 3, titulo: 'REGISTRO DE CONSEJERÍA', ruta: 'registro', path: 'registro-consejeria' },
-                { id: 4, titulo: 'AGENDA', ruta: 'calendario', path: 'agenda' },
-                { id: 5, titulo: 'TEMAS DE CONSEJERIA', ruta: 'chat', path: 'tema-consejeria' },
-                //{ id: 5, titulo: 'TEMAS DE CONSEJERIA', ruta: 'chat', path: 'test-component' },
+                { id: 2, titulo: 'AGENDA', ruta: 'calendario', path: 'agenda' },
+                { id: 3, titulo: 'TEMAS DE CONSEJERIA', ruta: 'chat', path: 'tema-consejeria' },
+                { id: 4, titulo: 'CUESTIONARIO DE SATISFACCIÓN', ruta: 'cuestionario', path: 'cuestionario-satisfaccion' },
+                { id: 5, titulo: 'EQUIPOS DE TRABAJO', ruta: 'equipo', path: 'about-us' },
                 { id: 6, titulo: 'SOPORTE TÉCNICO', ruta: 'servicio-cliente', path: '' },
-                { id: 7, titulo: 'CUESTIONARIO DE SATISFACCIÓN', ruta: 'cuestionario', path: 'cuestionario-satisfaccion' },
-                //test-component
+                { id: 7, titulo: 'REGISTRO DE CONSEJERÍA', ruta: 'registro', path: 'registro-consejeria' },
             ],
         }
     },

@@ -46,9 +46,11 @@ export const crearUsuario = async ({ commit }, entry) => {
     const { data } = await investigacionApi.post(`/api/usuarios`, entry);
     const { status, message } = data;
     commit('addUser', { status, message, data: entry })
-    console.log("crearUsuario action:", { status, message }, entry);
+    //console.log("crearUsuario action:", { status, message }, entry);
   } catch (error) {
-    console.error(error)
+    const {status,message} = error.response.data;
+    commit('addUser', { status, message})
+    //console.error(error)
   }
 }
 
@@ -58,7 +60,7 @@ export const transactionUserPeople = async ({ commit }, entry) => {
     if (!rptReq || !rptReq.data) {
       throw new Error('La respuesta recibida es inválida');
     }
-    console.log(`rptReq transactionUserPeople: `,rptReq)
+    //console.log(`rptReq transactionUserPeople: `,rptReq)
     const { status, data,message } = rptReq.data;
     commit('setTranUserPeople', { status, data, message })
     //console.log("crearUsuario action:", { status, message }, entry);

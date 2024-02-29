@@ -47,7 +47,7 @@
                                 <div class="col-10 m-0 p-0">
                                     <select class="form-select" v-model="output.title" aria-label="Default select example"
                                         required>
-                                        <option value="" disabled selected hidden>Paciente</option>
+                                        <option value="" disabled selected hidden>Cuidador</option>
                                         <option v-for="paciente in listPaciente" :key="paciente.label"
                                             :value="paciente.value">{{ paciente.value }}</option>
                                     </select>

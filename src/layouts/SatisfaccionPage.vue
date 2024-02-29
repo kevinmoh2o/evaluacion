@@ -7,8 +7,8 @@
             <div class="contenedor" v-for="item in cuestionario" :key="item.nro" :value="item.pregunta"
                 @click="presionado(item)">
                 <h3 class="pregunta">
-                    <span>{{ item.nro }}. </span>
-                    <strong class="numer">{{ item.pregunta }}</strong>
+                    <strong>{{ item.nro }}. </strong>
+                    <p class="numer">{{ item.pregunta }}</p>
                 </h3>
                 <div class="alinear">
                     <div class="hijo">
@@ -52,7 +52,7 @@ export default {
             cuestionario: [
                 {
                     nro: 1,
-                    pregunta: "En general, ¿cómo calificarías tu satisfacción con la plataforma web de la Consejería de Enfermería?",
+                    pregunta: "Fue simple usar esta plataforma.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -64,7 +64,7 @@ export default {
                 },
                 {
                     nro: 2,
-                    pregunta: "¿Encontraste la plataforma fácil de usar?",
+                    pregunta: "Fue fácil aprender a utilizar esta plataforma.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -76,7 +76,7 @@ export default {
                 },
                 {
                     nro: 3,
-                    pregunta: "¿La información en la plataforma fue clara y comprensible?",
+                    pregunta: "Creo que me volví experto rápidamente utilizando esta plataforma.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -88,7 +88,7 @@ export default {
                 },
                 {
                     nro: 4,
-                    pregunta: "¿Experimentaste algún problema técnico mientras utilizabas la plataforma?",
+                    pregunta: "La plataforma muestra mensajes de error que me dicen claramente cómo resolver los problemas.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -100,7 +100,7 @@ export default {
                 },
                 {
                     nro: 5,
-                    pregunta: "¿La plataforma te proporcionó la información que necesitabas de manera eficiente?",
+                    pregunta: "Cada vez que cometo un error utilizando la plataforma lo resuelvo fácil y rápidamente.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -112,7 +112,7 @@ export default {
                 },
                 {
                     nro: 6,
-                    pregunta: "En relación con tus expectativas, ¿cómo calificarías el rendimiento de la plataforma?",
+                    pregunta: "La información (como ayuda en línea, mensajes en pantalla y otra documentación) que provee esta plataforma es clara.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -124,7 +124,7 @@ export default {
                 },
                 {
                     nro: 7,
-                    pregunta: "¿Hubo alguna funcionalidad específica que no encontraste en la plataforma y que te hubiera sido útil?",
+                    pregunta: "Es fácil encontrar en la plataforma la información que necesito.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -136,7 +136,7 @@ export default {
                 },
                 {
                     nro: 8,
-                    pregunta: "¿Cómo evaluarías la apariencia visual de la plataforma?",
+                    pregunta: "La información que proporciona la plataforma fue efectiva ayudándome a completar las tareas.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -148,7 +148,7 @@ export default {
                 },
                 {
                     nro: 9,
-                    pregunta: "¿Recomendarías la plataforma web de la Consejería de Enfermería a otros usuarios?",
+                    pregunta: "La organización de la información de la plataforma en la pantalla fue clara.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -160,7 +160,43 @@ export default {
                 },
                 {
                     nro: 10,
-                    pregunta: "¿Tienes algún comentario adicional o sugerencia para mejorar la plataforma?",
+                    pregunta: "La interfaz de la plataforma fue placentera.",
+                    respuesta: { value: "0", label: "" },
+                    opciones: [
+                        { value: "1", label: "Muy poco atractiva" },
+                        { value: "2", label: "Poco atractiva" },
+                        { value: "3", label: "Neutral" },
+                        { value: "4", label: "Atractiva" },
+                        { value: "5", label: "Muy atractiva" }
+                    ]
+                },
+                {
+                    nro: 11,
+                    pregunta: "Me gustó utilizar la plataforma.",
+                    respuesta: { value: "0", label: "" },
+                    opciones: [
+                        { value: "1", label: "Muy poco atractiva" },
+                        { value: "2", label: "Poco atractiva" },
+                        { value: "3", label: "Neutral" },
+                        { value: "4", label: "Atractiva" },
+                        { value: "5", label: "Muy atractiva" }
+                    ]
+                },
+                {
+                    nro: 12,
+                    pregunta: "La plataforma tuvo todas las herramientas que esperaba que tuviera.",
+                    respuesta: { value: "0", label: "" },
+                    opciones: [
+                        { value: "1", label: "Muy poco atractiva" },
+                        { value: "2", label: "Poco atractiva" },
+                        { value: "3", label: "Neutral" },
+                        { value: "4", label: "Atractiva" },
+                        { value: "5", label: "Muy atractiva" }
+                    ]
+                },
+                {
+                    nro: 12,
+                    pregunta: "En general, estuve satisfecho con la plataforma.",
                     respuesta: { value: "0", label: "" },
                     opciones: [
                         { value: "1", label: "Muy poco atractiva" },
@@ -193,6 +229,9 @@ export default {
 .pregunta {
     font-size: 15px;
     font-weight: 400;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
 }
 
 .contenedor {
@@ -201,9 +240,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* Alinea los elementos al inicio verticalmente */
     align-items: flex-start;
-    /* Alinea los elementos al inicio horizontalmente */
 }
 
 
@@ -214,13 +251,6 @@ export default {
     flex-wrap: wrap;
     flex-direction: column;
     height: 50px;
-
-    /* justify-content: start;
-    justify-items: start;
-    justify-self: start;
-    align-items: center;
-    align-self: flex-start;
-    align-content: start; */
 }
 
 .elemnto {
@@ -229,8 +259,8 @@ export default {
 }
 
 .numer {
-    padding: 10px;
-    font-weight: bolder;
+    padding-left: 10px;
+    font-weight: 500;
 }
 
 
@@ -271,7 +301,7 @@ export default {
 }
 
 .hijo {
-    width: 200px;
+    width: 100%;
     padding: 0;
     margin: 0;
 }

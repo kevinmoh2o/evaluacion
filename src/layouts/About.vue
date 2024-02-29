@@ -1,12 +1,5 @@
 <template>
-    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Nosotros'"
-    @volver="onBackHandle"
-    ></Navbar>
-    <!-- <InfoUx class="box1" :intitulo="'Investigador:'" :inDescripcion="'BACH. MARIA PUMAYALLI'"></InfoUx>
-    <InfoUx class="box1" :intitulo="'Investigador:'" :inDescripcion="'BACH. CINTHIA PIO'"></InfoUx>
-    <InfoUx class="box1" :intitulo="'Asesor:'" :inDescripcion="' DANIEL CONDOR'"></InfoUx>
-    <InfoUx class="box1" :intitulo="'Desarrollador:'" :inDescripcion="'KEVIN MONTAÑEZ HUAMÁN'"></InfoUx> -->
-    <!-- <InfoUx></InfoUx> -->
+    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Nosotros'" @volver="onBackHandle"></Navbar>
     <EquipoTrabajo></EquipoTrabajo>
 </template>
 
@@ -31,20 +24,18 @@ export default {
         //InfoUx,
         EquipoTrabajo: defineAsyncComponent(() => import('@/components/compose/EquipoTrabajo.vue')),
     },
-    methods:{
+    methods: {
 
-        async onBackHandle(){
+        async onBackHandle() {
             console.log("navegando")
             await this.router.push('/menu')
         }
-    
+
     }
 }
 </script>
 <style lang="scss" scoped>
-
-.box1{
+.box1 {
     margin: 15px 0 15px 0;
 }
-
 </style>

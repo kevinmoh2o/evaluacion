@@ -1,13 +1,13 @@
 <template>
     <div class="radio-input">
-        <input value="value-1" name="value-radio" id="value-1" type="radio" class="star s1" @click="presionar(5)" />
-        <input value="value-2" name="value-radio" id="value-2" type="radio" class="star s2" @click="presionar(4)" />
-        <input value="value-3" name="value-radio" id="value-3" type="radio" class="star s3" @click="presionar(3)" />
-        <input value="value-4" name="value-radio" id="value-4" type="radio" class="star s4" @click="presionar(2)" />
-        <input value="value-5" name="value-radio" id="value-5" type="radio" class="star s5" @click="presionar(1)" />
+        <input value="value-1" name="value-radio" id="value-1" type="radio" class="star s1 strella" @click="presionar(5)" />
+        <input value="value-2" name="value-radio" id="value-2" type="radio" class="star s2 strella" @click="presionar(4)" />
+        <input value="value-3" name="value-radio" id="value-3" type="radio" class="star s3 strella" @click="presionar(3)" />
+        <input value="value-4" name="value-radio" id="value-4" type="radio" class="star s4 strella" @click="presionar(2)" />
+        <input value="value-5" name="value-radio" id="value-5" type="radio" class="star s5 strella" @click="presionar(1)" />
     </div>
     <div class="etiqueta">
-        <h4>{{ etiqueta(indice) }}</h4>
+        <h6>{{ etiqueta(indice) }}</h6>
     </div>
 </template>
 
@@ -75,46 +75,21 @@ export default {
 
     },
 
-    /* data() {
-        return {
-            time: {
-                hours: new Date().getHours(),
-                minutes: new Date().getMinutes()
-            }
-        }
-    }, */
-    /* methods: {
-        format(date) {
-            const day = date.getDate().toString().padStart(2, '0')
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
-        },
-        setNombre() {
-            return this.nombre;
-        },
-        setType() {
-            return this.type
-        },
-        presionar(value){
-            console.log(value)
-        }
-    } */
-
 }
 </script>
 
 
 <style lang="scss">
 @import '@/styles/styles.scss';
-
+.strella{
+    margin: 10px 20px 0px 20px;
+}
 //map-get($theme-colors, "azul")
 .radio-input {
     display: flex;
     scale: 0.2;
     transform: rotate(180deg);
-    justify-content: flex-end;
-    /* Alinea el contenido a la izquierda */
+    justify-content: center;
 }
 
 
