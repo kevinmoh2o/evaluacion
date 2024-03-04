@@ -27,3 +27,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 # yarn add -g sass
 # yarn add -D sass-loader@10 sass
 # yarn add bootstrap@5.2.3
+
+# agregar el archivo .env y descargar las credenciales de firebase

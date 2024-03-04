@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" ref="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog modal-md modal-lg modal-xl modal-xxl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form @submit="submitForm" class="needs-validation" novalidate>
+                    <form @submit.prevent="store" class="needs-validation" novalidate>
 
                         <div class="form-crear">
                             <div class="box-sup">
@@ -18,8 +18,8 @@
                                 <div class="col-11 m-0 p-0">
                                     <label for="recipient-name" class="col-12 fw-semibold px-1 align-left">Licenciado a
                                         Cargo:</label>
-                                    <label for="recipient-name" class="col-12 px-1 align-left">Kevin Basilio Montañez
-                                        Huamán</label>
+                                    <label for="recipient-name" class="col-12 px-1 align-left">{{ usuarioData.fullName
+                                        }}</label>
                                 </div>
                             </div>
 
@@ -31,7 +31,7 @@
                                     <label for="recipient-name" class="col-12 fw-semibold px-1 align-left">Fecha de
                                         cita:</label>
                                     <label for="recipient-name" class="col-12 px-1 align-left">{{
-                                        Formatos.ymdFechaToView(inFecha) }}</label>
+                        Formatos.ymdFechaToView(inFecha) }}</label>
                                 </div>
                             </div>
                         </div>
@@ -45,8 +45,8 @@
                                 <div class="img-mod"><i class="bi bi-person-fill"></i>
                                 </div>
                                 <div class="col-10 m-0 p-0">
-                                    <select class="form-select" v-model="output.title" aria-label="Default select example"
-                                        required>
+                                    <select class="form-select" v-model="output.title"
+                                        aria-label="Default select example" required>
                                         <option value="" disabled selected hidden>Cuidador</option>
                                         <option v-for="paciente in listPaciente" :key="paciente.label"
                                             :value="paciente.value">{{ paciente.value }}</option>
@@ -65,7 +65,8 @@
                                 <div class="col-10 m-0 p-0">
                                     <select id="startTime" class="form-select" v-model="selectedTime" required>
                                         <option value="" disabled selected>Elija una hora</option>
-                                        <option v-for="(time, index) in timeOptions" :key="index" :value="time">{{ time }}
+                                        <option v-for="(time, index) in timeOptions" :key="index" :value="time">{{ time
+                                            }}
                                         </option>
                                     </select>
                                 </div>
@@ -79,8 +80,8 @@
                                     <select class="form-select" v-model="output.extendedProps.recordar"
                                         aria-label="Default select example" required>
                                         <option value="" disabled selected hidden>Recordatorio</option>
-                                        <option v-for="index in listRecordar" :key="index.label" :value="index.value">{{
-                                            index.value }}</option>
+                                        <option v-for="index in listRecordar" :key="index.label" :value="index.value">
+                                            {{ index.value }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -109,7 +110,8 @@
                         </div>
 
                         <div class="my-3">
-                            <textarea class="form-control"  v-model="output.extendedProps.description" id="message-text" placeholder="Notas" maxlength="200"></textarea>
+                            <textarea class="form-control" v-model="output.extendedProps.description" id="message-text"
+                                placeholder="Notas" maxlength="200"></textarea>
                         </div>
 
                         <div class="modal-footer">
@@ -135,13 +137,14 @@ export default {
         msg: String,
         inFecha: String,
     },
-    setup() {
-        return {
-            Formatos
-        };
+    async mounted() {
+        this.usuarioData = this.getUser();
+        this.generateTimeOptions();
     },
     data() {
         return {
+            usuarioData: {},
+            Formatos,
             form: this.selectedOpt,
             selectedTime: '',
             timeOptions: [],
@@ -172,7 +175,7 @@ export default {
                     asistencia: "",
                     hora: "",
                     fecha: this.inFecha,
-                    meeting:"",
+                    meeting: "",
                 },
                 groupId: "kbmont",
                 start: this.selectedTime,
@@ -181,26 +184,35 @@ export default {
             }
         };
     },
-    mounted() {
-        // Genera las opciones de tiempo al montar el componente
-        this.generateTimeOptions();
-    },
+
     methods: {
         ...mapActions('programacionModule', ['createEntry', 'updateEntry', 'setIsLoading']),
-        ...mapGetters('programacionModule', ['getEstado']),
-        async store(form) {
+        ...mapGetters('programacionModule', ['getEstado', 'getUser']),
+        async store(event) {
             //this.setIsLoading(false);
-            var {meeting,end} = this.camposAdicionales();
-            this.output.end=end;
-            this.output.extendedProps.meeting=meeting;
-            console.log("selectedTime: ", this.selectedTime)
-                
-            console.log({meeting,end} )
+            var validateForm = this.submitForm(event);
+            var { meeting, end } = this.camposAdicionales();
+            this.output.end = end;
+            this.output.extendedProps.meeting = meeting;
+            console.log("validateForm: ", { validateForm, output: this.output })
+            this.$emit('modelProgramacion', { validateForm, output: this.output });
+            /* if (this.$refs.exampleModal) {
+                const closeButton = this.$refs.exampleModal.querySelector('.btn-close');
+                if (closeButton) {
+                    closeButton.click();
+                }
+            } */
+            /*console.log("selectedTime: ", this.selectedTime)
+
+            console.log({ meeting, end })
 
             console.log("output: ", this.output)
             this.$emit('saveAppt', form);
             console.log("this.flagUpdateMo")
-            await this.createEntry(this.output)
+            await this.createEntry(this.output) */
+
+
+
             /* if (this.flagUpdateMo) {
                 console.log("this.grabar", this.grabar)
                 try {
@@ -219,6 +231,14 @@ export default {
             }
             this.setIsLoading(true); */
         },
+        closeModal(valu){
+            if (this.$refs.exampleModal) {
+                const closeButton = this.$refs.exampleModal.querySelector('.btn-close');
+                if (closeButton) {
+                    closeButton.click();
+                }
+            }
+        },
         generateTimeOptions() {
             for (let hour = 8; hour <= 20; hour++) {
                 for (let minute = 0; minute < 60; minute += 10) {
@@ -232,7 +252,7 @@ export default {
         isValid(fieldName) {
             return this.validation[fieldName];
         },
-        submitForm(event) {
+        /* submitForm(event) {
             console.log("submitForm")
             const form = event.target;
             if (!form.checkValidity()) {
@@ -241,6 +261,17 @@ export default {
             }
             form.classList.add('was-validated');
             this.store(form)
+        },  */
+        submitForm(event) {
+
+            const form = event.target;
+            var validador = form.checkValidity();
+            if (!validador) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+            return validador;
         },
         camposAdicionales() {
             return {
@@ -248,7 +279,7 @@ export default {
                 end: Formatos.addOneHour(this.output.start),
             }
         },
- 
+
 
     },
     watch: {
@@ -269,7 +300,7 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: space-between;
     align-items: left;
 }
 
@@ -314,5 +345,5 @@ i {
     justify-content: center;
 }
 </style>
-                                    <!-- <a href="https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D"
+<!-- <a href="https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D"
                                         class="link-success">Link de la reunión</a> -->

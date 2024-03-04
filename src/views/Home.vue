@@ -56,7 +56,7 @@ export default {
     },
   },
   created() {
-    
+    console.log("created in home")
     this.contador = this.getCounter();
     if(this.contador>2){
       window.addEventListener('resize', this.handleWindowResize);

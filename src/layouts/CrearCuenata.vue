@@ -9,7 +9,8 @@
 
                 <div class="box">
                     <label for="validationCustom01" class="form-label"><span>*</span> Primer Nombre:</label>
-                    <input type="text" class="form-control" id="validationCustom01" v-model="data.firstName" required>
+                    <input type="text" class="form-control" id="validationCustom01" v-model.trim="data.firstName"
+                        required>
                     <div class="invalid-feedback">
                         Escriba un nombre válido.
                     </div>
@@ -17,13 +18,14 @@
 
                 <div class="box">
                     <label for="validationCustom02" class="form-label">Segundo Nombre:</label>
-                    <input type="text" class="form-control" v-model="data.secondName">
+                    <input type="text" class="form-control" v-model.trim="data.secondName">
 
                 </div>
 
                 <div class="box">
                     <label for="validationCustom03" class="form-label"><span>*</span> Apellido Paterno:</label>
-                    <input type="text" class="form-control" id="validationCustom03" v-model="data.apelPaterno" required>
+                    <input type="text" class="form-control" id="validationCustom03" v-model.trim="data.apelPaterno"
+                        required>
                     <div class="invalid-feedback">
                         Escriba un apellido válido.
                     </div>
@@ -31,20 +33,13 @@
 
                 <div class="box">
                     <label for="validationCustom04" class="form-label"><span>*</span> Apellido Materno:</label>
-                    <input type="text" class="form-control" id="validationCustom04" v-model="data.apelMaterno" required>
+                    <input type="text" class="form-control" id="validationCustom04" v-model.trim="data.apelMaterno"
+                        required>
                     <div class="invalid-feedback">
                         Escriba un apellido válido.
                     </div>
                 </div>
 
-                <!-- <div class="box">
-                    <label for="validationCustom05" class="form-label"><span>*</span> Edad:</label>
-                    <input type="number" class="form-control" id="validationCustom05" max="80" min="18" maxlength="2"
-                        v-model="data.age" required>
-                    <div class="invalid-feedback">
-                        Escriba una edad válida.
-                    </div>
-                </div> -->
 
                 <div class="box">
                     <label for="validationCustom06" class="form-label"><span>*</span> Sexo:</label>
@@ -69,7 +64,7 @@
 
                 <div class="box">
                     <label for="valiEmail" class="form-label"><span>*</span> Email:</label>
-                    <input type="email" class="form-control" id="valiEmail" v-model="data.email" required>
+                    <input type="email" class="form-control" id="valiEmail" v-model.trim="data.email" required>
                     <div class="invalid-feedback">
                         Escriba un dirección de correo electrónico válida.
                     </div>
@@ -138,8 +133,8 @@
 
                 <div class="box">
                     <label for="validationCustom13" class="form-label"><span>*</span> DNI:</label>
-                    <input type="text" class="form-control" id="validationCustom13" v-model="data.dni" maxlength="8"
-                        minlength="8" required>
+                    <input type="text" class="form-control" id="validationCustom13" v-model.trim="data.dni"
+                        maxlength="8" minlength="8" required>
                     <div class="invalid-feedback">
                         Escriba un DNI válido.
                     </div>
@@ -148,7 +143,7 @@
                 <div class="box">
                     <label for="validationCustom11" class="form-label"><span>*</span> Contraseña:</label>
                     <input type="password" class="form-control" id="validationCustom11" maxlength="12" minlength="6"
-                        autocomplete="new-password" v-model="data.password" required>
+                        autocomplete="new-password" v-model.trim="data.password" required>
                     <div class="invalid-feedback">
                         Entre 6-12 caracteres.
                     </div>
@@ -157,7 +152,7 @@
                 <div class="box">
                     <label for="validationCustom12" class="form-label"><span>*</span> Confirmar Contraseña:</label>
                     <input type="password" class="form-control" id="validationCustom12" maxlength="12" minlength="6"
-                        autocomplete="new-password" v-model="data.verifyPassword" required>
+                        autocomplete="new-password" v-model.trim="data.verifyPassword" required>
                     <div class="invalid-feedback">
                         Entre 6-12 caracteres.
                     </div>
@@ -175,9 +170,7 @@
 
     </form>
 
-    <!-- <LoadingOverlay :loading="loadingData" @cerrar-indicador="hadlerCloseIndicator" />
-    <SuccessView :reponse="successApi" />
-    <ErrorView :reponse="errorApi" @cerrar-indicador="hadlerCloseIndicator" /> -->
+
 
     <div v-if="loadingData.status === true">
         <LoadingOverlay :loading="loadingData" />
@@ -191,7 +184,7 @@
         </div>
     </div>
 </template>
-  
+
 <script>
 import Navbar from '@/components/compose/Navbar.vue';
 import { useRouter } from 'vue-router';
@@ -249,6 +242,8 @@ export default {
         ...mapGetters('programacionModule', ['getEstado', 'getRptHttp']),
         async onPressCrear(event) {
             //console.log("this.data: ",this.data)
+
+            
             var validateForm = this.submitForm(event);
             if (!validateForm) {
                 this.apiResponse = Object.assign({ status: false, data: null, message: 'Por favor, completa todos los campos obligatorios' }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
@@ -261,13 +256,9 @@ export default {
                 return null;
             }
 
-
             this.loadingData.status = true;
             try {
                 await this.crearUsuario(this.data);
-                //const { success, user, error } = await authService.createUser(this.data.email, this.data.password);
-                //console.log("respuesta http ", { success, user, error })
-                
                 var { status, message } = this.getRptHttp();
                 console.log("crear usuario ", { status, message })
                 if (status) {
@@ -279,7 +270,6 @@ export default {
             } catch (error) {
                 console.log("error: " + error)
             }
-
 
             this.loadingData.status = false;
         },
@@ -322,7 +312,7 @@ export default {
     },
 }
 </script>
-  
+
 <style scoped>
 /* label{
   display: flex;

@@ -3,37 +3,25 @@
 
 // }
 import investigacionApi from '@/apis/investigacionapi'
+import { ENDPOINTS } from '../../../../apis/endpoints';
 
-/* export const cargarUsuarios = async () => {
-  var path = `/api/usuarios`;
-  try {
-    console.log("path: ", path)
-    var rptReq = await investigacionApi.get(path);
-    console.log("rptReq: ", rptReq)
-    const { status, data, message } = rptReq.data;
-    console.log("data")
-    console.log({ status, data, message })
-  } catch (error) {
-    console.error(error)
-  }
-} */
 
 
 export const getUserByEmail = async ({ commit }, { dni, password }) => {
-  var path = `/api/usuarios/dni`;
   try {
     const params = { dni, password };
-    const url = `${path}?${new URLSearchParams(params)}`;
+    const url = `${ENDPOINTS.GET_USER_BY_DNI}?${new URLSearchParams(params)}`;
     var rptReq = await investigacionApi.get(url);
-      if (!rptReq || !rptReq.data) {
-        throw new Error('La respuesta recibida es inválida');
-      }
-      const { status, data } = rptReq.data;
-      commit('setUserProvider', { status, data, message: `Usuario ${data.apelPaterno} ${data.firstName} autenticado correctamente.` });
+    if (!rptReq || !rptReq.data) {
+      throw new Error('La respuesta recibida es inválida');
+    }
+    const { status, data } = rptReq.data;
+    commit('setUserProvider', { status, data, message: `Usuario ${data.apelPaterno} ${data.firstName} autenticado correctamente.` });
+    commit('setUser', data);
   } catch (error) {
-    const {status,message} = error.response.data;
-    console.log("error: ",{status,message} );
-    commit('setUserProvider', { status,message })
+    const { status, message } = error.response.data;
+    console.log("error: ", { status, message });
+    commit('setUserProvider', { status, message })
   }
 }
 
@@ -41,52 +29,96 @@ export const getUserByEmail = async ({ commit }, { dni, password }) => {
 export const crearUsuario = async ({ commit }, entry) => {
   var fechaActual = new Date();
   try {
-    //{config,data,headers,request,status,statusText}
     entry.createdAt = fechaActual.toISOString();
-    const { data } = await investigacionApi.post(`/api/usuarios`, entry);
+    const { data } = await investigacionApi.post(ENDPOINTS.POS_CREATE_USER, entry);
     const { status, message } = data;
     commit('addUser', { status, message, data: entry })
     //console.log("crearUsuario action:", { status, message }, entry);
   } catch (error) {
-    const {status,message} = error.response.data;
-    commit('addUser', { status, message})
-    //console.error(error)
+    const { status, message } = error.response.data;
+    commit('addUser', { status, message })
   }
 }
 
 export const transactionUserPeople = async ({ commit }, entry) => {
   try {
-    const rptReq = await investigacionApi.post(`/api/usuarios/transUser`, entry);
+    const rptReq = await investigacionApi.post(ENDPOINTS.POS_CREATE_TIE_PAC_CARE_USER, entry);
     if (!rptReq || !rptReq.data) {
       throw new Error('La respuesta recibida es inválida');
     }
-    //console.log(`rptReq transactionUserPeople: `,rptReq)
-    const { status, data,message } = rptReq.data;
+    const { status, data, message } = rptReq.data;
     commit('setTranUserPeople', { status, data, message })
     //console.log("crearUsuario action:", { status, message }, entry);
   } catch (error) {
-    const {status,message} = error.response.data;
-    commit('setTranUserPeople', { status,message })
+    const { status, message } = error.response.data;
+    commit('setTranUserPeople', { status, message })
   }
 }
 
 
-export const usuarioPersonas = async ({ commit }, { id, isActive }) => {
+export const listUserPersona = async ({ commit }, { id, isActive }) => {
   try {
-    var path = `/api/usuarios/userPeople`;
     const params = { id, isActive };
-    const url = `${path}?${new URLSearchParams(params)}`;
+    const url = `${ENDPOINTS.GET_LITS_PACC_CARE_BY_USER}?${new URLSearchParams(params)}`;
     var rptReq = await investigacionApi.get(url);
-      if (!rptReq || !rptReq.data) {
-        throw new Error('La respuesta recibida es inválida');
-      }
-      const { status, data } = rptReq.data;
-      commit('setUsuarioPersonaList', { status, data, message: `` });
+    if (!rptReq || !rptReq.data) {
+      throw new Error('La respuesta recibida es inválida');
+    }
+    const { status, data } = rptReq.data;
+    commit('setUsuarioPersonaList', { status, data, message: `` });
   } catch (error) {
-    const {status,message} = error.response.data;
-    commit('setTranUserPeople', { status,message })
+    const { status, message } = error.response.data;
+    commit('setTranUserPeople', { status, message })
   }
 }
+
+
+export const createProgramacion = async ({ commit }, entry) => {
+  try {
+    console.log("createProgramacion")
+    const newEntry = await investigacionApi.post(ENDPOINTS.POS_CREATE_PROGRAMACION, entry);
+    console.log("CREATE newProgramacion", newEntry, entry)
+    if (newEntry.status >= 200 && newEntry.status <= 299) {
+      entry["id"] = newEntry.data.name;
+      
+      commit('addEntry', entry)
+      return { entry, status: true };
+    } else {
+      return { message:"Error al crear la programación", status: false };
+    }
+
+  } catch (error) {
+    console.error(error)
+    return { message:"Server error", status: false };
+  }
+}
+
+
+export const cargarListProgramacionesById = async ({ commit }, {id}) => {
+  /* console.log("daloadEntriesta");
+  var path = `resultados.json?orderBy="groupId"&equalTo="${groupId}"`;
+  console.log(`loadEntries: ${path}`); */
+  var data = [];
+  try {
+    const params = { id };
+    const url = `${ENDPOINTS.GET_LIST_PROGRAMACIONES_BY_ID}?${new URLSearchParams(params)}`;
+    var respuesta = await investigacionApi.get(url);
+    //console.log("cargarListProgramacionesById: ", {status, data: data.data} );
+    console.log(respuesta);
+    const myObj = respuesta.data.data;
+    for (const key in myObj) {
+      const value = myObj[key];
+      value["id"] = key;
+      data.push(value);
+    }
+    console.log(data);
+    commit('setEntries', data)
+    localStorage.setItem('entries', JSON.stringify(data));
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 
 
 
@@ -167,3 +199,18 @@ export const setIsLoading = async ({ commit }, valor) => {
   commit('setIsLoading', valor);
 
 }
+
+
+/* export const cargarUsuarios = async () => {
+  var path = `/api/usuarios`;
+  try {
+    console.log("path: ", path)
+    var rptReq = await investigacionApi.get(path);
+    console.log("rptReq: ", rptReq)
+    const { status, data, message } = rptReq.data;
+    console.log("data")
+    console.log({ status, data, message })
+  } catch (error) {
+    console.error(error)
+  }
+} */

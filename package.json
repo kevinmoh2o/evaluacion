@@ -35,6 +35,7 @@
         "vue-router": "^4.0.3",
         "vue3-carousel": "^0.3.1",
         "vue3-datepicker": "^0.4.0",
+        "vue3-snackbar": "^2.2.0",
         "vue3-timepicker": "^1.0.0-beta.2",
         "vue3-youtube": "^0.1.9",
         "vuejs3-datepicker": "^1.0.19",

@@ -11,9 +11,9 @@
                     <p class="numer">{{ item.pregunta }}</p>
                 </h3>
                 <div class="alinear">
-                    <div class="hijo">
+                    <!-- <div class="hijo"> -->
                         <EstrellaQuest @selectedIndexEmit="readSelectedIndexEmit" :repuesta="item.respuesta"></EstrellaQuest>
-                    </div>
+                    <!-- </div> -->
 
                 </div>
 
@@ -297,6 +297,9 @@ export default {
 .alinear {
     width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: left;
 
 }
 
@@ -304,5 +307,9 @@ export default {
     width: 100%;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left !important;
+    align-items: start !important;
 }
 </style>

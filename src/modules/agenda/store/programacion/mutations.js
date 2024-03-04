@@ -24,11 +24,20 @@ export const setCounter = (state, newCounterValue) => {
   localStorage.setItem('counter', newCounterValue);
 };
 
+export const setUser = (state, user) => {
+  localStorage.setItem('user', JSON.stringify(user));
+};
 
-/* export const updateEntry = (state, entry) => {
-  const index = state.entries.findIndex(e => e.id === entry.id)
-  state.entries.splice(index, 1, entry)
-} */
+
+export const addProgramacion = (state, entry) => {
+  console.log("Mutacion addProgramacion", state, entry)
+  state.entries.push(entry)
+}
+
+
+
+
+
 export const updateEntry = (state, entry) => {
   const index = state.entries.findIndex((e) => e.id === entry.id);
   if (index !== -1) {
@@ -37,7 +46,7 @@ export const updateEntry = (state, entry) => {
 };
 
 export const addEntry = (state, entry) => {
-  console.log("Mutacion addEntry",state, entry)
+  console.log("Mutacion addEntry", state, entry)
   state.entries.push(entry)
 }
 
@@ -50,8 +59,6 @@ export const deleteEntry = (state, id) => {
 }
 
 export const setIsLoading = (state, valor) => {
-  /* console.log("state setIsLoading",state)
-  console.log("valor setIsLoading",valor) */
   state.isLoading = valor
 }
 
@@ -61,3 +68,8 @@ export const addUser = (state, valor) => {
 }
 
 
+
+/* export const updateEntry = (state, entry) => {
+  const index = state.entries.findIndex(e => e.id === entry.id)
+  state.entries.splice(index, 1, entry)
+} */

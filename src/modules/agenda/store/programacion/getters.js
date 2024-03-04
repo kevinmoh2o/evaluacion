@@ -25,8 +25,14 @@ export const getRptHttp = (state) => {
 };
 
 export const getCounter = (state) => {
-    console.log("state",state)
+    console.log("getCounter",state)
     return state.counter;
+};
+
+export const getUser = (state) => {
+    var usertest  = localStorage.user;
+    const user = usertest !== null ? JSON.parse(usertest) : null;
+    return user;
 };
 
 export const getEvents = ( state ) => {

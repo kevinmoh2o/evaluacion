@@ -21,7 +21,10 @@
                 <button class="btn boton" type="submit"><i class="fas fa-search"></i>Buscar</button>
             </div>
 
-            <Books class="books"></Books>
+            <div class="tamanio">
+                <Books class="books" :userProv="userProv"></Books>
+            </div>
+
         </div>
     </div>
 </template>
@@ -29,13 +32,18 @@
 <script>
 import Navbar from '../components/compose/Navbar.vue';
 import { defineAsyncComponent } from 'vue'
-
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'agenda-layout',
+    /* async mounted() {
+        this.userProv = this.getUser();
+        console.log("userProv mounted: ",userProv);
+    }, */
     data() {
-
-
+        return {
+            userProv:{}
+        }
     },
     components: {
         Navbar,
@@ -44,6 +52,8 @@ export default {
 
     },
     methods: {
+        ...mapActions('programacionModule', ['transactionUserPeople','listUserPersona']),
+        ...mapGetters('programacionModule', ['getUserProvider','getTranUserPeople','getUsuarioPersonaList','getUser']),
         onBackHandle() {
             this.$router.push('/menu');
         }
@@ -52,6 +62,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tamanio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100vw - 310px);
+}
+
+
+
 .contenedor {
     display: flex;
     flex-direction: column;
@@ -62,21 +81,9 @@ button i {
     padding: 5px;
 }
 
-/* @media (min-width:750px){
-    .cuerpo{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        text-align: center;
-        align-items: center;
-        flex-wrap: wrap;
-        flex-direction: column;
-    }
-
-    .books{
-        width: 100%;
-    }
-} */
+select {
+    width: 270px;
+}
 
 .form-select {
     text-align: center;
@@ -92,8 +99,6 @@ button i {
 
 .form-select:focus {
     outline: 2px solid #F2B749;
-    ;
-    /* Puedes ajustar el color y el grosor según tus preferencias */
     box-shadow: #F2B749;
     border-color: #F2B749;
     color: #F2B749;
@@ -101,6 +106,7 @@ button i {
 
 .boton {
     width: 90%;
+    height: 30px;
     border-radius: 10px;
     background-color: #F2B749;
     color: white;
@@ -114,23 +120,40 @@ button i {
 }
 
 .cuerpo {
+    //background-color: #87f249;
+    margin: 0;
+    padding: 0;
     display: flex;
-    text-align: center;
+    text-align: start;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
-    //height: calc(100vh - 60px);
-    //width: 600px;
-    justify-content: center;
+    justify-content: start;
     flex-grow: 1;
     height: 100%;
     width: 100vw;
 }
 
 
+@media only screen and (max-width: 767px) {
+    .cuerpo {
+        //background-color: #87f249;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        text-align: start;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: start;
+    }
+}
+
+
 .selector {
     margin: 10px 0 10px 0;
     width: 90%;
+    height: 30px;
     display: flex;
     align-content: center;
     align-items: center;
@@ -148,13 +171,32 @@ button i {
     align-content: center;
     text-align: center;
     justify-content: center;
+    //background-color: aqua;
 
 }
 
 
 
-/* .books{
-    width: calc(100vw - 400px);
+.books {
+    margin: 10px;
+    //width: calc(100vw - 400px);
+}
+
+
+/* @media (min-width:750px){
+    .cuerpo{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        text-align: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .books{
+        width: 100%;
+    }
 } */
 /* .cabeceraAgenda{
     grid-area:cabeceraAgenda;

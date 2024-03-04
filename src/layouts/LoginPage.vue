@@ -107,7 +107,8 @@ export default {
         };
     },
     mounted() {
-        //this.apiResponse= { status: false };
+        /* var userProv = this.getUser;
+        console.log("userProv: ",userProv); */
     },
     setup() {
         //const router = useRouter()
@@ -124,7 +125,7 @@ export default {
     },
     methods: {
         ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading', 'getUserByEmail']),
-        ...mapGetters('programacionModule', ['getEstado', 'getUserProvider']),
+        ...mapGetters('programacionModule', ['getEstado', 'getUserProvider','getUser']),
         async sleep(ms) {
             return await new Promise(resolve => setTimeout(resolve, ms));
         },
@@ -135,6 +136,7 @@ export default {
             this.loadingData.status = true;
             await this.getUserByEmail({ dni: this.email, password: this.password });
             const { status, data, message } = await this.getUserProvider();
+            console.log("Auth: ",{ status, data, message });
             if (status) {
                 this.apiResponse = Object.assign({ status, data, message }, { title: '¡Genial!', btnText: 'Continuar', navTo: '' });
                 this.$router.push('/menu');

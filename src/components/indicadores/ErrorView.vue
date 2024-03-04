@@ -57,7 +57,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 998;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,6 +1,6 @@
 <template>
   <div class="column-container">
-    <Fullcalendar ref="fullCalendar" :options="calendarOptions" class="full-calendar">
+    <Fullcalendar ref="fullCalendar" class="full-calendar" :options="calendarOptions" :userProv="userProv">
       <template #eventContent="arg">
         <p class="card-box" @mouseenter="handleEventMouseEnter(arg)" @mouseleave="handleMouseLeave">
           <span>
@@ -9,7 +9,7 @@
               <span class="fc-title">{{ arg.event.title }}</span>
             </div>
             <span class="card-popup popover">
-              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover"/>
+              <CalendarModal2 v-if="popoverVisible" :eventData="selectedEventData" :evento="eventoPopover" />
             </span>
           </span>
         </p>
@@ -19,7 +19,7 @@
   </div>
 </template>
 
-  
+
 <script>
 import '@fullcalendar/core'
 import Fullcalendar from '@fullcalendar/vue3'
@@ -46,14 +46,19 @@ export default {
   props: {
     usuario: {
       type: String,
-      required: true
+      required: true,
     },
+    //userProv: Object,
   },
   async mounted() {
     this.handleEventMount();
-    await this.loadEntries(this.usuario);
-    this.calendarOptions.events = this.getentriesTest();
-    if (Hardware.isMobile()) {
+    this.userData = this.getUser();
+    await this.cargarListProgramacionesById({ id: this.userData.id });
+    //await this.loadEntries(this.usuario);
+    this.calendarOptions.events = this.getEvents();
+    console.log("mounted: ", { data: this.userData, eventos: this.calendarOptions.events });
+
+    /* if (Hardware.isMobile()) {
       const screenWidth = Hardware.getScreenWidth();
       console.log("Se está abriendo desde un dispositivo móvil");
       console.log("Ancho de la pantalla: " + screenWidth + "px");
@@ -61,8 +66,10 @@ export default {
     } else {
       console.log("No se está abriendo desde un dispositivo móvil");
       this.calendarOptions.headerToolbar.right = 'timeGridDay,timeGridWeek,dayGridMonth,listDay';
-    }
+    } */
     console.log("calendarOptions", this.calendarOptions.headerToolbar.right);
+    this.userProv = this.getUser();
+    console.log("userProv mounted: ", this.userProv);
 
   },
   data() {
@@ -74,7 +81,8 @@ export default {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'timeGridDay,timeGridWeek,dayGridMonth',
+        //right: 'timeGridDay,timeGridWeek,dayGridMonth',
+        right: 'dayGridMonth,listDay',
       },
       allDaySlot: false,
       nowIndicator: true,
@@ -104,6 +112,8 @@ export default {
     var popoverVisible = false;
     var selectedEventData = null;
     var eventoPopover = {};
+    var userProv = {};
+    var userData = null;
     return {
       calendarOptions,
       showModal,
@@ -112,16 +122,19 @@ export default {
       popoverVisible,
       selectedEventData,
       eventoPopover,
+      userProv,
+      userData,
     }
   },
   methods: {
+    ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading', 'getUserByEmail', 'cargarListProgramacionesById']),
+    ...mapGetters('programacionModule', ['getEstado', 'getUserProvider', 'getUser']),
     handleEventMouseEnter({ event }) {
       this.showPopover(event);
       console.log("method handleEventMouseEnter", event);
       this.eventoPopover = event
       console.log(event.title);
       document.body.classList.add('hovered');
-
     },
     showPopover(event) {
       this.popoverVisible = true;
@@ -129,7 +142,6 @@ export default {
       console.log("method showPopover", event);
     },
     handleMouseLeave() {
-      // Elimina la clase del body cuando el cursor deja cualquier elemento .fc-title
       document.body.classList.remove('hovered');
     },
     handleEventClick(info) {
@@ -162,7 +174,6 @@ export default {
     },
     closeModal() {
       console.log("closeModal")
-
       this.showModal = false;
     },
     recortarTexto(texto) {
@@ -321,4 +332,3 @@ body.hovered .fc-content {
 
 }
 </style>
-

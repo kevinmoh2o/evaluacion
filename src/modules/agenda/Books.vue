@@ -2,31 +2,62 @@
 
 <template>
     <div class="book" v-if="!confirmacionOperation">
-        <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId" @saveAppt="saveAppt">
+        <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId"
+            @saveAppt="saveAppt">
         </Calendar>
-        <Modal ref="exampleModalModal" :inFecha="fechaProgramar"></Modal>
+        <Modal ref="modalPrincipal" :inFecha="fechaProgramar" @modelProgramacion="modelProgramacion"></Modal>
     </div>
-    <confirmacion class="carYesNo" v-if="confirmacionOperation" :message="'¿Desea eliminar la siguiente programación?'"
-        :onConfirm="handleConfirm" :onCancel="handleCancel"></confirmacion>
+
+    <!-- <vue3-snackbar bottom right :duration="4000"></vue3-snackbar> -->
+
+
+    <div v-if="loadingData.status === true">
+        <LoadingOverlay :loading="loadingData" />
+    </div>
+    <div v-else>
+        <div v-if="apiResponse.status === true">
+            <SuccessView :reponse="apiResponse" />
+        </div>
+        <div v-if="apiResponse.status === false">
+            <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
+        </div>
+    </div>
+    <!-- <confirmacion class="carYesNo" v-if="confirmacionOperation" :message="'¿Desea eliminar la siguiente programación?'"
+        :onConfirm="handleConfirm" :onCancel="handleCancel"></confirmacion> -->
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 //import { Formatos } from '@/utils/Formatos.js';
 import { Hardware } from '@/utils/Hardware.js';
 import { mapActions, mapGetters } from 'vuex'
 import { Modal } from 'bootstrap';
 import jQuery from "jquery";
+//import { Vue3Snackbar, useSnackbar } from "vue3-snackbar";
+
+
 const $ = jQuery;
 window.$ = $;
+
 export default {
     name: 'book-list',
+    props: {
+        userProv: Object,
+    },
+    mounted() {
+        this.usuarioData = this.getUser();
+        console.log("userProv mounted books: ", this.usuarioData);
+    },
     components: {
         Calendar: defineAsyncComponent(() => import('./components/Calendar.vue')),
         //CalendarModal: defineAsyncComponent(() => import('./components/CalendarModal.vue')),
         Modal: defineAsyncComponent(() => import('./components/Modal.vue')),
         //Cargando: defineAsyncComponent(() => import('./components/Cargando.vue')),
-        Confirmacion: defineAsyncComponent(() => import('./components/Confirmacion.vue')),
+        //Confirmacion: defineAsyncComponent(() => import('./components/Confirmacion.vue')),
+        LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
+        SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+        ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
+        //Vue3Snackbar,
 
     },
     created() {
@@ -41,35 +72,78 @@ export default {
             console.log("No se está abriendo desde un dispositivo móvil en mi phone");
         }
     },
-    data() {
+    setup() {
+        //const snackbar = useSnackbar();
+        const bottom = ref(true);
+        const right = ref(true);
+
+        const loadingData = ref({
+            status: false,
+            title: "Creando programación de reunión ..."
+        });
+
+        const apiResponse = ref({ status: null });
+
+        const usuarioData = ref({});
+
+        const eliminandoStatus = ref(true);
+
+        const licenciado = ref('');
+
+        const userId = ref('');
+
+        const flagUpdate = ref(false);
+
+        const eliminatedId = ref('');
+
+        const confirmacionOperation = ref(false);
+
+        const showModal = ref(false);
+
+        const estadoModalOptPa = ref(false);
+
+        const fechaProgramar = ref('');
+
+        const itemVar = ref({});
+
+        const newEvent = ref({
+            title: " ",
+            date_at: " ",
+            hour: " ",
+            user_id: " ",
+            session: 1800,
+        });
+
+        const nombreOpt = ref([
+            { id: 1, nombre: 'Juan' },
+            { id: 2, nombre: 'Maria' },
+            { id: 3, nombre: 'Pedro' }
+        ]);
+
         return {
-            eliminandoStatus: true,
-            licenciado: '',
-            userId: '',
-            flagUpdate: false,
-            eliminatedId: '',
-            confirmacionOperation: false,
-            showModal: false,
-            estadoModalOptPa: false,
-            fechaProgramar: '',
-            itemVar: {},
-            newEvent: {
-                title: " ",
-                date_at: " ",
-                hour: " ",
-                user_id: " ",
-                session: 1800,
-            },
-            nombreOpt: [
-                { id: 1, nombre: 'Juan' },
-                { id: 2, nombre: 'Maria' },
-                { id: 3, nombre: 'Pedro' }
-            ]
-        }
+            //snackbar,
+            bottom,
+            right,
+            loadingData,
+            apiResponse,
+            usuarioData,
+            eliminandoStatus,
+            licenciado,
+            userId,
+            flagUpdate,
+            eliminatedId,
+            confirmacionOperation,
+            showModal,
+            estadoModalOptPa,
+            fechaProgramar,
+            itemVar,
+            newEvent,
+            nombreOpt
+        };
     },
     methods: {
-        ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
-        ...mapGetters('programacionModule', ['getEstado']),
+        ...mapActions('programacionModule', ['createProgramacion', 'setIsLoading', 'getUserByEmail']),
+        ...mapGetters('programacionModule', ['getUserProvider', 'getUser']),
         dateClick(arg1, arg2) {
             this.showModal = true;
             this.flagUpdate = true;
@@ -110,9 +184,45 @@ export default {
             //this.fechaProgramar=Formatos.soloFechaDMY(date);
             console.log("this.fechaProgramar", this.fechaProgramar);
         },
+        async modelProgramacion(value) {
+
+            var { validateForm, output } = value;
+            console.log("value: ", value);
+            if (!validateForm) {
+                this.apiResponse = Object.assign({ status: false, data: null, message: 'Por favor, completa todos los campos obligatorios' }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
+                this.loadingData.status = false;
+                return null;
+            }
+            this.$refs.modalPrincipal.closeModal("ejecutar cerrar modal");
+            this.loadingData.status = true;
+            output.id = this.usuarioData.id;
+            
+            try {
+                const { message, status } = await this.createProgramacion(output);
+                console.log("this.usuarioData ", { message, status ,output })
+                if (status) {
+
+                    //this.apiResponse = { status, data: null, message, title: '¡Genial!', btnText: 'Continuar', navTo: '/' };
+                } else {
+                    this.apiResponse = { status, data: null, message, title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' };
+                }
+            } catch (error) {
+                console.log("error: " + error)
+            }
+
+            this.loadingData.status = false;
+            /* this.snackbar.add({
+                type: 'success',
+                text: 'Programación creada correctamente'
+            }) */
+
+        },
         async registrarUser() {
             // var respuesta = await createUserWithEmailAndPassword(auth,'kevsssinmohu@gmail.com',"1234567");
             // console.log("consultando xD",respuesta)
+        },
+        hadlerCloseIndicator(value) {
+            this.apiResponse.status = null;
         },
         async autenticar() {
 
@@ -129,11 +239,11 @@ export default {
             //console.log(await counterStore.deleteCollection('sexo'));
             //console.log(await counterStore.deleteDocument('sexo',"OKPvmXuEB0hPNeyoudR0"));
         },
-        closeModal() {
+        /* closeModal() {
             console.log("calendar closeModal")
             this.showModal = false;
             this.flagUpdate = true;
-        },
+        }, */
         recortarFecha(fecha) {
             const fechaOriginal = new Date(fecha);
             const dia = fechaOriginal.getDate();
@@ -201,10 +311,7 @@ export default {
 
 <style lang="scss" scoped>
 .book {
-    width: calc(100vw - 400px);
-    //width: 100%;
-    //z-index: 100;
-    //z-index: 1000;
+    width: auto;
 }
 
 @media (max-width:750px) {
@@ -319,4 +426,3 @@ a {
       data-bs-whatever="@mdo">Open modal for @mdo</button> -->
 */
 </style>
-

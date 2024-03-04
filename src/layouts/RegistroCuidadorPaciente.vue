@@ -293,8 +293,9 @@ export default {
         ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     },
     async mounted() {
-        const userProv = await this.getUserProvider();
-        await this.llamarLista(userProv.data.id)
+        const userProv = this.getUser();
+        console.log("userProv mounted: ",userProv);
+        await this.llamarLista(userProv.id);
     },
     data() {
         const router = useRouter()
@@ -311,8 +312,8 @@ export default {
         }
     },
     methods: {
-        ...mapActions('programacionModule', ['transactionUserPeople','usuarioPersonas']),
-        ...mapGetters('programacionModule', ['getUserProvider','getTranUserPeople','getUsuarioPersonaList']),
+        ...mapActions('programacionModule', ['transactionUserPeople','listUserPersona']),
+        ...mapGetters('programacionModule', ['getUserProvider','getTranUserPeople','getUsuarioPersonaList','getUser']),
         async onBackHandle() {
             console.log("navegando")
             await this.router.push('/menu')
@@ -353,7 +354,7 @@ export default {
             this.apiResponse.status = null;
         },
         async llamarLista(value) {
-            await this.usuarioPersonas({ id: value, isActive: true });
+            await this.listUserPersona({ id: value, isActive: true });
             const { status, data } = this.getUsuarioPersonaList();
             this.valorTabla=data;
         }

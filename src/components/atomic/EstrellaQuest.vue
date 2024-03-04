@@ -1,10 +1,15 @@
 <template>
     <div class="radio-input">
-        <input value="value-1" name="value-radio" id="value-1" type="radio" class="star s1 strella" @click="presionar(5)" />
-        <input value="value-2" name="value-radio" id="value-2" type="radio" class="star s2 strella" @click="presionar(4)" />
-        <input value="value-3" name="value-radio" id="value-3" type="radio" class="star s3 strella" @click="presionar(3)" />
-        <input value="value-4" name="value-radio" id="value-4" type="radio" class="star s4 strella" @click="presionar(2)" />
-        <input value="value-5" name="value-radio" id="value-5" type="radio" class="star s5 strella" @click="presionar(1)" />
+        <input value="value-1" name="value-radio" id="value-1" type="radio" class="star s1 strella"
+            @click="presionar(5)" />
+        <input value="value-2" name="value-radio" id="value-2" type="radio" class="star s2 strella"
+            @click="presionar(4)" />
+        <input value="value-3" name="value-radio" id="value-3" type="radio" class="star s3 strella"
+            @click="presionar(3)" />
+        <input value="value-4" name="value-radio" id="value-4" type="radio" class="star s4 strella"
+            @click="presionar(2)" />
+        <input value="value-5" name="value-radio" id="value-5" type="radio" class="star s5 strella"
+            @click="presionar(1)" />
     </div>
     <div class="etiqueta">
         <h6>{{ etiqueta(indice) }}</h6>
@@ -12,7 +17,7 @@
 </template>
 
 <script>
-import { ref, defineEmits  } from 'vue'
+import { ref, defineEmits } from 'vue'
 
 
 export default {
@@ -20,10 +25,10 @@ export default {
     name: 'estrella-satisfaction',
     components: {
     },
-    props:['repuesta'],
-    emits:['selectedIndexEmit'],
-    setup(props,context) {
-        console.log("props.repuesta: ",props.repuesta)
+    props: ['repuesta'],
+    emits: ['selectedIndexEmit'],
+    setup(props, context) {
+        console.log("props.repuesta: ", props.repuesta)
         const indice = ref(0);
         defineEmits(['selectedIndexEmit']);
 
@@ -60,8 +65,8 @@ export default {
         };
 
         const presionar = (value) => {
-            indice.value=value;
-            context.emit('selectedIndexEmit', value,null)
+            indice.value = value;
+            context.emit('selectedIndexEmit', value, null)
         };
 
         return {
@@ -81,10 +86,12 @@ export default {
 
 <style lang="scss">
 @import '@/styles/styles.scss';
-.strella{
+
+.strella {
     margin: 10px 20px 0px 20px;
 }
-//map-get($theme-colors, "azul")
+
+
 .radio-input {
     display: flex;
     scale: 0.2;
@@ -153,8 +160,9 @@ export default {
     }
 }
 
-.etiqueta{
+.etiqueta {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-   <div class="wrapper">
+  <div class="wrapper">
     <header>
       <p class="current-date">{{ currentMonth }}</p>
       <div class="icons">
@@ -18,7 +18,8 @@
         <li>Sab</li>
       </ul>
       <ul class="days">
-        <li v-for="(day, index) in calendarDays" :key="index" :class="{ inactive: day.inactive,active:day.active }">{{ day.day }}</li>
+        <li v-for="(day, index) in calendarDays" :key="index" :class="{ inactive: day.inactive, active: day.active }">{{
+        day.day }}</li>
       </ul>
     </div>
   </div>
@@ -32,17 +33,17 @@ export default {
       calendarDays: [],
       currYear: 0,
       currMonth: 0,
-      months: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+      months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
     };
   },
   mounted() {
-            this.currentDate   = document.querySelector(".current-date"),
-            this.dayTag        = document.querySelector(".days"),
-            this.prevNextIcon  = document.querySelectorAll(".icons span");
-            let date = new Date();
-            this.currYear = date.getFullYear();
-            this.currMonth = date.getMonth();
-            this.renderCalendar();
+    this.currentDate = document.querySelector(".current-date"),
+      this.dayTag = document.querySelector(".days"),
+      this.prevNextIcon = document.querySelectorAll(".icons span");
+    let date = new Date();
+    this.currYear = date.getFullYear();
+    this.currMonth = date.getMonth();
+    this.renderCalendar();
   },
   methods: {
     renderCalendar() {
@@ -58,9 +59,8 @@ export default {
 
       for (let i = 1; i <= lastDateofMonth; i++) {
         let isToday = i === new Date().getDate() && this.currMonth === new Date().getMonth()
-                      &&this.currYear === new Date().getFullYear()?"active":"";
-        //console.log(isToday,this.currMonth,this.currYear,i,"dasd");
-        let decidir = isToday?{ day: i, active: isToday, today: isToday }:{ day: i, inactive: isToday, today: isToday };
+          && this.currYear === new Date().getFullYear() ? "active" : "";
+        let decidir = isToday ? { day: i, active: isToday, today: isToday } : { day: i, inactive: isToday, today: isToday };
         calendarDays.push(decidir);
       }
 
@@ -86,8 +86,8 @@ export default {
     //  this.currentDate = `${months[this.currMonth]} ${this.currYear}`
     //}
   },
-  computed:{
-    
+  computed: {
+
   }
 };
 </script>
@@ -111,103 +111,148 @@ export default {
     min-height: 100vh;
 } */
 
-.wrapper{
-    width: 350px;
-    background: #fff;
-    border-radius: 10px;
+li {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px !important;
 }
 
-.wrapper header{
-    display: flex;
-    align-items: center;
-    padding: 25px 30px 10px;
-    justify-content: space-between;
+
+
+li::before {
+  width: 27px !important;
+  height: 27px !important;
+  margin: none !important;
 }
 
-header .current-date{
-    font-size: 1.45rem;
-    font-weight: 500;
+.calendar .days li {
+  width: 30px !important;
+  height: 30px !important;
+  margin-top: 5px !important;
 }
 
-header .icons span{
-    height: 38px;
-    width: 38px;
-    margin: 0 1px;
-    text-align: center;
-    line-height: 38px;
-    cursor: pointer;
-    border-radius: 50%;
-    background: #f2f2f2;
-    color: #878787;
-    font-size: 1.9rem;
+
+.wrapper {
+  width: 270px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 0 0 5px 0;
 }
 
-header .icons span:hover{
-    background: #f2f2f2;
+.wrapper header {
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
 }
 
-header .icons span:last-child{
-    margin-right: -10px;
+header .current-date {
+  font-size: 15px;
+  font-weight: 500;
 }
 
-.calendar{
-    padding: 20px;
+header .icons span {
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  text-align: center;
+  line-height: 38px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: #f2f2f2;
+  color: #878787;
+  font-size: 1.9rem;
 }
 
-.calendar ul{
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap;
-    text-align: center;
-} 
+header .icons span:hover {
+  background: #f2f2f2;
+}
 
-.calendar .days{
+header .icons span:last-child {
+  margin-right: -10px;
+}
+
+.calendar {
+  padding: 10px;
+}
+
+
+.weeks {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.days {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.days ul {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.calendar ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+/* .calendar .days{
     margin-bottom: 10px;
+} */
+
+.calendar .weeks li {
+  font-weight: 500;
 }
 
-.calendar .weeks li{
-    font-weight: 500;
+.calendar ul li {
+  position: relative;
+  width: calc(100% / 7);
 }
 
-.calendar ul li{
-    position: relative;
-    width: calc(100% / 7);
+.calendar .days li {
+  z-index: 1;
+  cursor: pointer;
+  margin-top: 30px;
 }
 
-.calendar .days li{
-    z-index: 1;
-    cursor: pointer;
-    margin-top: 30px;
+.days li.inactive {
+  color: #aaa;
 }
 
-.days li.inactive{
-    color: #aaa;
+.days li.active {
+  color: #fff;
 }
 
-.days li.active{
-    color: #fff;
+.calendar .days li::before {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 35px;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  //background: #f2f2f2;
+  background: rgba($color: #F2B749, $alpha: 0.1);
 }
 
-.calendar .days li::before{
-    position: absolute;
-    content: "";
-    height: 35px;
-    width: 35px;
-    top: 50%;
-    left: 50%;
-    z-index: -1;
-    border-radius: 50%;
-    transform: translate(-50%,-50%);
-    //background: #f2f2f2;
-    background: rgba($color:#F2B749,$alpha:0.1);
+.days li:hover::before {
+  background: #f2f2f2;
 }
 
-.days li:hover::before{
-    background: #f2f2f2;
-}
-
-.days li.active::before{
-    background: #F2B749;
+.days li.active::before {
+  background: #F2B749;
 }
 </style>
-  
