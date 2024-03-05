@@ -5,10 +5,9 @@
         <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId"
             @saveAppt="saveAppt">
         </Calendar>
-        <Modal ref="modalPrincipal" :inFecha="fechaProgramar" @modelProgramacion="modelProgramacion"></Modal>
+        <Modal ref="modalPrincipal" :inFecha="fechaProgramar" @modelProgramacion="modelProgramacion" :listPaciente="ddbOpts"></Modal>
     </div>
 
-    <!-- <vue3-snackbar bottom right :duration="4000"></vue3-snackbar> -->
 
 
     <div v-if="loadingData.status === true">
@@ -22,8 +21,17 @@
             <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
         </div>
     </div>
-    <!-- <confirmacion class="carYesNo" v-if="confirmacionOperation" :message="'¿Desea eliminar la siguiente programación?'"
-        :onConfirm="handleConfirm" :onCancel="handleCancel"></confirmacion> -->
+
+    <v-snackbar v-model="snackbar" :multi-line="multiLine" :timeout="4000" color="success">
+        {{ text }}
+
+        <template v-slot:action="{ attrs }">
+            <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+                Close
+            </v-btn>
+        </template>
+    </v-snackbar>
+
 </template>
 
 <script>
@@ -44,9 +52,12 @@ export default {
     props: {
         userProv: Object,
     },
-    mounted() {
+    async mounted() {
         this.usuarioData = this.getUser();
-        console.log("userProv mounted books: ", this.usuarioData);
+        //console.log("userProv mounted books: ", this.usuarioData);
+
+        this.ddbOpts = await this.getListaRelacionesDdb({id:this.usuarioData.id,isActive:true});
+        //console.log("this.ddbOpts: ",this.ddbOpts)
     },
     components: {
         Calendar: defineAsyncComponent(() => import('./components/Calendar.vue')),
@@ -105,6 +116,7 @@ export default {
         const fechaProgramar = ref('');
 
         const itemVar = ref({});
+        const ddbOpts = ref({});
 
         const newEvent = ref({
             title: " ",
@@ -119,6 +131,10 @@ export default {
             { id: 2, nombre: 'Maria' },
             { id: 3, nombre: 'Pedro' }
         ]);
+
+        const multiLine = ref(true);
+        const snackbar = ref(false);
+        const text = ref(`Programación creada correctamente`) ;
 
         return {
             //snackbar,
@@ -138,11 +154,15 @@ export default {
             fechaProgramar,
             itemVar,
             newEvent,
-            nombreOpt
+            nombreOpt,
+            multiLine,
+            snackbar,
+            text,
+            ddbOpts,
         };
     },
     methods: {
-        ...mapActions('programacionModule', ['createProgramacion', 'setIsLoading', 'getUserByEmail']),
+        ...mapActions('programacionModule', ['createProgramacion', 'setIsLoading', 'getUserByEmail','getListaRelacionesDdb']),
         ...mapGetters('programacionModule', ['getUserProvider', 'getUser']),
         dateClick(arg1, arg2) {
             this.showModal = true;
@@ -196,12 +216,12 @@ export default {
             this.$refs.modalPrincipal.closeModal("ejecutar cerrar modal");
             this.loadingData.status = true;
             output.id = this.usuarioData.id;
-            
+
             try {
                 const { message, status } = await this.createProgramacion(output);
-                console.log("this.usuarioData ", { message, status ,output })
+                console.log("this.usuarioData ", { message, status, output })
                 if (status) {
-
+                    this.snackbar=true;
                     //this.apiResponse = { status, data: null, message, title: '¡Genial!', btnText: 'Continuar', navTo: '/' };
                 } else {
                     this.apiResponse = { status, data: null, message, title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' };

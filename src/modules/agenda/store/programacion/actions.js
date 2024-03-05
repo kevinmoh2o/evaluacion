@@ -73,6 +73,28 @@ export const listUserPersona = async ({ commit }, { id, isActive }) => {
 }
 
 
+
+export const getListaRelacionesDdb = async ({ commit }, { id, isActive }) => {
+  try {
+    const params = { id, isActive };
+    const url = `${ENDPOINTS.GET_LIST_DDB_RELACIONES}?${new URLSearchParams(params)}`;
+    var rptReq = await investigacionApi.get(url);
+    if (!rptReq || !rptReq.data) {
+      throw new Error('La respuesta recibida es inválida');
+    }
+    const { status, data } = rptReq.data;
+   
+    console.log("dentro de getListaRelacionesDdb: ",data)
+    return data;
+  } catch (error) {
+    console.log("dentro de getListaRelacionesDdb: ",error)
+    //const { status, message } = error.response.data;
+    return [];
+    //commit('setTranUserPeople', { status, message })
+  }
+}
+
+
 export const createProgramacion = async ({ commit }, entry) => {
   try {
     console.log("createProgramacion")

@@ -10,7 +10,7 @@
             </div>
             <div class="participante" v-on:click="select(2)">
             </div>
-            <CardOne></CardOne>
+            <!-- <CardOne></CardOne> -->
         </div>
         <div class="btn-contendor">
             <button type="button" class="btn btn-success estilo-btn" data-bs-dismiss="modal">Registrar Consejería</button>
@@ -38,7 +38,7 @@ export default {
     },
     components: {
         //ModalCuidadorSelecionado: defineAsyncComponent(() => import('../components/compose/ModalCuidadorSelecionado.vue')),
-        CardOne: defineAsyncComponent(() => import('../components/widgets/CardOne.vue')),
+        //CardOne: defineAsyncComponent(() => import('../components/widgets/CardOne.vue')),
         Navbar,
         FilterHeader,
     },

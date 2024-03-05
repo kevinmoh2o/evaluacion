@@ -3,6 +3,7 @@ export const ENDPOINTS = {
     GET_USER_BY_DNI: '/api/usuarios/dni',
     GET_LITS_PACC_CARE_BY_USER: '/api/usuarios/userPeople',
     GET_LIST_PROGRAMACIONES_BY_ID: '/api/usuarios/programacion/by',
+    GET_LIST_DDB_RELACIONES: '/api/usuarios/relacion',
 
 
     /********* POST REUQESTS */

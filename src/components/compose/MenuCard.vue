@@ -1,15 +1,15 @@
 <template>
-  <div class="card-inkwell"  @click.prevent="$emit('clickbutton')">
-    <div class="card-container"  style="background: var(--primary);">
+  <div class="card-inkwell" @click.prevent="$emit('clickbutton')">
+    <div class="card-container" style="background: var(--primary);">
 
       <div class="imagen">
-          <img class="m-3" :src="require(`@/assets/menu/${ruta}.png`)" alt="Imagen PNG" width="70" height="70">
+        <img class="m-3" :src="require(`@/assets/menu/${ruta}.png`)" alt="Imagen PNG" width="70" height="70">
       </div>
 
       <div class="titulo">
-        <h5 class="m-2 p-0 text-light">{{titulo}}</h5>
+        <h5 class="m-2 p-0 text-light">{{ titulo }}</h5>
       </div>
-      
+
     </div>
   </div>
 
@@ -18,49 +18,48 @@
 <script>
 
 export default {
-    props:{
-        idCard: Number,
-        titulo:String,
-        ruta: {
-            type: String,
-            default: "calendario" 
-        },
+  props: {
+    idCard: Number,
+    titulo: String,
+    ruta: {
+      type: String,
+      default: "calendario"
     },
-    created() {
-        console.log("ruta",this.ruta);
-    }, 
-    data() {
-        return {
-            cards: [
-                
-            ]
-        }
-    },
-    components: {
-        
-    },
-    methods:{
-        presionar() {
-            console.log("id hijo",this.idCard)
-            this.$emit('presionado');
-        },
-        clickbutton(val) {
-            console.log(val)
-            console.log('Se ha hecho clic en la tarjeta del menú');
-        }
+  },
+  created() {
+    console.log("ruta", this.ruta);
+  },
+  data() {
+    return {
+      cards: [
+
+      ]
     }
+  },
+  components: {
+
+  },
+  methods: {
+    presionar() {
+      console.log("id hijo", this.idCard)
+      this.$emit('presionado');
+    },
+    clickbutton(val) {
+      console.log(val)
+      console.log('Se ha hecho clic en la tarjeta del menú');
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
 @import '../../styles/styles.scss';
 
-.card-container{
+.card-container {
   display: flex;
   border-radius: 15px;
   flex-direction: column;
-  width: 200px;
+  width: 150px;
   height: 200px;
   box-shadow: 10px 5px 5px #F2B749;
 }
@@ -69,22 +68,23 @@ export default {
   height: 145px;
 }
 
-.imagen{
+.imagen {
   border-radius: 15px 15px 0 0;
   height: 100px;
-  background-color: rgb(255, 255, 255); 
+  background-color: rgb(255, 255, 255);
   //color: #ffa600;
 }
 
-.card-inkwell{
+.card-inkwell {
+  max-width: 150px;
   transition: all .55s ease;
 }
 
-.card-inkwell:hover{
+.card-inkwell:hover {
   transform: translateY(-15px);
 }
 
-.titulo{
+.titulo {
   padding: 5px;
   display: flex;
   justify-content: center;

@@ -1,5 +1,6 @@
 <template>
-    <div class="modal fade" id="exampleModal" ref="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal fade" id="exampleModal" ref="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-md modal-lg modal-xl modal-xxl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -45,11 +46,11 @@
                                 <div class="img-mod"><i class="bi bi-person-fill"></i>
                                 </div>
                                 <div class="col-10 m-0 p-0">
-                                    <select class="form-select" v-model="output.title"
-                                        aria-label="Default select example" required>
+                                    <select class="form-select" v-model="selectedCuidador"
+                                        aria-label="Default select example" @change="updateOutput" required>
                                         <option value="" disabled selected hidden>Cuidador</option>
-                                        <option v-for="paciente in listPaciente" :key="paciente.label"
-                                            :value="paciente.value">{{ paciente.value }}</option>
+                                        <option v-for="paciente in listPaciente" :key="paciente.value"
+                                            :value="paciente.value">{{ paciente.label }}</option>
                                     </select>
                                 </div>
                                 <div class="valid-feedback">
@@ -130,16 +131,20 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { Formatos } from '@/utils/Formatos.js';
+import { list } from 'postcss';
 
 export default {
     name: 'Model-Component',
     props: {
         msg: String,
         inFecha: String,
+        listPaciente: Array
     },
-    async mounted() {
+    mounted() {
+        //console.log("ddbOpts recibido en el componente hijo: ", this.ddbOpts);
         this.usuarioData = this.getUser();
         this.generateTimeOptions();
+        //this.listPaciente = this.ddbOpts;
     },
     data() {
         return {
@@ -148,12 +153,7 @@ export default {
             form: this.selectedOpt,
             selectedTime: '',
             timeOptions: [],
-            listPaciente: [
-                { label: "1", value: "Maria" },
-                { label: "2", value: "Pedro" },
-                { label: "3", value: "Ana" },
-                { label: "4", value: "Isabel" },
-            ],
+            selectedCuidador: '',
             listRecordar: [
                 { label: "1", value: "No" },
                 { label: "2", value: "1 día antes" },
@@ -177,7 +177,7 @@ export default {
                     fecha: this.inFecha,
                     meeting: "",
                 },
-                groupId: "kbmont",
+                groupId: "",
                 start: this.selectedTime,
                 title: "",
                 id: ""
@@ -231,7 +231,7 @@ export default {
             }
             this.setIsLoading(true); */
         },
-        closeModal(valu){
+        closeModal(valu) {
             if (this.$refs.exampleModal) {
                 const closeButton = this.$refs.exampleModal.querySelector('.btn-close');
                 if (closeButton) {
@@ -252,16 +252,14 @@ export default {
         isValid(fieldName) {
             return this.validation[fieldName];
         },
-        /* submitForm(event) {
-            console.log("submitForm")
-            const form = event.target;
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
+        updateOutput(event) {
+            const selectedIndex = event.target.selectedIndex;
+            if (selectedIndex !== -1) {
+                const selectedOption = this.listPaciente[selectedIndex];
+                this.output.groupId = selectedOption.value;
+                this.output.title = selectedOption.label;
             }
-            form.classList.add('was-validated');
-            this.store(form)
-        },  */
+        },
         submitForm(event) {
 
             const form = event.target;
@@ -282,6 +280,7 @@ export default {
 
 
     },
+
     watch: {
         inFecha(newFecha) {
             // Actualizar la propiedad en el objeto output cuando inFecha cambia
@@ -290,6 +289,11 @@ export default {
         selectedTime(valor) {
             this.output.start = `${this.output.extendedProps.fecha}T${valor}:00`
             this.output.extendedProps.hora = `${valor}:00`
+        },
+        listPaciente: function (newListPaciente) {
+            if (newListPaciente.length > 0) {
+                this.output.title = newListPaciente[0].value; // Establecer el primer valor como seleccionado
+            }
         }
     },
 }
