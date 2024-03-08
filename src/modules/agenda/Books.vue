@@ -5,7 +5,8 @@
         <Calendar class="book" @dateClick="dateClick" @editarPadre="escucharHijo" :usuario="userId"
             @saveAppt="saveAppt">
         </Calendar>
-        <Modal ref="modalPrincipal" :inFecha="fechaProgramar" @modelProgramacion="modelProgramacion" :listPaciente="ddbOpts"></Modal>
+        <Modal ref="modalPrincipal" :inFecha="fechaProgramar" @modelProgramacion="modelProgramacion"
+            :listPaciente="ddbOpts"></Modal>
     </div>
 
 
@@ -50,13 +51,14 @@ window.$ = $;
 export default {
     name: 'book-list',
     props: {
-        userProv: Object,
     },
     async mounted() {
-        this.usuarioData = this.getUser();
+        var usertest = localStorage.user;
+        this.usuarioData = usertest !== null ? JSON.parse(usertest) : null;
+        //this.usuarioData = this.getUser();
         //console.log("userProv mounted books: ", this.usuarioData);
 
-        this.ddbOpts = await this.getListaRelacionesDdb({id:this.usuarioData.id,isActive:true});
+        this.ddbOpts = await this.getListaRelacionesDdb({ id: this.usuarioData.id, isActive: true });
         //console.log("this.ddbOpts: ",this.ddbOpts)
     },
     components: {
@@ -116,7 +118,7 @@ export default {
         const fechaProgramar = ref('');
 
         const itemVar = ref({});
-        const ddbOpts = ref({});
+        const ddbOpts = ref([]);
 
         const newEvent = ref({
             title: " ",
@@ -134,7 +136,7 @@ export default {
 
         const multiLine = ref(true);
         const snackbar = ref(false);
-        const text = ref(`Programación creada correctamente`) ;
+        const text = ref(`Programación creada correctamente`);
 
         return {
             //snackbar,
@@ -162,8 +164,8 @@ export default {
         };
     },
     methods: {
-        ...mapActions('programacionModule', ['createProgramacion', 'setIsLoading', 'getUserByEmail','getListaRelacionesDdb']),
-        ...mapGetters('programacionModule', ['getUserProvider', 'getUser']),
+        ...mapActions('programacionModule', ['createProgramacion', 'setIsLoading', 'getUserByEmail', 'getListaRelacionesDdb']),
+        ...mapGetters('programacionModule', ['getUser']),
         dateClick(arg1, arg2) {
             this.showModal = true;
             this.flagUpdate = true;
@@ -221,7 +223,7 @@ export default {
                 const { message, status } = await this.createProgramacion(output);
                 console.log("this.usuarioData ", { message, status, output })
                 if (status) {
-                    this.snackbar=true;
+                    this.snackbar = true;
                     //this.apiResponse = { status, data: null, message, title: '¡Genial!', btnText: 'Continuar', navTo: '/' };
                 } else {
                     this.apiResponse = { status, data: null, message, title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' };

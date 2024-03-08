@@ -29,7 +29,7 @@
 export default {
   data() {
     return {
-      currentDate: "Holi",
+      currentMonth: "Holi",
       calendarDays: [],
       currYear: 0,
       currMonth: 0,

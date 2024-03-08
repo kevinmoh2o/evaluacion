@@ -22,7 +22,7 @@
             </div>
 
             <div class="tamanio">
-                <Books class="books" :userProv="userProv"></Books>
+                <Books class="books"></Books>
             </div>
 
         </div>
@@ -42,7 +42,7 @@ export default {
     }, */
     data() {
         return {
-            userProv:{}
+            //userProv: {}
         }
     },
     components: {
@@ -52,8 +52,8 @@ export default {
 
     },
     methods: {
-        ...mapActions('programacionModule', ['transactionUserPeople','listUserPersona']),
-        ...mapGetters('programacionModule', ['getUserProvider','getTranUserPeople','getUsuarioPersonaList','getUser']),
+        ...mapActions('programacionModule', ['transactionUserPeople', 'listUserPersona']),
+        ...mapGetters('programacionModule', ['getTranUserPeople', 'getUsuarioPersonaList', 'getUser']),
         onBackHandle() {
             this.$router.push('/menu');
         }

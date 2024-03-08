@@ -49,8 +49,7 @@
                                     <select class="form-select" v-model="selectedCuidador"
                                         aria-label="Default select example" @change="updateOutput" required>
                                         <option value="" disabled selected hidden>Cuidador</option>
-                                        <option v-for="paciente in listPaciente" :key="paciente.value"
-                                            :value="paciente.value">{{ paciente.label }}</option>
+                                        <option v-for="paciente in listPaciente" :key="paciente.value" :value="paciente.value">{{ paciente.label }}</option>
                                     </select>
                                 </div>
                                 <div class="valid-feedback">
@@ -131,7 +130,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { Formatos } from '@/utils/Formatos.js';
-import { list } from 'postcss';
+
 
 export default {
     name: 'Model-Component',
@@ -141,8 +140,10 @@ export default {
         listPaciente: Array
     },
     mounted() {
-        //console.log("ddbOpts recibido en el componente hijo: ", this.ddbOpts);
-        this.usuarioData = this.getUser();
+        var usertest = localStorage.user;
+        this.usuarioData = usertest !== null ? JSON.parse(usertest) : null;
+
+        //this.usuarioData = this.getUser();
         this.generateTimeOptions();
         //this.listPaciente = this.ddbOpts;
     },
@@ -253,11 +254,14 @@ export default {
             return this.validation[fieldName];
         },
         updateOutput(event) {
-            const selectedIndex = event.target.selectedIndex;
-            if (selectedIndex !== -1) {
-                const selectedOption = this.listPaciente[selectedIndex];
-                this.output.groupId = selectedOption.value;
-                this.output.title = selectedOption.label;
+            // Verificamos que listPaciente tenga datos antes de acceder a él
+            if (this.listPaciente && this.listPaciente.length > 0) {
+                const selectedValue = event.target.value;
+                if (selectedValue !== -1) {
+                    const selectedOption = this.listPaciente.find(paciente => paciente.value === selectedValue);
+                    this.output.groupId = selectedOption.value;
+                    this.output.title = selectedOption.label;
+                }
             }
         },
         submitForm(event) {

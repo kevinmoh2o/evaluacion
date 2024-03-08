@@ -4,6 +4,12 @@
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
         </div>
         <FilterHeader></FilterHeader>
+        <div class="pacusr">
+            <CardPacCui :nombrePac="'Kevin Montañez'" :nombreCon="'Arturo Genesis'" :consejeria="'2'"></CardPacCui>
+            <CardPacCui :nombrePac="'Erik Yepes'" :nombreCon="'Fernando Manrique'" :consejeria="'3'"></CardPacCui>
+            <CardPacCui :nombrePac="'Roberth García'" :nombreCon="'Jorge Bolañoz'" :consejeria="'7'"></CardPacCui>
+            <CardPacCui :nombrePac="'Gustavo Olivos'" :nombreCon="'Gustavo Martinez'" :consejeria="'10'"></CardPacCui>
+        </div>
 
         <div class="mentoria">
             <div class="participante" v-on:click="select(1)">
@@ -11,6 +17,7 @@
             <div class="participante" v-on:click="select(2)">
             </div>
             <!-- <CardOne></CardOne> -->
+            
         </div>
         <div class="btn-contendor">
             <button type="button" class="btn btn-success estilo-btn" data-bs-dismiss="modal">Registrar Consejería</button>
@@ -41,6 +48,7 @@ export default {
         //CardOne: defineAsyncComponent(() => import('../components/widgets/CardOne.vue')),
         Navbar,
         FilterHeader,
+        CardPacCui: defineAsyncComponent(() => import('../components/widgets/CardPacCui.vue')),
     },
     methods: {
         async onBackHandle() {
@@ -65,6 +73,14 @@ $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 $color-amarillo: #F2B749;
 
+
+.pacusr{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 .mentoria {
     //width: 100%;

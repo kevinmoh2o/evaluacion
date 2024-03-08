@@ -1,60 +1,61 @@
 <template>
-    <Navbar  :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
+    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
 
     <!-- <div class="container" > -->
-        <div class="table-responsive">
-            <div clacontainerss="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-6">
-                            <h2>Cuidador - Paciente <b></b></h2>
-                        </div>
-                        <div class="col-6">
-                            <a  href="#addEmployeeModal"  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo"><i
-                                    class="material-icons">&#xE147;</i> <span>Agregar nuevo</span></a>
-                        </div>
+    <div class="table-responsive">
+        <div clacontainerss="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h2>Cuidador - Paciente <b></b></h2>
+                    </div>
+                    <div class="col-6">
+                        <a href="#addEmployeeModal" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo"><i
+                                class="material-icons">&#xE147;</i> <span>Agregar nuevo</span></a>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <!-- <th>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <!-- <th>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="selectAll">
                                     <label for="selectAll"></label>
                                 </span>
                             </th> -->
-                            <th>Estado</th>
-                            <th>Cuidador</th>
-                            <th>Paciente</th>
-                            <th>Email</th>
-                            <th>Celular</th>
-                            <th>Editar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in valorTabla" :key="index">
-                            <!-- <td>
+                        <th>Estado</th>
+                        <th>Cuidador</th>
+                        <th>Paciente</th>
+                        <th>Email</th>
+                        <th>Celular</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, index) in valorTabla" :key="index">
+                        <!-- <td>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="checkbox1" name="options[]" value="1">
                                     <label for="checkbox1"></label>
                                 </span>
                             </td> -->
-                            <td>
-                                <a href="#deleteEmployeeModal" class="done" data-toggle="modal"><i class="material-icons"
-                                        data-toggle="tooltip" title="Done">&#xe86c;</i></a>
-                            </td>
-                            <td>{{item.cuidador.name}}</td>
-                            <td>{{item.paciente.name}}</td>
-                            <td>{{item.paciente.email}}</td>
-                            <td>{{item.paciente.phone}}</td>
-                            <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                        data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                
-                            </td>
-                        </tr>
-                        <!-- <tr>
+                        <td>
+                            <a class="done" data-toggle="modal"><i class="material-icons"
+                                    data-toggle="tooltip" title="Done">&#xe86c;</i></a>
+                        </td>
+                        <td>{{ item.cuidador.apelPaterno }} {{ item.cuidador.name }}</td>
+                        <td>{{ item.paciente.apelPaterno }} {{ item.paciente.name }}</td>
+                        <td>{{ item.paciente.email }}</td>
+                        <td>{{ item.paciente.phone }}</td>
+                        <td>
+                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
+                                    data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+
+                        </td>
+                    </tr>
+                    <!-- <tr>
                             <td>
                                 <span class="custom-checkbox">
                                     <input type="checkbox" id="checkbox2" name="options[]" value="1">
@@ -96,13 +97,13 @@
                             </td>
                         </tr> -->
 
-<!-- <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
+                    <!-- <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
                                         data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
-            </div>
         </div>
+    </div>
     <!-- </div> -->
 
     <ModalCuidadorPaciente @createUSer="createUSer"></ModalCuidadorPaciente>
@@ -117,7 +118,7 @@
             <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
         </div>
     </div>
-    
+
     <!-- <section class="formulario">
 
         <div class="modal-header">
@@ -293,50 +294,53 @@ export default {
         ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     },
     async mounted() {
-        const userProv = this.getUser();
-        console.log("userProv mounted: ",userProv);
-        await this.llamarLista(userProv.id);
+        var usertest = localStorage.user;
+        this.userData = usertest !== null ? JSON.parse(usertest) : null;
+        //const userProv = this.getUser;
+        //console.log("userProv mounted: ", userProv);
+        await this.llamarLista(this.userData.id);
     },
     data() {
         const router = useRouter()
         return {
-            valorTabla:[],
+            valorTabla: [],
             apiResponse: { status: null, },
-            estadoModal:true,
+            estadoModal: true,
             loadingData: {
                 status: false,
                 title: "¡Estamos guardando la información del paciente y del cuidador!<br><br>Por favor, espera un momento mientras asociamos estos datos al especialista."
             },
             titulo: 'REGISTROS DEL CUIDADOR PRIMARIO Y PACIENTE',
-            router: router
+            router: router,
+            userData: {},
         }
     },
     methods: {
-        ...mapActions('programacionModule', ['transactionUserPeople','listUserPersona']),
-        ...mapGetters('programacionModule', ['getUserProvider','getTranUserPeople','getUsuarioPersonaList','getUser']),
+        ...mapActions('programacionModule', ['transactionUserPeople', 'listUserPersona']),
+        ...mapGetters('programacionModule', ['getUserProvider', 'getTranUserPeople', 'getUsuarioPersonaList', 'getUser']),
         async onBackHandle() {
             console.log("navegando")
             await this.router.push('/menu')
         },
-        async createUSer(value){
-            console.log("createUSer value:",value)
+        async createUSer(value) {
+            console.log("createUSer value:", value)
             this.loadingData.status = true;
-            const rptaUSrProv = this.getUserProvider();
+            //const rptaUSrProv = this.getUserProvider();
             //const { status, data, message } = await this.getUserProvider();
-            const userProv = await this.getUserProvider();
+            //const userProv = await this.getUserProvider();
             //console.log("hideModal")
-            const {perPac,perCui} = value;
-            await this.transactionUserPeople({id:userProv.data.id,perPac,perCui})
-            const { status, data,message } = await this.getTranUserPeople();
-            console.log("{ status, data,message }: ",{ status, data,message })
-            if(status){
+            const { perPac, perCui } = value;
+            await this.transactionUserPeople({ id: this.userData.id, perPac, perCui })
+            const { status, data, message } = await this.getTranUserPeople();
+            console.log("{ status, data,message }: ", { status, data, message })
+            if (status) {
                 this.apiResponse = Object.assign({ status, data, message }, { title: '¡Genial!', btnText: 'Continuar', navTo: '/menu' });
-            }else{
+            } else {
                 this.apiResponse = Object.assign({ status, data, message }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
             }
-            await this.llamarLista(userProv.data.id)
+            await this.llamarLista(this.userData.id)
             this.loadingData.status = false;
-            
+
             //console.log("rptaUSrProv: ",rptaUSrProv);
             //console.log("createUSer: ",value);
             //console.log("{ status, data, message }: ",{ status, data, message });
@@ -354,17 +358,22 @@ export default {
             this.apiResponse.status = null;
         },
         async llamarLista(value) {
-            await this.listUserPersona({ id: value, isActive: true });
-            const { status, data } = this.getUsuarioPersonaList();
-            this.valorTabla=data;
+            try {
+                await this.listUserPersona({ id: value, isActive: true });
+                const { status, data } = this.getUsuarioPersonaList();
+                this.valorTabla = data;
+                console.log("Todo bien: ", { status, data });
+            } catch (error) {
+                console.log("Todo mal: ", error);
+            }
+
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-
-.container{
+.container {
     width: 100vw;
     margin: 10px 10px 10px 10px;
 }

@@ -107,8 +107,13 @@ export default {
         };
     },
     mounted() {
+        //this.getStatte();
+        
         /* var userProv = this.getUser;
         console.log("userProv: ",userProv); */
+        localStorage.setItem('user', JSON.stringify(null));
+        localStorage.setItem('entries', JSON.stringify(null));
+        //localStorage.setItem('entries', JSON.stringify(null));
     },
     setup() {
         //const router = useRouter()
@@ -124,8 +129,8 @@ export default {
         ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     },
     methods: {
-        ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading', 'getUserByEmail']),
-        ...mapGetters('programacionModule', ['getEstado', 'getUserProvider','getUser']),
+        ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading', 'getUserByEmail','resetValues']),
+        ...mapGetters('programacionModule', ['getEstado','getUser','getStatte']),
         async sleep(ms) {
             return await new Promise(resolve => setTimeout(resolve, ms));
         },
@@ -134,12 +139,12 @@ export default {
         },
         async navegar() {
             this.loadingData.status = true;
-            await this.getUserByEmail({ dni: this.email, password: this.password });
-            const { status, data, message } = await this.getUserProvider();
+            const { status, data, message } =await this.getUserByEmail({ dni: this.email, password: this.password });
             console.log("Auth: ",{ status, data, message });
             if (status) {
                 this.apiResponse = Object.assign({ status, data, message }, { title: '¡Genial!', btnText: 'Continuar', navTo: '' });
                 this.$router.push('/menu');
+                this.resetValues(null);
             } else {
                 this.apiResponse = Object.assign({ status, data, message }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
             }

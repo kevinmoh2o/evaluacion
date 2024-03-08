@@ -25,7 +25,8 @@ export const setCounter = (state, newCounterValue) => {
 };
 
 export const setUser = (state, user) => {
-  localStorage.setItem('user', JSON.stringify(user));
+  state.user = user;
+  //localStorage.setItem('user', JSON.stringify(user));
 };
 
 
@@ -65,6 +66,24 @@ export const setIsLoading = (state, valor) => {
 
 export const addUser = (state, valor) => {
   state.respuesta = valor
+}
+
+
+export const resetState = (state, valor) => {
+  state.isLoading = {
+    loading: false,
+    success: false,
+    error: false
+  };
+  state.respuesta = {};
+  state.userProvider = {
+    status: false,
+    data: null,
+    message: "null"
+  };
+  state.usuarioPersonaList = [];
+  state.tranUserPeople = {};
+  state.entries = [];
 }
 
 

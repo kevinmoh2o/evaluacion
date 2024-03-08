@@ -1,5 +1,5 @@
 <template>
-  <transition v-if="contador<2" name="modal-animation">
+ <!--  <transition v-if="contador<2" name="modal-animation">
     <div v-show="modalActive" class="modal container-fluid">
       <div v-show="modalActive" class="modal container-fluid">
         <transition name="modal-animation-inner">
@@ -15,7 +15,7 @@
         </transition>
       </div>
     </div>
-  </transition>
+  </transition> -->
 
   <LoginPage></LoginPage>
 
@@ -24,7 +24,7 @@
 <script>
 // @ is an alias to /src
 import LoginPage from '../layouts/LoginPage.vue';
-import YouTube from 'vue3-youtube';
+//import YouTube from 'vue3-youtube';
 import { mapActions, mapGetters,mapMutations } from 'vuex'
 
 //import { defineAsyncComponent } from 'vue'
@@ -34,7 +34,7 @@ export default {
   name: 'home-view',
   components: {
     LoginPage,
-    YouTube,
+    //YouTube,
     //LoadingMainView: defineAsyncComponent(() => import('@/components/indicadores/LoadingMainView.vue')),
   },
   data() {

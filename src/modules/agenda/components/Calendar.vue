@@ -52,7 +52,10 @@ export default {
   },
   async mounted() {
     this.handleEventMount();
-    this.userData = this.getUser();
+
+    var usertest = localStorage.user;
+    this.userData = usertest !== null ? JSON.parse(usertest) : null;
+    //this.userData = this.getUser();
     await this.cargarListProgramacionesById({ id: this.userData.id });
     //await this.loadEntries(this.usuario);
     this.calendarOptions.events = this.getEvents();

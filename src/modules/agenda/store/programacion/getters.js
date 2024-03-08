@@ -3,6 +3,11 @@
 //  return state
 // }
 
+export const getStatte = (state) => {
+    console.log("state: ",state)
+    return state;
+};
+
 export const getUsuarioPersonaList = (state) => {
     console.log("usuarioPersonaList")
     return state.usuarioPersonaList;
@@ -30,9 +35,10 @@ export const getCounter = (state) => {
 };
 
 export const getUser = (state) => {
-    var usertest  = localStorage.user;
+    /* var usertest  = localStorage.user;
     const user = usertest !== null ? JSON.parse(usertest) : null;
-    return user;
+    return user; */
+    return state.user;
 };
 
 export const getEvents = ( state ) => {

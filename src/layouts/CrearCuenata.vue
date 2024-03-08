@@ -165,6 +165,7 @@
         <hr class="hr-estilo">
 
         <div class="btn-estilo">
+            <!-- <button class="button2" type="submit">Crear Usuario</button> -->
             <button type="submit" class="btn btn-success">Crear</button>
         </div>
 
@@ -259,12 +260,12 @@ export default {
             this.loadingData.status = true;
             try {
                 await this.crearUsuario(this.data);
-                var { status, message } = this.getRptHttp();
+                var { status, message, title } = this.getRptHttp();
                 console.log("crear usuario ", { status, message })
                 if (status) {
-                    this.apiResponse = { status, data: null, message, title: '¡Genial!', btnText: 'Continuar', navTo: '/' };
+                    this.apiResponse = { status, data: null, message, title, btnText: 'Continuar', navTo: '/' };
                 } else {
-                    this.apiResponse = { status, data: null, message, title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' };
+                    this.apiResponse = { status, data: null, message, title, btnText: 'Cerrar', navTo: '' };
                 }
                 console.log("this.apiResponse ", this.apiResponse);
             } catch (error) {
