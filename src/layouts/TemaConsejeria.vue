@@ -123,7 +123,7 @@ export default {
             });
         },
         onBackHandle() {
-            this.$router.push('/menu');
+            this.$router.push('/menu-main');
         }
     },
     watch: {

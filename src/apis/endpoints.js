@@ -1,4 +1,9 @@
 export const ENDPOINTS = {
+    /********* AUTH */
+    POS_CREATE_USER: '/api/auth/createUser',
+    POS_RESET_ACCOUNT:'/api/auth/reset',
+
+
     /********* GET REUQESTS */
     GET_USER_BY_DNI: '/api/usuarios/dni',
     GET_LITS_PACC_CARE_BY_USER: '/api/usuarios/userPeople',
@@ -7,7 +12,7 @@ export const ENDPOINTS = {
 
 
     /********* POST REUQESTS */
-    POS_CREATE_USER: '/api/usuarios',
+    
     POS_CREATE_TIE_PAC_CARE_USER: '/api/usuarios/transUser',
     POS_CREATE_PROGRAMACION: '/api/usuarios/programacion',
 

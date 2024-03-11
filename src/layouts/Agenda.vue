@@ -55,7 +55,7 @@ export default {
         ...mapActions('programacionModule', ['transactionUserPeople', 'listUserPersona']),
         ...mapGetters('programacionModule', ['getTranUserPeople', 'getUsuarioPersonaList', 'getUser']),
         onBackHandle() {
-            this.$router.push('/menu');
+            this.$router.push('/menu-main');
         }
     }
 }

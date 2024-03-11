@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
+        <Navbar :estadoTitulo="true" :estadoFlecha="false" :titulo="titulo" @volver="onBackHandle"></Navbar>
 
 
         <div class="formulario">
@@ -235,6 +235,7 @@ export default {
 }
 
 .contenedor {
+    max-width: 500px;
     margin: 5px 10px 5px 10px;
     padding: 5px;
     display: flex;
@@ -275,6 +276,7 @@ export default {
 }
 
 .formulario {
+    width: 100%;
     //height:calc(100vh);
     //width: 100vw;
     //overflow-y: scroll;
@@ -295,6 +297,7 @@ export default {
 
 
 .alinear {
+    height: 100px;
     width: 100%;
     display: flex;
     flex-direction: column;

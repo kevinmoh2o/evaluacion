@@ -53,7 +53,7 @@ export default {
     methods: {
         async onBackHandle() {
             console.log("navegando")
-            await this.router.push('/menu')
+            await this.router.push('/menu-main')
         },
         select: function (p2) {
             //var targetId = event.currentTarget.id;

@@ -1,7 +1,7 @@
 <template>
   <div class="column-container">
     <Fullcalendar ref="fullCalendar" class="full-calendar" :options="calendarOptions" :userProv="userProv">
-      <template #eventContent="arg">
+      <template v-slot:eventContent='arg'>
         <p class="card-box" @mouseenter="handleEventMouseEnter(arg)" @mouseleave="handleMouseLeave">
           <span>
             <div class="fc-content">
@@ -95,6 +95,7 @@ export default {
       themeSystem: 'bootstrap5',
       slotMinTime: "08:00:00",
       events: [],
+      eventColor: '#378006',
       dateClick: this.handleDateclick,
       eventChange: this.eventChangeClick,
       eventClick: this.handleEventClick,

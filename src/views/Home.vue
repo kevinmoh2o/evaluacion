@@ -56,16 +56,16 @@ export default {
     },
   },
   created() {
-    console.log("created in home")
+    /* console.log("created in home")
     this.contador = this.getCounter();
     if(this.contador>2){
       window.addEventListener('resize', this.handleWindowResize);
-    }
+    } */
   },
   unmounted() {
-    if(this.contador>2){
+    /* if(this.contador>2){
       window.removeEventListener('resize', this.handleWindowResize);
-    }
+    } */
   },
   methods: {
     ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading']),
@@ -84,12 +84,12 @@ export default {
       //console.log('contador: ',contador);
       this.setCounter(this.contador+1);
     },
-    onReady() {
+   /*  onReady() {
       this.$refs.youtube.playVideo()
     },
     handleWindowResize() {
       this.windowWidth = window.innerWidth;
-    },
+    }, */
   },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Nosotros'" @volver="onBackHandle"></Navbar>
+    <Navbar :estadoTitulo="true" :estadoFlecha="false" :titulo="'Nosotros'" @volver="onBackHandle"></Navbar>
     <EquipoTrabajo></EquipoTrabajo>
 </template>
 

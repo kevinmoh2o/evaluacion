@@ -4,8 +4,8 @@ import router from './router'
 
 import { createPinia } from 'pinia'
 import store from './store/module-template'
-import { app } from '@/plugins/firebase';
-import { SnackbarService, createVuetify } from "vuetify";
+//import { app } from '@/plugins/firebase';
+import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
@@ -19,7 +19,7 @@ const vuetify = createVuetify({
     directives
 });
 
-console.log({nombre:app.name})
+//console.log({nombre:app.name})
 createApp(App)
     .use(createPinia())
     .use(vuetify)

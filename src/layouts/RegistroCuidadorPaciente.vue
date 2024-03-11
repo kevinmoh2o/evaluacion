@@ -1,5 +1,5 @@
 <template>
-    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
+    <Navbar :estadoTitulo="true" :estadoFlecha="false" :titulo="titulo" @volver="onBackHandle"></Navbar>
 
     <!-- <div class="container" > -->
     <div class="table-responsive">
@@ -427,8 +427,9 @@ i {
 
 
 .table-responsive {
-    padding: 10px 10px 10px 10px;
-    margin: 10px 10px 10px 10px;
+    font-size: 15px;
+    padding: 20px;
+    margin: 20px;
 }
 
 .table-wrapper {

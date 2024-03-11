@@ -51,14 +51,14 @@ export default {
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap'); */
 
 
-html {
+/* html {
   font-size: 14px;
 }
 
 
 .app {
   height: 100vh;
-}
+} */
 
 .column-container .full-calendar a {
   text-decoration: none !important;
@@ -103,7 +103,7 @@ html {
 }
  */
 
-.loading-indicator {
+/* .loading-indicator {
   background: var(--gradient-primary);
   width: 100vw;
   height: 100%;
@@ -116,5 +116,5 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+} */
 </style>

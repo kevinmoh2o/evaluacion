@@ -18,6 +18,11 @@ const routes = [{
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/CrearCuenata.vue')
     },
     {
+        path: '/menu-main',
+        name: 'menu-main',
+        component: () => import ( /* webpackChunkName: "about" */ '../layouts/MenuPrincipal.vue')
+    },
+    {
         path: '/menu',
         name: 'menu-layout',
         component: () => import ( /* webpackChunkName: "about" */ '../layouts/Menu.vue')

@@ -2,12 +2,13 @@
     <div class="background-image"></div>
     <div class="contenedor">
 
-        <Navbar class="nav-tag" :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"
-            @volver="onBackHandle"></Navbar>
+        <!-- <Navbar class="nav-tag" :estadoTitulo="true" :estadoFlecha="true" :titulo="'Plataforma Virtual'"
+            @volver="onBackHandle"></Navbar> -->
 
         <div class="menu-general">
             <div v-for="(menu, index) in menus" :key="index" class="cards">
-                <MenuCard :titulo="menu.titulo" :ruta="menu.ruta" @clickbutton="handlePress(menu.id)" :idCard="idParent">
+                <MenuCard :titulo="menu.titulo" :ruta="menu.ruta" @clickbutton="handlePress(menu.id)"
+                    :idCard="idParent">
                 </MenuCard>
             </div>
         </div>
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import Navbar from '../components/compose/Navbar.vue';
+//import Navbar from '../components/compose/Navbar.vue';
 import MenuCard from '@/components/compose/MenuCard.vue';
 
 export default {
@@ -25,12 +26,12 @@ export default {
         return {
             idParent: 0,
             menus: [
-                { id: 1, titulo: 'REGISTRO DE USUARIO', ruta: 'cuidador', path: 'registrar-cuidador-paciente' },
+                /* { id: 1, titulo: 'REGISTRO DE USUARIO', ruta: 'cuidador', path: 'registrar-cuidador-paciente' }, */
                 { id: 2, titulo: 'AGENDA', ruta: 'calendario', path: 'agenda' },
                 { id: 3, titulo: 'TEMAS DE CONSEJERIA', ruta: 'chat', path: 'tema-consejeria' },
-                { id: 4, titulo: 'CUESTIONARIO DE SATISFACCIÓN', ruta: 'cuestionario', path: 'cuestionario-satisfaccion' },
+                /* { id: 4, titulo: 'CUESTIONARIO DE SATISFACCIÓN', ruta: 'cuestionario', path: 'cuestionario-satisfaccion' },
                 { id: 5, titulo: 'EQUIPOS DE TRABAJO', ruta: 'equipo', path: 'about-us' },
-                { id: 6, titulo: 'SOPORTE TÉCNICO', ruta: 'servicio-cliente', path: '' },
+                { id: 6, titulo: 'SOPORTE TÉCNICO', ruta: 'servicio-cliente', path: '' }, */
                 { id: 7, titulo: 'REGISTRO DE CONSEJERÍA', ruta: 'registro', path: 'registro-consejeria' },
             ],
         }
@@ -43,11 +44,11 @@ export default {
             this.$router.push(`/${ruta}`);
         },
         onBackHandle() {
-            this.$router.push('/');
+            this.$router.push('/menu-main');
         }
     },
     components: {
-        Navbar,
+        //Navbar,
         MenuCard,
 
     }
@@ -61,9 +62,13 @@ export default {
 }
 
 .contenedor {
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 .menu-general {
@@ -73,8 +78,8 @@ export default {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    flex-grow: 1;
-    width: 100vw;
+    //flex-grow: 1;
+    width: 100%;
     height: 100%;
 }
 
@@ -82,14 +87,15 @@ export default {
 
 .background-image {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-image: url('../assets/consejeria-menu.jpg');
-    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.45;
+    opacity: 0.5;
     z-index: -1;
 }
 

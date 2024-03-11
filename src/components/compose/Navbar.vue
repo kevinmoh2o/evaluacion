@@ -8,21 +8,21 @@
       </div>
 
       <div class="caja2">
-        <a v-if="estadoTitulo" class="estiloA"
-          style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <a v-if="estadoTitulo" class="estiloA">
           {{ titulo }}
         </a>
       </div>
 
-      <div class="caja3" style="display: flex; flex-direction: column; justify-content: center; align-items: center;background-color: #fff;">
+      <div class="caja3"
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center;background-color: #fff;">
         <img class="d-none d-sm-block" src="@/assets/logo2.png" alt="Vue Logo" height="70">
         <img class="d-block d-sm-none" src="@/assets/logo3.png" alt="Vue Logo" height="70">
       </div>
 
     </div>
     <!-- <div class="row"> -->
-      <div class="linea">
-      </div>
+    <div class="linea">
+    </div>
     <!-- </div> -->
   </nav>
 </template>
@@ -52,45 +52,66 @@ $color-azul: #1B62BF;
 $color-blanco: #f8f9fa;
 
 
-.navbar-container{
-  width: 100vw;
+.navbar-container {
+  width: 100%;
 }
 
-button{
-    transition: all .55s ease;
+button {
+  transition: all .55s ease;
 }
 
-button:hover{
-    transform: translateX(10px);
+button:hover {
+  transform: translateX(10px);
 }
 
 
-a{
+a {
   color: $color-blanco;
 }
 
-.estiloA{
-  text-align: center;
-  font-weight: 700;
+.estiloA {
+  font-size: 17px;
+  font-weight: 600;
   text-transform: uppercase;
   text-decoration: none;
+
+}
+
+.caja2 {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.caja2 a{
+  text-align: center;
 }
 
 
-@media (max-width:500px){
-  .caja2{
+@media (max-width:740px) {
+  /* .caja2 {
     width: 200px;
-    a{
+
+    a {
       max-lines: 2;
-      
+
     }
+  } */
+
+  .estiloA {
+    font-size: 15px;
   }
 
-  
+  .caja3{
+    width: 70px;
   }
+}
 
 
-nav .superior{
+nav .superior {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -99,12 +120,12 @@ nav .superior{
   background: $color-amarillo ;
 }
 
-.superior .caja1{
+.superior .caja1 {
   justify-items: center;
   margin: 0 10px 0 10px;
 }
 
-.superior{
+.superior {
   align-items: center;
 }
 
@@ -164,7 +185,7 @@ nav .superior{
 
 button.btn {
   &.btn-outline-info {
-    border-radius:10px;
+    border-radius: 10px;
     color: $color-azul;
     //border-color: var(--light);
     inline-size: 70px;
@@ -181,7 +202,8 @@ button.btn {
       font-size: 20px;
       font-weight: 700;
       transition: all .55s ease;
-      &:hover{
+
+      &:hover {
         font-size: 30px;
         font-weight: 700;
       }

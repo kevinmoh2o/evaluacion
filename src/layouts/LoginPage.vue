@@ -13,7 +13,7 @@
 
                             <div class="modal-content rounded-4 shadow align-items-center bg-azul pt-4">
                                 <h2 class="text-white">PLATAFORMA VIRTUAL</h2>
-                                <div class="imgBox mt-4">
+                                <div class="icono">
                                     <img src="https://cdn-icons-png.flaticon.com/512/536/536255.png" width="100"
                                         height="100">
                                 </div>
@@ -31,13 +31,11 @@
                                                 placeholder="Password" v-model="password" required />
                                             <label for="floatingPassword">Contraseña...</label>
                                         </div>
-                                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary mt-4"
+                                        <button class="boton"
                                             @click="navegar">Iniciar Sesión</button>
-                                        <!-- <small class="text-white">By clicking Sign up, you agree to the terms of use.</small> -->
                                         <hr class="my-4 text-white">
 
 
-                                        <!-- <div class="container-fluid row justify-content-center align-items-center"> -->
                                         <div class="text-link">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalCambioPassword"
                                                 data-bs-whatever="@mdo">¿Ha olvidado la contraseña?</a>
@@ -143,7 +141,7 @@ export default {
             console.log("Auth: ",{ status, data, message });
             if (status) {
                 this.apiResponse = Object.assign({ status, data, message }, { title: '¡Genial!', btnText: 'Continuar', navTo: '' });
-                this.$router.push('/menu');
+                this.$router.push('/menu-main');
                 this.resetValues(null);
             } else {
                 this.apiResponse = Object.assign({ status, data, message }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
@@ -184,9 +182,14 @@ $color-azul-intermedio: #616C8C;
 $color-placeholder: #4f4d4db5;
 $color-negro: #2c3e50;
 
+.icono{
+    font-size: 50px;
+}
+
 
 .pantalla {
     height: 100vh;
+    overflow: hidden;
 }
 
 .nav-link {
@@ -196,6 +199,16 @@ $color-negro: #2c3e50;
 .contenedor-body {
     width: 100%;
     height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.boton{
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: $color-negro;
+    color: white;
 }
 
 i {
