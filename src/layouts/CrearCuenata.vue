@@ -1,5 +1,5 @@
 <template>
-    <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="'Crear Cuenta'" @volver="onBackHandle"></Navbar>
+    <Navbar class="navbar" :estadoTitulo="true" :estadoFlecha="true" :titulo="'Crear Cuenta'" @volver="onBackHandle"></Navbar>
 
     <form @submit="onPressCrear" class="pagina" novalidate>
         <div class="seccion">
@@ -165,7 +165,6 @@
         <hr class="hr-estilo">
 
         <div class="btn-estilo">
-            <!-- <button class="button2" type="submit">Crear Usuario</button> -->
             <button type="submit" class="btn btn-success">Crear</button>
         </div>
 
@@ -315,14 +314,12 @@ export default {
 </script>
 
 <style scoped>
-/* label{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: start;
-  justify-content: start;
-  margin: 0;
-} */
+
+div h4{
+    font-size: 20px;
+    padding: 5px;
+}
+
 span {
     padding: 0;
     flex-direction: row;
@@ -334,7 +331,10 @@ span {
 }
 
 .pagina {
+    box-sizing: border-box;
+    width: 100%;
     padding: 10px;
+    overflow-x: hidden;
 
 }
 
@@ -343,7 +343,6 @@ span {
 }
 
 .seccion>h4 {
-    padding: 20px 20px 5px 20px;
     font-weight: 600;
     color: rgb(75, 72, 72);
 }
@@ -372,9 +371,9 @@ button {
 }
 
 .box {
-    width: 250px;
+    width: 230px;
     padding: 5px;
-    margin: 5px 10px 5px 10px;
+    margin: 10px;
 }
 
 .hr-estilo {

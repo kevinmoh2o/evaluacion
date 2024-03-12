@@ -297,7 +297,7 @@ export default {
 
 
 .alinear {
-    height: 100px;
+    height: 70px;
     width: 100%;
     display: flex;
     flex-direction: column;

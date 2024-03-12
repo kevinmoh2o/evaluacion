@@ -1,8 +1,7 @@
 <template>
     <Navbar :estadoTitulo="true" :estadoFlecha="false" :titulo="titulo" @volver="onBackHandle"></Navbar>
 
-    <!-- <div class="container" > -->
-    <div class="table-responsive">
+    <div class="table-responsive" :class="{ 'corto': isMaxBarraLateral }">
         <div clacontainerss="table-wrapper">
             <div class="table-title">
                 <div class="row">
@@ -19,31 +18,19 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <!-- <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th> -->
-                        <th>Estado</th>
-                        <th>Cuidador</th>
-                        <th>Paciente</th>
-                        <th>Email</th>
-                        <th>Celular</th>
-                        <th>Editar</th>
+                        <th class="thc">Estado</th>
+                        <th class="thc">Cuidador</th>
+                        <th class="thc">Paciente</th>
+                        <th class="thc">Email</th>
+                        <th class="thc">Celular</th>
+                        <th class="thc">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) in valorTabla" :key="index">
-                        <!-- <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                    <label for="checkbox1"></label>
-                                </span>
-                            </td> -->
                         <td>
-                            <a class="done" data-toggle="modal"><i class="material-icons"
-                                    data-toggle="tooltip" title="Done">&#xe86c;</i></a>
+                            <a class="done" data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
+                                    title="Done">&#xe86c;</i></a>
                         </td>
                         <td>{{ item.cuidador.apelPaterno }} {{ item.cuidador.name }}</td>
                         <td>{{ item.paciente.apelPaterno }} {{ item.paciente.name }}</td>
@@ -55,56 +42,12 @@
 
                         </td>
                     </tr>
-                    <!-- <tr>
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                                    <label for="checkbox2"></label>
-                                </span>
-                            </td>
-                            <td>
-                                <a href="#deleteEmployeeModal" class="cancel" data-toggle="modal"><i class="material-icons"
-                                        data-toggle="tooltip" title="Done">&#xe5c9;</i></a>
-                            </td>
-                            <td>Dominique Perrier</td>
-                            <td>Pablo Bacilio</td>
-                            <td>dominiqueperrier@mail.com</td>
-                            <td>(51) 123456789</td>
-                            <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                        data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="checkbox2" name="options[]" value="1">
-                                    <label for="checkbox2"></label>
-                                </span>
-                            </td>
-                            <td>
-                                <a href="#deleteEmployeeModal" class="cancel" data-toggle="modal"><i class="material-icons"
-                                        data-toggle="tooltip" title="Done">&#xe5c9;</i></a>
-                            </td>
-                            <td>Agustin Garcia</td>
-                            <td>Nicolas Becerra</td>
-                            <td>agusgar@mail.com</td>
-                            <td>(51) 123456789</td>
-                            <td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                        data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            </td>
-                        </tr> -->
-
-                    <!-- <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                        data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
                 </tbody>
             </table>
 
         </div>
     </div>
-    <!-- </div> -->
 
     <ModalCuidadorPaciente @createUSer="createUSer"></ModalCuidadorPaciente>
     <div v-if="loadingData.status === true">
@@ -275,6 +218,50 @@
 
         </div>
     </section> -->
+    <!-- <tr>
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox2" name="options[]" value="1">
+                                    <label for="checkbox2"></label>
+                                </span>
+                            </td>
+                            <td>
+                                <a href="#deleteEmployeeModal" class="cancel" data-toggle="modal"><i class="material-icons"
+                                        data-toggle="tooltip" title="Done">&#xe5c9;</i></a>
+                            </td>
+                            <td>Dominique Perrier</td>
+                            <td>Pablo Bacilio</td>
+                            <td>dominiqueperrier@mail.com</td>
+                            <td>(51) 123456789</td>
+                            <td>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
+                                        data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox2" name="options[]" value="1">
+                                    <label for="checkbox2"></label>
+                                </span>
+                            </td>
+                            <td>
+                                <a href="#deleteEmployeeModal" class="cancel" data-toggle="modal"><i class="material-icons"
+                                        data-toggle="tooltip" title="Done">&#xe5c9;</i></a>
+                            </td>
+                            <td>Agustin Garcia</td>
+                            <td>Nicolas Becerra</td>
+                            <td>agusgar@mail.com</td>
+                            <td>(51) 123456789</td>
+                            <td>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
+                                        data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            </td>
+                        </tr> -->
+
+    <!-- <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
+                                        data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
 </template>
 
 <script>
@@ -293,11 +280,12 @@ export default {
         SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
         ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
     },
+    props: {
+        isMaxBarraLateral: Boolean,
+    },
     async mounted() {
         var usertest = localStorage.user;
         this.userData = usertest !== null ? JSON.parse(usertest) : null;
-        //const userProv = this.getUser;
-        //console.log("userProv mounted: ", userProv);
         await this.llamarLista(this.userData.id);
     },
     data() {
@@ -320,31 +308,25 @@ export default {
         ...mapGetters('programacionModule', ['getUserProvider', 'getTranUserPeople', 'getUsuarioPersonaList', 'getUser']),
         async onBackHandle() {
             console.log("navegando")
-            await this.router.push('/menu')
+            await this.router.push('/menu-main')
         },
+
         async createUSer(value) {
             console.log("createUSer value:", value)
             this.loadingData.status = true;
-            //const rptaUSrProv = this.getUserProvider();
-            //const { status, data, message } = await this.getUserProvider();
-            //const userProv = await this.getUserProvider();
-            //console.log("hideModal")
+
             const { perPac, perCui } = value;
             await this.transactionUserPeople({ id: this.userData.id, perPac, perCui })
             const { status, data, message } = await this.getTranUserPeople();
             console.log("{ status, data,message }: ", { status, data, message })
             if (status) {
-                this.apiResponse = Object.assign({ status, data, message }, { title: '¡Genial!', btnText: 'Continuar', navTo: '/menu' });
+                this.apiResponse = Object.assign({ status, data, message }, { title: '¡Genial!', btnText: 'Continuar', navTo: '/menu-main' });
             } else {
                 this.apiResponse = Object.assign({ status, data, message }, { title: '¡ OoPs !', btnText: 'Cerrar', navTo: '' });
             }
             await this.llamarLista(this.userData.id)
             this.loadingData.status = false;
 
-            //console.log("rptaUSrProv: ",rptaUSrProv);
-            //console.log("createUSer: ",value);
-            //console.log("{ status, data, message }: ",{ status, data, message });
-            //this.$refs.modalCuidadorPaciente.hide();
         },
         submitForm(event) {
             const form = event.target;
@@ -368,90 +350,51 @@ export default {
             }
 
         }
-    }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
-.container {
-    width: 100vw;
-    margin: 10px 10px 10px 10px;
-}
-
-
-.formulario {
-    margin: 10px;
-}
-
-button {
-    margin: 15px 10px 15px 10px;
-    width: 250px;
-}
-
-.footer-form {
-    display: flex;
-    width: 100vw;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.cuidador-box {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
-.caja {
-    display: flex;
-    width: 300px;
-    align-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin: 15px 10px 15px 10px;
-}
-
-
-.caja i {
-    width: 40px;
-    margin: 0 10px 0 10px;
-    font-size: 25px;
-    //color: grey;
-}
-
 i {
     color: var(--warning);
 }
 
 
 .table-responsive {
+    position: fixed;
+    width: calc(100% - 90px);
     font-size: 15px;
-    padding: 20px;
-    margin: 20px;
+    padding: 10px;
+    margin: 10px;
 }
 
 .table-wrapper {
-    min-width: 1000px;
+    width: 100%;
+    //min-width: 1000px;
     background: #fff;
-    padding: 20px 25px;
+    padding: 25px;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 
+.corto {
+    width: calc(100% - 260px);
+}
+
 .table-title {
-    padding-bottom: 15px;
+    //width: calc(100% - 100px);
+    //padding-top: 10px;
+    //padding-bottom: 10px;
     background: #435d7d;
     color: #fff;
-    padding: 16px 30px;
-    margin: -20px -25px 10px;
+    padding: 10px;
+    //margin: 10px;
     border-radius: 3px 3px 0 0;
 }
 
 .table-title h2 {
     margin: 5px 0 0;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .table-title .btn-group {
@@ -481,8 +424,13 @@ i {
     margin-top: 2px;
 }
 
+/* .thc{
+    font-size: 15px !important;
+} */
+
 table.table tr th,
 table.table tr td {
+    font-size: 13px !important;
     border-color: #e9e9e9;
     padding: 12px 15px;
     vertical-align: middle;
@@ -505,7 +453,7 @@ table.table-striped.table-hover tbody tr:hover {
 }
 
 table.table th i {
-    font-size: 13px;
+    font-size: 10px;
     margin: 0 5px;
     cursor: pointer;
 }
@@ -660,5 +608,22 @@ table.table .avatar {
 
 .modal form label {
     font-weight: normal;
+}
+
+@media (max-width:600px) {
+    .table-responsive {
+        //position: fixed;
+        width: calc(100% - 50px);
+    }
+
+    .table-wrapper{
+        position: relative;
+        width: calc(100% - 50px);
+    }
+
+
+    .corto {
+        width: calc(100% - 50px);
+    }
 }
 </style>

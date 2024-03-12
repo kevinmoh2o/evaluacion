@@ -69,6 +69,11 @@ const routes = [{
         component: () => import (/* webpackChunkName: "about" */'../layouts/SatisfaccionPage.vue')
     },
     {
+        path: '/login-layout',
+        name: 'login-layout',
+        component: () => import (/* webpackChunkName: "about" */'../layouts/LoginPage.vue')
+    },
+    {
         path: '/test-component',
         name: 'test-component',
         component: () => import (/* webpackChunkName: "about" */'../layouts/TestComponent.vue')

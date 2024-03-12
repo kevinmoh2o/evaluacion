@@ -93,10 +93,10 @@ export default {
 
 
 .radio-input {
-    max-width: 500px;
-    max-height: 100px;
+    max-width: 170px;
+    max-height: 50px;
     display: flex;
-    scale: 0.1;
+    scale: 0.07;
     transform: rotate(180deg);
     justify-content: center;
 }

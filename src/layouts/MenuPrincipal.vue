@@ -15,26 +15,39 @@
           <ion-icon id="cloud" name="rocket-outline" @click="toggleMiniBarraLateral"></ion-icon>
           <span :class="{ 'oculto': !isMaxBarraLateral }">Consejería en Enfermería</span>
         </div>
-        <!-- <button class="boton">
-          <ion-icon name="log-out-outline"></ion-icon>
-          <span :class="{ 'oculto': !isMaxBarraLateral }">Cerrar Sesión</span>
-        </button> -->
       </div>
 
 
       <nav class="navegacion">
         <ul>
-          <li><a id="inbox" href="" @click.prevent="showContent('inbox')"><ion-icon name="menu-outline"></ion-icon>Menú
-              Principal</a></li>
-
-          <li><a href="" @click.prevent="showContent('registrar')"><ion-icon
-                name="person-add-outline"></ion-icon>Registrar Usuario</a></li>
-          <li><a href="" @click.prevent="showContent('equipos')"><ion-icon name="hammer-outline"></ion-icon>Equipos de
-              Trabajo</a></li>
-          <li><a href="" @click.prevent="showContent('soporte')"><ion-icon name="help-outline"></ion-icon>Soporte
-              Técnico</a></li>
-          <li><a href="" @click.prevent="showContent('satisfaccion')"><ion-icon
-                name="reader-outline"></ion-icon>Satisfacción</a></li>
+          <li>
+            <a id="main-menu" :class="{ 'seleccion': boolIcn1 }" @click.prevent="showContent('main-menu')">
+              <ion-icon name="menu-outline"></ion-icon>
+              Menú Principal
+            </a>
+          </li>
+          <li>
+            <a id="registrar" :class="{ 'seleccion': boolIcn2 }" @click.prevent="showContent('registrar')">
+              <ion-icon name="person-add-outline"></ion-icon>
+              Registrar Usuario</a>
+          </li>
+          <li>
+            <a id="equipos" :class="{ 'seleccion': boolIcn3 }" @click.prevent="showContent('equipos')">
+              <ion-icon name="hammer-outline"></ion-icon>Equipos de
+              Trabajo</a>
+          </li>
+          <li>
+            <a id="soporte" :class="{ 'seleccion': boolIcn4 }" @click.prevent="showContent('soporte')">
+              <ion-icon name="help-outline"></ion-icon>
+              Soporte Técnico
+            </a>
+          </li>
+          <li>
+            <a id="satisfaccion" :class="{ 'seleccion': boolIcn5 }" @click.prevent="showContent('satisfaccion')">
+              <ion-icon name="reader-outline"></ion-icon>
+              Satisfacción
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -57,14 +70,14 @@
           <ion-icon id="imagen" name="person-circle-outline"></ion-icon>
           <div class="info-usuario" :class="{ 'oculto': !isMaxBarraLateral }">
             <div class="nombre-email">
-              <span class="nombre">{{userData.fullName}}</span>
-              <span class="email">{{userData.email}}</span>
+              <span class="nombre">{{ userData.fullName }}</span>
+              <span class="email">{{ userData.email }}</span>
             </div>
           </div>
 
 
         </div>
-        <button class="boton">
+        <button class="boton" @click="cerrarSesion">
           <ion-icon name="log-out-outline"></ion-icon>
           <span :class="{ 'oculto': !isMaxBarraLateral }">Cerrar Sesión</span>
         </button>
@@ -79,20 +92,34 @@
     </div>
 
     <main :class="{ 'min-main': !isMaxBarraLateral }">
-      <h1 v-if="selectedContent === 'inbox'">
-        <Menu></Menu>
-      </h1>
-      <h1 v-else-if="selectedContent === 'registrar'">
-        <RegistroCuidadorPaciente></RegistroCuidadorPaciente>
-      </h1>
-      <h1 v-else-if="selectedContent === 'equipos'">
-        <About></About>
-      </h1>
-      <h1 v-else-if="selectedContent === 'soporte'">Contenido para Soporte Técnico</h1>
-      <h1 v-else-if="selectedContent === 'satisfaccion'">
-        <SatisfaccionPage></SatisfaccionPage>
-      </h1>
+      <transition name="fade">
+        <div class="menu-selected" v-if="selectedContent === 'main-menu'">
+          <Menu></Menu>
+        </div>
+        <div v-else-if="selectedContent === 'registrar'">
+          <RegistroCuidadorPaciente :isMaxBarraLateral="isMaxBarraLateral"></RegistroCuidadorPaciente>
+        </div>
+        <div v-else-if="selectedContent === 'equipos'">
+          <About></About>
+        </div>
+        <div v-else-if="selectedContent === 'soporte'">Contenido para Soporte Técnico</div>
+        <div v-else-if="selectedContent === 'satisfaccion'">
+          <SatisfaccionPage></SatisfaccionPage>
+        </div>
+      </transition>
     </main>
+  </div>
+
+  <div v-if="loadingData.status === true">
+    <LoadingOverlay :loading="loadingData" />
+  </div>
+  <div v-else>
+    <div v-if="apiResponse.status === true">
+      <SuccessView :reponse="apiResponse" />
+    </div>
+    <div v-if="apiResponse.status === false">
+      <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
+    </div>
   </div>
 </template>
 
@@ -103,6 +130,8 @@ import About from '@/layouts/About.vue';
 import RegistroCuidadorPaciente from '@/layouts/RegistroCuidadorPaciente.vue';
 import SatisfaccionPage from '@/layouts/SatisfaccionPage.vue';
 import { mapActions } from 'vuex'
+import { defineAsyncComponent } from 'vue'
+
 
 export default {
   name: 'menu-main',
@@ -114,12 +143,25 @@ export default {
     About,
     RegistroCuidadorPaciente,
     SatisfaccionPage,
+    LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
+    SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+    ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
+  },
+  beforeUnmount() {
+    // Remover el escuchador de eventos al desmontar el componente
+    window.removeEventListener('popstate', this.handlePopstate);
   },
   async mounted() {
-    this.selectedContent = 'inbox';
+    this.selectedContent = 'main-menu';
     var usertest = localStorage.user;
     this.userData = usertest !== null ? JSON.parse(usertest) : null;
     await this.llamarLista(this.userData.id);
+    // Agregar un escuchador de eventos para el evento popstate
+    window.addEventListener('popstate', this.handlePopstate);
+
+    // Modificar el historial para que la página no tenga una entrada de historial adicional
+    history.pushState(null, document.title, location.href);
+
   },
   data() {
     return {
@@ -127,6 +169,16 @@ export default {
       isDarkMode: false,
       selectedContent: null,
       userData: {},
+      boolIcn1: true,
+      boolIcn2: false,
+      boolIcn3: false,
+      boolIcn4: false,
+      boolIcn5: false,
+      loadingData: {
+        status: false,
+        title: "Cerrando Sesión..."
+      },
+      apiResponse: { status: null, },
     };
   },
   methods: {
@@ -142,6 +194,26 @@ export default {
     },
     showContent(content) {
       this.selectedContent = content;
+      console.log(this.selectedContent)
+      switch (this.selectedContent) {
+        case "main-menu":
+          this.boolIcn1 = true; this.boolIcn2 = false; this.boolIcn3 = false; this.boolIcn5 = false; this.boolIcn5 = false;
+          break;
+        case "registrar":
+          this.boolIcn1 = false; this.boolIcn2 = true; this.boolIcn3 = false; this.boolIcn5 = false; this.boolIcn5 = false;
+          break;
+        case "equipos":
+          this.boolIcn1 = false; this.boolIcn2 = false; this.boolIcn3 = true; this.boolIcn5 = false; this.boolIcn5 = false;
+          break;
+        case "soporte":
+          this.boolIcn1 = false; this.boolIcn2 = false; this.boolIcn3 = false; this.boolIcn5 = true; this.boolIcn5 = false;
+          break;
+        case "satisfaccion":
+          this.boolIcn1 = false; this.boolIcn2 = false; this.boolIcn3 = false; this.boolIcn5 = false; this.boolIcn5 = true;
+          break;
+        default:
+          break;
+      }
     },
     async llamarLista(value) {
       try {
@@ -153,6 +225,22 @@ export default {
         console.log("Todo mal: ", error);
       }
 
+    },
+    handlePopstate(event) {
+      // Impedir el comportamiento predeterminado (navegación hacia atrás)
+      history.pushState(null, document.title, location.href);
+    },
+    async sleep(ms) {
+      return await new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async cerrarSesion() {
+      this.loadingData.status = true;
+      this.loadingData.title = "Cerrando Sesión...";
+      await this.sleep(3000);
+      this.loadingData.title = "Borrando Todos sus datos de Navegación";
+      await this.sleep(3000);
+      this.$router.push('/login-layout');
+      this.loadingData.status = false;
     }
   },
 
@@ -266,6 +354,11 @@ export default {
   color: var(--color-botton-texto);
   margin-top: 20px;
   cursor: pointer;
+  transition: width 0.5s ease;
+}
+
+.barra-lateral .boton:hover {
+  width: 90%;
 }
 
 .barra-lateral .boton ion-icon {
@@ -446,22 +539,30 @@ export default {
 /************ Main ************/
 
 main {
+  height: 100%;
   margin-left: 250px;
   padding: 0;
   transition: margin-left 0.5s ease;
 }
 
 main.min-main {
+
   margin-left: 80px;
 }
 
-#inbox {
+/* #main-menu {
+  background-color: var(--color-menu-hover);
+  color: var(--color-menu-hover-texto);
+} */
+
+.seleccion {
   background-color: var(--color-menu-hover);
   color: var(--color-menu-hover-texto);
 }
 
 /************ ****************/
 .barra-lateral .version {
+  padding-left: 5px;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -477,6 +578,24 @@ main.min-main {
   overflow: hidden;
 }
 
+
+.menu-selected {
+  height: 100%;
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active in <2.1.8 */
+  {
+  opacity: 0;
+}
 
 /************* MEDIA QUERYS  *************/
 @media (max-height:660px) {

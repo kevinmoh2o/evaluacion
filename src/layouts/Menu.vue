@@ -62,13 +62,13 @@ export default {
 }
 
 .contenedor {
-    position: relative;
+    //position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
+    //flex-grow: 1;
 }
 
 .menu-general {

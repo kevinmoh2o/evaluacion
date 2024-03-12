@@ -53,6 +53,7 @@ $color-blanco: #f8f9fa;
 
 
 .navbar-container {
+  padding: 0;
   width: 100%;
 }
 
