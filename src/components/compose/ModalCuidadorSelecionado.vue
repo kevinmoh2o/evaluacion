@@ -10,10 +10,18 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="contenedor">
+                    <!-- <div class="contenedor" v-for="(item, index) in listPacCui" :key="index">
                         <CardPacCui v-for="index in 5" :key="index" :nombrePac="'Kevin Montañez'"
-                            :nombreCon="'Arturo Genesis'" :consejeria="'2'"></CardPacCui>
+                            :nombreCon="'Arturo Genesis'" :consejeria="'2'">
+                        </CardPacCui>
+                    </div> -->
+
+                    <div class="contenedor" v-for="(item, index) in listPacCui" :key="index">
+                        <CardPacCui :key="index" :nombrePac="item.paciente.name" :nombreCon="item.paciente.name"
+                            :consejeria="item.nroConsejeria">
+                        </CardPacCui>
                     </div>
+
                 </div>
 
             </div>
@@ -24,30 +32,38 @@
 
 <script>
 
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, ref, onMounted, watch } from 'vue';
+
 export default {
     name: 'Modal-Cuidador',
     components: {
         CardPacCui: defineAsyncComponent(() => import('@/components/widgets/CardPacCui.vue')),
     },
+    setup(props) {
+        const listPacCui = ref([]);
+
+        onMounted(() => {
+            console.log("valor modal: ", props.lista)
+            listPacCui.value = props.lista;
+        });
+        watch(() => props.lista, (newValue) => {
+            listPacCui.value = newValue;
+        });
+
+        return {
+            listPacCui
+        };
+    },
     props: {
-        intitulo: String,
-        inDescripcion: String
+        lista: Object,
     },
     methods: {
         isValid(fieldName) {
             return this.validation[fieldName];
         },
-        submitForm(event) {
-            const form = event.target;
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        },
     }
 }
+
 </script>
 <style lang="scss" scoped>
 $color-azul: #1B62BF;

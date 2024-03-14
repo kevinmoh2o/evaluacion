@@ -82,7 +82,7 @@ export const transactionUserPeople = async ({ commit }, entry) => {
 }
 
 
-export const listUserPersona = async ({ commit }, { id, isActive }) => {
+export const listPacienteCuidador = async ({ commit }, { id, isActive }) => {
   const params = { id, isActive };
   const url = `${ENDPOINTS.GET_LITS_PACC_CARE_BY_USER}?${new URLSearchParams(params)}`;
   console.log("url: ", url);

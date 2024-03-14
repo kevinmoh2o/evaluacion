@@ -183,7 +183,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('programacionModule', ['transactionUserPeople', 'listUserPersona']),
+    ...mapActions('programacionModule', ['transactionUserPeople', 'listPacienteCuidador']),
     toggleSidebar() {
       this.isMaxBarraLateral = !this.isMaxBarraLateral;
     },
@@ -218,7 +218,7 @@ export default {
     },
     async llamarLista(value) {
       try {
-        await this.listUserPersona({ id: value, isActive: true });
+        await this.listPacienteCuidador({ id: value, isActive: true });
         const { status, data } = this.getUsuarioPersonaList();
         this.valorTabla = data;
         console.log("Todo bien: ", { status, data });
@@ -242,7 +242,10 @@ export default {
       await this.sleep(3000);
       this.$router.push('/login-layout');
       this.loadingData.status = false;
-    }
+    },
+    /* uppercase(value) {
+      return value.toUpperCase();
+    } */
   },
 
 }
@@ -515,6 +518,7 @@ export default {
 
 .barra-lateral .usuario .info-usuario.oculto {
   width: 0;
+  display: none;
 }
 
 .barra-lateral .usuario .nombre-email {
@@ -525,13 +529,16 @@ export default {
 }
 
 .barra-lateral .usuario .nombre {
-  font-size: 13px;
+  width: 100%;
+  font-size: 12px;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 .barra-lateral .usuario .email {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .barra-lateral .usuario ion-icon {

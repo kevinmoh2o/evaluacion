@@ -20,10 +20,10 @@
       </div>
 
     </div>
-    <!-- <div class="row"> -->
     <div class="linea">
+      <a href=""></a>
     </div>
-    <!-- </div> -->
+
   </nav>
 </template>
 
@@ -70,7 +70,6 @@ $color-blanco: #f8f9fa;
 } */
 
 .navbar-container {
-  padding: 0;
   width: 100%;
   height: 70px;
   

@@ -1,14 +1,5 @@
 <template>
 
-  <!-- <div class="contenedor">
-      <button class="imagen boton-efecto" data-bs-toggle="modal" data-bs-target="#modalCuidadorPaciente" data-bs-whatever="@mdo">
-        <img src="../../assets/boton/doctor.png">
-        <h5><span class="primary">Agregar Cuidador - <br>Paciente</span></h5>
-      </button>
-    </div> -->
-
-  <!--  <hr class="solid"> -->
-
   <div class="filtro">
 
 
@@ -17,7 +8,6 @@
       <button class="search-btn" type="submit" data-bs-toggle="modal" data-bs-target="#modalCuidadorSeleccion"
         data-bs-whatever="@mdo"><i class="bx bx-search"></i></button>
     </div>
-
 
     <div class="form-input">
       <select class="form-select" aria-label="Default select example">
@@ -31,33 +21,30 @@
   </div>
 
 
-  <ModalCuidadorSelecionado></ModalCuidadorSelecionado>
+  <ModalCuidadorSelecionado :lista="nroConsejeria"></ModalCuidadorSelecionado>
 </template>
 
 <script>
 import ModalCuidadorSelecionado from '@/components/compose/ModalCuidadorSelecionado.vue';
-//import ModalCuidadorPaciente from '@/components/compose/ModalCuidadorPaciente.vue';
+import { ref, onMounted, watchEffect } from 'vue';
 
 export default {
   name: 'filter-component',
   props: {
-    label: String,
-    placeholder: String,
-    nombre: String,
-    type: String
+    lista: Object
   },
-  data() {
+  setup(props) {
+    const nroConsejeria = ref(props.lista);
+
+    watchEffect(() => {
+      nroConsejeria.value = props.lista;
+    });
 
     return {
-      nroConsejeria: [
-        { id: 1, valor: "1" },
-        { id: 2, valor: "2" },
-        { id: 3, valor: "3" }
-      ]
-    }
+      nroConsejeria
+    };
   },
   components: {
-    //ModalCuidadorPaciente,
     ModalCuidadorSelecionado,
   },
   methods: {
@@ -69,6 +56,7 @@ export default {
     }
   }
 }
+
 </script>
 
 

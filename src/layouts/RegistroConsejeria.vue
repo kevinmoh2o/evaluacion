@@ -3,54 +3,68 @@
         <div class="cabecera">
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
         </div>
-        <FilterHeader></FilterHeader>
-        <!-- <div class="pacusr">
-            <CardPacCui :nombrePac="'Kevin Montañez'" :nombreCon="'Arturo Genesis'" :consejeria="'2'"></CardPacCui>
-            <CardPacCui :nombrePac="'Erik Yepes'" :nombreCon="'Fernando Manrique'" :consejeria="'3'"></CardPacCui>
-            <CardPacCui :nombrePac="'Roberth García'" :nombreCon="'Jorge Bolañoz'" :consejeria="'7'"></CardPacCui>
-            <CardPacCui :nombrePac="'Gustavo Olivos'" :nombreCon="'Gustavo Martinez'" :consejeria="'10'"></CardPacCui>
-        </div> -->
+        <FilterHeader :lista="valorTabla"></FilterHeader>
 
         <div class="mentoria">
             <div class="participante" v-on:click="select(1)">
             </div>
             <div class="participante" v-on:click="select(2)">
             </div>
-            <!-- <CardOne></CardOne> -->
-            
         </div>
+
         <div class="btn-contendor">
-            <button type="button" class="btn btn-success estilo-btn" data-bs-dismiss="modal">Registrar Consejería</button>
+            <button type="button" class="btn btn-success estilo-btn" data-bs-dismiss="modal">
+                Registrar Consejería
+            </button>
         </div>
 
     </form>
+
+    <!-- <div class="pacusr">
+        <CardPacCui :nombrePac="'Kevin Montañez'" :nombreCon="'Arturo Genesis'" :consejeria="'2'"></CardPacCui>
+        <CardPacCui :nombrePac="'Erik Yepes'" :nombreCon="'Fernando Manrique'" :consejeria="'3'"></CardPacCui>
+        <CardPacCui :nombrePac="'Roberth García'" :nombreCon="'Jorge Bolañoz'" :consejeria="'7'"></CardPacCui>
+        <CardPacCui :nombrePac="'Gustavo Olivos'" :nombreCon="'Gustavo Martinez'" :consejeria="'10'"></CardPacCui>
+    </div> -->
+    <!-- <CardOne></CardOne> -->
+
 </template>
 
 
 <script>
 import Navbar from '@/components/compose/Navbar.vue';
 import FilterHeader from '@/components/compose/FilterHeader.vue';
-//import BotonVue from '@/components/atomic/BotonVue.vue';
-import { useRouter } from 'vue-router'
-import { defineAsyncComponent } from 'vue'
+import { useRouter } from 'vue-router';
+import { mapActions, mapGetters } from 'vuex';
+import { ref, onMounted } from 'vue';
+//import { defineAsyncComponent } from 'vue'
 
 export default {
     name: 'regiconsejeria-layout',
     setup() {
-        const router = useRouter()
+        const router = useRouter();
+        const valorTabla = ref([]);
+        
         return {
             titulo: 'REGISTROS DE CONSEJERÍA',
-            router: router
+            router: router,
+            userData: {},
+            valorTabla,
         }
     },
+    async mounted() {
+        var usertest = localStorage.user;
+        this.userData = usertest !== null ? JSON.parse(usertest) : null;
+        await this.llamarLista(this.userData.id);
+    },
     components: {
-        //ModalCuidadorSelecionado: defineAsyncComponent(() => import('../components/compose/ModalCuidadorSelecionado.vue')),
         //CardOne: defineAsyncComponent(() => import('../components/widgets/CardOne.vue')),
         Navbar,
         FilterHeader,
-        //CardPacCui: defineAsyncComponent(() => import('../components/widgets/CardPacCui.vue')),
     },
     methods: {
+        ...mapActions('programacionModule', ['transactionUserPeople', 'listPacienteCuidador']),
+        ...mapGetters('programacionModule', ['getUserProvider', 'getTranUserPeople', 'getUsuarioPersonaList', 'getUser']),
         async onBackHandle() {
             console.log("navegando")
             await this.router.push('/menu-main')
@@ -60,6 +74,17 @@ export default {
             //console.log(event); // returns 'foo'
             //console.log(targetId); // returns 'foo'
             console.log(p2);
+        },
+        async llamarLista(value) {
+            try {
+                await this.listPacienteCuidador({ id: value, isActive: true });
+                const { status, data } = this.getUsuarioPersonaList();
+                this.valorTabla = data;
+                console.log("Todo bien: ", { status, data });
+            } catch (error) {
+                console.log("Todo mal: ", error);
+            }
+
         }
 
     }
@@ -74,7 +99,7 @@ $color-negro: #2c3e50;
 $color-amarillo: #F2B749;
 
 
-.pacusr{
+.pacusr {
     display: flex;
     flex-direction: row;
     align-items: center;

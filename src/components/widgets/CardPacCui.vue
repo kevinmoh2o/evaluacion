@@ -48,6 +48,7 @@ export default {
 <style scoped>
 .contenedor {
   margin: 10px;
+  width: auto;
 }
 
 .nro-consejeria {

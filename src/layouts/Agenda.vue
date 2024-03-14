@@ -52,7 +52,7 @@ export default {
 
     },
     methods: {
-        ...mapActions('programacionModule', ['transactionUserPeople', 'listUserPersona']),
+        ...mapActions('programacionModule', ['transactionUserPeople', 'listPacienteCuidador']),
         ...mapGetters('programacionModule', ['getTranUserPeople', 'getUsuarioPersonaList', 'getUser']),
         onBackHandle() {
             this.$router.push('/menu-main');

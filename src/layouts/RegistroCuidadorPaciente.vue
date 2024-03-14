@@ -304,7 +304,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions('programacionModule', ['transactionUserPeople', 'listUserPersona']),
+        ...mapActions('programacionModule', ['transactionUserPeople', 'listPacienteCuidador']),
         ...mapGetters('programacionModule', ['getUserProvider', 'getTranUserPeople', 'getUsuarioPersonaList', 'getUser']),
         async onBackHandle() {
             console.log("navegando")
@@ -341,7 +341,7 @@ export default {
         },
         async llamarLista(value) {
             try {
-                await this.listUserPersona({ id: value, isActive: true });
+                await this.listPacienteCuidador({ id: value, isActive: true });
                 const { status, data } = this.getUsuarioPersonaList();
                 this.valorTabla = data;
                 console.log("Todo bien: ", { status, data });

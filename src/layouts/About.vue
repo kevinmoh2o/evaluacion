@@ -1,6 +1,14 @@
 <template>
-    <Navbar :estadoTitulo="true" :estadoFlecha="false" :titulo="'Nosotros'" @volver="onBackHandle"></Navbar>
-    <EquipoTrabajo></EquipoTrabajo>
+    <nav class="about">
+        <nav class="cab">
+            <Navbar :estadoTitulo="true" :estadoFlecha="false" :titulo="'Nosotros'" @volver="onBackHandle"></Navbar>
+        </nav>
+        <nav class="bod">
+            <EquipoTrabajo></EquipoTrabajo>
+        </nav>
+    </nav>
+
+
 </template>
 
 
@@ -35,7 +43,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.box1 {
-    margin: 15px 0 15px 0;
+.about {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.cab{
+    height: 80px;
 }
 </style>
