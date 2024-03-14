@@ -4,12 +4,12 @@
             <Navbar :estadoTitulo="true" :estadoFlecha="true" :titulo="titulo" @volver="onBackHandle"></Navbar>
         </div>
         <FilterHeader></FilterHeader>
-        <div class="pacusr">
+        <!-- <div class="pacusr">
             <CardPacCui :nombrePac="'Kevin Montañez'" :nombreCon="'Arturo Genesis'" :consejeria="'2'"></CardPacCui>
             <CardPacCui :nombrePac="'Erik Yepes'" :nombreCon="'Fernando Manrique'" :consejeria="'3'"></CardPacCui>
             <CardPacCui :nombrePac="'Roberth García'" :nombreCon="'Jorge Bolañoz'" :consejeria="'7'"></CardPacCui>
             <CardPacCui :nombrePac="'Gustavo Olivos'" :nombreCon="'Gustavo Martinez'" :consejeria="'10'"></CardPacCui>
-        </div>
+        </div> -->
 
         <div class="mentoria">
             <div class="participante" v-on:click="select(1)">
@@ -48,7 +48,7 @@ export default {
         //CardOne: defineAsyncComponent(() => import('../components/widgets/CardOne.vue')),
         Navbar,
         FilterHeader,
-        CardPacCui: defineAsyncComponent(() => import('../components/widgets/CardPacCui.vue')),
+        //CardPacCui: defineAsyncComponent(() => import('../components/widgets/CardPacCui.vue')),
     },
     methods: {
         async onBackHandle() {
@@ -83,7 +83,8 @@ $color-amarillo: #F2B749;
 }
 
 .mentoria {
-    //width: 100%;
+    width: 100%;
+    height: 100%;
     display: flex;
     padding: 5px 30px 5px 30px;
     flex-direction: row;
@@ -97,7 +98,7 @@ $color-amarillo: #F2B749;
     width: 45%;
     text-align: center;
     margin: 5px 10px 5px 10px;
-    min-height: 300px;
+    min-height: 400px;
 }
 
 @media (max-width:600px) {

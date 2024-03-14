@@ -1,7 +1,7 @@
 <template>
     <div class="pantalla">
 
-        <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onBackHandle"></Navbar>
+        <!-- <Navbar :estadoTitulo="true" :estadoFlecha="false" @volver="onBackHandle"></Navbar> -->
 
         <div class="contenedor-body">
             <div class="row flex-grow-1">
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import Navbar from '../components/compose/Navbar.vue';
+//import Navbar from '../components/compose/Navbar.vue';
 import { defineAsyncComponent } from 'vue'
 import ModalCambioPassword from '@/components/compose/ModalCambioPassword.vue';
 //import { useRouter } from 'vue-router'
@@ -120,7 +120,7 @@ export default {
         }
     },
     components: {
-        Navbar,
+        //Navbar,
         ModalCambioPassword,
         LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
         SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
@@ -188,7 +188,8 @@ $color-negro: #2c3e50;
 
 
 .pantalla {
-    height: 100vh;
+    border: 2px solid red;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -197,8 +198,9 @@ $color-negro: #2c3e50;
 }
 
 .contenedor-body {
+    border: 2px solid blue;
     width: 100%;
-    height: auto;
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
 }

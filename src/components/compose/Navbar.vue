@@ -2,8 +2,9 @@
   <nav class="navbar-container" aria-label="Second navbar example">
     <div class="superior">
       <div class="caja1">
-        <button class="btn btn-outline-info" v-if="estadoFlecha" @click="$emit('volver')">
-          <i class="fa fa-arrow-left"></i>
+        <button class="boton" v-if="estadoFlecha" @click="$emit('volver')">
+          <!-- <i class="fa fa-arrow-left"></i> -->
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
         </button>
       </div>
 
@@ -13,10 +14,9 @@
         </a>
       </div>
 
-      <div class="caja3"
-        style="display: flex; flex-direction: column; justify-content: center; align-items: center;background-color: #fff;">
-        <img class="d-none d-sm-block" src="@/assets/logo2.png" alt="Vue Logo" height="70">
-        <img class="d-block d-sm-none" src="@/assets/logo3.png" alt="Vue Logo" height="70">
+      <div class="caja3" style="display: flex; flex-direction: column; justify-content: center; align-items: center;background-color: #fff;">
+        <!-- <img class="d-none d-sm-block" src="@/assets/logo2.png" alt="Vue Logo" height="70">
+        <img class="d-block d-sm-none" src="@/assets/logo3.png" alt="Vue Logo" height="70"> -->
       </div>
 
     </div>
@@ -52,9 +52,28 @@ $color-azul: #1B62BF;
 $color-blanco: #f8f9fa;
 
 
+.boton{
+  width: 65px;
+  height: 65px;
+  border: none;
+  font-size: 50px;
+  color: #ffffff;
+  background-color: $color-amarillo;
+}
+
+
+/* .boton {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  
+} */
+
 .navbar-container {
   padding: 0;
   width: 100%;
+  height: 70px;
+  
 }
 
 button {
@@ -79,12 +98,11 @@ a {
 }
 
 .caja2 {
-  width: 50%;
+  width: auto;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .caja2 a{
@@ -92,16 +110,7 @@ a {
 }
 
 
-@media (max-width:740px) {
-  /* .caja2 {
-    width: 200px;
-
-    a {
-      max-lines: 2;
-
-    }
-  } */
-
+/* @media (max-width:740px) {
   .estiloA {
     font-size: 15px;
   }
@@ -109,21 +118,22 @@ a {
   .caja3{
     width: 70px;
   }
-}
+} */
 
 
 nav .superior {
+  height: 70px;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
   background: $color-amarillo ;
+  
 }
 
 .superior .caja1 {
   justify-items: center;
-  margin: 0 10px 0 10px;
 }
 
 .superior {
@@ -143,19 +153,11 @@ nav .superior {
 
 }
 
-.boton {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  background-color: $color-amarillo;
-  grid-area: boton;
-}
 
 .linea {
   background-color: $color-azul;
   width: 100%;
   height: 10px;
-  grid-area: linea;
 }
 
 .texto {
@@ -173,10 +175,6 @@ nav .superior {
 
 
 .navbar-brand {
-  padding: 0;
-  margin: 0;
-  /* font-size: 15px; */
-  /* display: block; */
   text-align: center;
   font-weight: 700;
   text-transform: uppercase;
@@ -184,7 +182,7 @@ nav .superior {
 }
 
 
-button.btn {
+/* button.btn {
   &.btn-outline-info {
     border-radius: 10px;
     color: $color-azul;
@@ -212,5 +210,5 @@ button.btn {
   }
 
   background-color: $color-amarillo;
-}
+} */
 </style>

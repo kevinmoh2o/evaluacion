@@ -210,6 +210,7 @@ export default {
   backface-visibility: hidden;
   border: 1px solid #18181b;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .flip-card-front {

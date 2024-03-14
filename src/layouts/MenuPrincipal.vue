@@ -12,7 +12,8 @@
 
       <div>
         <div class="nombre-pagina">
-          <ion-icon id="cloud" name="rocket-outline" @click="toggleMiniBarraLateral"></ion-icon>
+          <!-- <ion-icon id="cloud" @click="toggleMiniBarraLateral"></ion-icon> -->
+          <img id="cloud" @click="toggleMiniBarraLateral" src="@/assets/images.jpeg" alt="" width="50" height="50">
           <span :class="{ 'oculto': !isMaxBarraLateral }">Consejería en Enfermería</span>
         </div>
       </div>
@@ -92,7 +93,7 @@
     </div>
 
     <main :class="{ 'min-main': !isMaxBarraLateral }">
-      <transition name="fade">
+      <transition name="fade" mode="out-in">
         <div class="menu-selected" v-if="selectedContent === 'main-menu'">
           <Menu></Menu>
         </div>
@@ -330,7 +331,7 @@ export default {
   align-items: center;
 }
 
-.barra-lateral .nombre-pagina ion-icon {
+.barra-lateral .nombre-pagina img {
   min-width: 50px;
   font-size: 40px;
   cursor: pointer;
@@ -338,6 +339,7 @@ export default {
 
 .barra-lateral .nombre-pagina span {
   margin-left: 5px;
+  font-weight: 800;
 }
 
 
@@ -584,18 +586,19 @@ main.min-main {
 }
 
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
-.fade-enter,
-.fade-leave-to
+.fade-enter-active,
+.fade-leave-active
 
 /* .fade-leave-active in <2.1.8 */
   {
-  opacity: 0;
+    transition: opacity 0.5s ease;
 }
+
 
 /************* MEDIA QUERYS  *************/
 @media (max-height:660px) {

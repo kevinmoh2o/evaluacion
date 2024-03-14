@@ -10,38 +10,38 @@
                     </path>
                 </svg>
             </button> -->
-            <button class="btn mx-1 resaltado ">
+            <button class="boton-pop" title="Editar evento">
                 <i class="fa-solid fa-pen-to-square" style="color: #73777b;"></i>
             </button>
-            <button class="btn mx-1 resaltado">
+            <button class="boton-pop" title="Quita el evento de este calendario">
                 <i class="fa-solid fa-trash" style="color: #73777b;"></i>
             </button>
-            <button class="btn mx-1 resaltado">
+            <button class="boton-pop" title="Cerrar">
                 <i class="fa-solid fa-xmark" style="color: #73777b;"></i>
             </button>
         </div>
 
         <div class="box">
-            <i class="fa-solid fa-square imagen" style="color: #039BE5;"></i>
+            <i class="fa-solid fa-square imagen" style="color: #73777b;"></i>
             <div class="contenido">
                 <label>{{ evento.title }}</label>
             </div>
         </div>
 
         <div class="box">
-            <i class="fas fa-calendar imagen" style="color: #039BE5;"></i>
+            <i class="fas fa-calendar imagen" style="color: #73777b;"></i>
             <div class="contenido">
                 <label>{{ evento.extendedProps.meeting }}</label>
             </div>
         </div>
         <div class="box">
-            <i class="fa fa-clock imagen" style="color: #039BE5;"></i>
+            <i class="fa fa-clock imagen" style="color: #73777b;"></i>
             <div class="contenido">
                 <label>{{ evento.extendedProps.hora }}</label>
             </div>
         </div>
         <div class="box">
-            <i class="fas fa-link imagen" style="color: #039BE5;"></i>
+            <i class="fas fa-link imagen" style="color: #73777b;"></i>
             <div class="contenido">
                 <router-link
                     :to="{ name: 'video-conference', query: { valor: encodeURIComponent(JSON.stringify(evento)), meeting: `Reunion con ${evento.title}` } }">Ir
@@ -49,21 +49,6 @@
                     Video Conferencia</router-link>
             </div>
         </div>
-
-        <!-- <router-link :to="evento.extendedProps.link" class="link-success">Link de la reunión</router-link> -->
-
-
-
-
-        <!--  <div class="alarma">
-            <label>30 minutos antes</label>
-        </div>
-
-        <div class="owner">
-            <label>{{ evento.extendedProps.meeting }}</label>
-        </div> -->
-
-
 
     </div>
 </template>
@@ -107,6 +92,29 @@ export default {
 
 <style scoped>
 
+.boton-pop{
+    background-color: white  !important;
+    border: none;
+    color:rgb(139, 129, 129);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: background-color 0.5s ease;
+}
+
+.boton-pop:hover{
+    background-color: rgb(205, 199, 199)  !important;
+    /* border: none;
+    color:rgb(139, 129, 129);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding-left: 5px;
+    padding-right: 5px; */
+}
+
 .contenido label{
     font-size: 13px;
 }
@@ -136,8 +144,8 @@ export default {
 
 .botones {
     /* height: 40px; */
-    align-items: end;
-    align-content: end;
+    /* align-items: end;
+    align-content: end; */
     text-align: right;
 }
 
@@ -229,7 +237,7 @@ export default {
 } */
 
 
-.button {
+/* .button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -244,7 +252,7 @@ export default {
   transition-duration: .3s;
   overflow: hidden;
   position: relative;
-}
+} */
 
 .svgIcon {
   width: 12px;
@@ -255,13 +263,13 @@ export default {
   fill: white;
 }
 
-.button:hover {
+/* .button:hover {
   width: 140px;
   border-radius: 50px;
   transition-duration: .3s;
   background-color: rgb(255, 69, 69);
   align-items: center;
-}
+} */
 
 .button:hover .svgIcon {
   width: 50px;
