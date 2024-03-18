@@ -241,7 +241,7 @@ export default {
         ...mapActions('programacionModule', ['crearUsuario', 'deleteEntry', 'setIsLoading']),
         ...mapGetters('programacionModule', ['getEstado', 'getRptHttp']),
         async onPressCrear(event) {
-            //console.log("this.data: ",this.data)
+            console.log("this.data: ",this.data)
 
             
             var validateForm = this.submitForm(event);
@@ -260,13 +260,13 @@ export default {
             try {
                 await this.crearUsuario(this.data);
                 var { status, message, title } = this.getRptHttp();
-                console.log("crear usuario ", { status, message })
+                //console.log("crear usuario ", { status, message })
                 if (status) {
                     this.apiResponse = { status, data: null, message, title, btnText: 'Continuar', navTo: '/' };
                 } else {
                     this.apiResponse = { status, data: null, message, title, btnText: 'Cerrar', navTo: '' };
                 }
-                console.log("this.apiResponse ", this.apiResponse);
+                //console.log("this.apiResponse ", this.apiResponse);
             } catch (error) {
                 console.log("error: " + error)
             }
@@ -315,9 +315,14 @@ export default {
 
 <style scoped>
 
+.navbar{
+    padding: 0;
+}
+
 div h4{
     font-size: 20px;
     padding: 5px;
+    margin: 0;
 }
 
 span {
@@ -340,6 +345,7 @@ span {
 
 .seccion {
     width: 100%;
+    margin-top: 10px;
 }
 
 .seccion>h4 {
@@ -377,6 +383,8 @@ button {
 }
 
 .hr-estilo {
+    margin: 0;
+
     display: flex;
     width: 100%;
     align-items: center;

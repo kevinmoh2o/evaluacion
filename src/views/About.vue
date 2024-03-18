@@ -12,3 +12,9 @@ export default {
   }
 }
 </script>
+
+<style>
+/* Hide the default checkbox */
+
+
+</style>

@@ -1,6 +1,5 @@
 <template>
-    <div class="modal fade" id="modalCuidadorPaciente" ref="modalCuidadorPaciente" tabindex="-1"
-        aria-labelledby="modalCuidadorPaciente" aria-hidden="true">
+    <div class="modal fade" id="modalCuidadorPaciente" ref="modalCuidadorPaciente" tabindex="-1" aria-labelledby="modalCuidadorPaciente" aria-hidden="true">
         <div class="modal-dialog modal-md modal-lg modal-xl modal-xxl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -238,24 +237,6 @@ export default {
                 btnText: 'Continuar',
                 navTo: '',
             },
-            /* loadingData: {
-                status: false,
-                title: "Autenticando usuario..."
-            },
-            successApi: {
-                status: false,
-                title: '¡ Genial !',
-                descripccion: 'Usuario correctmente autenticado',
-                btnText: 'Continuar',
-                navTo: '',
-            },
-            errorApi: {
-                status: false,
-                title: '¡ ooPs !',
-                descripccion: 'Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.',
-                btnText: 'Cerrar',
-                navTo: '',
-            }, */
             perPac: {
                 dni: '',
                 tipoDoc: "",
@@ -263,7 +244,6 @@ export default {
                 apelPaterno: "",
                 apelMaterno: "",
                 birthDate: "",
-                //age: "",
                 gender: "",
                 ocupation: "",
                 phone: "",
@@ -278,8 +258,7 @@ export default {
                 apelPaterno: "",
                 apelMaterno: "",
                 birthDate: "",
-                //age: "",
-                gender: "",
+                        gender: "",
                 ocupation: "",
                 phone: "",
                 relationship: "",
@@ -326,6 +305,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.modal-header{
+    padding: 10px !important;
+}
+
+
 .cuidador-box {
     display: flex;
     flex-direction: row;
@@ -336,7 +320,7 @@ export default {
 
 .caja {
     display: flex;
-    width: 300px;
+    width: 250px;
     align-content: center;
     align-items: center;
     flex-direction: row;

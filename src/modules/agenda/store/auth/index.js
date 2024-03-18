@@ -5,7 +5,7 @@ import * as getters from './getters'
 import * as mutations from './mutations'
 
 
-const programacionModule = {
+const authModule = {
     namespaced: true,
     actions,
     getters,
@@ -14,4 +14,4 @@ const programacionModule = {
 }
 
 
-export default programacionModule
+export default authModule

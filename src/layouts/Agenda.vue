@@ -62,6 +62,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nav-tag{
+    height: 80px;
+}
+
 .tamanio {
     display: flex;
     align-items: center;
@@ -135,21 +139,6 @@ select {
 }
 
 
-@media only screen and (max-width: 767px) {
-    .cuerpo {
-        //background-color: #87f249;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        text-align: start;
-        align-items: center;
-        flex-wrap: wrap;
-        flex-direction: column;
-        justify-content: start;
-    }
-}
-
-
 .selector {
     margin: 10px 0 10px 0;
     width: 90%;
@@ -164,15 +153,11 @@ select {
 }
 
 .fitro-calendario {
-
-    //padding: 10px;
     display: flex;
     flex-direction: column;
     align-content: center;
     text-align: center;
     justify-content: center;
-    //background-color: aqua;
-
 }
 
 
@@ -183,57 +168,25 @@ select {
 }
 
 
-/* @media (min-width:750px){
-    .cuerpo{
+@media only screen and (max-width: 767px) {
+    .cuerpo {
+        //background-color: #87f249;
+        margin: 0;
+        padding: 10px;
         display: flex;
-        width: 100%;
-        justify-content: space-between;
-        text-align: center;
+        text-align: start;
         align-items: center;
         flex-wrap: wrap;
         flex-direction: column;
+        justify-content: start;
+        overflow-x: hidden;
     }
 
-    .books{
-        width: 100%;
+    .fitro-calendario {
+        display: none;
     }
-} */
-/* .cabeceraAgenda{
-    grid-area:cabeceraAgenda;
-    
-}
 
-.booksContainer{
-    grid-area:booksContainer;
-    max-width: 1000px;
-    align-content: center;
-    align-items: center;
-    text-align: center;
 }
 
 
-.pantalla-agenda {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    max-width: 100%;
-}
-
-.cabecera-agenda {
-    height: 100px;
-    padding: 0;
-    margin: 0;
-}
-
-.cuerpo-agenda {
-
-    background-size: cover;
-    background-position: center;
-    flex: 1;
-    background-size: cover;
-}
- */
 </style>

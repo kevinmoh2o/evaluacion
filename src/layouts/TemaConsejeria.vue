@@ -25,6 +25,27 @@
                 </div>
             </div>
 
+            <div class="mydict">
+        <div>
+            <label>
+                <input type="radio" name="radio" v-model="selectedOption" value="opcionOne">
+                <span>Adherencia</span>
+            </label>
+            <label>
+                <input type="radio" name="radio" v-model="selectedOption" value="opcionTwo">
+                <span>Crianza</span>
+            </label>
+            <label>
+                <input type="radio" name="radio" v-model="selectedOption" value="opcionThree">
+                <span>Prevencion</span>
+            </label>
+            <label>
+                <input type="radio" name="radio" v-model="selectedOption" value="opcionFour">
+                <span>Soporte</span>
+            </label>
+        </div>
+    </div> 
+
 
             <div class="slider">
                 <div class="slider-wrapper">
@@ -60,29 +81,6 @@
 
         </div>
     </div>
-
-
-
-    <!-- <div class="mydict">
-        <div>
-            <label>
-                <input type="radio" name="radio" v-model="selectedOption" value="opcionOne">
-                <span>Adherencia</span>
-            </label>
-            <label>
-                <input type="radio" name="radio" v-model="selectedOption" value="opcionTwo">
-                <span>Crianza</span>
-            </label>
-            <label>
-                <input type="radio" name="radio" v-model="selectedOption" value="opcionThree">
-                <span>Prevencion</span>
-            </label>
-            <label>
-                <input type="radio" name="radio" v-model="selectedOption" value="opcionFour">
-                <span>Soporte</span>
-            </label>
-        </div>
-    </div> -->
 </template>
 
 <script>
@@ -222,8 +220,8 @@ ion-icon:hover {
     height: 100%;
     display: flex;
     flex-direction: row;
-
 }
+
 
 .contenedor .botones {
     /* border: 2px solid blue; */
@@ -231,6 +229,7 @@ ion-icon:hover {
     align-items: center;
     justify-content: center;
     display: flex;
+    transition: width 0.9s ease;
 }
 
 
@@ -314,12 +313,19 @@ ion-icon:hover {
     /* border: 2px solid green; */
     height: 100%;
     width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 .container {
     /* max-width: 600px; */
     width: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .slider-wrapper {
@@ -327,19 +333,23 @@ ion-icon:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    widows: 100%;
+    /* width: auto; */
+    /* max-width: 400px !important; */
+    height:100%;
     margin: 0;
-
-
+    flex-direction: row;
+    flex-wrap:wrap;
 }
 
 .image-container {
+    /* border: 2px solid blue; */
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    max-width: 480px;
+    max-width: 500px;
     overflow-x: hidden;
     padding-top: 10px;
+    
 }
 
 .image-item {
@@ -349,7 +359,7 @@ ion-icon:hover {
 }
 
 .slider-wrapper .slider .slide-button {
-    border: 3px solid green;
+    /* border: 3px solid green; */
     position: absolute;
     top: 50%;
     outline: none;
@@ -475,10 +485,10 @@ ion-icon:hover {
 }
 
 .mydict div {
-    display: flex;
     flex-wrap: wrap;
     margin: 0.5rem 0.5rem;
     justify-content: center;
+    display: none;
 }
 
 .mydict input[type="radio"] {
@@ -529,4 +539,43 @@ label:last-child span {
 .fade-leave-active {
     transition: opacity 0.5s ease;
 }
+
+
+@media (max-width: 800px) {
+  .contenedor .botones {
+    display:none;
+    width: 0;
+  }
+
+  .image-container {
+    /* border: 2px solid red; */
+    max-width: 450px;
+    }
+
+    .slider-wrapper {
+    flex-direction: column;
+}
+
+.mydict div {
+    display: flex;
+}
+
+.contenedor {
+    margin: 10px;
+    flex-direction: column;
+}
+
+}
+
+/* @media (min-width: 1600px) {
+    .image-container {
+        border: 2px solid green;
+        max-width: 900px;
+    }
+
+    .mydict {
+    display: flex;
+    }
+
+} */
 </style>

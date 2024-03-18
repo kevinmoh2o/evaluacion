@@ -39,6 +39,7 @@ export const crearUsuario = async ({ commit }, entry) => {
   var fechaActual = new Date();
   try {
     entry.createdAt = fechaActual.toISOString();
+    console.log(entry)
     const { data } = await investigacionApi.post(ENDPOINTS.POS_CREATE_USER, entry);
     const { status, message, title } = data;
     commit('addUser', { status, message, data: entry, title })
@@ -51,20 +52,7 @@ export const crearUsuario = async ({ commit }, entry) => {
 }
 
 
-export const resetAccount = async ({ commit }, entry) => {
-  var fechaActual = new Date();
-  try {
-    entry.createdAt = fechaActual.toISOString();
-    const { success,message } = await investigacionApi.post(ENDPOINTS.POS_RESET_ACCOUNT, entry);
-    //const { status, message, title } = data;
-    //commit('addUser', { status, message, data: entry, title })
-    //console.log("crearUsuario action:", { status, message }, entry);
-  } catch (error) {
-    console.log("error: ", error)
-    //const { status, message, title } = error.response.data;
-    //commit('addUser', { status, message, title })
-  }
-}
+
 
 export const transactionUserPeople = async ({ commit }, entry) => {
   try {

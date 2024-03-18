@@ -65,7 +65,8 @@ export default {
 }
 
 .card-color {
-  height: 50%;
+  height: auto;
+  max-height: 800px;
   background: var(--clr-neutral-100);
   /* color: hsl(var(--clr-neutral-hsl-100), .7); */
   border-radius: 30px;

@@ -1,35 +1,29 @@
 <template>
-  <div class="contenedor">
+  <div class="cont-card" @click.prevent="capturarValores">
     <div class="flip-card ">
       <div class="flip-card-inner">
         <div class="flip-card-front">
           <div class="notification">
             <div class="notititle">Cuidador</div>
-            <div class="notibody">{{nombreCon}}</div>
+            <div class="notibody">{{ item.cuidador.name }}</div>
             <br>
             <div class="notititle">Paciente</div>
-            <div class="notibody">{{nombrePac}}</div>
+            <div class="notibody">{{ item.paciente.name }}</div>
           </div>
         </div>
         <div class="flip-card-back">
           <p class="title" lin>N° <br>CONSEJERIA</p>
-          <p class="nro-consejeria">{{ consejeria }}</p>
+          <p class="nro-consejeria">{{ item.nroConsejeria }}</p>
         </div>
       </div>
     </div>
   </div>
-
-
-
 </template>
 
 <script>
 export default {
   props: {
-    nombrePac: String,
-    nombreCon: String,
-    consejeria: Number,
-
+    item: Object,
   },
   setup() {
     //const router = useRouter()
@@ -39,16 +33,23 @@ export default {
     }
   },
   methods: {
+    seleccionarPAccForConsejeria() {
 
+    },
+    capturarValores() {
+      console.log("Nombre del objeto:", this.item);
+      this.$emit('selectedObjConsejeria', this.item)
+    },
+    
 
   }
 }
 </script>
 
 <style scoped>
-.contenedor {
+.cont-card {
   margin: 10px;
-  width: auto;
+  width: 200px;
 }
 
 .nro-consejeria {
@@ -62,7 +63,6 @@ export default {
   display: flex;
   flex-direction: column;
   isolation: isolate;
-  /* position: relative; */
   border-radius: 10px;
   padding-top: 10px;
   width: auto;
@@ -78,20 +78,16 @@ export default {
 }
 
 .notification:before {
-  /* position: absolute; */
   content: "";
   inset: 0.0625rem;
-  /* border-radius: none; */
   background: #18181b;
   z-index: 2
 }
 
 .notification:after {
-  position: absolute;
   content: "";
   width: 0.25rem;
   inset: 0.65rem auto 0.65rem 0.5rem;
-  /* border-radius: none; */
   background: var(--gradient);
   transition: transform 300ms ease;
   z-index: 4;
@@ -220,7 +216,6 @@ export default {
 }
 
 .flip-card-back {
-  /* background: linear-gradient(120deg, #efbc21 30%, #ffbf00 88%, #f2e3b7 40%, #eacb6e 78%); */
   background: #24242b;
   color: white;
   transform: rotateY(180deg);

@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <ModalCuidadorPaciente @createUSer="createUSer"></ModalCuidadorPaciente>
+    <ModCrearCuidador @createUSer="createUSer"></ModCrearCuidador>
     <div v-if="loadingData.status === true">
         <LoadingOverlay :loading="loadingData" />
     </div>
@@ -267,7 +267,7 @@
 <script>
 import Navbar from '@/components/compose/Navbar.vue';
 import { useRouter } from 'vue-router'
-import ModalCuidadorPaciente from '@/components/compose/ModalCuidadorPaciente.vue';
+import ModCrearCuidador from '@/components/modals/ModCrearCuidador.vue';
 import { mapActions, mapGetters } from 'vuex'
 import { defineAsyncComponent } from 'vue'
 
@@ -275,7 +275,7 @@ export default {
     name: 'regis-cuidador-paciente',
     components: {
         Navbar,
-        ModalCuidadorPaciente,
+        ModCrearCuidador,
         LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
         SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
         ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),

@@ -1,14 +1,16 @@
 import { createStore } from 'vuex'
 
 import programacionModule from '../../modules/agenda/store/programacion'
+import authModule from '../../modules/agenda/store/auth'
 
 
 
-const stores = createStore({
+export default createStore({
     modules: {
-        programacionModule
+        programacionModule,
+        authModule
         
     }
 })
 
-export default stores
+//export default stores
