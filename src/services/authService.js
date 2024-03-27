@@ -1,4 +1,4 @@
-//import {auth, signInWithEmailAndPassword , createUserWithEmailAndPassword} from '@/plugins/firebase';
+/* //import {auth, signInWithEmailAndPassword , createUserWithEmailAndPassword} from '@/plugins/firebase';
 import { signInWithEmailAndPassword } from '@/plugins/firebase';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -33,4 +33,4 @@ export const authService = {
   },
 
 
-};
+}; */

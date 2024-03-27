@@ -15,6 +15,7 @@ export const ENDPOINTS = {
     
     POS_CREATE_TIE_PAC_CARE_USER: '/api/usuarios/transUser',
     POS_CREATE_PROGRAMACION: '/api/usuarios/programacion',
+    POS_CREATE_NRO_PROGRAMACION: '/api/usuarios/consejeria',
 
 
     /********* UPDATE REUQESTS */

@@ -115,7 +115,7 @@
         </div>
 
         <div class="btn-contendor">
-            <button type="button" class="btn btn-success estilo-btn" data-bs-dismiss="modal">
+            <button type="button" class="btn btn-success estilo-btn" @click="grabarConsejeria">
                 Registrar Consejería
             </button>
         </div>
@@ -124,6 +124,21 @@
 
     <ModConsejeria :lista="valorTabla" @selectedObjConsejeria="selectedObjConsejeria">
     </ModConsejeria>
+
+
+    <div v-if="loadingData.status === true">
+        <LoadingOverlay :loading="loadingData" />
+    </div>
+    <div v-else>
+        <div v-if="apiResponse.status === true">
+            <SuccessView :reponse="apiResponse" />
+        </div>
+        <div v-if="apiResponse.status === false">
+            <ErrorView :reponse="apiResponse" @cerrar-indicador="hadlerCloseIndicator" />
+        </div>
+    </div>
+
+
 </template>
 
 
@@ -131,7 +146,7 @@
     import Navbar from '@/components/compose/Navbar.vue';
     import { useRouter } from 'vue-router';
     import { mapActions, mapGetters, useStore } from 'vuex';
-    import { ref, onMounted } from 'vue';
+    import { ref, onMounted, reactive, defineAsyncComponent } from 'vue';
     import ModConsejeria from '@/components/modals/ModConsejeria.vue';
 
     export default {
@@ -144,6 +159,14 @@
             const userData = ref(null);
             const selectedValue = ref(null);
             const vSelectedValueBool = ref(false);
+            const loadingData = reactive({
+                status: ref(false),
+                title: ref("Autenticando usuario...")
+            });
+
+            const apiResponse = reactive({
+                status: ref(null)
+            });
 
             const onBackHandle = async () => {
                 console.log("navegando")
@@ -195,6 +218,8 @@
 
             return {
                 vSelectedValueBool,
+                loadingData,
+                apiResponse,
                 titulo,
                 router,
                 valorTabla,
@@ -210,9 +235,36 @@
                 funPhone,
             };
         },
+        methods: {
+            ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading', 'getUserByEmail', 'grabarNroProgramacion']),
+            ...mapGetters('programacionModule', ['getEstado', 'getUser', 'getStatte']),
+            async grabarConsejeria() {
+                console.log("selectedValue.value: ", this.selectedValue);
+                this.loadingData.status = true;
+                this.loadingData.title = "Grabando Número de consejería...";
+
+                var obj = {
+                    idConsejero: this.selectedValue.id,
+                    idUsuarioPersona: this.selectedValue.idUsuarioPersona,
+                    nroConsejeria: this.selectedValue.nroConsejeria + 1,
+                    state: true,
+                };
+                const { message, status } = await this.grabarNroProgramacion(obj);
+                console.log("obj: ", obj);
+                if (status) {
+                    this.apiResponse = { status, message, title: '¡Genial!', btnText: 'Continuar', navTo: '/menu-main' };
+                } else {
+                    this.apiResponse = { status, message, title: '¡ OoPs !', btnText: 'Cerrar', navTo: '/menu-main' };
+                }
+                this.loadingData.status = false;
+            }
+        },
         components: {
             Navbar,
             ModConsejeria,
+            LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
+            SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+            ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')),
         }
     };
 </script>

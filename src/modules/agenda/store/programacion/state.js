@@ -2,9 +2,11 @@
 export default () => ({
     //isLoading: false,
     isLoading: {
-        loading:false,
-        success:false,
-        error:false
+        loadingData: {
+            status: false,
+            title: "Autenticando usuario..."
+        },
+        apiResponse: { status: null, },
     },
     respuesta:{},
     userProvider:{

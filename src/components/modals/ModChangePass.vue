@@ -1,21 +1,27 @@
 <template>
-    <div class="modal fade" id="modalCambioPassword" tabindex="-1" aria-labelledby="modalCambioPassword"
+    <div class="modal fade" ref="modalCambioPassword" id="modalCambioPassword" tabindex="-1" aria-labelledby="modalCambioPassword"
         aria-hidden="true">
         <div class="modal-dialog modal-md modal-lg modal-xl modal-xxl">
             <div class="modal-content personalizado">
 
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Cambio de Contraseña</h5>
-                    <button type="button" class="custom-button" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
 
                 <form @submit="submitForm" class="alineamiento" novalidate>
                     <div class="caja">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" class="form-control" id="validationCustom01"
-                            placeholder="Correo electrónico" required>
+                        <div class="label">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" class="form-control" id="validationCustom01" v-model="inPassword"
+                                placeholder="Correo electrónico" required>
+
+                            <div class="invalid-feedback">
+                                Escriba un email válido
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-success">Enviar</button>
                     </div>
                 </form>
@@ -28,7 +34,7 @@
 
 <script>
 
-    import { mapActions } from 'vuex'
+
     export default {
         name: 'Modal-Cuidador',
         components: {
@@ -37,23 +43,35 @@
             intitulo: String,
             inDescripcion: String
         },
+        setup() {
+            return {
+                inPassword: '',
+            };
+        },
         methods: {
-            ...mapActions('authModule', ['resetAccount']),
-            ...mapActions('authModule', ['resetAccount']),
+            //...mapActions('authModule', ['resetAccount']),
             isValid(fieldName) {
                 return this.validation[fieldName];
             },
             async submitForm(event) {
-                console.log("change pass: ")
-                /* const form = event.target;
+                //console.log("change pass: ")
+                const form = event.target;
                 if (!form.checkValidity()) {
                     event.preventDefault();
                     event.stopPropagation();
                 }
-                form.classList.add('was-validated'); */
-
-                const { success, message } =  await this.resetAccount('kevinmohu@gmail.com');
-                console.log("change pass: ",{ success, message })
+                form.classList.add('was-validated');
+                //console.log("change pass: ", this.inPassword)
+                this.$emit('evChangePass', this.inPassword);
+            },
+            async cerrarModal() {
+                console.log("this.$refs: ", this.$refs.modalCambioPassword.dispatchEvent)
+                if (this.$refs.modalCambioPassword) {
+                    const closeButton = this.$refs.modalCambioPassword.querySelector('.btn-close');
+                    if (closeButton) {
+                        closeButton.click();
+                    }
+                }
             },
         }
     }
@@ -110,12 +128,20 @@
         align-items: center;
     }
 
+    .label {
+        display: flex;
+        width: 500px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
     .caja {
         border-radius: 10px;
         display: flex;
         width: 500px;
         align-items: center;
-        flex-direction: row;
+        flex-direction: column;
         margin: 10px 10px 10px 10px;
         padding: 10px 10px 10px 10px;
     }

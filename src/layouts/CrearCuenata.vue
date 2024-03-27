@@ -190,7 +190,7 @@ import Navbar from '@/components/compose/Navbar.vue';
 import { useRouter } from 'vue-router';
 import { mapActions, mapGetters } from 'vuex';
 import { defineAsyncComponent } from 'vue';
-import { authService } from '@/services/authService';
+
 
 export default {
     name: 'Crear-Cuenta',

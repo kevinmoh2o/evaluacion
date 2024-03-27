@@ -16,10 +16,9 @@
                                 <div class="img-mod">
                                     <i class="fas fa-user-md"></i>
                                 </div>
-                                <div class="col-11 m-0 p-0">
-                                    <label for="recipient-name" class="col-12 fw-semibold px-1 align-left">Licenciado a
-                                        Cargo:</label>
-                                    <label for="recipient-name" class="col-12 px-1 align-left">{{ usuarioData.fullName
+                                <div class="datos">
+                                    <label for="recipient-name" class="etiqueta">Licenciado a Cargo:</label>
+                                    <label for="recipient-name" class="valor">{{ usuarioData.fullName
                                         }}</label>
                                 </div>
                             </div>
@@ -28,10 +27,9 @@
                                 <div class="img-mod">
                                     <i class="bi bi-calendar-event-fill"></i>
                                 </div>
-                                <div class="col-11 m-0 p-0">
-                                    <label for="recipient-name" class="col-12 fw-semibold px-1 align-left">Fecha de
-                                        cita:</label>
-                                    <label for="recipient-name" class="col-12 px-1 align-left">{{
+                                <div class="datos">
+                                    <label for="recipient-name" class="etiqueta">Fecha de cita:</label>
+                                    <label for="recipient-name" class="valor">{{
                         Formatos.ymdFechaToView(inFecha) }}</label>
                                 </div>
                             </div>
@@ -45,11 +43,12 @@
                             <div class="box">
                                 <div class="img-mod"><i class="bi bi-person-fill"></i>
                                 </div>
-                                <div class="col-10 m-0 p-0">
+                                <div class="">
                                     <select class="form-select" v-model="selectedCuidador"
                                         aria-label="Default select example" @change="updateOutput" required>
                                         <option value="" disabled selected hidden>Cuidador</option>
-                                        <option v-for="paciente in listPaciente" :key="paciente.value" :value="paciente.value">{{ paciente.label }}</option>
+                                        <option v-for="paciente in listPaciente" :key="paciente.value"
+                                            :value="paciente.value">{{ paciente.label }}</option>
                                     </select>
                                 </div>
                                 <div class="valid-feedback">
@@ -62,7 +61,7 @@
                                 <div class="img-mod">
                                     <i class="bi bi-alarm-fill"></i>
                                 </div>
-                                <div class="col-10 m-0 p-0">
+                                <div class="">
                                     <select id="startTime" class="form-select" v-model="selectedTime" required>
                                         <option value="" disabled selected>Elija una hora</option>
                                         <option v-for="(time, index) in timeOptions" :key="index" :value="time">{{ time
@@ -76,7 +75,7 @@
                             <div class="box">
                                 <div class="img-mod"><i class="bi bi-bell-fill"></i>
                                 </div>
-                                <div class="col-10 m-0 p-0">
+                                <div class="">
                                     <select class="form-select" v-model="output.extendedProps.recordar"
                                         aria-label="Default select example" required>
                                         <option value="" disabled selected hidden>Recordatorio</option>
@@ -128,230 +127,259 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import { Formatos } from '@/utils/Formatos.js';
+    import { mapActions, mapGetters } from 'vuex';
+    import { Formatos } from '@/utils/Formatos.js';
 
 
-export default {
-    name: 'Model-Component',
-    props: {
-        msg: String,
-        inFecha: String,
-        listPaciente: Array
-    },
-    mounted() {
-        var usertest = localStorage.user;
-        this.usuarioData = usertest !== null ? JSON.parse(usertest) : null;
-
-        //this.usuarioData = this.getUser();
-        this.generateTimeOptions();
-        //this.listPaciente = this.ddbOpts;
-    },
-    data() {
-        return {
-            usuarioData: {},
-            Formatos,
-            form: this.selectedOpt,
-            selectedTime: '',
-            timeOptions: [],
-            selectedCuidador: '',
-            listRecordar: [
-                { label: "1", value: "No" },
-                { label: "2", value: "1 día antes" },
-                { label: "3", value: "1 hora antes" },
-            ],
-            listAsistio: [
-                { label: "1", value: "Si" },
-                { label: "2", value: "No" },
-            ],
-            output: {
-                backgroundColor: "#F43E3D",
-                borderColor: "#F50B00",
-                end: "",
-                extendedProps: {
-                    description: "",
-                    encargado: "",
-                    link: "/video-conference",
-                    recordar: "",
-                    asistencia: "",
-                    hora: "",
-                    fecha: this.inFecha,
-                    meeting: "",
-                },
-                groupId: "",
-                start: this.selectedTime,
-                title: "",
-                id: ""
-            }
-        };
-    },
-
-    methods: {
-        ...mapActions('programacionModule', ['createEntry', 'updateEntry', 'setIsLoading']),
-        ...mapGetters('programacionModule', ['getEstado', 'getUser']),
-        async store(event) {
-            //this.setIsLoading(false);
-            var validateForm = this.submitForm(event);
-            var { meeting, end } = this.camposAdicionales();
-            this.output.end = end;
-            this.output.extendedProps.meeting = meeting;
-            console.log("validateForm: ", { validateForm, output: this.output })
-            this.$emit('modelProgramacion', { validateForm, output: this.output });
-            /* if (this.$refs.exampleModal) {
-                const closeButton = this.$refs.exampleModal.querySelector('.btn-close');
-                if (closeButton) {
-                    closeButton.click();
-                }
-            } */
-            /*console.log("selectedTime: ", this.selectedTime)
-
-            console.log({ meeting, end })
-
-            console.log("output: ", this.output)
-            this.$emit('saveAppt', form);
-            console.log("this.flagUpdateMo")
-            await this.createEntry(this.output) */
-
-
-
-            /* if (this.flagUpdateMo) {
-                console.log("this.grabar", this.grabar)
-                try {
-                    console.log("createEntry", this.update)
-                    //await this.createEntry(this.grabar)
-                } catch (error) {
-                    console.log("Error en creacion", error);
-                }
-            } else {
-                try {
-                    console.log("update", this.update)
-                    //await this.updateEntry(this.update)
-                } catch (error) {
-                    console.log("Error en update", error);
-                }
-            }
-            this.setIsLoading(true); */
+    export default {
+        name: 'Model-Component',
+        props: {
+            msg: String,
+            inFecha: String,
+            listPaciente: Array
         },
-        closeModal(valu) {
-            if (this.$refs.exampleModal) {
-                const closeButton = this.$refs.exampleModal.querySelector('.btn-close');
-                if (closeButton) {
-                    closeButton.click();
-                }
-            }
-        },
-        generateTimeOptions() {
-            for (let hour = 8; hour <= 20; hour++) {
-                for (let minute = 0; minute < 60; minute += 10) {
-                    const formattedHour = (hour < 10 ? '0' : '') + hour;
-                    const formattedMinute = (minute < 10 ? '0' : '') + minute;
-                    const timeValue = `${formattedHour}:${formattedMinute}`;
-                    this.timeOptions.push(timeValue);
-                }
-            }
-        },
-        isValid(fieldName) {
-            return this.validation[fieldName];
-        },
-        updateOutput(event) {
-            // Verificamos que listPaciente tenga datos antes de acceder a él
-            if (this.listPaciente && this.listPaciente.length > 0) {
-                const selectedValue = event.target.value;
-                if (selectedValue !== -1) {
-                    const selectedOption = this.listPaciente.find(paciente => paciente.value === selectedValue);
-                    this.output.groupId = selectedOption.value;
-                    this.output.title = selectedOption.label;
-                }
-            }
-        },
-        submitForm(event) {
+        mounted() {
+            var usertest = localStorage.user;
+            this.usuarioData = usertest !== null ? JSON.parse(usertest) : null;
 
-            const form = event.target;
-            var validador = form.checkValidity();
-            if (!validador) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-            return validador;
+            //this.usuarioData = this.getUser();
+            this.generateTimeOptions();
+            //this.listPaciente = this.ddbOpts;
         },
-        camposAdicionales() {
+        data() {
             return {
-                meeting: `Reunión ${Formatos.fechaMeeting(this.output.start)}`,
-                end: Formatos.addOneHour(this.output.start),
+                usuarioData: {},
+                Formatos,
+                form: this.selectedOpt,
+                selectedTime: '',
+                timeOptions: [],
+                selectedCuidador: '',
+                listRecordar: [
+                    { label: "1", value: "No" },
+                    { label: "2", value: "1 día antes" },
+                    { label: "3", value: "1 hora antes" },
+                ],
+                listAsistio: [
+                    { label: "1", value: "Si" },
+                    { label: "2", value: "No" },
+                ],
+                output: {
+                    backgroundColor: "#F43E3D",
+                    borderColor: "#F50B00",
+                    end: "",
+                    extendedProps: {
+                        description: "",
+                        encargado: "",
+                        link: "/video-conference",
+                        recordar: "",
+                        asistencia: "",
+                        hora: "",
+                        fecha: this.inFecha,
+                        meeting: "",
+                    },
+                    groupId: "",
+                    start: this.selectedTime,
+                    title: "",
+                    id: ""
+                }
+            };
+        },
+
+        methods: {
+            ...mapActions('programacionModule', ['createEntry', 'updateEntry', 'setIsLoading']),
+            ...mapGetters('programacionModule', ['getEstado', 'getUser']),
+            async store(event) {
+                //this.setIsLoading(false);
+                var validateForm = this.submitForm(event);
+                var { meeting, end } = this.camposAdicionales();
+                this.output.end = end;
+                this.output.extendedProps.meeting = meeting;
+                console.log("validateForm: ", { validateForm, output: this.output })
+                this.$emit('modelProgramacion', { validateForm, output: this.output });
+                /* if (this.$refs.exampleModal) {
+                    const closeButton = this.$refs.exampleModal.querySelector('.btn-close');
+                    if (closeButton) {
+                        closeButton.click();
+                    }
+                } */
+                /*console.log("selectedTime: ", this.selectedTime)
+    
+                console.log({ meeting, end })
+    
+                console.log("output: ", this.output)
+                this.$emit('saveAppt', form);
+                console.log("this.flagUpdateMo")
+                await this.createEntry(this.output) */
+
+
+
+                /* if (this.flagUpdateMo) {
+                    console.log("this.grabar", this.grabar)
+                    try {
+                        console.log("createEntry", this.update)
+                        //await this.createEntry(this.grabar)
+                    } catch (error) {
+                        console.log("Error en creacion", error);
+                    }
+                } else {
+                    try {
+                        console.log("update", this.update)
+                        //await this.updateEntry(this.update)
+                    } catch (error) {
+                        console.log("Error en update", error);
+                    }
+                }
+                this.setIsLoading(true); */
+            },
+            closeModal(valu) {
+                if (this.$refs.exampleModal) {
+                    const closeButton = this.$refs.exampleModal.querySelector('.btn-close');
+                    if (closeButton) {
+                        closeButton.click();
+                    }
+                }
+            },
+            generateTimeOptions() {
+                for (let hour = 8; hour <= 20; hour++) {
+                    for (let minute = 0; minute < 60; minute += 10) {
+                        const formattedHour = (hour < 10 ? '0' : '') + hour;
+                        const formattedMinute = (minute < 10 ? '0' : '') + minute;
+                        const timeValue = `${formattedHour}:${formattedMinute}`;
+                        this.timeOptions.push(timeValue);
+                    }
+                }
+            },
+            isValid(fieldName) {
+                return this.validation[fieldName];
+            },
+            updateOutput(event) {
+                // Verificamos que listPaciente tenga datos antes de acceder a él
+                if (this.listPaciente && this.listPaciente.length > 0) {
+                    const selectedValue = event.target.value;
+                    if (selectedValue !== -1) {
+                        const selectedOption = this.listPaciente.find(paciente => paciente.value === selectedValue);
+                        this.output.groupId = selectedOption.value;
+                        this.output.title = selectedOption.label;
+                    }
+                }
+            },
+            submitForm(event) {
+
+                const form = event.target;
+                var validador = form.checkValidity();
+                if (!validador) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                return validador;
+            },
+            camposAdicionales() {
+                return {
+                    meeting: `Reunión ${Formatos.fechaMeeting(this.output.start)}`,
+                    end: Formatos.addOneHour(this.output.start),
+                }
+            },
+
+
+        },
+
+        watch: {
+            inFecha(newFecha) {
+                // Actualizar la propiedad en el objeto output cuando inFecha cambia
+                this.output.extendedProps.fecha = newFecha;
+            },
+            selectedTime(valor) {
+                this.output.start = `${this.output.extendedProps.fecha}T${valor}:00`
+                this.output.extendedProps.hora = `${valor}:00`
+            },
+            listPaciente: function (newListPaciente) {
+                if (newListPaciente.length > 0) {
+                    this.output.title = newListPaciente[0].value; // Establecer el primer valor como seleccionado
+                }
             }
         },
-
-
-    },
-
-    watch: {
-        inFecha(newFecha) {
-            // Actualizar la propiedad en el objeto output cuando inFecha cambia
-            this.output.extendedProps.fecha = newFecha;
-        },
-        selectedTime(valor) {
-            this.output.start = `${this.output.extendedProps.fecha}T${valor}:00`
-            this.output.extendedProps.hora = `${valor}:00`
-        },
-        listPaciente: function (newListPaciente) {
-            if (newListPaciente.length > 0) {
-                this.output.title = newListPaciente[0].value; // Establecer el primer valor como seleccionado
-            }
-        }
-    },
-}
+    }
 </script>
 
 <style scoped>
-.form-crear {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: left;
-}
+    .form-crear {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: left;
+    }
 
-.box {
-    width: 200px;
-    padding: 5px;
-    margin: 0 10px 0 10px;
-    display: flex;
-    flex-direction: row;
-}
+    .box {
+        width: 200px;
+        padding: 5px;
+        margin: 0 10px 0 10px;
+        display: flex;
+        flex-direction: row;
+    }
 
-.box-sup {
-    width: auto;
-    padding: 5px;
-    margin: 0 10px 0 10px;
-    display: flex;
-    flex-direction: row;
+    .box-sup {
+        
+        padding: 5px;
+        margin: 0 10px 0 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
 
-}
+    }
 
-.custom-modal {
-    max-width: 800px !important;
-}
+    .custom-modal {
+        max-width: 800px !important;
+    }
 
-.input-group-append {
-    cursor: pointer;
-}
+    .input-group-append {
+        cursor: pointer;
+    }
 
-.align-left {
-    text-align: left;
-}
+    .align-left {
+        text-align: left;
+    }
 
-i {
-    color: var(--warning);
-    font-size: 20px;
-}
+    i {
+        color: var(--warning);
+        font-size: 20px;
+    }
 
-.img-mod {
-    margin: 0 10px 0 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .img-mod {
+        margin: 0 10px 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .datos{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .datos .etiqueta{
+        font-weight: 800;
+        font-size: 16px;
+    }
+    
+    .datos .valor{
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+
+    .form-select{
+        width: 170px;
+    }
+
+   /*  @media (max-width:550px) {
+
+        .form-crear {
+            display: flex;
+            flex-direction: column;
+        }
+
+    } */
+
 </style>
-<!-- <a href="https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D"
-                                        class="link-success">Link de la reunión</a> -->

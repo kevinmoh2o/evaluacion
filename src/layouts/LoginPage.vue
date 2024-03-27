@@ -67,7 +67,7 @@
 
     </div>
 
-    <ModChangePass></ModChangePass>
+    <ModChangePass ref="modalChangePassword" @evChangePass="evChangePass"></ModChangePass>
 
 
 
@@ -87,11 +87,11 @@
 <script lang="js">
 
     import Navbar from '../components/compose/Navbar.vue';
-    import { defineAsyncComponent } from 'vue'
+    import { defineAsyncComponent, ref } from 'vue'
     import ModChangePass from '@/components/modals/ModChangePass.vue';
     //import { useRouter } from 'vue-router'
     import { mapActions, mapGetters } from 'vuex'
-    import { authService } from '@/services/authService';
+
 
 
     export default {
@@ -132,6 +132,7 @@
         },
         methods: {
             ...mapActions('programacionModule', ['deleteEntry', 'setIsLoading', 'getUserByEmail', 'resetValues']),
+            ...mapActions('authModule', ['resetAccount']),
             ...mapGetters('programacionModule', ['getEstado', 'getUser', 'getStatte']),
             async sleep(ms) {
                 return await new Promise(resolve => setTimeout(resolve, ms));
@@ -141,6 +142,7 @@
             },
             async navegar() {
                 this.loadingData.status = true;
+                this.loadingData.title = "Autenticando usuario...";
                 const { status, data, message } = await this.getUserByEmail({ dni: this.email, password: this.password });
                 console.log("Auth: ", { status, data, message });
                 if (status) {
@@ -158,8 +160,24 @@
             handleCheckboxChange() {
                 // Este método se ejecutará cada vez que cambie el estado del checkbox
                 console.log("El estado del checkbox ha cambiado:", this.showPassword);
-            }
-        }
+            },
+            async evChangePass(val) {
+                this.$refs.modalChangePassword.cerrarModal();
+                this.loadingData.status = true;
+                this.loadingData.title = "Por favor, revice su email para continuar con el cambio de contraseña...";
+                const { status, message } = await this.resetAccount(val);
+                
+                //console.log("valor evChangePass: ", { status, message });
+                if (status) {
+                    this.apiResponse = { status, data: null, message, title: '¡Genial!', btnText: 'Continuar', navTo: '/login-layout' };
+                } else {
+                    this.apiResponse = { status, data: null, message, title: '¡ OoPs !', btnText: 'Cerrar', navTo: '/login-layout' };
+                }
+
+                this.loadingData.status = false;
+            },
+        },
+
     }
     /* if (error != null) {
         msgLoading=error;
@@ -364,8 +382,9 @@
     .text-link a:hover {
         transform: translateY(-10px);
         text-decoration: underline;
-        font-size: 16px;
+        font-size: 15px;
         color: $color-amarillo;
+        text-decoration: none;
     }
 
     button {

@@ -114,6 +114,30 @@ export const getListaRelacionesDdb = async ({ commit }, { id, isActive }) => {
 }
 
 
+
+export const grabarNroProgramacion = async ({ commit }, entry) => {
+  try {
+    console.log("grabarNroProgramacion")
+    var fechaActual = new Date();
+    entry.createdAt = fechaActual.toISOString();
+    const newEntry = await investigacionApi.post(ENDPOINTS.POS_CREATE_NRO_PROGRAMACION, entry);
+    console.log("grabarNroProgramacion", newEntry, entry)
+    if (newEntry.status >= 200 && newEntry.status <= 299) {
+      entry["id"] = newEntry.data.name;
+      //commit('addEntry', entry)
+      return { message: newEntry.data.message, status: true };
+    } else {
+      return { message: "Error al crear la programación", status: false };
+    }
+
+  } catch (error) {
+    console.error(error)
+    return { message: "Server error", status: false };
+  }
+}
+
+
+
 export const createProgramacion = async ({ commit }, entry) => {
   try {
     console.log("createProgramacion")
@@ -236,7 +260,7 @@ export const deleteEntry = async ({ commit }, id) => {
 }
 
 export const setIsLoading = async ({ commit }, valor) => {
-
+  console.log("setIsLoading: ",valor)
   commit('setIsLoading', valor);
 
 }

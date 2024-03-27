@@ -1,5 +1,6 @@
 <template>
-    <div class="modal fade" id="modalCuidadorPaciente" ref="modalCuidadorPaciente" tabindex="-1" aria-labelledby="modalCuidadorPaciente" aria-hidden="true">
+    <div class="modal fade" id="modalCuidadorPaciente" ref="modalCuidadorPaciente" tabindex="-1"
+        aria-labelledby="modalCuidadorPaciente" aria-hidden="true">
         <div class="modal-dialog modal-md modal-lg modal-xl modal-xxl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -25,26 +26,26 @@
                             <div class="caja">
                                 <i class="fas fa-id-card"></i>
                                 <input type="number" class="form-control" id="validationCustom01"
-                                    placeholder="Documento de Identidad" min="0" max="1000000000000000" v-model="perCui.dni"
-                                    required>
+                                    placeholder="Documento de Identidad" min="0" max="1000000000000000"
+                                    v-model="perCui.dni" required>
                             </div>
 
                             <div class="caja">
                                 <i class="fas fa-user"></i>
                                 <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre"
-                                 v-model.trim="perCui.name" required>
+                                    v-model.trim="perCui.name" required>
                             </div>
 
                             <div class="caja">
                                 <i class="fas fa-id-badge"></i>
-                                <input type="text" class="form-control" id="validationCustom01" placeholder="Apellido Paterno"
-                                 v-model.trim="perCui.apelPaterno" required>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="Apellido Paterno" v-model.trim="perCui.apelPaterno" required>
                             </div>
 
                             <div class="caja">
                                 <i class="fas fa-id-badge"></i>
-                                <input type="text" class="form-control" id="validationCustom01" placeholder="Apellido Materno"
-                                 v-model.trim="perCui.apelMaterno" required>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="Apellido Materno" v-model.trim="perCui.apelMaterno" required>
                             </div>
 
                             <div class="caja">
@@ -88,6 +89,29 @@
                                     min="0" v-model="perCui.phone" required>
                             </div>
 
+
+                            <div class="caja">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="form-control" id="validationCustom01"
+                                    placeholder="Correo electrónico" v-model="perCui.email" required>
+                            </div>
+
+                            <div class="caja">
+                                <i class="fas fa-users"></i>
+                                <select class="form-select" name="ocupacion" id="ocupacion"
+                                    v-model="perCui.relationship" required>
+                                    <option selected disabled value="">Selecciona un parentesco</option>
+                                    <option value="padre">Padre</option>
+                                    <option value="madre">Madre</option>
+                                    <option value="hijo">Hijo</option>
+                                    <option value="hija">Hija</option>
+                                    <option value="abuelo">Abuelo</option>
+                                    <option value="abuela">Abuela</option>
+                                    <option value="tío">Tío</option>
+                                    <option value="tía">Tía</option>
+                                </select>
+                            </div>
+
                         </div>
 
                         <hr class="solid">
@@ -111,27 +135,27 @@
                             <div class="caja">
                                 <i class="fas fa-id-card"></i>
                                 <input type="number" class="form-control" id="validationCustom01"
-                                    placeholder="Documento de Identidad" min="0" max="1000000000000000" v-model="perPac.dni"
-                                    required>
+                                    placeholder="Documento de Identidad" min="0" max="1000000000000000"
+                                    v-model="perPac.dni" required>
                             </div>
 
 
                             <div class="caja">
                                 <i class="fas fa-user"></i>
                                 <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre"
-                                 v-model.trim="perPac.name" required>
+                                    v-model.trim="perPac.name" required>
                             </div>
 
                             <div class="caja">
                                 <i class="fas fa-id-badge"></i>
-                                <input type="text" class="form-control" id="validationCustom01" placeholder="Apellido Paterno"
-                                 v-model.trim="perPac.apelPaterno" required>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="Apellido Paterno" v-model.trim="perPac.apelPaterno" required>
                             </div>
 
                             <div class="caja">
                                 <i class="fas fa-id-badge"></i>
-                                <input type="text" class="form-control" id="validationCustom01" placeholder="Apellido Materno"
-                                 v-model.trim="perPac.apelMaterno" required>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="Apellido Materno" v-model.trim="perPac.apelMaterno" required>
                             </div>
 
                             <div class="caja">
@@ -156,11 +180,7 @@
                                 </select>
                             </div>
 
-                            <div class="caja">
-                                <i class="fas fa-envelope"></i>
-                                <input type="email" class="form-control" id="validationCustom01"
-                                    placeholder="Correo electrónico" v-model="perPac.email" required>
-                            </div>
+
 
                             <div class="caja">
                                 <i class="fas fa-briefcase"></i>
@@ -180,21 +200,7 @@
                                     min="0" v-model="perPac.phone" required>
                             </div>
 
-                            <div class="caja">
-                                <i class="fas fa-users"></i>
-                                <select class="form-select" name="ocupacion" id="ocupacion" v-model="perPac.relationship"
-                                    required>
-                                    <option selected disabled value="">Selecciona un parentesco</option>
-                                    <option value="padre">Padre</option>
-                                    <option value="madre">Madre</option>
-                                    <option value="hijo">Hijo</option>
-                                    <option value="hija">Hija</option>
-                                    <option value="abuelo">Abuelo</option>
-                                    <option value="abuela">Abuela</option>
-                                    <option value="tío">Tío</option>
-                                    <option value="tía">Tía</option>
-                                </select>
-                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
@@ -214,128 +220,128 @@
 
 
 <script>
-import { defineAsyncComponent } from 'vue'
-export default {
-    name: 'Modal-Cuidador',
-    components: {
-        /* LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
-        SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
-        ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')), */
-    },
-    props: {
-        intitulo: String,
-        inDescripcion: String
-    },
-    data() {
-        return {
-            showModal: false,
-            loading: {
-                statusLodingData: false,
-                statusSuccessApi: false,
-                statusErrorApi: false,
-                descripccion: 'Usuario correctmente autenticado',
-                btnText: 'Continuar',
-                navTo: '',
-            },
-            perPac: {
-                dni: '',
-                tipoDoc: "",
-                name: "",
-                apelPaterno: "",
-                apelMaterno: "",
-                birthDate: "",
-                gender: "",
-                ocupation: "",
-                phone: "",
-                relationship: "",
-                email: "",
-                tipo: "1",
-            },
-            perCui: {
-                dni: '',
-                tipoDoc: "",
-                name: "",
-                apelPaterno: "",
-                apelMaterno: "",
-                birthDate: "",
-                        gender: "",
-                ocupation: "",
-                phone: "",
-                relationship: "",
-                email: "",
-                tipo: "0",
-            }
-        }
-    },
-    methods: {
-        isValid(fieldName) {
-            return this.validation[fieldName];
+    import { defineAsyncComponent } from 'vue'
+    export default {
+        name: 'Modal-Cuidador',
+        components: {
+            /* LoadingOverlay: defineAsyncComponent(() => import('@/components/indicadores/LoadingOverlay.vue')),
+            SuccessView: defineAsyncComponent(() => import('@/components/indicadores/SuccessView.vue')),
+            ErrorView: defineAsyncComponent(() => import('@/components/indicadores/ErrorView.vue')), */
         },
-        async onPressCrear() {
-            console.log("this.$refs: ", this.$refs.modalCuidadorPaciente.dispatchEvent)
-            if (this.$refs.modalCuidadorPaciente) {
-                const closeButton = this.$refs.modalCuidadorPaciente.querySelector('.btn-close');
-                if (closeButton) {
-                    closeButton.click();
+        props: {
+            intitulo: String,
+            inDescripcion: String
+        },
+        data() {
+            return {
+                showModal: false,
+                loading: {
+                    statusLodingData: false,
+                    statusSuccessApi: false,
+                    statusErrorApi: false,
+                    descripccion: 'Usuario correctmente autenticado',
+                    btnText: 'Continuar',
+                    navTo: '',
+                },
+                perPac: {
+                    dni: '',
+                    tipoDoc: "",
+                    name: "",
+                    apelPaterno: "",
+                    apelMaterno: "",
+                    birthDate: "",
+                    gender: "",
+                    ocupation: "",
+                    phone: "",
+                    //relationship: "",
+                    //email: "",
+                    tipo: "1",
+                },
+                perCui: {
+                    dni: '',
+                    tipoDoc: "",
+                    name: "",
+                    apelPaterno: "",
+                    apelMaterno: "",
+                    birthDate: "",
+                    gender: "",
+                    ocupation: "",
+                    phone: "",
+                    relationship: "",
+                    email: "",
+                    tipo: "0",
                 }
             }
-            this.$emit('createUSer', { state: true, perPac: this.perPac, perCui: this.perCui });
         },
-        submitForm(event) {
-            event.preventDefault(); // Prevent default form submission
-            event.stopPropagation();
-            const form = event.target;
-            if (!form.checkValidity()) {
-                event.preventDefault();
+        methods: {
+            isValid(fieldName) {
+                return this.validation[fieldName];
+            },
+            async onPressCrear() {
+                console.log("this.$refs: ", this.$refs.modalCuidadorPaciente.dispatchEvent)
+                if (this.$refs.modalCuidadorPaciente) {
+                    const closeButton = this.$refs.modalCuidadorPaciente.querySelector('.btn-close');
+                    if (closeButton) {
+                        closeButton.click();
+                    }
+                }
+                this.$emit('createUSer', { state: true, perPac: this.perPac, perCui: this.perCui });
+            },
+            submitForm(event) {
+                event.preventDefault(); // Prevent default form submission
                 event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-            this.onPressCrear()
-        },
-        hadlerCloseIndicator(value) {
-            this.errorApi.status = value;
-        },
-        closeModal() {
-            this.showModal = false;
-        },
-        async sleep(ms) {
-            return await new Promise(resolve => setTimeout(resolve, ms));
-        },
+                const form = event.target;
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                this.onPressCrear()
+            },
+            hadlerCloseIndicator(value) {
+                this.errorApi.status = value;
+            },
+            closeModal() {
+                this.showModal = false;
+            },
+            async sleep(ms) {
+                return await new Promise(resolve => setTimeout(resolve, ms));
+            },
+        }
     }
-}
 </script>
 <style lang="scss" scoped>
-.modal-header{
-    padding: 10px !important;
-}
+    .modal-header {
+        padding: 10px !important;
+    }
 
 
-.cuidador-box {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
+    .cuidador-box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
 
-.caja {
-    display: flex;
-    width: 250px;
-    align-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin: 15px 10px 15px 10px;
-}
+    .caja {
+        display: flex;
+        width: 290px;
+        align-content: center;
+        align-items: center;
+        flex-direction: row;
+        margin: 15px 10px 15px 10px;
+    }
 
 
-.caja i {
-    width: 40px;
-    margin: 0 10px 0 10px;
-    font-size: 25px;
-    //color: grey;
-}
+    .caja i {
+        width: 40px;
+        margin: 0 10px 0 10px;
+        font-size: 25px;
+        //color: grey;
+    }
 
-i {
-    color: var(--warning);
-}
+    i {
+        color: var(--warning);
+    }
 </style>

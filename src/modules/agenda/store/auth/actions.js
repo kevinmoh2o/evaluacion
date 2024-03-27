@@ -10,8 +10,10 @@ export const resetAccount = async ({ commit }, entry) => {
     const params = { email: entry };
     const url = `${ENDPOINTS.POS_RESET_ACCOUNT}?${new URLSearchParams(params)}`;
     const rptReq = await investigacionApi.post(url, entry);
-    const { status, data } = rptReq.data;
-    return { status, data };
+    console.log("url : ",url);
+    console.log("rptReq : ",rptReq);
+    const { message, success } = rptReq.data;
+    return { message,status:success};
   } catch (error) {
     const { status, message } = error.response.data;
     return { status, message };

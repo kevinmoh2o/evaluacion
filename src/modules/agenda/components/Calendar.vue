@@ -1,7 +1,7 @@
 <template>
   <div class="column-container">
     <Fullcalendar ref="fullCalendar" class="full-calendar" :options="calendarOptions" :userProv="userProv">
-      <template v-slot:eventContent='arg'>
+      <!-- <template v-slot:eventContent='arg'>
         <p class="card-box" @mouseenter="handleEventMouseEnter(arg)" @mouseleave="handleMouseLeave">
           <span>
             <div class="fc-content">
@@ -13,7 +13,7 @@
             </span>
           </span>
         </p>
-      </template>
+      </template> -->
 
     </Fullcalendar>
   </div>
@@ -32,7 +32,7 @@ import { mapActions, mapState, mapGetters, mapMutations } from 'vuex'
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { Hardware } from '@/utils/Hardware.js';
-import CalendarModal2 from '@/modules/agenda/components/CalendarModal2.vue';
+//import CalendarModal2 from '@/modules/agenda/components/CalendarModal2.vue';
 /* import jQuery from "jquery";
 
 const $ = jQuery;
@@ -41,7 +41,7 @@ export default {
   name: 'calendario-dos',
   components: {
     Fullcalendar,
-    CalendarModal2,
+    //CalendarModal2,
   },
   props: {
     usuario: {
@@ -77,7 +77,7 @@ export default {
   },
   data() {
     const calendarOptions = {
-      eventMouseEnter: this.handleEventMouseEnter,
+      //eventMouseEnter: this.handleEventMouseEnter,
       plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
       initialView: 'dayGridMonth',
       locale: esLocale,

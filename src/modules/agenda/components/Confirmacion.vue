@@ -40,7 +40,6 @@
   @import '@/styles/styles.scss';
 .mensajito{
   margin: 20px;
-  /* padding: 20px; */
   width: 300px;
 }
 
@@ -51,8 +50,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según tus necesidades */
-  z-index: 999; /* Asegúrate de que la capa esté por encima del contenido principal */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
   .confirmation-dialog {
     display: flex;
@@ -61,7 +60,6 @@
     height: 100%;
     width: 100%;
     background-color: transparent;
-    /* background-color: #fbc02d; */
   }
   
   .dialog-content {
